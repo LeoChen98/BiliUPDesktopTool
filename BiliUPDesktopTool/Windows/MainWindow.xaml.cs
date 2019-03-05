@@ -7,6 +7,12 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Private Fields
+
+        private int i;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public MainWindow()
@@ -17,6 +23,11 @@ namespace BiliUPDesktopTool
         #endregion Public Constructors
 
         #region Private Methods
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            num1.ChangeNum(i++);
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
