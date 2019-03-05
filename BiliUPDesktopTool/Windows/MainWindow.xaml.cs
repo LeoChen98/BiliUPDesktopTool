@@ -20,7 +20,7 @@ namespace BiliUPDesktopTool
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            DesktopEmbeddedWindowHelper.DesktopEmbedWindow(this);
+            //DesktopEmbeddedWindowHelper.DesktopEmbedWindow(this);
         }
 
         #endregion Private Methods
