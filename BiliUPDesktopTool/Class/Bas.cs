@@ -8,6 +8,12 @@ namespace BiliUPDesktopTool
 {
     internal class Bas
     {
+        #region Public Fields
+
+        public static Skin skin;
+
+        #endregion Public Fields
+
         #region Public Methods
 
         /// <summary>

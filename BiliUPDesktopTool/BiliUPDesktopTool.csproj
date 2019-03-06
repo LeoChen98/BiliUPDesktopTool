@@ -26,12 +26,15 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -66,9 +69,23 @@
     </ApplicationDefinition>
     <Compile Include="Class\Bas.cs" />
     <Compile Include="Class\BiliUPData.cs" />
+    <Compile Include="DesktopWindowSetter.xaml.cs">
+      <DependentUpon>DesktopWindowSetter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DesktopWindow.xaml.cs">
+      <DependentUpon>DesktopWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helper\DesktopEmbeddedWindowHelper.cs" />
     <Compile Include="Helper\WinAPIHelper.cs" />
-    <Page Include="RollingNum.xaml">
+    <Page Include="Controls\RollingNum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DesktopWindowSetter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DesktopWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,9 +101,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RollingNum.xaml.cs">
+    <Compile Include="Controls\RollingNum.xaml.cs">
       <DependentUpon>RollingNum.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View Model\Skin.cs" />
     <Compile Include="Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -123,9 +141,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-    <Folder Include="View Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

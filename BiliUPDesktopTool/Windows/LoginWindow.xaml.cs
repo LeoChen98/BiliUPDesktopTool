@@ -48,7 +48,7 @@ namespace BiliUPDesktopTool
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(strCode, QRCodeGenerator.ECCLevel.Q);
                 QRCode qrcode = new QRCode(qrCodeData);
 
-                // qrcode.GetGraphic 方法可参考最下发“补充说明”
+                //生成二维码位图
                 Bitmap qrCodeImage = qrcode.GetGraphic(5, Color.Black, Color.White, null, 0, 6, false);
 
                 qrcodeBox.Dispatcher.Invoke(delegate ()

@@ -31,6 +31,9 @@ namespace BiliUPDesktopTool
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Bas.skin = new Skin();
+            DesktopWindow dw = new DesktopWindow();
+            dw.Show();
             //DesktopEmbeddedWindowHelper.DesktopEmbedWindow(this);
         }
 
