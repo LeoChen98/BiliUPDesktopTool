@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
-        Title="B站up主桌面助手" Height="600" Width="350" WindowStyle="None" ShowInTaskbar="False" Loaded="Window_Loaded" AllowsTransparency="True">
-    <Grid>
+        Title="B站up主桌面助手" Height="600" Width="350" WindowStyle="None" ShowInTaskbar="False" Loaded="Window_Loaded" AllowsTransparency="True" Background="{x:Null}">
+    <Grid x:Name="Holder">
     </Grid>
 </Window>

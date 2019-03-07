@@ -1,5 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Windows.Media;
 
@@ -12,10 +13,7 @@ namespace BiliUPDesktopTool
     {
         #region Private Fields
 
-        private Brush _DesktopWnd_Bg = new SolidColorBrush(Color.FromArgb(225, 225, 225, 225));
-        private double _DesktopWnd_Left = 300;
-        private double _DesktopWnd_Opacity = 1;
-        private double _DesktopWnd_Top = 300;
+        private SkinTable ST;
 
         #endregion Private Fields
 
@@ -26,6 +24,7 @@ namespace BiliUPDesktopTool
         /// </summary>
         public Skin()
         {
+            ST = new SkinTable();
             if (File.Exists("\\Skin.dms"))
             {
                 using (FileStream fs = File.OpenRead("\\Skin.dms"))
@@ -33,9 +32,8 @@ namespace BiliUPDesktopTool
                     using (StreamReader reader = new StreamReader(fs))
                     {
                         string str = reader.ReadToEnd();
-                        JObject obj = JObject.Parse(str);
-
-                        //具体代码
+                        OutputTable OT = JsonConvert.DeserializeObject<OutputTable>(str);
+                        ST = OT.settings;
                     }
                 }
             }
@@ -56,10 +54,10 @@ namespace BiliUPDesktopTool
         /// </summary>
         public Brush DesktopWnd_Bg
         {
-            get { return _DesktopWnd_Bg; }
+            get { return ST.DesktopWnd_Bg; }
             set
             {
-                _DesktopWnd_Bg = value;
+                ST.DesktopWnd_Bg = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DesktopWnd_Bg"));
             }
         }
@@ -69,10 +67,10 @@ namespace BiliUPDesktopTool
         /// </summary>
         public double DesktopWnd_Left
         {
-            get { return _DesktopWnd_Left; }
+            get { return ST.DesktopWnd_Left; }
             set
             {
-                _DesktopWnd_Left = value;
+                ST.DesktopWnd_Left = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DesktopWnd_Left"));
             }
         }
@@ -82,10 +80,10 @@ namespace BiliUPDesktopTool
         /// </summary>
         public double DesktopWnd_Opacity
         {
-            get { return _DesktopWnd_Opacity; }
+            get { return ST.DesktopWnd_Opacity; }
             set
             {
-                _DesktopWnd_Opacity = value;
+                ST.DesktopWnd_Opacity = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DesktopWnd_Opacity"));
             }
         }
@@ -95,10 +93,10 @@ namespace BiliUPDesktopTool
         /// </summary>
         public double DesktopWnd_Top
         {
-            get { return _DesktopWnd_Top; }
+            get { return ST.DesktopWnd_Top; }
             set
             {
-                _DesktopWnd_Top = value;
+                ST.DesktopWnd_Top = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DesktopWnd_Top"));
             }
         }
@@ -112,8 +110,102 @@ namespace BiliUPDesktopTool
         /// </summary>
         public void Save()
         {
+            OutputTable OT = new OutputTable(ST);
+            string json = JsonConvert.SerializeObject(OT);
+            using (FileStream fs = File.OpenRead("\\Skin.dms"))
+            {
+                using (StreamWriter writer = new StreamWriter(fs))
+                {
+                    writer.Write(json);
+                }
+            }
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private Color GetColor(string ColorCode)
+        {
+            return Color.FromArgb(byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier),
+                byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier),
+                byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier),
+                byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier));
+        }
+
+        #endregion Private Methods
+
+        #region Private Classes
+
+        /// <summary>
+        /// 设置导出类
+        /// </summary>
+        private class OutputTable
+        {
+            #region Public Fields
+
+            public const int pid = 117;
+            public const int version = 1;
+            public SkinTable settings;
+
+            #endregion Public Fields
+
+            #region Public Constructors
+
+            public OutputTable(SkinTable ST)
+            {
+                settings = ST;
+            }
+
+            #endregion Public Constructors
+        }
+
+        /// <summary>
+        /// 皮肤设置值类
+        /// </summary>
+        private class SkinTable
+        {
+            #region Public Fields
+
+            /// <summary>
+            /// 桌面窗体的背景颜色
+            /// </summary>
+            [JsonIgnore]
+            public Brush DesktopWnd_Bg = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0xff, 0xff));
+
+            /// <summary>
+            /// 桌面窗体的Left属性
+            /// </summary>
+            public double DesktopWnd_Left = 300;
+
+            /// <summary>
+            /// 桌面窗体的透明度
+            /// </summary>
+            public double DesktopWnd_Opacity = 1;
+
+            /// <summary>
+            /// 桌面窗体的Top属性
+            /// </summary>
+            public double DesktopWnd_Top = 300;
+
+            #endregion Public Fields
+
+            #region Public Properties
+
+            /// <summary>
+            /// 桌面窗体的背景颜色字符串
+            /// </summary>
+            public string DesktopWnd_Background
+            {
+                get
+                {
+                    return ((SolidColorBrush)DesktopWnd_Bg).Color.ToString();
+                }
+            }
+
+            #endregion Public Properties
+        }
+
+        #endregion Private Classes
     }
 }

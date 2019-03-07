@@ -60,7 +60,7 @@ namespace BiliUPDesktopTool
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_Bg")
             };
-            SetBinding(BackgroundProperty, bind_background);
+            Holder.SetBinding(BackgroundProperty, bind_background);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
