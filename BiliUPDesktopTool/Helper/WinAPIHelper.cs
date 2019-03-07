@@ -19,11 +19,28 @@ namespace BiliUPDesktopTool
         [DllImport("user32.dll", EntryPoint = "SendMessageA")]
         public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
+        /// <summary>
+        /// 将窗体设置到前台
+        /// </summary>
+        /// <param name="hWnd">窗体句柄</param>
+        /// <returns></returns>
+        [DllImport("User32.dll")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
         [DllImport("user32.dll")]
         public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
         [DllImport("user32.dll")]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndlnsertAfter, int X, int Y, int cx, int cy, uint Flags);
+
+        /// <summary>
+        /// 显示窗体
+        /// </summary>
+        /// <param name="hWnd">窗体句柄</param>
+        /// <param name="cmdShow">类型</param>
+        /// <returns></returns>
+        [DllImport("User32.dll")]
+        public static extern bool ShowWindow(IntPtr hWnd, int cmdShow);
 
         #endregion Public Methods
     }

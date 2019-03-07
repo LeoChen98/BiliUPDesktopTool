@@ -26,8 +26,6 @@ namespace BiliUPDesktopTool
         /// </summary>
         private void BindingInit()
         {
-            DataContext = Bas.skin;
-
             //绑定窗体Top
             Binding bind_top = new Binding
             {

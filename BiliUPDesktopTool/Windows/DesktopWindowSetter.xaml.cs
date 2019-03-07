@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -24,9 +26,13 @@ namespace BiliUPDesktopTool
         {
             InitializeComponent();
 
+            //显示桌面
+            ShowDesktop();
+
             //建立备份
             _Backup = new double[2] { Bas.skin.DesktopWnd_Top, Bas.skin.DesktopWnd_Left };
 
+            //初始化数据绑定
             BindingInit();
         }
 
@@ -68,6 +74,18 @@ namespace BiliUPDesktopTool
         private void Btn_comfirm_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        /// <summary>
+        /// 显示桌面
+        /// </summary>
+        private void ShowDesktop()
+        {
+            Type oleType = Type.GetTypeFromProgID("Shell.Application");
+            object oleObject = Activator.CreateInstance(oleType);
+            oleType.InvokeMember("MinimizeAll", BindingFlags.InvokeMethod, null, oleObject, null);
+
+            WindowState = WindowState.Normal;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
