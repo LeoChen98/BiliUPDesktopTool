@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.IO;
+using System.Windows.Media;
 
 namespace BiliUPDesktopTool
 {
@@ -11,9 +12,10 @@ namespace BiliUPDesktopTool
     {
         #region Private Fields
 
-        private double _DesktopWnd_Left;
+        private Brush _DesktopWnd_Bg = new SolidColorBrush(Color.FromArgb(225, 225, 225, 225));
+        private double _DesktopWnd_Left = 300;
         private double _DesktopWnd_Opacity = 1;
-        private double _DesktopWnd_Top;
+        private double _DesktopWnd_Top = 300;
 
         #endregion Private Fields
 
@@ -48,6 +50,19 @@ namespace BiliUPDesktopTool
         #endregion Public Events
 
         #region Public Properties
+
+        /// <summary>
+        /// 桌面窗体的背景颜色
+        /// </summary>
+        public Brush DesktopWnd_Bg
+        {
+            get { return _DesktopWnd_Bg; }
+            set
+            {
+                _DesktopWnd_Bg = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DesktopWnd_Bg"));
+            }
+        }
 
         /// <summary>
         /// 桌面窗体的Left属性
@@ -89,5 +104,16 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// 保存皮肤配置文件
+        /// </summary>
+        public void Save()
+        {
+        }
+
+        #endregion Public Methods
     }
 }

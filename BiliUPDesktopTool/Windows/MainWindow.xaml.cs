@@ -34,6 +34,8 @@ namespace BiliUPDesktopTool
             Bas.skin = new Skin();
             DesktopWindow dw = new DesktopWindow();
             dw.Show();
+            DesktopWindowSetter dws = new DesktopWindowSetter();
+            dws.Show();
             //DesktopEmbeddedWindowHelper.DesktopEmbedWindow(this);
         }
 
