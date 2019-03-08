@@ -112,7 +112,7 @@ namespace BiliUPDesktopTool
         {
             OutputTable OT = new OutputTable(ST);
             string json = JsonConvert.SerializeObject(OT);
-            using (FileStream fs = File.OpenRead("\\Skin.dms"))
+            using (FileStream fs = File.Open("Skin.dms", FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(fs))
                 {
@@ -122,18 +122,6 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private Color GetColor(string ColorCode)
-        {
-            return Color.FromArgb(byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier),
-                byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier),
-                byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier),
-                byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier));
-        }
-
-        #endregion Private Methods
 
         #region Private Classes
 
@@ -201,9 +189,30 @@ namespace BiliUPDesktopTool
                 {
                     return ((SolidColorBrush)DesktopWnd_Bg).Color.ToString();
                 }
+                set
+                {
+                    DesktopWnd_Bg = new SolidColorBrush(GetColor(value));
+                }
             }
 
             #endregion Public Properties
+
+            #region Private Methods
+
+            /// <summary>
+            /// 将sRGB字符串转换为Color实例
+            /// </summary>
+            /// <param name="ColorCode">sRBG字符串</param>
+            /// <returns>Color实例</returns>
+            private Color GetColor(string ColorCode)
+            {
+                return Color.FromArgb(byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier),
+                    byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier),
+                    byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier),
+                    byte.Parse(ColorCode.Substring(1, 2), NumberStyles.AllowHexSpecifier));
+            }
+
+            #endregion Private Methods
         }
 
         #endregion Private Classes

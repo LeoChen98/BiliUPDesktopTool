@@ -29,6 +29,21 @@ namespace BiliUPDesktopTool
 
         #endregion Public Constructors
 
+        #region Public Methods
+
+        /// <summary>
+        /// 显示模式窗口
+        /// </summary>
+        /// <param name="info">提示信息</param>
+        /// <returns>操作是否成功</returns>
+        public bool? ShowDialog(string info)
+        {
+            lbl_stauts.Dispatcher.Invoke(delegate () { lbl_stauts.Visibility = Visibility.Visible; lbl_stauts.Content = info; });
+            return ShowDialog();
+        }
+
+        #endregion Public Methods
+
         #region Private Methods
 
         /// <summary>
@@ -92,10 +107,10 @@ namespace BiliUPDesktopTool
 
                     DateTime expires = DateTime.Now.AddDays(29);
 
-                    Properties.Settings.Default.Cookies = cookies;
-                    Properties.Settings.Default.CookiesExpires = expires;
-                    Properties.Settings.Default.Save();
-                    Dispatcher.Invoke(delegate () { Close(); });
+                    Bas.account.Cookies = cookies;
+                    Bas.account.Expires = expires;
+                    Bas.account.Save();
+                    Dispatcher.Invoke(delegate () { Close(); DialogResult = true; });
                 }
             }
             else

@@ -101,12 +101,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Setting\Account.cs" />
     <Compile Include="Class\Bas.cs" />
     <Compile Include="Class\BiliUPData.cs" />
-    <Compile Include="Windows\DesktopWindowSetter.xaml.cs">
+    <Compile Include="Helper\EncryptHelper.cs" />
+    <Compile Include="Window\DesktopWindowSetter.xaml.cs">
       <DependentUpon>DesktopWindowSetter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\DesktopWindow.xaml.cs">
+    <Compile Include="Window\DesktopWindow.xaml.cs">
       <DependentUpon>DesktopWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper\DesktopEmbeddedWindowHelper.cs" />
@@ -115,19 +117,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\DesktopWindowSetter.xaml">
+    <Page Include="Window\DesktopWindowSetter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\DesktopWindow.xaml">
+    <Page Include="Window\DesktopWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LoginWindow.xaml">
+    <Page Include="Window\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MainWindow.xaml">
+    <Page Include="Window\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -139,11 +141,11 @@
       <DependentUpon>RollingNum.xaml</DependentUpon>
     </Compile>
     <Compile Include="View Model\Skin.cs" />
-    <Compile Include="Windows\LoginWindow.xaml.cs">
+    <Compile Include="Window\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
-    <Compile Include="Windows\MainWindow.xaml.cs">
+    <Compile Include="Setting\Settings.cs" />
+    <Compile Include="Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

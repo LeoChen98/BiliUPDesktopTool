@@ -32,6 +32,7 @@ namespace BiliUPDesktopTool
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Bas.skin = new Skin();
+            Bas.account = new Account();
             DesktopWindow dw = new DesktopWindow();
             dw.Show();
             DesktopWindowSetter dws = new DesktopWindowSetter();

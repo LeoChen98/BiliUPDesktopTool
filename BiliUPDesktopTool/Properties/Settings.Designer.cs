@@ -22,28 +22,5 @@ namespace BiliUPDesktopTool.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Cookies {
-            get {
-                return ((string)(this["Cookies"]));
-            }
-            set {
-                this["Cookies"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime CookiesExpires {
-            get {
-                return ((global::System.DateTime)(this["CookiesExpires"]));
-            }
-            set {
-                this["CookiesExpires"] = value;
-            }
-        }
     }
 }
