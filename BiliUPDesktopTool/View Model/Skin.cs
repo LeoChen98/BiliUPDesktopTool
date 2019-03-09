@@ -25,9 +25,9 @@ namespace BiliUPDesktopTool
         public Skin()
         {
             ST = new SkinTable();
-            if (File.Exists("\\Skin.dms"))
+            if (File.Exists("Skin.dms"))
             {
-                using (FileStream fs = File.OpenRead("\\Skin.dms"))
+                using (FileStream fs = File.OpenRead("Skin.dms"))
                 {
                     using (StreamReader reader = new StreamReader(fs))
                     {
@@ -132,8 +132,12 @@ namespace BiliUPDesktopTool
         {
             #region Public Fields
 
+            [JsonProperty("pid")]
             public const int pid = 117;
+
+            [JsonProperty("version")]
             public const int version = 1;
+
             public SkinTable settings;
 
             #endregion Public Fields

@@ -15,7 +15,7 @@ namespace BiliUPDesktopTool
         /// <returns>电池数</returns>
         public static int GetCharge()
         {
-            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/elec/balance", Properties.Settings.Default.Cookies);
+            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/elec/balance", Bas.account.Cookies);
             JObject obj = JObject.Parse(str);
             if ((int)obj["code"] == 0)
             {
@@ -33,7 +33,7 @@ namespace BiliUPDesktopTool
         /// <returns>[0]:前天收入;[1]:本月收入</returns>
         public static int[] GetGrowUp()
         {
-            string str = Bas.GetHTTPBody("https://api.bilibili.com/studio/growup/web/up/summary", Properties.Settings.Default.Cookies);
+            string str = Bas.GetHTTPBody("https://api.bilibili.com/studio/growup/web/up/summary", Bas.account.Cookies);
             JObject obj = JObject.Parse(str);
             if ((int)obj["code"] == 0)
             {
@@ -51,7 +51,7 @@ namespace BiliUPDesktopTool
         /// <returns>[0]:新增粉丝;[1]:总粉丝数;[2]:新增播放;[3]:总播放</returns>
         public static int[] PlayNFans()
         {
-            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/index/stat", Properties.Settings.Default.Cookies);
+            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/index/stat", Bas.account.Cookies);
             JObject obj = JObject.Parse(str);
             if ((int)obj["code"] == 0)
             {

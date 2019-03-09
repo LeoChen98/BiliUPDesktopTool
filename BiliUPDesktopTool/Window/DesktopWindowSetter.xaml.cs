@@ -73,6 +73,7 @@ namespace BiliUPDesktopTool
 
         private void Btn_comfirm_Click(object sender, RoutedEventArgs e)
         {
+            Bas.skin.Save();
             Close();
         }
 

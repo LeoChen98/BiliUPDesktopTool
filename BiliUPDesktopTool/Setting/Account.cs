@@ -120,8 +120,10 @@ namespace BiliUPDesktopTool
         {
             #region Public Fields
 
+            [JsonProperty("pid")]
             public const int pid = 117;
 
+            [JsonProperty("version")]
             public const int version = 1;
 
             public AccountTable Account;
