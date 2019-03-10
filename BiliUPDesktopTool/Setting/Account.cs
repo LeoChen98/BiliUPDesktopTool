@@ -11,6 +11,11 @@ namespace BiliUPDesktopTool
     {
         #region Private Fields
 
+        /// <summary>
+        /// 加密秘钥
+        /// </summary>
+        private const string encryptKey = "{C6F403E9-53FF-4B75-8182-DC03BBE6944A}";//TODO 发布时重新生成.
+
         private AccountTable AT;
 
         #endregion Private Fields
@@ -31,7 +36,7 @@ namespace BiliUPDesktopTool
                     using (StreamReader reader = new StreamReader(fs))
                     {
                         string str = reader.ReadToEnd();
-                        str = EncryptHelper.DesDecrypt(str, "{C6F403E9-53FF-4B75-8182-DC03BBE6944A}");
+                        str = EncryptHelper.DesDecrypt(str, encryptKey);
                         OutputTable OT = JsonConvert.DeserializeObject<OutputTable>(str);
                         AT = OT.Account;
                     }
@@ -86,7 +91,7 @@ namespace BiliUPDesktopTool
         {
             OutputTable OT = new OutputTable(AT);
             string json = JsonConvert.SerializeObject(OT);
-            json = EncryptHelper.DesEncrypt(json, "{C6F403E9-53FF-4B75-8182-DC03BBE6944A}");
+            json = EncryptHelper.DesEncrypt(json, encryptKey);
             using (FileStream fs = File.Open("Account.dma", FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(fs))
