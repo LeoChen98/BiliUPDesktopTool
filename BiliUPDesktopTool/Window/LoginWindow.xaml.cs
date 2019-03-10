@@ -104,13 +104,17 @@ namespace BiliUPDesktopTool
                     {
                         cookies += KeyValuePair[i] + "; ";
                     }
-
+                    cookies = cookies.Substring(0, cookies.Length - 2);
                     DateTime expires = DateTime.Now.AddDays(29);
 
                     Bas.account.Cookies = cookies;
                     Bas.account.Expires = expires;
                     Bas.account.Save();
-                    Dispatcher.Invoke(delegate () { Close(); DialogResult = true; });
+                    Dispatcher.Invoke(delegate ()
+                    {
+                        DialogResult = true;
+                        Close();
+                    });
                 }
             }
             else

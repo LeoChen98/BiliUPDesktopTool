@@ -13,13 +13,13 @@ namespace BiliUPDesktopTool
         /// 获得充电数据
         /// </summary>
         /// <returns>电池数</returns>
-        public static int GetCharge()
+        public static float GetCharge()
         {
             string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/elec/balance", Bas.account.Cookies);
             JObject obj = JObject.Parse(str);
             if ((int)obj["code"] == 0)
             {
-                return (int)obj["data"]["wallet"]["sponsorBalance"];
+                return (float)obj["data"]["wallet"]["sponsorBalance"];
             }
             else
             {
@@ -31,17 +31,17 @@ namespace BiliUPDesktopTool
         /// 获得激励计划数据
         /// </summary>
         /// <returns>[0]:前天收入;[1]:本月收入</returns>
-        public static int[] GetGrowUp()
+        public static float[] GetGrowUp()
         {
             string str = Bas.GetHTTPBody("https://api.bilibili.com/studio/growup/web/up/summary", Bas.account.Cookies);
             JObject obj = JObject.Parse(str);
             if ((int)obj["code"] == 0)
             {
-                return new int[2] { (int)obj["data"]["day_income"], (int)obj["data"]["income"] };
+                return new float[2] { (float)obj["data"]["day_income"], (float)obj["data"]["income"] };
             }
             else
             {
-                return new int[2] { -1, -1 };
+                return new float[2] { -1, -1 };
             }
         }
 
