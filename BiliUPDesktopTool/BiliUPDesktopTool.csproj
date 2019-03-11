@@ -101,6 +101,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Setting\SettingsBase.cs" />
+    <Compile Include="Setting\Settings.cs" />
     <Compile Include="Setting\Account.cs" />
     <Compile Include="Class\Bas.cs" />
     <Compile Include="Class\BiliUPData.cs" />
@@ -144,7 +146,6 @@
     <Compile Include="Window\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Setting\Settings.cs" />
     <Compile Include="Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

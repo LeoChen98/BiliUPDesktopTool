@@ -7,16 +7,15 @@ namespace BiliUPDesktopTool
     /// <summary>
     /// 账号数据类
     /// </summary>
-    internal class Account
+    internal class Account : SettingsBase<Account.AccountTable>
     {
         #region Private Fields
 
+        //TODO 发布时重新生成.
         /// <summary>
         /// 加密秘钥
         /// </summary>
-        private const string encryptKey = "{C6F403E9-53FF-4B75-8182-DC03BBE6944A}";//TODO 发布时重新生成.
-
-        private AccountTable AT;
+        private const string encryptKey = "{C6F403E9-53FF-4B75-8182-DC03BBE6944A}";
 
         #endregion Private Fields
 
@@ -27,7 +26,7 @@ namespace BiliUPDesktopTool
         /// </summary>
         public Account()
         {
-            AT = new AccountTable();
+            ST = new AccountTable();
 
             if (File.Exists("Account.dma"))
             {
@@ -37,8 +36,8 @@ namespace BiliUPDesktopTool
                     {
                         string str = reader.ReadToEnd();
                         str = EncryptHelper.DesDecrypt(str, encryptKey);
-                        OutputTable OT = JsonConvert.DeserializeObject<OutputTable>(str);
-                        AT = OT.Account;
+                        OutputTable<AccountTable> OT = JsonConvert.DeserializeObject<OutputTable<AccountTable>>(str);
+                        ST = OT.settings;
                     }
                 }
             }
@@ -63,12 +62,21 @@ namespace BiliUPDesktopTool
                         return null;
                     }
                 }
-                return AT.Cookies;
+                return ST.Cookies;
             }
             set
             {
-                AT.Cookies = value;
+                ST.Cookies = value;
             }
+        }
+
+        /// <summary>
+        /// csrf_token值
+        /// </summary>
+        public string Csrf_Token
+        {
+            get { return ST.Csrf_Token; }
+            set { ST.Csrf_Token = value; }
         }
 
         /// <summary>
@@ -76,8 +84,17 @@ namespace BiliUPDesktopTool
         /// </summary>
         public DateTime Expires
         {
-            get { return AT.Expires; }
-            set { AT.Expires = value; }
+            get { return ST.Expires; }
+            set { ST.Expires = value; }
+        }
+
+        /// <summary>
+        /// 用户数字id
+        /// </summary>
+        public string Uid
+        {
+            get { return ST.Uid; }
+            set { ST.Uid = value; }
         }
 
         #endregion Public Properties
@@ -87,9 +104,9 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 保存
         /// </summary>
-        public void Save()
+        public override void Save()
         {
-            OutputTable OT = new OutputTable(AT);
+            OutputTable<AccountTable> OT = new OutputTable<AccountTable>(ST);
             string json = JsonConvert.SerializeObject(OT);
             json = EncryptHelper.DesEncrypt(json, encryptKey);
             using (FileStream fs = File.Open("Account.dma", FileMode.Create))
@@ -113,36 +130,11 @@ namespace BiliUPDesktopTool
             #region Public Fields
 
             public string Cookies;
+            public string Csrf_Token;
             public DateTime Expires;
+            public string Uid;
 
             #endregion Public Fields
-        }
-
-        /// <summary>
-        /// 导出数据表
-        /// </summary>
-        public class OutputTable
-        {
-            #region Public Fields
-
-            [JsonProperty("pid")]
-            public const int pid = 117;
-
-            [JsonProperty("version")]
-            public const int version = 1;
-
-            public AccountTable Account;
-
-            #endregion Public Fields
-
-            #region Public Constructors
-
-            public OutputTable(AccountTable AT)
-            {
-                Account = AT;
-            }
-
-            #endregion Public Constructors
         }
 
         #endregion Public Classes

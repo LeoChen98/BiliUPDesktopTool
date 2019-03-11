@@ -25,6 +25,8 @@ namespace BiliUPDesktopTool
         public LoginWindow()
         {
             InitializeComponent();
+
+            if (Bas.account == null) Bas.account = new Account();
         }
 
         #endregion Public Constructors
@@ -51,35 +53,40 @@ namespace BiliUPDesktopTool
         /// </summary>
         private void GetQrcode()
         {
+        re:
             //获取二维码要包含的url
             string str = Bas.GetHTTPBody("https://passport.bilibili.com/qrcode/getLoginUrl", "", "https://passport.bilibili.com/login");
-            JObject obj = JObject.Parse(str);
-
-            if ((int)obj["code"] == 0)
+            if (!string.IsNullOrEmpty(str))
             {
-                // 生成二维码的内容
-                string strCode = obj["data"]["url"].ToString();
-                QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                QRCodeData qrCodeData = qrGenerator.CreateQrCode(strCode, QRCodeGenerator.ECCLevel.Q);
-                QRCode qrcode = new QRCode(qrCodeData);
+                JObject obj = JObject.Parse(str);
 
-                //生成二维码位图
-                Bitmap qrCodeImage = qrcode.GetGraphic(5, Color.Black, Color.White, null, 0, 6, false);
-
-                qrcodeBox.Dispatcher.Invoke(delegate ()
+                if ((int)obj["code"] == 0)
                 {
-                    IntPtr myImagePtr = qrCodeImage.GetHbitmap();     //创建GDI对象，返回指针
+                    // 生成二维码的内容
+                    string strCode = obj["data"]["url"].ToString();
+                    QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                    QRCodeData qrCodeData = qrGenerator.CreateQrCode(strCode, QRCodeGenerator.ECCLevel.Q);
+                    QRCode qrcode = new QRCode(qrCodeData);
 
-                    BitmapSource imgsource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(myImagePtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());  //创建imgSource
+                    //生成二维码位图
+                    Bitmap qrCodeImage = qrcode.GetGraphic(5, Color.Black, Color.White, null, 0, 6, false);
 
-                    WinAPIHelper.DeleteObject(myImagePtr);
+                    qrcodeBox.Dispatcher.Invoke(delegate ()
+                    {
+                        IntPtr myImagePtr = qrCodeImage.GetHbitmap();     //创建GDI对象，返回指针
 
-                    qrcodeBox.Source = imgsource;
-                });
+                        BitmapSource imgsource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(myImagePtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());  //创建imgSource
 
-                Monitor = new Timer(MonitorCallback, obj["data"]["oauthKey"].ToString(), 1000, 1000);
-                Refresher = new Timer(RefresherCallback, null, 180000, Timeout.Infinite);
+                        WinAPIHelper.DeleteObject(myImagePtr);
+
+                        qrcodeBox.Source = imgsource;
+                    });
+
+                    Monitor = new Timer(MonitorCallback, obj["data"]["oauthKey"].ToString(), 1000, 1000);
+                    Refresher = new Timer(RefresherCallback, null, 180000, Timeout.Infinite);
+                }
             }
+            else goto re;
         }
 
         /// <summary>
@@ -103,6 +110,21 @@ namespace BiliUPDesktopTool
                     for (int i = 0; i < KeyValuePair.Length - 1; i++)
                     {
                         cookies += KeyValuePair[i] + "; ";
+
+                        string[] tmp = Regex.Split(KeyValuePair[i], "=");
+                        switch (tmp[0])
+                        {
+                            case "bili_jct":
+                                Bas.account.Csrf_Token = tmp[1];
+                                break;
+
+                            case "DedeUserID":
+                                Bas.account.Uid = tmp[1];
+                                break;
+
+                            default:
+                                break;
+                        }
                     }
                     cookies = cookies.Substring(0, cookies.Length - 2);
                     DateTime expires = DateTime.Now.AddDays(29);

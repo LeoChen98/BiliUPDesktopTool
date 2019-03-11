@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Globalization;
-using System.IO;
 using System.Windows.Media;
 
 namespace BiliUPDesktopTool
@@ -9,11 +8,14 @@ namespace BiliUPDesktopTool
     /// <summary>
     /// 皮肤配置
     /// </summary>
-    internal class Skin : INotifyPropertyChanged
+    public class Skin : SettingsBase<Skin.SkinTable>
     {
         #region Private Fields
 
-        private SkinTable ST;
+        /// <summary>
+        /// 皮肤配置文件保存位置
+        /// </summary>
+        private const string savepath = "Skin.dms";
 
         #endregion Private Fields
 
@@ -22,30 +24,9 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 初始化皮肤
         /// </summary>
-        public Skin()
-        {
-            ST = new SkinTable();
-            if (File.Exists("Skin.dms"))
-            {
-                using (FileStream fs = File.OpenRead("Skin.dms"))
-                {
-                    using (StreamReader reader = new StreamReader(fs))
-                    {
-                        string str = reader.ReadToEnd();
-                        OutputTable OT = JsonConvert.DeserializeObject<OutputTable>(str);
-                        ST = OT.settings;
-                    }
-                }
-            }
-        }
+        public Skin() : base(new SkinTable(), savepath) { }
 
         #endregion Public Constructors
-
-        #region Public Events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion Public Events
 
         #region Public Properties
 
@@ -58,7 +39,7 @@ namespace BiliUPDesktopTool
             set
             {
                 ST.DesktopWnd_Bg = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DesktopWnd_Bg"));
+                PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_Bg"));
             }
         }
 
@@ -71,7 +52,7 @@ namespace BiliUPDesktopTool
             set
             {
                 ST.DesktopWnd_Left = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DesktopWnd_Left"));
+                PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_Left"));
             }
         }
 
@@ -84,7 +65,7 @@ namespace BiliUPDesktopTool
             set
             {
                 ST.DesktopWnd_Opacity = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DesktopWnd_Opacity"));
+                PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_Opacity"));
             }
         }
 
@@ -97,65 +78,18 @@ namespace BiliUPDesktopTool
             set
             {
                 ST.DesktopWnd_Top = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DesktopWnd_Top"));
+                PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_Top"));
             }
         }
 
         #endregion Public Properties
 
-        #region Public Methods
-
-        /// <summary>
-        /// 保存皮肤配置文件
-        /// </summary>
-        public void Save()
-        {
-            OutputTable OT = new OutputTable(ST);
-            string json = JsonConvert.SerializeObject(OT);
-            using (FileStream fs = File.Open("Skin.dms", FileMode.Create))
-            {
-                using (StreamWriter writer = new StreamWriter(fs))
-                {
-                    writer.Write(json);
-                }
-            }
-        }
-
-        #endregion Public Methods
-
-        #region Private Classes
-
-        /// <summary>
-        /// 设置导出类
-        /// </summary>
-        private class OutputTable
-        {
-            #region Public Fields
-
-            [JsonProperty("pid")]
-            public const int pid = 117;
-
-            [JsonProperty("version")]
-            public const int version = 1;
-
-            public SkinTable settings;
-
-            #endregion Public Fields
-
-            #region Public Constructors
-
-            public OutputTable(SkinTable ST)
-            {
-                settings = ST;
-            }
-
-            #endregion Public Constructors
-        }
+        #region Public Classes
 
         /// <summary>
         /// 皮肤设置值类
         /// </summary>
-        private class SkinTable
+        public class SkinTable
         {
             #region Public Fields
 
@@ -219,6 +153,6 @@ namespace BiliUPDesktopTool
             #endregion Private Methods
         }
 
-        #endregion Private Classes
+        #endregion Public Classes
     }
 }
