@@ -93,6 +93,9 @@ namespace BiliUPDesktopTool
         {
             #region Private Fields
 
+            /// <summary>
+            /// 数据内存
+            /// </summary>
             private string _coin, _coin_incr, _fav, _fav_incr, _like, _like_incr, _reply, _reply_incr, _share, _share_incr, _view, _view_incr;
 
             #endregion Private Fields
@@ -315,9 +318,10 @@ namespace BiliUPDesktopTool
         {
             #region Private Fields
 
-            private string _coin, _coin_incr, _dm, _dm_incr, _fan, _fan_incr, _fav, _fav_incr, _like, _like_incr, _play, _play_incr, _share, _share_incr;
-
-            private string _elec, _elec_incr, _growup, _growup_incr;
+            /// <summary>
+            /// 数据内存
+            /// </summary>
+            private string _coin, _coin_incr, _dm, _dm_incr, _fan, _fan_incr, _fav, _fav_incr, _like, _like_incr, _play, _play_incr, _share, _share_incr, _elec, _elec_incr, _growup, _growup_incr;
 
             #endregion Private Fields
 
