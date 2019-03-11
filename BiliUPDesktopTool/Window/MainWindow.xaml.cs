@@ -33,6 +33,7 @@ namespace BiliUPDesktopTool
         {
             Bas.skin = new Skin();
             Bas.account = new Account();
+            Bas.settings = new Settings();
             DesktopWindow dw = new DesktopWindow();
             dw.Show();
             DesktopWindowSetter dws = new DesktopWindowSetter();

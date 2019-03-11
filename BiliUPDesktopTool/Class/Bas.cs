@@ -11,6 +11,7 @@ namespace BiliUPDesktopTool
         #region Public Fields
 
         public static Account account;
+        public static Settings settings;
         public static Skin skin;
 
         #endregion Public Fields
