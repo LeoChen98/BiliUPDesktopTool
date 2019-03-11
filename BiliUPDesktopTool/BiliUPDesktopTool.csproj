@@ -101,6 +101,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\DataViewer.xaml.cs">
+      <DependentUpon>DataViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Setting\SettingsBase.cs" />
     <Compile Include="Setting\Settings.cs" />
     <Compile Include="Setting\Account.cs" />
@@ -116,6 +119,10 @@
     <Compile Include="Helper\DesktopEmbeddedWindowHelper.cs" />
     <Compile Include="Helper\WinAPIHelper.cs" />
     <Page Include="Controls\RollingNum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DataViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
