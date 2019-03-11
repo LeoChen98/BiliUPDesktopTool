@@ -10,8 +10,24 @@ namespace BiliUPDesktopTool
     {
         #region Public Fields
 
+        /// <summary>
+        /// 账号信息实例
+        /// </summary>
         public static Account account;
+
+        /// <summary>
+        /// up主数据实例
+        /// </summary>
+        public static BiliUPData biliupdata;
+
+        /// <summary>
+        /// 设置实例
+        /// </summary>
         public static Settings settings;
+
+        /// <summary>
+        /// 皮肤实例
+        /// </summary>
         public static Skin skin;
 
         #endregion Public Fields
