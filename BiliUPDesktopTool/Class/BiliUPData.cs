@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.ComponentModel;
+using System.Threading;
 
 namespace BiliUPDesktopTool
 {
@@ -22,6 +23,15 @@ namespace BiliUPDesktopTool
 
         #endregion Public Fields
 
+        #region Private Fields
+
+        /// <summary>
+        /// 数据刷新计时器
+        /// </summary>
+        private Timer Refresher;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         /// <summary>
@@ -31,6 +41,8 @@ namespace BiliUPDesktopTool
         {
             article = new Article();
             video = new Video();
+
+            Refresher = new Timer((o) => { Refresh(); }, null, 0, Bas.settings.DataRefreshInterval);
         }
 
         #endregion Public Constructors
@@ -57,6 +69,12 @@ namespace BiliUPDesktopTool
         /// </summary>
         public class Article : INotifyPropertyChanged
         {
+            #region Private Fields
+
+            private int _coin, _coin_incr, _fav, _fav_incr, _like, _like_incr, _reply, _reply_incr, _share, _share_incr, _view, _view_incr;
+
+            #endregion Private Fields
+
             #region Public Constructors
 
             /// <summary>
@@ -64,7 +82,6 @@ namespace BiliUPDesktopTool
             /// </summary>
             public Article()
             {
-                Refresh();
             }
 
             #endregion Public Constructors
@@ -80,62 +97,158 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 硬币
             /// </summary>
-            public int coin { get; private set; }
+            public int coin
+            {
+                get { return _coin; }
+                set
+                {
+                    _coin = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin"));
+                }
+            }
 
             /// <summary>
             /// 硬币增量
             /// </summary>
-            public int coin_incr { get; private set; }
+            public int coin_incr
+            {
+                get { return _coin_incr; }
+                set
+                {
+                    _coin_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin_incr"));
+                }
+            }
 
             /// <summary>
             /// 收藏
             /// </summary>
-            public int fav { get; private set; }
+            public int fav
+            {
+                get { return _fav; }
+                set
+                {
+                    _fav = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav"));
+                }
+            }
 
             /// <summary>
             /// 收藏增量
             /// </summary>
-            public int fav_incr { get; private set; }
+            public int fav_incr
+            {
+                get { return _fav_incr; }
+                set
+                {
+                    _fav_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav_incr"));
+                }
+            }
 
             /// <summary>
             /// 点赞
             /// </summary>
-            public int like { get; private set; }
+            public int like
+            {
+                get { return _like; }
+                set
+                {
+                    _like = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like"));
+                }
+            }
 
             /// <summary>
             /// 点赞增量
             /// </summary>
-            public int like_incr { get; private set; }
+            public int like_incr
+            {
+                get { return _like_incr; }
+                set
+                {
+                    _like_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like_incr"));
+                }
+            }
 
             /// <summary>
             /// 评论
             /// </summary>
-            public int reply { get; private set; }
+            public int reply
+            {
+                get { return _reply; }
+                set
+                {
+                    _reply = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("reply"));
+                }
+            }
 
             /// <summary>
             /// 评论增量
             /// </summary>
-            public int reply_incr { get; private set; }
+            public int reply_incr
+            {
+                get { return _reply_incr; }
+                set
+                {
+                    _reply_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("reply_incr"));
+                }
+            }
 
             /// <summary>
             /// 分享
             /// </summary>
-            public int share { get; private set; }
+            public int share
+            {
+                get { return _share; }
+                set
+                {
+                    _share = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share"));
+                }
+            }
 
             /// <summary>
             /// 分享增量
             /// </summary>
-            public int share_incr { get; private set; }
+            public int share_incr
+            {
+                get { return _reply_incr; }
+                set
+                {
+                    _reply_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share_incr"));
+                }
+            }
 
             /// <summary>
             /// 点击
             /// </summary>
-            public int view { get; private set; }
+            public int view
+            {
+                get { return _view; }
+                set
+                {
+                    _view = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("view"));
+                }
+            }
 
             /// <summary>
             /// 点击增量
             /// </summary>
-            public int view_incr { get; private set; }
+            public int view_incr
+            {
+                get { return _view_incr; }
+                set
+                {
+                    _view_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("view_incr"));
+                }
+            }
 
             #endregion Public Properties
 
@@ -178,6 +291,14 @@ namespace BiliUPDesktopTool
         /// </summary>
         public class Video : INotifyPropertyChanged
         {
+            #region Private Fields
+
+            private int _coin, _coin_incr, _dm, _dm_incr, _fan, _fan_incr, _fav, _fav_incr, _like, _like_incr, _play, _play_incr, _share, _share_incr;
+
+            private float _elec, _elec_incr, _growup, _growup_incr;
+
+            #endregion Private Fields
+
             #region Public Constructors
 
             /// <summary>
@@ -185,7 +306,6 @@ namespace BiliUPDesktopTool
             /// </summary>
             public Video()
             {
-                Refresh();
             }
 
             #endregion Public Constructors
@@ -201,92 +321,236 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 硬币
             /// </summary>
-            public int coin { get; private set; }
+            public int coin
+            {
+                get { return _coin; }
+                set
+                {
+                    _coin = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin"));
+                }
+            }
 
             /// <summary>
             /// 硬币增量
             /// </summary>
-            public int coin_incr { get; private set; }
+            public int coin_incr
+            {
+                get { return _coin_incr; }
+                set
+                {
+                    _coin_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin_incr"));
+                }
+            }
 
             /// <summary>
             /// 弹幕
             /// </summary>
-            public int dm { get; private set; }
+            public int dm
+            {
+                get { return _dm; }
+                set
+                {
+                    _dm = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("dm"));
+                }
+            }
 
             /// <summary>
             /// 弹幕增量
             /// </summary>
-            public int dm_incr { get; private set; }
+            public int dm_incr
+            {
+                get { return _dm_incr; }
+                set
+                {
+                    _dm_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("dm_incr"));
+                }
+            }
 
             /// <summary>
             /// 电池
             /// </summary>
-            public float elec { get; private set; }
+            public float elec
+            {
+                get { return _elec; }
+                set
+                {
+                    _elec = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("elec"));
+                }
+            }
 
             /// <summary>
             /// 电池增量
             /// </summary>
-            public float elec_incr { get; private set; }
+            public float elec_incr
+            {
+                get { return _elec_incr; }
+                set
+                {
+                    _elec_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("elec_incr"));
+                }
+            }
 
             /// <summary>
             /// 粉丝
             /// </summary>
-            public int fan { get; private set; }
+            public int fan
+            {
+                get { return _fan; }
+                set
+                {
+                    _fan = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fan"));
+                }
+            }
 
             /// <summary>
             /// 粉丝增量
             /// </summary>
-            public int fan_incr { get; private set; }
+            public int fan_incr
+            {
+                get { return _fan_incr; }
+                set
+                {
+                    _fan_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fan_incr"));
+                }
+            }
 
             /// <summary>
             /// 收藏
             /// </summary>
-            public int fav { get; private set; }
+            public int fav
+            {
+                get { return _fav; }
+                set
+                {
+                    _fav = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav"));
+                }
+            }
 
             /// <summary>
             /// 收藏增量
             /// </summary>
-            public int fav_incr { get; private set; }
+            public int fav_incr
+            {
+                get { return _fav_incr; }
+                set
+                {
+                    _fav_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav_incr"));
+                }
+            }
 
             /// <summary>
             /// 激励计划
             /// </summary>
-            public float growup { get; private set; }
+            public float growup
+            {
+                get { return _growup; }
+                set
+                {
+                    _growup = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("growup"));
+                }
+            }
 
             /// <summary>
             /// 激励计划增量
             /// </summary>
-            public float growup_incr { get; private set; }
+            public float growup_incr
+            {
+                get { return _growup_incr; }
+                set
+                {
+                    _growup_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("growup_incr"));
+                }
+            }
 
             /// <summary>
             /// 点赞
             /// </summary>
-            public int like { get; private set; }
+            public int like
+            {
+                get { return _like; }
+                set
+                {
+                    _like = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like"));
+                }
+            }
 
             /// <summary>
             /// 点赞增量
             /// </summary>
-            public int like_incr { get; private set; }
+            public int like_incr
+            {
+                get { return _like_incr; }
+                set
+                {
+                    _like_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like_incr"));
+                }
+            }
 
             /// <summary>
             /// 播放
             /// </summary>
-            public int play { get; private set; }
+            public int play
+            {
+                get { return _play; }
+                set
+                {
+                    _play = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("play"));
+                }
+            }
 
             /// <summary>
             /// 播放增量
             /// </summary>
-            public int play_incr { get; private set; }
+            public int play_incr
+            {
+                get { return _play_incr; }
+                set
+                {
+                    _play_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("play_incr"));
+                }
+            }
 
             /// <summary>
             /// 分享
             /// </summary>
-            public int share { get; private set; }
+            public int share
+            {
+                get { return _share; }
+                set
+                {
+                    _share = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share"));
+                }
+            }
 
             /// <summary>
             /// 分享增量
             /// </summary>
-            public int share_incr { get; private set; }
+            public int share_incr
+            {
+                get { return _share_incr; }
+                set
+                {
+                    _share_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share_incr"));
+                }
+            }
 
             #endregion Public Properties
 
