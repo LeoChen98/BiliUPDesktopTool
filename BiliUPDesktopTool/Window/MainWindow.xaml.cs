@@ -26,7 +26,8 @@ namespace BiliUPDesktopTool
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            num1.ChangeNum(i++);
+            //num1.ChangeNum(i++);
+            nums1.ChangeNum(1234.56);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

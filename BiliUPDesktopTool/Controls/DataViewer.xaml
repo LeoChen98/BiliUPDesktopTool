@@ -7,5 +7,8 @@
              mc:Ignorable="d"
              d:DesignHeight="150" d:DesignWidth="175" Width= "175" Height="150">
     <Grid>
+        <Label x:Name="DataTitle" Margin="10,10,55.2,106.4" Content="播放" Foreground="White" VerticalContentAlignment="Center" FontSize="14" />
+        <Label x:Name="DataNum" Margin="10,44,10.2,52.4" Content="1.2万" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" />
+        <Label x:Name="DataIncr" Margin="51,113,10.2,10.4" Content="1.2万" Foreground="White" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" />
     </Grid>
 </UserControl>

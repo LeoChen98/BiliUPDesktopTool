@@ -104,6 +104,12 @@
     <Compile Include="Controls\DataViewer.xaml.cs">
       <DependentUpon>DataViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataViewerPanel.xaml.cs">
+      <DependentUpon>DataViewerPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RollingNums.xaml.cs">
+      <DependentUpon>RollingNums.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Setting\SettingsBase.cs" />
     <Compile Include="Setting\Settings.cs" />
     <Compile Include="Setting\Account.cs" />
@@ -123,6 +129,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\DataViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DataViewerPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RollingNums.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

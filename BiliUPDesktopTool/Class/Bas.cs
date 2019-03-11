@@ -6,6 +6,9 @@ using System.Text.RegularExpressions;
 
 namespace BiliUPDesktopTool
 {
+    /// <summary>
+    /// 公共模块
+    /// </summary>
     internal class Bas
     {
         #region Public Fields

@@ -62,28 +62,6 @@ namespace BiliUPDesktopTool
 
         #endregion Public Methods
 
-        #region Protected Methods
-
-        /// <summary>
-        /// 格式化数字(大于1万则返回x.x万）
-        /// </summary>
-        /// <param name="num">数字</param>
-        /// <returns></returns>
-        protected static string TrimNumStr(string num)
-        {
-            if (float.Parse(num) >= 10000)
-            {
-                string tmp = num.Split('.')[0];
-                return tmp.Substring(0, tmp.Length - 4) + "." + tmp.Substring(tmp.Length - 4, 1) + "万";
-            }
-            else
-            {
-                return num;
-            }
-        }
-
-        #endregion Protected Methods
-
         #region Public Classes
 
         /// <summary>
@@ -93,10 +71,7 @@ namespace BiliUPDesktopTool
         {
             #region Private Fields
 
-            /// <summary>
-            /// 数据内存
-            /// </summary>
-            private string _coin, _coin_incr, _fav, _fav_incr, _like, _like_incr, _reply, _reply_incr, _share, _share_incr, _view, _view_incr;
+            private int _coin, _coin_incr, _fav, _fav_incr, _like, _like_incr, _reply, _reply_incr, _share, _share_incr, _view, _view_incr;
 
             #endregion Private Fields
 
@@ -122,12 +97,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 硬币
             /// </summary>
-            public string coin
+            public int coin
             {
                 get { return _coin; }
                 set
                 {
-                    _coin = TrimNumStr(value);
+                    _coin = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin"));
                 }
             }
@@ -135,12 +110,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 硬币增量
             /// </summary>
-            public string coin_incr
+            public int coin_incr
             {
                 get { return _coin_incr; }
                 set
                 {
-                    _coin_incr = TrimNumStr(value);
+                    _coin_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin_incr"));
                 }
             }
@@ -148,12 +123,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 收藏
             /// </summary>
-            public string fav
+            public int fav
             {
                 get { return _fav; }
                 set
                 {
-                    _fav = TrimNumStr(value);
+                    _fav = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav"));
                 }
             }
@@ -161,12 +136,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 收藏增量
             /// </summary>
-            public string fav_incr
+            public int fav_incr
             {
                 get { return _fav_incr; }
                 set
                 {
-                    _fav_incr = TrimNumStr(value);
+                    _fav_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav_incr"));
                 }
             }
@@ -174,12 +149,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 点赞
             /// </summary>
-            public string like
+            public int like
             {
                 get { return _like; }
                 set
                 {
-                    _like = TrimNumStr(value);
+                    _like = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like"));
                 }
             }
@@ -187,12 +162,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 点赞增量
             /// </summary>
-            public string like_incr
+            public int like_incr
             {
                 get { return _like_incr; }
                 set
                 {
-                    _like_incr = TrimNumStr(value);
+                    _like_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like_incr"));
                 }
             }
@@ -200,12 +175,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 评论
             /// </summary>
-            public string reply
+            public int reply
             {
                 get { return _reply; }
                 set
                 {
-                    _reply = TrimNumStr(value);
+                    _reply = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("reply"));
                 }
             }
@@ -213,12 +188,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 评论增量
             /// </summary>
-            public string reply_incr
+            public int reply_incr
             {
                 get { return _reply_incr; }
                 set
                 {
-                    _reply_incr = TrimNumStr(value);
+                    _reply_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("reply_incr"));
                 }
             }
@@ -226,12 +201,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 分享
             /// </summary>
-            public string share
+            public int share
             {
                 get { return _share; }
                 set
                 {
-                    _share = TrimNumStr(value);
+                    _share = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share"));
                 }
             }
@@ -239,12 +214,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 分享增量
             /// </summary>
-            public string share_incr
+            public int share_incr
             {
                 get { return _reply_incr; }
                 set
                 {
-                    _reply_incr = TrimNumStr(value);
+                    _reply_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share_incr"));
                 }
             }
@@ -252,12 +227,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 点击
             /// </summary>
-            public string view
+            public int view
             {
                 get { return _view; }
                 set
                 {
-                    _view = TrimNumStr(value);
+                    _view = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("view"));
                 }
             }
@@ -265,12 +240,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 点击增量
             /// </summary>
-            public string view_incr
+            public int view_incr
             {
                 get { return _view_incr; }
                 set
                 {
-                    _view_incr = TrimNumStr(value);
+                    _view_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("view_incr"));
                 }
             }
@@ -291,18 +266,18 @@ namespace BiliUPDesktopTool
                     JObject obj = JObject.Parse(str);
                     if ((int)obj["code"] == 0)
                     {
-                        coin = obj["data"]["stat"]["coin"].ToString();
-                        coin_incr = obj["data"]["stat"]["incr_coin"].ToString();
-                        fav = obj["data"]["stat"]["fav"].ToString();
-                        fav_incr = obj["data"]["stat"]["incr_fav"].ToString();
-                        like = obj["data"]["stat"]["like"].ToString();
-                        like_incr = obj["data"]["stat"]["incr_like"].ToString();
-                        reply = obj["data"]["stat"]["reply"].ToString();
-                        reply_incr = obj["data"]["stat"]["incr_reply"].ToString();
-                        share = obj["data"]["stat"]["share"].ToString();
-                        share_incr = obj["data"]["stat"]["incr_share"].ToString();
-                        view = obj["data"]["stat"]["view"].ToString();
-                        view_incr = obj["data"]["stat"]["incr_view"].ToString();
+                        coin = (int)obj["data"]["stat"]["coin"];
+                        coin_incr = (int)obj["data"]["stat"]["incr_coin"];
+                        fav = (int)obj["data"]["stat"]["fav"];
+                        fav_incr = (int)obj["data"]["stat"]["incr_fav"];
+                        like = (int)obj["data"]["stat"]["like"];
+                        like_incr = (int)obj["data"]["stat"]["incr_like"];
+                        reply = (int)obj["data"]["stat"]["reply"];
+                        reply_incr = (int)obj["data"]["stat"]["incr_reply"];
+                        share = (int)obj["data"]["stat"]["share"];
+                        share_incr = (int)obj["data"]["stat"]["incr_share"];
+                        view = (int)obj["data"]["stat"]["view"];
+                        view_incr = (int)obj["data"]["stat"]["incr_view"];
                     }
                 }
                 return this;
@@ -318,10 +293,9 @@ namespace BiliUPDesktopTool
         {
             #region Private Fields
 
-            /// <summary>
-            /// 数据内存
-            /// </summary>
-            private string _coin, _coin_incr, _dm, _dm_incr, _fan, _fan_incr, _fav, _fav_incr, _like, _like_incr, _play, _play_incr, _share, _share_incr, _elec, _elec_incr, _growup, _growup_incr;
+            private int _coin, _coin_incr, _dm, _dm_incr, _fan, _fan_incr, _fav, _fav_incr, _like, _like_incr, _play, _play_incr, _share, _share_incr;
+
+            private double _elec, _elec_incr, _growup, _growup_incr;
 
             #endregion Private Fields
 
@@ -347,12 +321,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 硬币
             /// </summary>
-            public string coin
+            public int coin
             {
                 get { return _coin; }
                 set
                 {
-                    _coin = TrimNumStr(value);
+                    _coin = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin"));
                 }
             }
@@ -360,12 +334,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 硬币增量
             /// </summary>
-            public string coin_incr
+            public int coin_incr
             {
                 get { return _coin_incr; }
                 set
                 {
-                    _coin_incr = TrimNumStr(value);
+                    _coin_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin_incr"));
                 }
             }
@@ -373,12 +347,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 弹幕
             /// </summary>
-            public string dm
+            public int dm
             {
                 get { return _dm; }
                 set
                 {
-                    _dm = TrimNumStr(value);
+                    _dm = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("dm"));
                 }
             }
@@ -386,12 +360,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 弹幕增量
             /// </summary>
-            public string dm_incr
+            public int dm_incr
             {
                 get { return _dm_incr; }
                 set
                 {
-                    _dm_incr = TrimNumStr(value);
+                    _dm_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("dm_incr"));
                 }
             }
@@ -399,12 +373,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 电池
             /// </summary>
-            public string elec
+            public double elec
             {
                 get { return _elec; }
                 set
                 {
-                    _elec = TrimNumStr(value);
+                    _elec = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("elec"));
                 }
             }
@@ -412,12 +386,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 电池增量
             /// </summary>
-            public string elec_incr
+            public double elec_incr
             {
                 get { return _elec_incr; }
                 set
                 {
-                    _elec_incr = TrimNumStr(value);
+                    _elec_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("elec_incr"));
                 }
             }
@@ -425,12 +399,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 粉丝
             /// </summary>
-            public string fan
+            public int fan
             {
                 get { return _fan; }
                 set
                 {
-                    _fan = TrimNumStr(value);
+                    _fan = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fan"));
                 }
             }
@@ -438,12 +412,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 粉丝增量
             /// </summary>
-            public string fan_incr
+            public int fan_incr
             {
                 get { return _fan_incr; }
                 set
                 {
-                    _fan_incr = TrimNumStr(value);
+                    _fan_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fan_incr"));
                 }
             }
@@ -451,12 +425,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 收藏
             /// </summary>
-            public string fav
+            public int fav
             {
                 get { return _fav; }
                 set
                 {
-                    _fav = TrimNumStr(value);
+                    _fav = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav"));
                 }
             }
@@ -464,12 +438,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 收藏增量
             /// </summary>
-            public string fav_incr
+            public int fav_incr
             {
                 get { return _fav_incr; }
                 set
                 {
-                    _fav_incr = TrimNumStr(value);
+                    _fav_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav_incr"));
                 }
             }
@@ -477,12 +451,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 激励计划
             /// </summary>
-            public string growup
+            public double growup
             {
                 get { return _growup; }
                 set
                 {
-                    _growup = TrimNumStr(value);
+                    _growup = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("growup"));
                 }
             }
@@ -490,12 +464,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 激励计划增量
             /// </summary>
-            public string growup_incr
+            public double growup_incr
             {
                 get { return _growup_incr; }
                 set
                 {
-                    _growup_incr = TrimNumStr(value);
+                    _growup_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("growup_incr"));
                 }
             }
@@ -503,12 +477,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 点赞
             /// </summary>
-            public string like
+            public int like
             {
                 get { return _like; }
                 set
                 {
-                    _like = TrimNumStr(value);
+                    _like = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like"));
                 }
             }
@@ -516,12 +490,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 点赞增量
             /// </summary>
-            public string like_incr
+            public int like_incr
             {
                 get { return _like_incr; }
                 set
                 {
-                    _like_incr = TrimNumStr(value);
+                    _like_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like_incr"));
                 }
             }
@@ -529,12 +503,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 播放
             /// </summary>
-            public string play
+            public int play
             {
                 get { return _play; }
                 set
                 {
-                    _play = TrimNumStr(value);
+                    _play = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("play"));
                 }
             }
@@ -542,12 +516,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 播放增量
             /// </summary>
-            public string play_incr
+            public int play_incr
             {
                 get { return _play_incr; }
                 set
                 {
-                    _play_incr = TrimNumStr(value);
+                    _play_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("play_incr"));
                 }
             }
@@ -555,12 +529,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 分享
             /// </summary>
-            public string share
+            public int share
             {
                 get { return _share; }
                 set
                 {
-                    _share = TrimNumStr(value);
+                    _share = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share"));
                 }
             }
@@ -568,12 +542,12 @@ namespace BiliUPDesktopTool
             /// <summary>
             /// 分享增量
             /// </summary>
-            public string share_incr
+            public int share_incr
             {
                 get { return _share_incr; }
                 set
                 {
-                    _share_incr = TrimNumStr(value);
+                    _share_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share_incr"));
                 }
             }
@@ -594,26 +568,26 @@ namespace BiliUPDesktopTool
                     JObject obj = JObject.Parse(str);
                     if ((int)obj["code"] == 0)
                     {
-                        coin = obj["data"]["stat"]["coin"].ToString();
-                        coin_incr = ((int)obj["data"]["stat"]["coin"] - (int)obj["data"]["stat"]["coin_last"]).ToString();
-                        dm = obj["data"]["stat"]["dm"].ToString();
-                        dm_incr = ((int)obj["data"]["stat"]["dm"] - (int)obj["data"]["stat"]["dm_last"]).ToString();
-                        elec_incr = ((float)obj["data"]["stat"]["elec"] - (float)obj["data"]["stat"]["elec_last"]).ToString();
-                        fan = obj["data"]["stat"]["fan"].ToString();
-                        fan_incr = ((int)obj["data"]["stat"]["fan"] - (int)obj["data"]["stat"]["fan_last"]).ToString();
-                        fav = obj["data"]["stat"]["fav"].ToString();
-                        fav_incr = ((int)obj["data"]["stat"]["fav"] - (int)obj["data"]["stat"]["fav_last"]).ToString();
-                        like = obj["data"]["stat"]["like"].ToString();
-                        like_incr = ((int)obj["data"]["stat"]["like"] - (int)obj["data"]["stat"]["like_last"]).ToString();
-                        play = obj["data"]["stat"]["play"].ToString();
-                        play_incr = ((int)obj["data"]["stat"]["play"] - (int)obj["data"]["stat"]["play_last"]).ToString();
-                        share = obj["data"]["stat"]["share"].ToString();
-                        share_incr = ((int)obj["data"]["stat"]["share"] - (int)obj["data"]["stat"]["share_last"]).ToString();
+                        coin = (int)obj["data"]["stat"]["coin"];
+                        coin_incr = (int)obj["data"]["stat"]["coin"] - (int)obj["data"]["stat"]["coin_last"];
+                        dm = (int)obj["data"]["stat"]["dm"];
+                        dm_incr = (int)obj["data"]["stat"]["dm"] - (int)obj["data"]["stat"]["dm_last"];
+                        elec_incr = (double)obj["data"]["stat"]["elec"] - (double)obj["data"]["stat"]["elec_last"];
+                        fan = (int)obj["data"]["stat"]["fan"];
+                        fan_incr = (int)obj["data"]["stat"]["fan"] - (int)obj["data"]["stat"]["fan_last"];
+                        fav = (int)obj["data"]["stat"]["fav"];
+                        fav_incr = (int)obj["data"]["stat"]["fav"] - (int)obj["data"]["stat"]["fav_last"];
+                        like = (int)obj["data"]["stat"]["like"];
+                        like_incr = (int)obj["data"]["stat"]["like"] - (int)obj["data"]["stat"]["like_last"];
+                        play = (int)obj["data"]["stat"]["play"];
+                        play_incr = (int)obj["data"]["stat"]["play"] - (int)obj["data"]["stat"]["play_last"];
+                        share = (int)obj["data"]["stat"]["share"];
+                        share_incr = (int)obj["data"]["stat"]["share"] - (int)obj["data"]["stat"]["share_last"];
                     }
                 }
 
                 elec = GetCharge();
-                string[] tmp = GetGrowUp();
+                double[] tmp = GetGrowUp();
                 growup_incr = tmp[0];
                 growup = tmp[1];
                 return this;
@@ -627,17 +601,17 @@ namespace BiliUPDesktopTool
             /// 获得充电数据
             /// </summary>
             /// <returns>电池数</returns>
-            private string GetCharge()
+            private double GetCharge()
             {
                 string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/elec/balance", Bas.account.Cookies);
                 JObject obj = JObject.Parse(str);
                 if ((int)obj["code"] == 0)
                 {
-                    return obj["data"]["wallet"]["sponsorBalance"].ToString();
+                    return (double)obj["data"]["wallet"]["sponsorBalance"];
                 }
                 else
                 {
-                    return "";
+                    return -1;
                 }
             }
 
@@ -645,17 +619,17 @@ namespace BiliUPDesktopTool
             /// 获得激励计划数据
             /// </summary>
             /// <returns>[0]:前天收入;[1]:本月收入</returns>
-            private string[] GetGrowUp()
+            private double[] GetGrowUp()
             {
                 string str = Bas.GetHTTPBody("https://api.bilibili.com/studio/growup/web/up/summary", Bas.account.Cookies);
                 JObject obj = JObject.Parse(str);
                 if ((int)obj["code"] == 0)
                 {
-                    return new string[2] { obj["data"]["day_income"].ToString(), obj["data"]["income"].ToString() };
+                    return new double[2] { (double)obj["data"]["day_income"], (double)obj["data"]["income"] };
                 }
                 else
                 {
-                    return new string[2] { "", "" };
+                    return new double[2] { -1, -1 };
                 }
             }
 

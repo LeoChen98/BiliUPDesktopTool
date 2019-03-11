@@ -1,17 +1,18 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Shapes;
 
 namespace BiliUPDesktopTool
 {
     /// <summary>
-    /// DataViewer.xaml 的交互逻辑
+    /// DataViewerPanel.xaml 的交互逻辑
     /// </summary>
-    public partial class DataViewer : UserControl
+    public partial class DataViewerPanel : UserControl
     {
         #region Public Constructors
 
-        public DataViewer()
+        public DataViewerPanel()
         {
             InitializeComponent();
 
@@ -27,15 +28,14 @@ namespace BiliUPDesktopTool
         /// </summary>
         private void BindingInit()
         {
-            Binding bind_datatitle_color = new Binding()
+            Binding bind_R_color = new Binding()
             {
                 Source = Bas.skin,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };
-            DataTitle.SetBinding(ForegroundProperty, bind_datatitle_color);
-            DataNum.SetBinding(ForegroundProperty, bind_datatitle_color);
-            DataIncr.SetBinding(ForegroundProperty, bind_datatitle_color);
+            BindingOperations.SetBinding(Rx, Shape.StrokeProperty, bind_R_color);
+            BindingOperations.SetBinding(Ry, Shape.StrokeProperty, bind_R_color);
         }
 
         #endregion Private Methods

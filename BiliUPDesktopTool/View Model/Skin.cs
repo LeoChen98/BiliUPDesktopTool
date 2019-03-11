@@ -44,6 +44,19 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
+        /// 桌面窗体的字体颜色
+        /// </summary>
+        public Brush DesktopWnd_FontColor
+        {
+            get { return ST.DesktopWnd_FC; }
+            set
+            {
+                ST.DesktopWnd_FC = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_FontColor"));
+            }
+        }
+
+        /// <summary>
         /// 桌面窗体的Left属性
         /// </summary>
         public double DesktopWnd_Left
@@ -97,7 +110,13 @@ namespace BiliUPDesktopTool
             /// 桌面窗体的背景颜色
             /// </summary>
             [JsonIgnore]
-            public Brush DesktopWnd_Bg = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0xff, 0xff));
+            public Brush DesktopWnd_Bg = new SolidColorBrush(Color.FromArgb(0x2D, 0x0, 0x0, 0x0));
+
+            /// <summary>
+            /// 桌面窗体的字体颜色
+            /// </summary>
+            [JsonIgnore]
+            public Brush DesktopWnd_FC = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0xff, 0xff));
 
             /// <summary>
             /// 桌面窗体的Left属性
@@ -130,6 +149,21 @@ namespace BiliUPDesktopTool
                 set
                 {
                     DesktopWnd_Bg = new SolidColorBrush(GetColor(value));
+                }
+            }
+
+            /// <summary>
+            /// 桌面窗体的字体颜色字符串
+            /// </summary>
+            public string DesktopWnd_FontColor
+            {
+                get
+                {
+                    return ((SolidColorBrush)DesktopWnd_FC).Color.ToString();
+                }
+                set
+                {
+                    DesktopWnd_FC = new SolidColorBrush(GetColor(value));
                 }
             }
 
