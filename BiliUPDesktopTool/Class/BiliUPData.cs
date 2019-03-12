@@ -613,11 +613,14 @@ namespace BiliUPDesktopTool
                         share_incr = (int)obj["data"]["stat"]["share"] - (int)obj["data"]["stat"]["share_last"];
                     }
                 }
-
-                elec = GetCharge();
+                double tmp1 = GetCharge();
+                if (tmp1 != -1) elec = tmp1;
                 double[] tmp = GetGrowUp();
-                growup_incr = tmp[0];
-                growup = tmp[1];
+                if (tmp != new double[2] { -1, -1 })
+                {
+                    growup_incr = tmp[0];
+                    growup = tmp[1];
+                }
                 return this;
             }
 
@@ -632,15 +635,19 @@ namespace BiliUPDesktopTool
             private double GetCharge()
             {
                 string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/elec/balance", Bas.account.Cookies);
-                JObject obj = JObject.Parse(str);
-                if ((int)obj["code"] == 0)
+                if (!string.IsNullOrEmpty(str))
                 {
-                    return (double)obj["data"]["wallet"]["sponsorBalance"];
+                    JObject obj = JObject.Parse(str);
+                    if ((int)obj["code"] == 0)
+                    {
+                        return (double)obj["data"]["wallet"]["sponsorBalance"];
+                    }
+                    else
+                    {
+                        return -1;
+                    }
                 }
-                else
-                {
-                    return -1;
-                }
+                else return -1;
             }
 
             /// <summary>
@@ -650,15 +657,19 @@ namespace BiliUPDesktopTool
             private double[] GetGrowUp()
             {
                 string str = Bas.GetHTTPBody("https://api.bilibili.com/studio/growup/web/up/summary", Bas.account.Cookies);
-                JObject obj = JObject.Parse(str);
-                if ((int)obj["code"] == 0)
+                if (!string.IsNullOrWhiteSpace(str))
                 {
-                    return new double[2] { (double)obj["data"]["day_income"], (double)obj["data"]["income"] };
+                    JObject obj = JObject.Parse(str);
+                    if ((int)obj["code"] == 0)
+                    {
+                        return new double[2] { (double)obj["data"]["day_income"], (double)obj["data"]["income"] };
+                    }
+                    else
+                    {
+                        return new double[2] { -1, -1 };
+                    }
                 }
-                else
-                {
-                    return new double[2] { -1, -1 };
-                }
+                else { return new double[2] { -1, -1 }; }
             }
 
             #endregion Private Methods
