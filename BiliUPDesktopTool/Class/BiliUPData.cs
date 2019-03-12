@@ -216,10 +216,10 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int share_incr
             {
-                get { return _reply_incr; }
+                get { return _share_incr; }
                 set
                 {
-                    _reply_incr = value;
+                    _share_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share_incr"));
                 }
             }

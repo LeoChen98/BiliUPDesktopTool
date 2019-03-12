@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
@@ -27,20 +26,14 @@ namespace BiliUPDesktopTool
             }
 
             IntPtr pWndA = WinAPIHelper.FindWindow("WorkerW", null);
-            Debug.WriteLine(pWndA);
             pWnd = WinAPIHelper.FindWindowEx(pWndA, IntPtr.Zero, "SHELLDLL_DefVIew", null);
-            Debug.WriteLine(pWnd);
             while (pWnd == IntPtr.Zero)
             {
                 pWndA = WinAPIHelper.FindWindowEx(IntPtr.Zero, pWndA, "WorkerW", null);
-                Debug.WriteLine(pWndA);
                 pWnd = WinAPIHelper.FindWindowEx(pWndA, IntPtr.Zero, "SHELLDLL_DefVIew", null);
-                Debug.WriteLine(pWnd);
             }
             pWndA = WinAPIHelper.FindWindowEx(IntPtr.Zero, pWndA, "WorkerW", null);
-            Debug.WriteLine(pWndA);
             pWnd = WinAPIHelper.FindWindowEx(pWnd, IntPtr.Zero, "SysListView32", null);
-            Debug.WriteLine(pWnd);
 
             if (pWndA != IntPtr.Zero) WinAPIHelper.SetParent(hWndC, pWndA);
             else System.Windows.Forms.MessageBox.Show("嵌入桌面失败！");
@@ -60,20 +53,14 @@ namespace BiliUPDesktopTool
             }
 
             IntPtr pWndA = WinAPIHelper.FindWindow("WorkerW", null);
-            Debug.WriteLine(pWndA);
             pWnd = WinAPIHelper.FindWindowEx(pWndA, IntPtr.Zero, "SHELLDLL_DefVIew", null);
-            Debug.WriteLine(pWnd);
             while (pWnd == IntPtr.Zero)
             {
                 pWndA = WinAPIHelper.FindWindowEx(IntPtr.Zero, pWndA, "WorkerW", null);
-                Debug.WriteLine(pWndA);
                 pWnd = WinAPIHelper.FindWindowEx(pWndA, IntPtr.Zero, "SHELLDLL_DefVIew", null);
-                Debug.WriteLine(pWnd);
             }
             pWndA = WinAPIHelper.FindWindowEx(IntPtr.Zero, pWndA, "WorkerW", null);
-            Debug.WriteLine(pWndA);
             pWnd = WinAPIHelper.FindWindowEx(pWnd, IntPtr.Zero, "SysListView32", null);
-            Debug.WriteLine(pWnd);
 
             if (pWndA != IntPtr.Zero) WinAPIHelper.SetParent(new WindowInteropHelper(window).Handle, pWndA);
             else System.Windows.Forms.MessageBox.Show("嵌入桌面失败！");
@@ -93,20 +80,14 @@ namespace BiliUPDesktopTool
             }
 
             IntPtr pWndA = WinAPIHelper.FindWindow("WorkerW", null);
-            Debug.WriteLine(pWndA);
             pWnd = WinAPIHelper.FindWindowEx(pWndA, IntPtr.Zero, "SHELLDLL_DefVIew", null);
-            Debug.WriteLine(pWnd);
             while (pWnd == IntPtr.Zero)
             {
                 pWndA = WinAPIHelper.FindWindowEx(IntPtr.Zero, pWndA, "WorkerW", null);
-                Debug.WriteLine(pWndA);
                 pWnd = WinAPIHelper.FindWindowEx(pWndA, IntPtr.Zero, "SHELLDLL_DefVIew", null);
-                Debug.WriteLine(pWnd);
             }
             pWndA = WinAPIHelper.FindWindowEx(IntPtr.Zero, pWndA, "WorkerW", null);
-            Debug.WriteLine(pWndA);
             pWnd = WinAPIHelper.FindWindowEx(pWnd, IntPtr.Zero, "SysListView32", null);
-            Debug.WriteLine(pWnd);
 
             if (pWndA != IntPtr.Zero) WinAPIHelper.SetParent(window.Handle, pWndA);
             else System.Windows.Forms.MessageBox.Show("嵌入桌面失败！");
