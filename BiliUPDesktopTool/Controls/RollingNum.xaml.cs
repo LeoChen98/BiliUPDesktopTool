@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media.Animation;
 
 namespace BiliUPDesktopTool
@@ -21,6 +22,8 @@ namespace BiliUPDesktopTool
         public RollingNum()
         {
             InitializeComponent();
+
+            BindingInit();
         }
 
         #endregion Public Constructors
@@ -43,6 +46,29 @@ namespace BiliUPDesktopTool
         #endregion Public Methods
 
         #region Private Methods
+
+        private void BindingInit()
+        {
+            Binding bind_fontcolor = new Binding()
+            {
+                Source = Bas.skin,
+                Mode = BindingMode.TwoWay,
+                Path = new PropertyPath("DesktopWnd_FontColor")
+            };
+            num0.SetBinding(ForegroundProperty, bind_fontcolor);
+            num1.SetBinding(ForegroundProperty, bind_fontcolor);
+            num2.SetBinding(ForegroundProperty, bind_fontcolor);
+            num3.SetBinding(ForegroundProperty, bind_fontcolor);
+            num4.SetBinding(ForegroundProperty, bind_fontcolor);
+            num5.SetBinding(ForegroundProperty, bind_fontcolor);
+            num6.SetBinding(ForegroundProperty, bind_fontcolor);
+            num7.SetBinding(ForegroundProperty, bind_fontcolor);
+            num8.SetBinding(ForegroundProperty, bind_fontcolor);
+            num9.SetBinding(ForegroundProperty, bind_fontcolor);
+            numw.SetBinding(ForegroundProperty, bind_fontcolor);
+            numb.SetBinding(ForegroundProperty, bind_fontcolor);
+            numx.SetBinding(ForegroundProperty, bind_fontcolor);
+        }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

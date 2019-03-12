@@ -1,5 +1,8 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace BiliUPDesktopTool
 {
@@ -8,17 +11,63 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class RollingNums : UserControl
     {
+        #region Public Fields
+
+        /// <summary>
+        /// 数据依赖属性
+        /// </summary>
+        public static readonly DependencyProperty numProperty =
+            DependencyProperty.Register("num", typeof(double), typeof(RollingNums), new PropertyMetadata((double)0, new PropertyChangedCallback(ChangeNum)));
+
+        #endregion Public Fields
+
         #region Public Constructors
 
         public RollingNums()
         {
             InitializeComponent();
+
+            BindingInit();
+
+            ChangeNum(0);//初始化值
         }
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        /// <summary>
+        /// 数据
+        /// </summary>
+        public double num
+        {
+            get { return (double)GetValue(numProperty); }
+            set
+            {
+                SetValue(numProperty, value);
+            }
+        }
+
+        #endregion Public Properties
+
         #region Public Methods
 
+        /// <summary>
+        /// 改变数字（自动回调）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void ChangeNum(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            RollingNums r = (RollingNums)sender;
+            double v = Convert.ToDouble(e.NewValue);
+            r.ChangeNum(v);
+        }
+
+        /// <summary>
+        /// 改变数字
+        /// </summary>
+        /// <param name="num">数字</param>
         public void ChangeNum(double num)
         {
             string numstr = num.ToString();
@@ -57,7 +106,14 @@ namespace BiliUPDesktopTool
                         }
                         else
                         {
-                            numids[4 - i] = -3;
+                            if (4 - i == 3)
+                            {
+                                numids[3] = 0;
+                            }
+                            else
+                            {
+                                numids[4 - i] = -3;
+                            }
                         }
                     }
                 }
@@ -116,10 +172,39 @@ namespace BiliUPDesktopTool
             N3.ChangeNum(numids[1]);
             N2.ChangeNum(numids[2]);
             N1.ChangeNum(numids[3]);
-            P1.ChangeNum(numids[4]);
-            P2.ChangeNum(numids[5]);
+            if (numids[4] == 0 && numids[5] == 0)
+            {
+                numpoint.Visibility = Visibility.Hidden;
+                P1.Visibility = Visibility.Hidden;
+                P2.Visibility = Visibility.Hidden;
+                ViewPanel.Margin = new Thickness(30, 0, -28, 0);
+            }
+            else
+            {
+                numpoint.Visibility = Visibility.Visible;
+                P1.Visibility = Visibility.Visible;
+                P2.Visibility = Visibility.Visible;
+                ViewPanel.Margin = new Thickness(1, 0, 1, 0);
+                P1.ChangeNum(numids[4]);
+                P2.ChangeNum(numids[5]);
+            }
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void BindingInit()
+        {
+            Binding bind_fontcolor = new Binding()
+            {
+                Source = Bas.skin,
+                Mode = BindingMode.TwoWay,
+                Path = new PropertyPath("DesktopWnd_FontColor")
+            };
+            numpoint.SetBinding(ForegroundProperty, bind_fontcolor);
+        }
+
+        #endregion Private Methods
     }
 }

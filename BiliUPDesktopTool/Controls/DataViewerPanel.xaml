@@ -9,9 +9,9 @@
     <Grid>
         <Rectangle x:Name="Rx"  Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="20,150,20,0" Stroke="Black" VerticalAlignment="Top" Width="310" />
         <Rectangle x:Name="Ry"  Fill="#FFF4F4F5" HorizontalAlignment="Left" Width="1" Margin="175,20,0,0" Stroke="Black" VerticalAlignment="Top" Height="260" />
-        <local:DataViewer HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" />
-        <local:DataViewer HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="170" Margin="180,0,0,0" />
-        <local:DataViewer HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" Margin="0,151,0,0" />
-        <local:DataViewer HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" Margin="176,151,0,0" />
+        <local:DataViewer x:Name="ViewerLT" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" />
+        <local:DataViewer x:Name="ViewerRT" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="170" Margin="180,0,0,0" />
+        <local:DataViewer x:Name="ViewerLB" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" Margin="0,151,0,0" />
+        <local:DataViewer x:Name="ViewerRB" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" Margin="176,151,0,0" />
     </Grid>
 </UserControl>

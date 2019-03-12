@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Shapes;
 
 namespace BiliUPDesktopTool
 {
@@ -20,6 +21,19 @@ namespace BiliUPDesktopTool
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        /// <summary>
+        /// 数据标题
+        /// </summary>
+        public string Title
+        {
+            get { return DataTitle.Content.ToString(); }
+            set { DataTitle.Content = value; }
+        }
+
+        #endregion Public Properties
+
         #region Private Methods
 
         /// <summary>
@@ -34,8 +48,8 @@ namespace BiliUPDesktopTool
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };
             DataTitle.SetBinding(ForegroundProperty, bind_datatitle_color);
-            DataNum.SetBinding(ForegroundProperty, bind_datatitle_color);
-            DataIncr.SetBinding(ForegroundProperty, bind_datatitle_color);
+            Triangle.SetBinding(Shape.FillProperty, bind_datatitle_color);
+            Triangle.SetBinding(Shape.StrokeProperty, bind_datatitle_color);
         }
 
         #endregion Private Methods

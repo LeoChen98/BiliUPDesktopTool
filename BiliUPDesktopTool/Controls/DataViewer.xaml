@@ -8,7 +8,28 @@
              d:DesignHeight="150" d:DesignWidth="175" Width= "175" Height="150">
     <Grid>
         <Label x:Name="DataTitle" Margin="10,10,55.2,106.4" Content="播放" Foreground="White" VerticalContentAlignment="Center" FontSize="14" />
-        <Label x:Name="DataNum" Margin="10,44,10.2,52.4" Content="1.2万" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" />
-        <Label x:Name="DataIncr" Margin="51,113,10.2,10.4" Content="1.2万" Foreground="White" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" />
+        <local:RollingNums x:Name="num" HorizontalAlignment="Center" Height="50" Margin="10,49,0,0" VerticalAlignment="Top" Width="140" />
+        <local:RollingNums x:Name="incr" HorizontalAlignment="Center" Height="50" Margin="45,100,-9.8,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.5,0.5">
+            <local:RollingNums.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="0.6" ScaleY="0.6" />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </local:RollingNums.RenderTransform>
+        </local:RollingNums>
+        <Canvas HorizontalAlignment="Left" Height="30" Margin="41,110,0,0" VerticalAlignment="Top" Width="30">
+            <Path x:Name="Triangle" Fill="White" Stroke="White">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure StartPoint="10,20" IsClosed="True">
+                            <LineSegment Point="15,16"></LineSegment>
+                            <LineSegment Point="20,20"></LineSegment>
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </Canvas>
     </Grid>
 </UserControl>

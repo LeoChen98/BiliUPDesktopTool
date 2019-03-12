@@ -293,7 +293,7 @@ namespace BiliUPDesktopTool
         {
             #region Private Fields
 
-            private int _coin, _coin_incr, _dm, _dm_incr, _fan, _fan_incr, _fav, _fav_incr, _like, _like_incr, _play, _play_incr, _share, _share_incr;
+            private int _coin, _coin_incr, _dm, _dm_incr, _fan, _fan_incr, _fav, _fav_incr, _like, _like_incr, _play, _play_incr, _share, _share_incr, _comment, _comment_incr;
 
             private double _elec, _elec_incr, _growup, _growup_incr;
 
@@ -341,6 +341,32 @@ namespace BiliUPDesktopTool
                 {
                     _coin_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin_incr"));
+                }
+            }
+
+            /// <summary>
+            /// 评论
+            /// </summary>
+            public int comment
+            {
+                get { return _comment; }
+                set
+                {
+                    _comment = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("comment"));
+                }
+            }
+
+            /// <summary>
+            /// 评论增量
+            /// </summary>
+            public int comment_incr
+            {
+                get { return _comment_incr; }
+                set
+                {
+                    _comment_incr = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("comment_incr"));
                 }
             }
 
@@ -570,6 +596,8 @@ namespace BiliUPDesktopTool
                     {
                         coin = (int)obj["data"]["stat"]["coin"];
                         coin_incr = (int)obj["data"]["stat"]["coin"] - (int)obj["data"]["stat"]["coin_last"];
+                        comment = (int)obj["data"]["stat"]["comment"];
+                        comment_incr = (int)obj["data"]["stat"]["comment"] - (int)obj["data"]["stat"]["comment_last"];
                         dm = (int)obj["data"]["stat"]["dm"];
                         dm_incr = (int)obj["data"]["stat"]["dm"] - (int)obj["data"]["stat"]["dm_last"];
                         elec_incr = (double)obj["data"]["stat"]["elec"] - (double)obj["data"]["stat"]["elec_last"];

@@ -1,4 +1,6 @@
-﻿namespace BiliUPDesktopTool
+﻿using System.Collections.Generic;
+
+namespace BiliUPDesktopTool
 {
     /// <summary>
     /// 常规设置类
@@ -34,6 +36,15 @@
             set { ST.DataRefreshInterval = value; }
         }
 
+        /// <summary>
+        /// 数据展示选择的项目
+        /// </summary>
+        public List<string[]> DataViewSelected
+        {
+            get { return ST.DataViewSelected; }
+            set { ST.DataViewSelected = value; }
+        }
+
         #endregion Public Properties
 
         #region Public Classes
@@ -46,6 +57,8 @@
             #region Public Fields
 
             public int DataRefreshInterval = 60000;
+
+            public List<string[]> DataViewSelected = new List<string[]>() { new string[3] { "video", "play", "play_incr" }, new string[3] { "video", "fan", "fan_incr" }, new string[3] { "video", "growup", "growup_incr" }, new string[3] { "video", "elec", "elec_incr" } };
 
             #endregion Public Fields
         }

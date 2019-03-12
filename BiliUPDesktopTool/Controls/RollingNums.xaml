@@ -7,12 +7,14 @@
              mc:Ignorable="d"
              d:DesignHeight="50" Width="140">
     <Grid>
-        <local:RollingNum x:Name="N4" Width="28" Height="50" Margin="0,0,0,-0.4" HorizontalAlignment="Left"></local:RollingNum>
-        <local:RollingNum x:Name="N3" Width="28" Height="50" Margin="20,0,0,-0.4" HorizontalAlignment="Left"></local:RollingNum>
-        <local:RollingNum x:Name="N2" Width="28" Height="50" Margin="40,0,0,-0.4" HorizontalAlignment="Left"></local:RollingNum>
-        <local:RollingNum x:Name="N1" Width="28" Height="50" Margin="60,0,0,-0.4" HorizontalAlignment="Left"></local:RollingNum>
-        <Label x:Name="numpoint" Content="."  Height="50" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="80,0,0,-0.4" HorizontalAlignment="Left" Width="17" />
-        <local:RollingNum x:Name="P1" Width="28" Height="50" Margin="90,0,0,-0.4" HorizontalAlignment="Left"></local:RollingNum>
-        <local:RollingNum x:Name="P2" Width="28" Height="50" Margin="110,0,0,-0.4" HorizontalAlignment="Left"></local:RollingNum>
+        <Grid x:Name="ViewPanel" Margin="1,0,1,-0.4">
+            <local:RollingNum x:Name="N4" Width="28" Height="50" HorizontalAlignment="Left" />
+            <local:RollingNum x:Name="N3" Width="28" Height="50" Margin="20,0,0,0" HorizontalAlignment="Left" />
+            <local:RollingNum x:Name="N2" Width="28" Height="50" Margin="40,0,0,0" HorizontalAlignment="Left" />
+            <local:RollingNum x:Name="N1" Width="28" Height="50" Margin="60,0,0,0" HorizontalAlignment="Left" />
+            <Label x:Name="numpoint" Content="."  Height="50" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="80,0,0,0" HorizontalAlignment="Left" Width="17" />
+            <local:RollingNum x:Name="P1" Width="28" Height="50" Margin="90,0,0,0" HorizontalAlignment="Left" />
+            <local:RollingNum x:Name="P2" Width="28" Height="50" Margin="110,0,0,0" HorizontalAlignment="Left" />
+        </Grid>
     </Grid>
 </UserControl>
