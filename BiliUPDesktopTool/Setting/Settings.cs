@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace BiliUPDesktopTool
 {
@@ -45,6 +47,20 @@ namespace BiliUPDesktopTool
             set { ST.DataViewSelected = value; }
         }
 
+        /// <summary>
+        /// （未启用）指示可选实时数据是否启动实时
+        /// </summary>
+        [Obsolete("实时数据功能未实现。")]
+        public bool IsRealTime
+        {
+            get { return ST.IsRealTime; }
+            set
+            {
+                ST.IsRealTime = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("IsRealTime"));
+            }
+        }
+
         #endregion Public Properties
 
         #region Public Classes
@@ -59,6 +75,9 @@ namespace BiliUPDesktopTool
             public int DataRefreshInterval = 60000;
 
             public List<string[]> DataViewSelected = new List<string[]>() { new string[3] { "video", "play", "play_incr" }, new string[3] { "video", "fan", "fan_incr" }, new string[3] { "video", "growup", "growup_incr" }, new string[3] { "video", "elec", "elec_incr" } };
+
+            //TODO 实时功能未实现
+            public bool IsRealTime = false;
 
             #endregion Public Fields
         }

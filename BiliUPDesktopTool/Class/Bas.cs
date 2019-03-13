@@ -24,6 +24,11 @@ namespace BiliUPDesktopTool
         public static BiliUPData biliupdata;
 
         /// <summary>
+        /// 系统托盘
+        /// </summary>
+        public static NotifyIconHelper notifyIcon;
+
+        /// <summary>
         /// 设置实例
         /// </summary>
         public static Settings settings;

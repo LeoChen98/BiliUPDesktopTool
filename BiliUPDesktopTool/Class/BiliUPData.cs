@@ -600,9 +600,6 @@ namespace BiliUPDesktopTool
                         comment_incr = (int)obj["data"]["stat"]["comment"] - (int)obj["data"]["stat"]["comment_last"];
                         dm = (int)obj["data"]["stat"]["dm"];
                         dm_incr = (int)obj["data"]["stat"]["dm"] - (int)obj["data"]["stat"]["dm_last"];
-                        elec_incr = (double)obj["data"]["stat"]["elec"] - (double)obj["data"]["stat"]["elec_last"];
-                        fan = (int)obj["data"]["stat"]["fan"];
-                        fan_incr = (int)obj["data"]["stat"]["fan"] - (int)obj["data"]["stat"]["fan_last"];
                         fav = (int)obj["data"]["stat"]["fav"];
                         fav_incr = (int)obj["data"]["stat"]["fav"] - (int)obj["data"]["stat"]["fav_last"];
                         like = (int)obj["data"]["stat"]["like"];
@@ -612,15 +609,23 @@ namespace BiliUPDesktopTool
                         share = (int)obj["data"]["stat"]["share"];
                         share_incr = (int)obj["data"]["stat"]["share"] - (int)obj["data"]["stat"]["share_last"];
                     }
+                    fan = (int)obj["data"]["stat"]["fan"];
+                    fan_incr = (int)obj["data"]["stat"]["fan"] - (int)obj["data"]["stat"]["fan_last"];
+                    double tmp1 = GetCharge();
+                    if (tmp1 != -1)
+                    {
+                        elec = tmp1;
+                        elec_incr = (double)obj["data"]["stat"]["elec"] - (double)obj["data"]["stat"]["elec_last"];
+                    }
                 }
-                double tmp1 = GetCharge();
-                if (tmp1 != -1) elec = tmp1;
                 double[] tmp = GetGrowUp();
                 if (tmp != new double[2] { -1, -1 })
+
                 {
                     growup_incr = tmp[0];
                     growup = tmp[1];
                 }
+
                 return this;
             }
 
