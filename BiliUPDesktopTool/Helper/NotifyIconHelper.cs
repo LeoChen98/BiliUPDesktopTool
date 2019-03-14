@@ -36,6 +36,25 @@ namespace BiliUPDesktopTool
 
         #endregion Public Constructors
 
+        #region Public Methods
+
+        /// <summary>
+        /// 气泡提示
+        /// </summary>
+        /// <param name="msg">必选，消息</param>
+        /// <param name="title">可选，标题</param>
+        /// <param name="time">可选，显示时间</param>
+        /// <param name="icon">可选，图标</param>
+        public void ShowToolTip(string msg, string title = "B站up主桌面工具", int time = 5000, ToolTipIcon icon = ToolTipIcon.Info)
+        {
+            NI.BalloonTipIcon = icon;
+            NI.BalloonTipText = msg;
+            NI.BalloonTipTitle = title;
+            NI.ShowBalloonTip(time);
+        }
+
+        #endregion Public Methods
+
         #region Private Methods
 
         /// <summary>

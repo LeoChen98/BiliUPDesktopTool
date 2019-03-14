@@ -34,10 +34,10 @@ namespace BiliUPDesktopTool
         {
             DesktopWindow dw = new DesktopWindow();
             dw.Show();
-            //DesktopWindowSetter dws = new DesktopWindowSetter();
-            //dws.Show();
-            //LoginWindow lw = new LoginWindow();
-            //lw.ShowDialog();
+            DesktopWindowSetter dws = new DesktopWindowSetter();
+            dws.Show();
+            LoginWindow lw = new LoginWindow();
+            lw.ShowDialog();
             //DesktopEmbeddedWindowHelper.DesktopEmbedWindow(this);
         }
 

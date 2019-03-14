@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
-        Title="DesktopWindowSetter" Height="600" Width="350" WindowStyle="None" AllowsTransparency="True" Cursor="SizeAll" Background="#02FFFFFF" MouseDown="Window_MouseDown">
+        Title="DesktopWindowSetter" Height="600" Width="350" WindowStyle="None" AllowsTransparency="True" Cursor="SizeAll" Background="#02FFFFFF" MouseDown="Window_MouseDown" Icon="/BiliUPDesktopTool;component/icon.ico">
     <Border BorderBrush="Black" BorderThickness="1">
         <Grid>
             <Label FontSize="24" Margin="156,30,156.4,100">
