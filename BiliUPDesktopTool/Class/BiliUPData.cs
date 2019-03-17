@@ -55,8 +55,11 @@ namespace BiliUPDesktopTool
         /// <returns>刷新后的实例</returns>
         public BiliUPData Refresh()
         {
-            article.Refresh();
-            video.Refresh();
+            if (Bas.account != null)
+            {
+                article.Refresh();
+                video.Refresh();
+            }
             return this;
         }
 
@@ -263,21 +266,27 @@ namespace BiliUPDesktopTool
                 string str = Bas.GetHTTPBody("https://member.bilibili.com/x/h5/data/article", Bas.account.Cookies, "https://member.bilibili.com/studio/gabriel/data-center/overview");
                 if (!string.IsNullOrEmpty(str))
                 {
-                    JObject obj = JObject.Parse(str);
-                    if ((int)obj["code"] == 0)
+                    try
                     {
-                        coin = (int)obj["data"]["stat"]["coin"];
-                        coin_incr = (int)obj["data"]["stat"]["incr_coin"];
-                        fav = (int)obj["data"]["stat"]["fav"];
-                        fav_incr = (int)obj["data"]["stat"]["incr_fav"];
-                        like = (int)obj["data"]["stat"]["like"];
-                        like_incr = (int)obj["data"]["stat"]["incr_like"];
-                        reply = (int)obj["data"]["stat"]["reply"];
-                        reply_incr = (int)obj["data"]["stat"]["incr_reply"];
-                        share = (int)obj["data"]["stat"]["share"];
-                        share_incr = (int)obj["data"]["stat"]["incr_share"];
-                        view = (int)obj["data"]["stat"]["view"];
-                        view_incr = (int)obj["data"]["stat"]["incr_view"];
+                        JObject obj = JObject.Parse(str);
+                        if ((int)obj["code"] == 0)
+                        {
+                            coin = (int)obj["data"]["stat"]["coin"];
+                            coin_incr = (int)obj["data"]["stat"]["incr_coin"];
+                            fav = (int)obj["data"]["stat"]["fav"];
+                            fav_incr = (int)obj["data"]["stat"]["incr_fav"];
+                            like = (int)obj["data"]["stat"]["like"];
+                            like_incr = (int)obj["data"]["stat"]["incr_like"];
+                            reply = (int)obj["data"]["stat"]["reply"];
+                            reply_incr = (int)obj["data"]["stat"]["incr_reply"];
+                            share = (int)obj["data"]["stat"]["share"];
+                            share_incr = (int)obj["data"]["stat"]["incr_share"];
+                            view = (int)obj["data"]["stat"]["view"];
+                            view_incr = (int)obj["data"]["stat"]["incr_view"];
+                        }
+                    }
+                    catch
+                    {
                     }
                 }
                 return this;
@@ -591,31 +600,37 @@ namespace BiliUPDesktopTool
                 string str = Bas.GetHTTPBody("https://member.bilibili.com/x/h5/data/overview?type=0", Bas.account.Cookies, "https://member.bilibili.com/studio/gabriel/data-center/overview");
                 if (!string.IsNullOrEmpty(str))
                 {
-                    JObject obj = JObject.Parse(str);
-                    if ((int)obj["code"] == 0)
+                    try
                     {
-                        coin = (int)obj["data"]["stat"]["coin"];
-                        coin_incr = (int)obj["data"]["stat"]["coin"] - (int)obj["data"]["stat"]["coin_last"];
-                        comment = (int)obj["data"]["stat"]["comment"];
-                        comment_incr = (int)obj["data"]["stat"]["comment"] - (int)obj["data"]["stat"]["comment_last"];
-                        dm = (int)obj["data"]["stat"]["dm"];
-                        dm_incr = (int)obj["data"]["stat"]["dm"] - (int)obj["data"]["stat"]["dm_last"];
-                        fav = (int)obj["data"]["stat"]["fav"];
-                        fav_incr = (int)obj["data"]["stat"]["fav"] - (int)obj["data"]["stat"]["fav_last"];
-                        like = (int)obj["data"]["stat"]["like"];
-                        like_incr = (int)obj["data"]["stat"]["like"] - (int)obj["data"]["stat"]["like_last"];
-                        play = (int)obj["data"]["stat"]["play"];
-                        play_incr = (int)obj["data"]["stat"]["play"] - (int)obj["data"]["stat"]["play_last"];
-                        share = (int)obj["data"]["stat"]["share"];
-                        share_incr = (int)obj["data"]["stat"]["share"] - (int)obj["data"]["stat"]["share_last"];
+                        JObject obj = JObject.Parse(str);
+                        if ((int)obj["code"] == 0)
+                        {
+                            coin = (int)obj["data"]["stat"]["coin"];
+                            coin_incr = (int)obj["data"]["stat"]["coin"] - (int)obj["data"]["stat"]["coin_last"];
+                            comment = (int)obj["data"]["stat"]["comment"];
+                            comment_incr = (int)obj["data"]["stat"]["comment"] - (int)obj["data"]["stat"]["comment_last"];
+                            dm = (int)obj["data"]["stat"]["dm"];
+                            dm_incr = (int)obj["data"]["stat"]["dm"] - (int)obj["data"]["stat"]["dm_last"];
+                            fav = (int)obj["data"]["stat"]["fav"];
+                            fav_incr = (int)obj["data"]["stat"]["fav"] - (int)obj["data"]["stat"]["fav_last"];
+                            like = (int)obj["data"]["stat"]["like"];
+                            like_incr = (int)obj["data"]["stat"]["like"] - (int)obj["data"]["stat"]["like_last"];
+                            play = (int)obj["data"]["stat"]["play"];
+                            play_incr = (int)obj["data"]["stat"]["play"] - (int)obj["data"]["stat"]["play_last"];
+                            share = (int)obj["data"]["stat"]["share"];
+                            share_incr = (int)obj["data"]["stat"]["share"] - (int)obj["data"]["stat"]["share_last"];
+                        }
+                        fan = (int)obj["data"]["stat"]["fan"];
+                        fan_incr = (int)obj["data"]["stat"]["fan"] - (int)obj["data"]["stat"]["fan_last"];
+                        double tmp1 = GetCharge();
+                        if (tmp1 != -1)
+                        {
+                            elec = tmp1;
+                            elec_incr = (double)obj["data"]["stat"]["elec"] - (double)obj["data"]["stat"]["elec_last"];
+                        }
                     }
-                    fan = (int)obj["data"]["stat"]["fan"];
-                    fan_incr = (int)obj["data"]["stat"]["fan"] - (int)obj["data"]["stat"]["fan_last"];
-                    double tmp1 = GetCharge();
-                    if (tmp1 != -1)
+                    catch
                     {
-                        elec = tmp1;
-                        elec_incr = (double)obj["data"]["stat"]["elec"] - (double)obj["data"]["stat"]["elec_last"];
                     }
                 }
                 double[] tmp = GetGrowUp();
@@ -642,12 +657,19 @@ namespace BiliUPDesktopTool
                 string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/elec/balance", Bas.account.Cookies);
                 if (!string.IsNullOrEmpty(str))
                 {
-                    JObject obj = JObject.Parse(str);
-                    if ((int)obj["code"] == 0)
+                    try
                     {
-                        return (double)obj["data"]["wallet"]["sponsorBalance"];
+                        JObject obj = JObject.Parse(str);
+                        if ((int)obj["code"] == 0)
+                        {
+                            return (double)obj["data"]["wallet"]["sponsorBalance"];
+                        }
+                        else
+                        {
+                            return -1;
+                        }
                     }
-                    else
+                    catch
                     {
                         return -1;
                     }
@@ -664,12 +686,19 @@ namespace BiliUPDesktopTool
                 string str = Bas.GetHTTPBody("https://api.bilibili.com/studio/growup/web/up/summary", Bas.account.Cookies);
                 if (!string.IsNullOrWhiteSpace(str))
                 {
-                    JObject obj = JObject.Parse(str);
-                    if ((int)obj["code"] == 0)
+                    try
                     {
-                        return new double[2] { (double)obj["data"]["day_income"], (double)obj["data"]["income"] };
+                        JObject obj = JObject.Parse(str);
+                        if ((int)obj["code"] == 0)
+                        {
+                            return new double[2] { (double)obj["data"]["day_income"], (double)obj["data"]["income"] };
+                        }
+                        else
+                        {
+                            return new double[2] { -1, -1 };
+                        }
                     }
-                    else
+                    catch
                     {
                         return new double[2] { -1, -1 };
                     }

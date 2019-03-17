@@ -26,7 +26,13 @@ namespace BiliUPDesktopTool
         {
             InitializeComponent();
 
-            if (Bas.account == null) Bas.account = new Account();
+            //if (Bas.account == null) Bas.account = new Account();
+        }
+
+        public LoginWindow(Account account)
+        {
+            InitializeComponent();
+            Bas.account = account;
         }
 
         #endregion Public Constructors
@@ -42,6 +48,15 @@ namespace BiliUPDesktopTool
         {
             lbl_stauts.Dispatcher.Invoke(delegate () { lbl_stauts.Visibility = Visibility.Visible; lbl_stauts.Content = info; });
             return ShowDialog();
+        }
+
+        /// <summary>
+        /// 显示模式窗口
+        /// </summary>
+        /// <returns>操作是否成功</returns>
+        public void ShowDialog(MethodFlag f)
+        {
+            ShowDialog();
         }
 
         #endregion Public Methods
@@ -98,61 +113,68 @@ namespace BiliUPDesktopTool
             string oauthKey = o.ToString();
 
             string str = Bas.PostHTTPBody("https://passport.bilibili.com/qrcode/getLoginInfo", "oauthKey=" + oauthKey + "&gourl=https%3A%2F%2Fwww.bilibili.com%2F", "", "https://passport.bilibili.com/login");
-            JObject obj = JObject.Parse(str);
-
-            if (obj.Property("code") != null)
+            if (!string.IsNullOrEmpty(str))
             {
-                if ((int)obj["code"] == 0)//登陆成功
-                {
-                    string Querystring = Regex.Split(obj["data"]["url"].ToString(), "\\?")[1];
-                    string[] KeyValuePair = Regex.Split(Querystring, "&");
-                    string cookies = "";
-                    for (int i = 0; i < KeyValuePair.Length - 1; i++)
-                    {
-                        cookies += KeyValuePair[i] + "; ";
+                JObject obj = JObject.Parse(str);
 
-                        string[] tmp = Regex.Split(KeyValuePair[i], "=");
-                        switch (tmp[0])
+                if (obj.Property("code") != null)
+                {
+                    if ((int)obj["code"] == 0)//登陆成功
+                    {
+                        //关闭监视器
+                        Monitor.Change(Timeout.Infinite, Timeout.Infinite);
+                        Refresher.Change(Timeout.Infinite, Timeout.Infinite);
+
+                        string Querystring = Regex.Split(obj["data"]["url"].ToString(), "\\?")[1];
+                        string[] KeyValuePair = Regex.Split(Querystring, "&");
+                        string cookies = "";
+                        for (int i = 0; i < KeyValuePair.Length - 1; i++)
                         {
-                            case "bili_jct":
-                                Bas.account.Csrf_Token = tmp[1];
-                                break;
+                            cookies += KeyValuePair[i] + "; ";
 
-                            case "DedeUserID":
-                                Bas.account.Uid = tmp[1];
-                                break;
+                            string[] tmp = Regex.Split(KeyValuePair[i], "=");
+                            switch (tmp[0])
+                            {
+                                case "bili_jct":
+                                    Bas.account.Csrf_Token = tmp[1];
+                                    break;
 
-                            default:
-                                break;
+                                case "DedeUserID":
+                                    Bas.account.Uid = tmp[1];
+                                    break;
+
+                                default:
+                                    break;
+                            }
                         }
+                        cookies = cookies.Substring(0, cookies.Length - 2);
+                        DateTime expires = DateTime.Now.AddDays(29);
+
+                        Bas.account.Cookies = cookies;
+                        Bas.account.Expires = expires;
+                        Bas.account.Save();
+                        Dispatcher.Invoke(delegate ()
+                        {
+                            DialogResult = true;
+                            Close();
+                        });
                     }
-                    cookies = cookies.Substring(0, cookies.Length - 2);
-                    DateTime expires = DateTime.Now.AddDays(29);
-
-                    Bas.account.Cookies = cookies;
-                    Bas.account.Expires = expires;
-                    Bas.account.Save();
-                    Dispatcher.Invoke(delegate ()
-                    {
-                        DialogResult = true;
-                        Close();
-                    });
                 }
-            }
-            else
-            {
-                switch ((int)obj["data"])
+                else
                 {
-                    case -4://未扫描
-                        break;
+                    switch ((int)obj["data"])
+                    {
+                        case -4://未扫描
+                            break;
 
-                    case -5://已扫描
-                        lbl_stauts.Dispatcher.Invoke(delegate () { lbl_stauts.Visibility = Visibility.Visible; });
-                        break;
+                        case -5://已扫描
+                            lbl_stauts.Dispatcher.Invoke(delegate () { lbl_stauts.Visibility = Visibility.Visible; });
+                            break;
 
-                    case 0://登陆成功
+                        case 0://登陆成功
 
-                        break;
+                            break;
+                    }
                 }
             }
         }
@@ -172,5 +194,11 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Private Methods
+
+        #region Public Classes
+
+        public class MethodFlag { };
+
+        #endregion Public Classes
     }
 }

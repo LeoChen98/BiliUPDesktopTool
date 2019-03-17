@@ -32,12 +32,14 @@ namespace BiliUPDesktopTool
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Hide();
             DesktopWindow dw = new DesktopWindow();
             dw.Show();
             DesktopWindowSetter dws = new DesktopWindowSetter();
             dws.Show();
-            LoginWindow lw = new LoginWindow();
-            lw.ShowDialog();
+            Close();
+            //LoginWindow lw = new LoginWindow();
+            //lw.ShowDialog();
             //DesktopEmbeddedWindowHelper.DesktopEmbedWindow(this);
         }
 

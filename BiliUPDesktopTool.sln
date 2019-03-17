@@ -4,9 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiliUPDesktopTool", "BiliUPDesktopTool\BiliUPDesktopTool.csproj", "{B31C3B29-E506-4603-9F46-CF7106B77116}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96726D53-3035-4BFA-8198-3454DEDCCC95} = {96726D53-3035-4BFA-8198-3454DEDCCC95}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRunSetter", "AutoRunSetter\AutoRunSetter.csproj", "{96726D53-3035-4BFA-8198-3454DEDCCC95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		AutoRunSetter - Debug|Any CPU = AutoRunSetter - Debug|Any CPU
+		AutoRunSetter - Debug|x64 = AutoRunSetter - Debug|x64
+		AutoRunSetter - Debug|x86 = AutoRunSetter - Debug|x86
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
@@ -15,6 +23,12 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B31C3B29-E506-4603-9F46-CF7106B77116}.AutoRunSetter - Debug|Any CPU.ActiveCfg = AutoRunSetter - Debug|Any CPU
+		{B31C3B29-E506-4603-9F46-CF7106B77116}.AutoRunSetter - Debug|Any CPU.Build.0 = AutoRunSetter - Debug|Any CPU
+		{B31C3B29-E506-4603-9F46-CF7106B77116}.AutoRunSetter - Debug|x64.ActiveCfg = AutoRunSetter - Debug|x64
+		{B31C3B29-E506-4603-9F46-CF7106B77116}.AutoRunSetter - Debug|x64.Build.0 = AutoRunSetter - Debug|x64
+		{B31C3B29-E506-4603-9F46-CF7106B77116}.AutoRunSetter - Debug|x86.ActiveCfg = AutoRunSetter - Debug|x86
+		{B31C3B29-E506-4603-9F46-CF7106B77116}.AutoRunSetter - Debug|x86.Build.0 = AutoRunSetter - Debug|x86
 		{B31C3B29-E506-4603-9F46-CF7106B77116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B31C3B29-E506-4603-9F46-CF7106B77116}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B31C3B29-E506-4603-9F46-CF7106B77116}.Debug|x64.ActiveCfg = Debug|x64
@@ -27,6 +41,24 @@ Global
 		{B31C3B29-E506-4603-9F46-CF7106B77116}.Release|x64.Build.0 = Release|x64
 		{B31C3B29-E506-4603-9F46-CF7106B77116}.Release|x86.ActiveCfg = Release|x86
 		{B31C3B29-E506-4603-9F46-CF7106B77116}.Release|x86.Build.0 = Release|x86
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.AutoRunSetter - Debug|Any CPU.ActiveCfg = AutoRunSetter - Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.AutoRunSetter - Debug|Any CPU.Build.0 = AutoRunSetter - Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.AutoRunSetter - Debug|x64.ActiveCfg = AutoRunSetter - Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.AutoRunSetter - Debug|x64.Build.0 = AutoRunSetter - Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.AutoRunSetter - Debug|x86.ActiveCfg = AutoRunSetter - Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.AutoRunSetter - Debug|x86.Build.0 = AutoRunSetter - Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Debug|x64.Build.0 = Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Debug|x86.Build.0 = Debug|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Release|x64.ActiveCfg = Release|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Release|x64.Build.0 = Release|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Release|x86.ActiveCfg = Release|Any CPU
+		{96726D53-3035-4BFA-8198-3454DEDCCC95}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

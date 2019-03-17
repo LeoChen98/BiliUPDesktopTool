@@ -1,0 +1,54 @@
+﻿<Window x:Class="BiliUPDesktopTool.DataDisplaySetter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BiliUPDesktopTool"
+        mc:Ignorable="d"
+        Title="数据展示设置 - B站up主桌面工具" Height="430" Width="966" ResizeMode="CanMinimize" Icon="/BiliUPDesktopTool;component/icon.ico">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/BiliUPDesktopTool;component/Style/SelectPanel_ScrollViewer.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid x:Name="Content_Left" Margin="0,0,320,0">
+            <Grid x:Name="Menu_Tab" Height="40" VerticalAlignment="Top">
+                <Grid x:Name="Tab_Overall" HorizontalAlignment="Left" Width="120" Cursor="Hand">
+                    <Canvas Height="40" Margin="0,0,-20,0" VerticalAlignment="Top">
+                        <Path x:Name="Bg_Overall" Fill="#6642B7DD" Stroke="#6642B7DD" Data="M0,40 L20,10 L100,10 L120,40 z"/>
+                    </Canvas>
+                    <Label Content="全局数据" FontSize="16" Margin="10,10,10,0" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                </Grid>
+                <Grid x:Name="Tab_Video" HorizontalAlignment="Left" Width="120" Margin="120,0,0,0" Cursor="Hand">
+                    <Canvas Height="40" Margin="0,0,0,0" VerticalAlignment="Top">
+                        <Path x:Name="Bg_Video" Fill="#FF42B7DD" Stroke="#FF42B7DD" Data="M0,40 L20,10 L100,10 L120,40 z"/>
+                    </Canvas>
+                    <Label Content="视频数据" FontSize="16" Margin="10,10,10,0" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                </Grid>
+                <Grid x:Name="Tab_Article" HorizontalAlignment="Left" Width="120" Margin="240,0,0,0" Cursor="Hand">
+                    <Canvas Height="40" Margin="0,0,0,0" VerticalAlignment="Top">
+                        <Path x:Name="Bg_Article" Fill="#FF42B7DD" Stroke="#FF42B7DD" Data="M0,40 L20,10 L100,10 L120,40 z"/>
+                    </Canvas>
+                    <Label Content="专栏数据" FontSize="16" Margin="10,10,10,0" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                </Grid>
+            </Grid>
+            <Grid x:Name="Setting_Box" Margin="0,40,0,0" Background="#6642B7DD">
+                <ScrollViewer x:Name="Scroll_Overall"  Height="200" VerticalAlignment="Top" CanContentScroll="True" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Style="{StaticResource FilletScrollViewer}" MouseWheel="Scroll_Overall_MouseWheel" Background="#02FFFFFF">
+                    <Grid x:Name="SelectPanel_Overall" ScrollViewer.CanContentScroll="True" Height="189.5" ScrollViewer.HorizontalScrollBarVisibility="Auto" MouseWheel="Scroll_Overall_MouseWheel" ScrollViewer.VerticalScrollBarVisibility="Disabled" Width="1058.5" Background="#02FFFFFF">
+                        <local:DataViewer Height="150" Width="175" HorizontalAlignment="Left" d:LayoutOverrides="HorizontalAlignment"/>
+                        <local:DataViewer Height="150" Width="175" HorizontalAlignment="Left" Margin="175,0,0,0"/>
+                        <local:DataViewer Height="150" Width="175" HorizontalAlignment="Left" Margin="350,0,0,0"/>
+                        <local:DataViewer Height="150" Width="175" HorizontalAlignment="Left" Margin="525,0,-60,0"/>
+                        <local:DataViewer Height="150" Width="175" HorizontalAlignment="Left" Margin="700,0,-235,0"/>
+                        <local:DataViewer Height="150" Width="175" HorizontalAlignment="Left" Margin="875,0,-410,0"/>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+
+        </Grid>
+        <Grid x:Name="Content_Right" HorizontalAlignment="Right" Width="320"/>
+    </Grid>
+</Window>

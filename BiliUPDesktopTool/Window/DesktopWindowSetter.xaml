@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
-        Title="DesktopWindowSetter" Height="600" Width="350" WindowStyle="None" AllowsTransparency="True" Cursor="SizeAll" Background="#02FFFFFF" MouseDown="Window_MouseDown" Icon="/BiliUPDesktopTool;component/icon.ico">
+        Title="DesktopWindowSetter" Height="300" Width="350" WindowStyle="None" AllowsTransparency="True" Cursor="SizeAll" Background="#66000000" MouseDown="Window_MouseDown" Icon="/BiliUPDesktopTool;component/icon.ico">
     <Border BorderBrush="Black" BorderThickness="1">
         <Grid>
-            <Label FontSize="24" Margin="156,30,156.4,100">
-                <TextBlock Height="470" Width="33" Foreground="#FF7C7C7C"><Run Text="请" /><LineBreak /><Run Text="移" /><LineBreak /><Run Text="动" /><LineBreak /><Run Text="本" /><LineBreak /><Run Text="窗" /><LineBreak /><Run Text="口" /><LineBreak /><Run Text="以" /><LineBreak /><Run Text="调" /><LineBreak /><Run Text="整" /><LineBreak /><Run Text="桌" /><LineBreak /><Run Text="面" /><LineBreak /><Run Text="挂" /><LineBreak /><Run Text="件" /><LineBreak /><Run Text="位" /><LineBreak /><Run Text="置" /></TextBlock>
+            <Label x:Name="Notice" FontSize="24" Margin="0,40,9.8,89.6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD6D6D6">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="28"><Run Text="请移动本窗体" /><LineBreak /><Run Text="设置桌面数据展示位置" /></TextBlock>
             </Label>
-            <Button x:Name="btn_comfirm" Content="确定" HorizontalAlignment="Left" Margin="97,523,0,0" VerticalAlignment="Top" Width="75" Background="#FFDDDDDD" Cursor="Hand" Click="Btn_comfirm_Click" />
-            <Button x:Name="btn_cancel" Content="取消" HorizontalAlignment="Left" Margin="177,523,0,0" VerticalAlignment="Top" Width="75" Background="#FFDDDDDD" Cursor="Hand" Click="Btn_cancel_Click" />
+            <Button x:Name="btn_comfirm" Content="确定" HorizontalAlignment="Left" Margin="93,213,0,0" VerticalAlignment="Top" Width="75" Background="#FFDDDDDD" Cursor="Hand" Click="Btn_comfirm_Click" />
+            <Button x:Name="btn_cancel" Content="取消" HorizontalAlignment="Left" Margin="173,213,0,0" VerticalAlignment="Top" Width="75" Background="#FFDDDDDD" Cursor="Hand" Click="Btn_cancel_Click" />
         </Grid>
     </Border>
 </Window>

@@ -11,7 +11,9 @@ namespace BiliUPDesktopTool
     {
         #region Private Fields
 
+        private DataDisplaySetter DSetter;
         private NotifyIcon NI;
+        private SettingWindow OSetter;
 
         #endregion Private Fields
 
@@ -22,16 +24,14 @@ namespace BiliUPDesktopTool
         /// </summary>
         public NotifyIconHelper()
         {
-            ContextMenu menu = new ContextMenu();
-            menu.MenuItems.AddRange(GetMenuItems());
-
             NI = new NotifyIcon()
             {
                 Icon = System.Drawing.Icon.ExtractAssociatedIcon(Application.ExecutablePath),
                 Text = "B站up主桌面工具",
                 Visible = true,
-                ContextMenu = menu
+                ContextMenuStrip = new ContextMenuStrip(),
             };
+            NI.ContextMenuStrip.Items.AddRange(GetMenuItems(NI));
         }
 
         #endregion Public Constructors
@@ -58,23 +58,63 @@ namespace BiliUPDesktopTool
         #region Private Methods
 
         /// <summary>
-        /// 获得菜单数组
+        /// 获得菜单对象
         /// </summary>
         /// <returns></returns>
-        private MenuItem[] GetMenuItems()
+        private ToolStripItemCollection GetMenuItems(NotifyIcon ni)
         {
-            List<MenuItem> r = new List<MenuItem>();
+            List<ToolStripItem> m = new List<ToolStripItem>();
 
-            MenuItem MI_Exit = new MenuItem() { Text = "退出" };
+            ToolStripSeparator MI_Separator = new ToolStripSeparator();
+
+            ToolStripMenuItem MI_OverallSetting = new ToolStripMenuItem() { Text = "全局设置" };
+            MI_OverallSetting.Click += MI_OverallSetting_Click;
+            m.Add(MI_OverallSetting);
+
+            ToolStripMenuItem MI_DataDisplaySetting = new ToolStripMenuItem() { Text = "数据展示设置" };
+            MI_DataDisplaySetting.Click += MI_DataDisplaySetting_Click;
+            m.Add(MI_DataDisplaySetting);
+
+            m.Add(MI_Separator);
+
+            ToolStripMenuItem MI_Exit = new ToolStripMenuItem() { Text = "退出" };
             MI_Exit.Click += MI_Exit_Click;
-            r.Add(MI_Exit);
+            m.Add(MI_Exit);
 
-            return r.ToArray();
+            return new ToolStripItemCollection(ni.ContextMenuStrip, m.ToArray());
+        }
+
+        private void MI_DataDisplaySetting_Click(object sender, EventArgs e)
+        {
+            if (DSetter == null || !DSetter.IsVisible)
+            {
+                DSetter = new DataDisplaySetter();
+                DSetter.Show();
+            }
+            else
+            {
+                DSetter.Activate();
+                DSetter.WindowState = System.Windows.WindowState.Normal;
+            }
         }
 
         private void MI_Exit_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void MI_OverallSetting_Click(object sender, EventArgs e)
+        {
+            if (OSetter == null || !OSetter.IsVisible)
+            {
+                OSetter = new SettingWindow();
+                OSetter.Show();
+            }
+            else
+            {
+                OSetter.Activate();
+                OSetter.WindowState = System.Windows.WindowState.Normal;
+            }
         }
 
         #endregion Private Methods

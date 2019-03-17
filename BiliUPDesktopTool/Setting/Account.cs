@@ -7,7 +7,7 @@ namespace BiliUPDesktopTool
     /// <summary>
     /// 账号数据类
     /// </summary>
-    internal class Account : SettingsBase<Account.AccountTable>
+    public class Account : SettingsBase<Account.AccountTable>
     {
         #region Private Fields
 
@@ -27,7 +27,6 @@ namespace BiliUPDesktopTool
         public Account()
         {
             ST = new AccountTable();
-
             if (File.Exists("Account.dma"))
             {
                 using (FileStream fs = File.Open("Account.dma", FileMode.Open))
@@ -41,6 +40,21 @@ namespace BiliUPDesktopTool
                     }
                 }
             }
+            else
+            {
+                //Bas.account = new Account(new EmptyInit());
+                LoginWindow lw = new LoginWindow(this);
+                lw.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// 空白初始化函数
+        /// </summary>
+        /// <param name="flag"></param>
+        public Account(EmptyInit flag)
+        {
+            ST = new AccountTable();
         }
 
         #endregion Public Constructors
@@ -56,11 +70,7 @@ namespace BiliUPDesktopTool
             {
                 if (DateTime.Compare(DateTime.Now, Expires) >= 0)//如果过期
                 {
-                    LoginWindow LWnd = new LoginWindow();
-                    if (!(bool)LWnd.ShowDialog("登录失效，请重新登陆。"))
-                    {
-                        return null;
-                    }
+                    App.Current.Dispatcher.Invoke(() => { LoginWindow LWnd = new LoginWindow(); LWnd.ShowDialog(); });
                 }
                 return ST.Cookies;
             }
@@ -136,6 +146,8 @@ namespace BiliUPDesktopTool
 
             #endregion Public Fields
         }
+
+        public class EmptyInit { };
 
         #endregion Public Classes
     }
