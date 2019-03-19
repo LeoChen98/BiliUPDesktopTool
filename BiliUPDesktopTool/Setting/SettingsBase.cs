@@ -83,7 +83,7 @@ namespace BiliUPDesktopTool
         {
             OutputTable<T> OT = new OutputTable<T>(ST);
             string json = JsonConvert.SerializeObject(OT);
-            using (FileStream fs = File.Open(savepath, FileMode.Create))
+            using (FileStream fs = File.Open(savepath, FileMode.Create, FileAccess.Write))
             {
                 using (StreamWriter writer = new StreamWriter(fs))
                 {

@@ -29,7 +29,7 @@ namespace BiliUPDesktopTool
             ST = new AccountTable();
             if (File.Exists("Account.dma"))
             {
-                using (FileStream fs = File.Open("Account.dma", FileMode.Open))
+                using (FileStream fs = File.Open("Account.dma", FileMode.Open, FileAccess.Read))
                 {
                     using (StreamReader reader = new StreamReader(fs))
                     {
@@ -119,7 +119,7 @@ namespace BiliUPDesktopTool
             OutputTable<AccountTable> OT = new OutputTable<AccountTable>(ST);
             string json = JsonConvert.SerializeObject(OT);
             json = EncryptHelper.DesEncrypt(json, encryptKey);
-            using (FileStream fs = File.Open("Account.dma", FileMode.Create))
+            using (FileStream fs = File.Open("Account.dma", FileMode.Create, FileAccess.Write))
             {
                 using (StreamWriter writer = new StreamWriter(fs))
                 {
