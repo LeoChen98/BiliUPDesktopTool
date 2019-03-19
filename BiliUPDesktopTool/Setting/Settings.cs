@@ -35,7 +35,7 @@ namespace BiliUPDesktopTool
         public int DataRefreshInterval
         {
             get { return ST.DataRefreshInterval; }
-            set { ST.DataRefreshInterval = value; }
+            set { ST.DataRefreshInterval = value; Save(); }
         }
 
         /// <summary>
@@ -44,7 +44,23 @@ namespace BiliUPDesktopTool
         public List<string[]> DataViewSelected
         {
             get { return ST.DataViewSelected; }
-            set { ST.DataViewSelected = value; }
+            set { ST.DataViewSelected = value; Save(); }
+        }
+
+        /// <summary>
+        /// 指示是否第一次启动
+        /// </summary>
+        public bool IsFirstRun
+        {
+            get
+            {
+                return ST.IsFirstRun;
+            }
+            set
+            {
+                ST.IsFirstRun = value;
+                Save();
+            }
         }
 
         /// <summary>
@@ -75,6 +91,8 @@ namespace BiliUPDesktopTool
             public int DataRefreshInterval = 60000;
 
             public List<string[]> DataViewSelected = new List<string[]>() { new string[3] { "video", "play", "play_incr" }, new string[3] { "video", "fan", "fan_incr" }, new string[3] { "video", "growup", "growup_incr" }, new string[3] { "video", "elec", "elec_incr" } };
+
+            public bool IsFirstRun = true;
 
             //TODO 实时功能未实现
             public bool IsRealTime = false;

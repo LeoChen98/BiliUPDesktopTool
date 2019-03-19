@@ -58,6 +58,13 @@ namespace BiliUPDesktopTool
             Bas.account = new Account();
             Bas.biliupdata = new BiliUPData();
             Bas.notifyIcon = new NotifyIconHelper();
+
+            if (Bas.settings.IsFirstRun)
+            {
+                //首次运行执行
+
+                Bas.settings.IsFirstRun = false;
+            }
         }
 
         #endregion Private Methods
