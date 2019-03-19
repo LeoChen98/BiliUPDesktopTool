@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiliUPDesktopTool", "BiliUPDesktopTool\BiliUPDesktopTool.csproj", "{B31C3B29-E506-4603-9F46-CF7106B77116}"
-	ProjectSection(ProjectDependencies) = postProject
-		{96726D53-3035-4BFA-8198-3454DEDCCC95} = {96726D53-3035-4BFA-8198-3454DEDCCC95}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRunSetter", "AutoRunSetter\AutoRunSetter.csproj", "{96726D53-3035-4BFA-8198-3454DEDCCC95}"
 EndProject

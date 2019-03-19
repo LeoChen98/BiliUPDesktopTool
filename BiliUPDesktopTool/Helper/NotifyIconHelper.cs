@@ -12,6 +12,9 @@ namespace BiliUPDesktopTool
         #region Private Fields
 
         private DataDisplaySetter DSetter;
+
+        private DesktopWindowSetter DWS;
+
         private NotifyIcon NI;
         private SettingWindow OSetter;
 
@@ -65,7 +68,13 @@ namespace BiliUPDesktopTool
         {
             List<ToolStripItem> m = new List<ToolStripItem>();
 
-            ToolStripSeparator MI_Separator = new ToolStripSeparator();
+            ToolStripSeparator MI_Separator1 = new ToolStripSeparator(), MI_Separator2 = new ToolStripSeparator();
+
+            ToolStripMenuItem MI_DesktopWndPosSetting = new ToolStripMenuItem() { Text = "设置桌面挂件位置" };
+            MI_DesktopWndPosSetting.Click += MI_DesktopWndPosSetting_Click;
+            m.Add(MI_DesktopWndPosSetting);
+
+            m.Add(MI_Separator1);
 
             ToolStripMenuItem MI_OverallSetting = new ToolStripMenuItem() { Text = "全局设置" };
             MI_OverallSetting.Click += MI_OverallSetting_Click;
@@ -75,7 +84,7 @@ namespace BiliUPDesktopTool
             MI_DataDisplaySetting.Click += MI_DataDisplaySetting_Click;
             m.Add(MI_DataDisplaySetting);
 
-            m.Add(MI_Separator);
+            m.Add(MI_Separator2);
 
             ToolStripMenuItem MI_Exit = new ToolStripMenuItem() { Text = "退出" };
             MI_Exit.Click += MI_Exit_Click;
@@ -95,6 +104,20 @@ namespace BiliUPDesktopTool
             {
                 DSetter.Activate();
                 DSetter.WindowState = System.Windows.WindowState.Normal;
+            }
+        }
+
+        private void MI_DesktopWndPosSetting_Click(object sender, EventArgs e)
+        {
+            if (DWS == null || !DWS.IsVisible)
+            {
+                DWS = new DesktopWindowSetter();
+                DWS.Show();
+            }
+            else
+            {
+                DWS.Activate();
+                DWS.WindowState = System.Windows.WindowState.Normal;
             }
         }
 
