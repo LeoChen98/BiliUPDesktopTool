@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel;
 using System.IO;
+using System.Windows.Forms;
 
 namespace BiliUPDesktopTool
 {
@@ -37,11 +38,11 @@ namespace BiliUPDesktopTool
         public SettingsBase(T _ST, string _savepath)
         {
             ST = _ST;
-            savepath = _savepath;
+            savepath = Application.StartupPath + "\\" + _savepath;
 
             if (File.Exists(savepath))
             {
-                using (FileStream fs = File.OpenRead("Skin.dms"))
+                using (FileStream fs = File.OpenRead(savepath))
                 {
                     using (StreamReader reader = new StreamReader(fs))
                     {

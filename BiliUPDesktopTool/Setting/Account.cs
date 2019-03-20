@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace BiliUPDesktopTool
 {
@@ -27,9 +28,9 @@ namespace BiliUPDesktopTool
         public Account()
         {
             ST = new AccountTable();
-            if (File.Exists("Account.dma"))
+            if (File.Exists(Application.StartupPath + "\\Account.dma"))
             {
-                using (FileStream fs = File.Open("Account.dma", FileMode.Open, FileAccess.Read))
+                using (FileStream fs = File.Open(Application.StartupPath + "\\Account.dma", FileMode.Open, FileAccess.Read))
                 {
                     using (StreamReader reader = new StreamReader(fs))
                     {
@@ -119,7 +120,7 @@ namespace BiliUPDesktopTool
             OutputTable<AccountTable> OT = new OutputTable<AccountTable>(ST);
             string json = JsonConvert.SerializeObject(OT);
             json = EncryptHelper.DesEncrypt(json, encryptKey);
-            using (FileStream fs = File.Open("Account.dma", FileMode.Create, FileAccess.Write))
+            using (FileStream fs = File.Open(Application.StartupPath + "\\Account.dma", FileMode.Create, FileAccess.Write))
             {
                 using (StreamWriter writer = new StreamWriter(fs))
                 {

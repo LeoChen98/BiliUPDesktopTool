@@ -35,8 +35,8 @@ namespace BiliUPDesktopTool
             Hide();
             DesktopWindow dw = new DesktopWindow();
             dw.Show();
-            DesktopWindowSetter dws = new DesktopWindowSetter();
-            dws.Show();
+            //DesktopWindowSetter dws = new DesktopWindowSetter();
+            //dws.Show();
             Close();
             //LoginWindow lw = new LoginWindow();
             //lw.ShowDialog();
