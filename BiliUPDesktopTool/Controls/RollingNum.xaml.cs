@@ -22,8 +22,6 @@ namespace BiliUPDesktopTool
         public RollingNum()
         {
             InitializeComponent();
-
-            BindingInit();
         }
 
         #endregion Public Constructors
@@ -55,23 +53,15 @@ namespace BiliUPDesktopTool
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };
-            num0.SetBinding(ForegroundProperty, bind_fontcolor);
-            num1.SetBinding(ForegroundProperty, bind_fontcolor);
-            num2.SetBinding(ForegroundProperty, bind_fontcolor);
-            num3.SetBinding(ForegroundProperty, bind_fontcolor);
-            num4.SetBinding(ForegroundProperty, bind_fontcolor);
-            num5.SetBinding(ForegroundProperty, bind_fontcolor);
-            num6.SetBinding(ForegroundProperty, bind_fontcolor);
-            num7.SetBinding(ForegroundProperty, bind_fontcolor);
-            num8.SetBinding(ForegroundProperty, bind_fontcolor);
-            num9.SetBinding(ForegroundProperty, bind_fontcolor);
-            numw.SetBinding(ForegroundProperty, bind_fontcolor);
-            numb.SetBinding(ForegroundProperty, bind_fontcolor);
-            numx.SetBinding(ForegroundProperty, bind_fontcolor);
+            SetBinding(ForegroundProperty, bind_fontcolor);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            if (Parent.GetValue(NameProperty).ToString() != "ViewPanel")
+            {
+                BindingInit();
+            }
         }
 
         #endregion Private Methods

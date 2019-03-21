@@ -74,6 +74,7 @@ namespace BiliUPDesktopTool
             {
                 ST.IsRealTime = value;
                 PropertyChangedA(this, new PropertyChangedEventArgs("IsRealTime"));
+                Save();
             }
         }
 

@@ -27,8 +27,6 @@ namespace BiliUPDesktopTool
         {
             InitializeComponent();
 
-            BindingInit();
-
             ChangeNum(0);//初始化值
         }
 
@@ -205,7 +203,15 @@ namespace BiliUPDesktopTool
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };
-            numpoint.SetBinding(ForegroundProperty, bind_fontcolor);
+            SetBinding(ForegroundProperty, bind_fontcolor);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Parent.GetValue(NameProperty).ToString() != "DV_Holder")
+            {
+                BindingInit();
+            }
         }
 
         #endregion Private Methods

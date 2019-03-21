@@ -1,15 +1,15 @@
-﻿<UserControl x:Class="BiliUPDesktopTool.DataViewer"
+﻿<UserControl x:Name="userControl" x:Class="BiliUPDesktopTool.DataViewer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:BiliUPDesktopTool"
              mc:Ignorable="d"
-             d:DesignHeight="150" d:DesignWidth="175" Width= "175" Height="150">
-    <Grid>
-        <Label x:Name="DataTitle" Margin="10,10,55.2,106.4" Content="播放" Foreground="White" VerticalContentAlignment="Center" FontSize="14" />
-        <local:RollingNums x:Name="num" HorizontalAlignment="Center" Height="50" Margin="10,49,0,0" VerticalAlignment="Top" Width="140" />
-        <local:RollingNums x:Name="incr" HorizontalAlignment="Center" Height="50" Margin="45,100,-9.8,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.5,0.5">
+             d:DesignHeight="150" d:DesignWidth="175" Width= "175" Height="150" Loaded="UserControl_Loaded">
+    <Grid x:Name="DV_Holder">
+        <Label x:Name="DataTitle" Margin="10,10,55.2,106.4" Content="播放" Foreground="{Binding Foreground, ElementName=userControl}" VerticalContentAlignment="Center" FontSize="14" />
+        <local:RollingNums x:Name="num" HorizontalAlignment="Center" Height="50" Margin="10,49,0,0" VerticalAlignment="Top" Width="140" Foreground="{Binding Foreground, ElementName=userControl}" />
+        <local:RollingNums x:Name="incr" HorizontalAlignment="Center" Height="50" Margin="45,100,-9.8,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.5,0.5" Foreground="{Binding Foreground, ElementName=userControl}">
             <local:RollingNums.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="0.6" ScaleY="0.6" />
@@ -20,7 +20,7 @@
             </local:RollingNums.RenderTransform>
         </local:RollingNums>
         <Canvas HorizontalAlignment="Left" Height="30" Margin="41,110,0,0" VerticalAlignment="Top" Width="30">
-            <Path x:Name="Triangle" Fill="White" Stroke="White">
+            <Path x:Name="Triangle" Fill="{Binding Foreground, ElementName=userControl}" Stroke="{Binding Foreground, ElementName=userControl}">
                 <Path.Data>
                     <PathGeometry>
                         <PathFigure StartPoint="10,20" IsClosed="True">

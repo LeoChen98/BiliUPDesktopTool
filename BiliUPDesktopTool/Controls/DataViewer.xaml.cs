@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Shapes;
 
 namespace BiliUPDesktopTool
 {
@@ -10,18 +9,29 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class DataViewer : UserControl
     {
+        #region Public Fields
+
+        public static readonly DependencyProperty DataModeProperty =
+            DependencyProperty.Register("DataMode", typeof(string[]), typeof(UserControl), new PropertyMetadata(new string[3] { "video", "play", "play_incr" }, new PropertyChangedCallback(ChangeView)));
+
+        #endregion Public Fields
+
         #region Public Constructors
 
         public DataViewer()
         {
             InitializeComponent();
-
-            BindingInit();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public string[] DataMode
+        {
+            get { return (string[])GetValue(DataModeProperty); }
+            set { SetValue(DataModeProperty, value); }
+        }
 
         /// <summary>
         /// 数据标题
@@ -33,6 +43,59 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public static void ChangeView(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            DataViewer r = (DataViewer)sender;
+            Binding binding_num, binding_incr;
+            string[] value = e.NewValue as string[];
+            if (value.Length == 3)
+            {
+                switch (value[0])
+                {
+                    case "video":
+                        binding_num = new Binding()
+                        {
+                            Source = Bas.biliupdata.video,
+                            Mode = BindingMode.TwoWay,
+                            Path = new PropertyPath(value[1])
+                        };
+                        binding_incr = new Binding()
+                        {
+                            Source = Bas.biliupdata.video,
+                            Mode = BindingMode.TwoWay,
+                            Path = new PropertyPath(value[2])
+                        };
+                        BindingOperations.SetBinding(r.num, RollingNums.numProperty, binding_num);
+                        BindingOperations.SetBinding(r.incr, RollingNums.numProperty, binding_incr);
+                        break;
+
+                    case "article":
+                        binding_num = new Binding()
+                        {
+                            Source = Bas.biliupdata.article,
+                            Mode = BindingMode.TwoWay,
+                            Path = new PropertyPath(value[1])
+                        };
+                        binding_incr = new Binding()
+                        {
+                            Source = Bas.biliupdata.article,
+                            Mode = BindingMode.TwoWay,
+                            Path = new PropertyPath(value[2])
+                        };
+                        BindingOperations.SetBinding(r.num, RollingNums.numProperty, binding_num);
+                        BindingOperations.SetBinding(r.incr, RollingNums.numProperty, binding_incr);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -47,9 +110,21 @@ namespace BiliUPDesktopTool
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };
-            DataTitle.SetBinding(ForegroundProperty, bind_datatitle_color);
-            Triangle.SetBinding(Shape.FillProperty, bind_datatitle_color);
-            Triangle.SetBinding(Shape.StrokeProperty, bind_datatitle_color);
+            SetBinding(ForegroundProperty, bind_datatitle_color);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            FrameworkElement __do = Parent as FrameworkElement;
+            while (__do != null)
+            {
+                __do = __do.Parent as FrameworkElement;
+                if (__do.Parent == null) break;
+            }
+            if (Parent.GetValue(NameProperty).ToString() != "DVP_Holder" && __do.GetType() != typeof(DataDisplaySetter))
+            {
+                BindingInit();
+            }
         }
 
         #endregion Private Methods

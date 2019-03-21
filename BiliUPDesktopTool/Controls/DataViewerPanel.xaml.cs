@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Shapes;
 
 namespace BiliUPDesktopTool
 {
@@ -16,8 +15,6 @@ namespace BiliUPDesktopTool
         {
             InitializeComponent();
 
-            BindingInit();
-
             //初始化数据
             ChangeView();
         }
@@ -31,49 +28,13 @@ namespace BiliUPDesktopTool
         /// </summary>
         public void ChangeView()
         {
-            DataViewer[] viewers = new DataViewer[4] { ViewerLT, ViewerRT, ViewerLB, ViewerRB };
-            for (int i = 0; i < viewers.Length; i++)
+            if (Bas.biliupdata != null)
             {
-                Binding binding_num, binding_incr;
-                viewers[i].Title = GetDataTile(Bas.settings.DataViewSelected[i]);
-                switch (Bas.settings.DataViewSelected[i][0])
+                DataViewer[] viewers = new DataViewer[4] { ViewerLT, ViewerRT, ViewerLB, ViewerRB };
+                for (int i = 0; i < viewers.Length; i++)
                 {
-                    case "video":
-                        binding_num = new Binding()
-                        {
-                            Source = Bas.biliupdata.video,
-                            Mode = BindingMode.TwoWay,
-                            Path = new PropertyPath(Bas.settings.DataViewSelected[i][1])
-                        };
-                        binding_incr = new Binding()
-                        {
-                            Source = Bas.biliupdata.video,
-                            Mode = BindingMode.TwoWay,
-                            Path = new PropertyPath(Bas.settings.DataViewSelected[i][2])
-                        };
-                        BindingOperations.SetBinding(viewers[i].num, RollingNums.numProperty, binding_num);
-                        BindingOperations.SetBinding(viewers[i].incr, RollingNums.numProperty, binding_incr);
-                        break;
-
-                    case "article":
-                        binding_num = new Binding()
-                        {
-                            Source = Bas.biliupdata.article,
-                            Mode = BindingMode.TwoWay,
-                            Path = new PropertyPath(Bas.settings.DataViewSelected[i][1])
-                        };
-                        binding_incr = new Binding()
-                        {
-                            Source = Bas.biliupdata.article,
-                            Mode = BindingMode.TwoWay,
-                            Path = new PropertyPath(Bas.settings.DataViewSelected[i][2])
-                        };
-                        BindingOperations.SetBinding(viewers[i].num, RollingNums.numProperty, binding_num);
-                        BindingOperations.SetBinding(viewers[i].incr, RollingNums.numProperty, binding_incr);
-                        break;
-
-                    default:
-                        break;
+                    viewers[i].Title = GetDataTile(Bas.settings.DataViewSelected[i]);
+                    viewers[i].DataMode = Bas.settings.DataViewSelected[i];
                 }
             }
         }
@@ -93,8 +54,7 @@ namespace BiliUPDesktopTool
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };
-            BindingOperations.SetBinding(Rx, Shape.StrokeProperty, bind_R_color);
-            BindingOperations.SetBinding(Ry, Shape.StrokeProperty, bind_R_color);
+            SetBinding(ForegroundProperty, bind_R_color);
         }
 
         /// <summary>
@@ -170,6 +130,14 @@ namespace BiliUPDesktopTool
                     break;
             }
             return title;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Parent.GetType() == typeof(DesktopWindow))
+            {
+                BindingInit();
+            }
         }
 
         #endregion Private Methods
