@@ -60,8 +60,6 @@ namespace BiliUPDesktopTool
             {
                 ST.DataViewSelected = value;
                 Save();
-                PropertyChangedA(this, new PropertyChangedEventArgs("DataViewSelected"));
-                DataViewSelected_Changed(this, new EventArgs());
             }
         }
 

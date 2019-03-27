@@ -94,11 +94,13 @@ namespace BiliUPDesktopTool
                         BindingOperations.ClearAllBindings(r.incr);
                         break;
                 }
+                r.Visibility = Visibility.Visible;
             }
             else if (value != null)
             {
                 BindingOperations.ClearAllBindings(r.num);
                 BindingOperations.ClearAllBindings(r.incr);
+                r.Visibility = Visibility.Visible;
             }
             else
             {
