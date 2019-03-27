@@ -51,7 +51,7 @@ namespace BiliUPDesktopTool
             DataViewer r = (DataViewer)sender;
             Binding binding_num, binding_incr;
             string[] value = e.NewValue as string[];
-            if (value.Length == 3)
+            if (value != null && value.Length == 3)
             {
                 switch (value[0])
                 {
@@ -90,8 +90,19 @@ namespace BiliUPDesktopTool
                         break;
 
                     default:
+                        BindingOperations.ClearAllBindings(r.num);
+                        BindingOperations.ClearAllBindings(r.incr);
                         break;
                 }
+            }
+            else if (value != null)
+            {
+                BindingOperations.ClearAllBindings(r.num);
+                BindingOperations.ClearAllBindings(r.incr);
+            }
+            else
+            {
+                r.Visibility = Visibility.Hidden;
             }
         }
 

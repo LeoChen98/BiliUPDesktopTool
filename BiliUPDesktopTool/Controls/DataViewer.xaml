@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:BiliUPDesktopTool"
              mc:Ignorable="d"
-             d:DesignHeight="150" d:DesignWidth="175" Width= "175" Height="150" Loaded="UserControl_Loaded">
+             d:DesignHeight="150" d:DesignWidth="175" Width= "175" Height="150" Loaded="UserControl_Loaded" Background="#02FFFFFF">
     <Grid x:Name="DV_Holder">
         <Label x:Name="DataTitle" Margin="10,10,55.2,106.4" Content="播放" Foreground="{Binding Foreground, ElementName=userControl}" VerticalContentAlignment="Center" FontSize="14" />
         <local:RollingNums x:Name="num" HorizontalAlignment="Center" Height="50" Margin="10,49,0,0" VerticalAlignment="Top" Width="140" Foreground="{Binding Foreground, ElementName=userControl}" />

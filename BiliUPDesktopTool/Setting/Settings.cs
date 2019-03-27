@@ -23,9 +23,21 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 初始化设置类
         /// </summary>
-        public Settings() : base(new SettingsTable(), savepath) { }
+        public Settings() : base(new SettingsTable(), savepath)
+        {
+            if (DataViewSelected == null)
+            {
+                DataViewSelected = new List<string[]>() { new string[3] { "video", "play", "play_incr" }, new string[3] { "video", "fan", "fan_incr" }, new string[3] { "video", "growup", "growup_incr" }, new string[3] { "video", "elec", "elec_incr" } };
+            }
+        }
 
         #endregion Public Constructors
+
+        #region Public Events
+
+        public event EventHandler DataViewSelected_Changed;
+
+        #endregion Public Events
 
         #region Public Properties
 
@@ -44,7 +56,13 @@ namespace BiliUPDesktopTool
         public List<string[]> DataViewSelected
         {
             get { return ST.DataViewSelected; }
-            set { ST.DataViewSelected = value; Save(); }
+            set
+            {
+                ST.DataViewSelected = value;
+                Save();
+                PropertyChangedA(this, new PropertyChangedEventArgs("DataViewSelected"));
+                DataViewSelected_Changed(this, new EventArgs());
+            }
         }
 
         /// <summary>
@@ -80,6 +98,19 @@ namespace BiliUPDesktopTool
 
         #endregion Public Properties
 
+        #region Public Methods
+
+        /// <summary>
+        /// 调起列表变更事件
+        /// </summary>
+        public void DataViewSelected_Changed_Send()
+        {
+            DataViewSelected_Changed(this, new EventArgs());
+            Save();
+        }
+
+        #endregion Public Methods
+
         #region Public Classes
 
         /// <summary>
@@ -91,7 +122,7 @@ namespace BiliUPDesktopTool
 
             public int DataRefreshInterval = 60000;
 
-            public List<string[]> DataViewSelected = new List<string[]>() { new string[3] { "video", "play", "play_incr" }, new string[3] { "video", "fan", "fan_incr" }, new string[3] { "video", "growup", "growup_incr" }, new string[3] { "video", "elec", "elec_incr" } };
+            public List<string[]> DataViewSelected;
 
             public bool IsFirstRun = true;
 

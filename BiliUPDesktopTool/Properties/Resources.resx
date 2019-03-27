@@ -117,6 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataDesc" xml:space="preserve">
+    <value>{
+  "article": {
+    "view": "文章点击量。（实时模式下显示昨日增量+程序运行时增量）",
+    "coin": "硬币。（实时模式下显示昨日增量+程序运行时增量）",
+    "reply": "评论。（实时模式下显示昨日增量+程序运行时增量）",
+    "fav": "收藏。（实时模式下显示昨日增量+程序运行时增量）",
+    "like": "点赞。（实时模式下显示昨日增量+程序运行时增量）",
+    "share": "分享数。（实时模式下显示昨日增量+程序运行时增量）"
+  },
+  "video": {
+    "play": "视频播放数。（实时模式下显示昨日增量+程序运行时增量）",
+    "coin": "硬币。（实时模式下显示昨日增量+程序运行时增量）",
+    "comment": "评论。（实时模式下显示昨日增量+程序运行时增量）",
+    "dm": "弹幕。（实时模式下显示昨日增量+程序运行时增量）",
+    "fav": "收藏。（实时模式下显示昨日增量+程序运行时增量）",
+    "share": "分享数。（实时模式下显示昨日增量+程序运行时增量）",
+    "like": "点赞。（实时模式下显示昨日增量+程序运行时增量）",
+    "fan": "实时粉丝数。（不受“实时模式”开关状态的影响）",
+    "growup": "创作激励计划。（每天凌晨更新，不受“实时模式”开关状态的影响）",
+    "elec": "充电计划电池。（不受“实时模式”开关状态的影响）"
+  }
+}</value>
+    <comment>数据描述</comment>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -284,6 +284,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="DataDesc.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

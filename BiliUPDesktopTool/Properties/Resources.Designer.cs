@@ -61,6 +61,30 @@ namespace BiliUPDesktopTool.Properties {
         }
         
         /// <summary>
+        ///   查找类似 {
+        ///  &quot;article&quot;: {
+        ///    &quot;view&quot;: &quot;文章点击量。（实时模式下显示昨日增量+程序运行时增量）&quot;,
+        ///    &quot;coin&quot;: &quot;硬币。（实时模式下显示昨日增量+程序运行时增量）&quot;,
+        ///    &quot;reply&quot;: &quot;评论。（实时模式下显示昨日增量+程序运行时增量）&quot;,
+        ///    &quot;fav&quot;: &quot;收藏。（实时模式下显示昨日增量+程序运行时增量）&quot;,
+        ///    &quot;like&quot;: &quot;点赞。（实时模式下显示昨日增量+程序运行时增量）&quot;,
+        ///    &quot;share&quot;: &quot;分享数。（实时模式下显示昨日增量+程序运行时增量）&quot;
+        ///  },
+        ///  &quot;video&quot;: {
+        ///    &quot;play&quot;: &quot;视频播放数。（实时模式下显示昨日增量+程序运行时增量）&quot;,
+        ///    &quot;coin&quot;: &quot;硬币。（实时模式下显示昨日增量+程序运行时增量）&quot;,
+        ///    &quot;comment&quot;: &quot;评论。（实时模式下显示昨日增量+程序运行时增量）&quot;,
+        ///    &quot;dm&quot;: &quot;弹幕。（实时模式下显示昨日增量+程序运行时增量）&quot;,
+        ///    &quot;fav&quot;: &quot;收藏。（实时模式下显示昨日增量+程序运行时增量）&quot;,
+        ///    &quot;share&quot;: &quot;分 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string DataDesc {
+            get {
+                return ResourceManager.GetString("DataDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Icon icon {

@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -9,17 +11,38 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class DataViewerPanel : UserControl
     {
+        #region Public Fields
+
+        // Using a DependencyProperty as the backing store for DataModes. This enables animation,
+        // styling, binding, etc...
+        public static readonly DependencyProperty DataModesProperty =
+            DependencyProperty.Register("DataModes", typeof(List<string[]>), typeof(UserControl), new PropertyMetadata(null, new PropertyChangedCallback(ModesChanged)));
+
+        #endregion Public Fields
+
         #region Public Constructors
 
         public DataViewerPanel()
         {
             InitializeComponent();
 
+            Bas.settings.DataViewSelected_Changed += ModesChanged;
+
             //初始化数据
             ChangeView();
         }
 
         #endregion Public Constructors
+
+        #region Public Properties
+
+        public List<string[]> DataModes
+        {
+            get { return (List<string[]>)GetValue(DataModesProperty); }
+            set { SetValue(DataModesProperty, value); }
+        }
+
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -43,6 +66,12 @@ namespace BiliUPDesktopTool
 
         #region Private Methods
 
+        private static void ModesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            DataViewerPanel s = d as DataViewerPanel;
+            s.ChangeView();
+        }
+
         /// <summary>
         /// 初始化绑定
         /// </summary>
@@ -64,6 +93,7 @@ namespace BiliUPDesktopTool
         /// <returns></returns>
         private string GetDataTile(string[] v)
         {
+            if (v == null) return "";
             string title = "";
             switch (v[0])
             {
@@ -130,6 +160,11 @@ namespace BiliUPDesktopTool
                     break;
             }
             return title;
+        }
+
+        private void ModesChanged(object sender, EventArgs e)
+        {
+            ChangeView();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
