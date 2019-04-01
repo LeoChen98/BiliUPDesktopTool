@@ -103,5 +103,39 @@ namespace BiliUPDesktopTool.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找类似 B站UP主桌面工具的诞生离不开以下开源项目的帮助：
+        ///
+        ///·Newtonsoft.Json 12.0.1
+        ///  https://www.newtonsoft.com/json
+        ///  Copyright © 2019 Newtonsoft
+        ///  Licensed under MIT
+        ///
+        ///·QRCoder 1.3.5
+        ///  https://github.com/codebude/QRCoder/
+        ///  Copyright © 2011 - 2018 Raffael Herrmann
+        ///  Licensed under MIT
+        ///  
+        ///·SharpZipLib 1.1.0
+        ///  https://github.com/icsharpcode/SharpZipLib
+        ///  Copyright © 2000-2018 SharpZipLib Contributors
+        ///  Licensed under MIT 的本地化字符串。
+        /// </summary>
+        internal static string Thanks {
+            get {
+                return ResourceManager.GetString("Thanks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon Upateicon {
+            get {
+                object obj = ResourceManager.GetObject("Upateicon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

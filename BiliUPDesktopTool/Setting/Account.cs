@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
-using System.Windows.Forms;
 
 namespace BiliUPDesktopTool
 {
@@ -27,10 +26,13 @@ namespace BiliUPDesktopTool
         /// </summary>
         public Account()
         {
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\"))
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\");
+
             ST = new AccountTable();
-            if (File.Exists(Application.StartupPath + "\\Account.dma"))
+            if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\Account.dma"))
             {
-                using (FileStream fs = File.Open(Application.StartupPath + "\\Account.dma", FileMode.Open, FileAccess.Read))
+                using (FileStream fs = File.Open(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\Account.dma", FileMode.Open, FileAccess.Read))
                 {
                     using (StreamReader reader = new StreamReader(fs))
                     {
@@ -120,7 +122,7 @@ namespace BiliUPDesktopTool
             OutputTable<AccountTable> OT = new OutputTable<AccountTable>(ST);
             string json = JsonConvert.SerializeObject(OT);
             json = EncryptHelper.DesEncrypt(json, encryptKey);
-            using (FileStream fs = File.Open(Application.StartupPath + "\\Account.dma", FileMode.Create, FileAccess.Write))
+            using (FileStream fs = File.Open(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\Account.dma", FileMode.Create, FileAccess.Write))
             {
                 using (StreamWriter writer = new StreamWriter(fs))
                 {

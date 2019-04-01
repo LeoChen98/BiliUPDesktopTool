@@ -5,7 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
-        Title="SettingWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="设置 - B站up主桌面工具" Height="172.4" Width="274.4" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="/BiliUPDesktopTool;component/icon.ico" ResizeMode="CanMinimize">
     <Grid>
+        <Label x:Name="label" Content="开机启动：" HorizontalAlignment="Left" Height="30" Margin="35,30,0,0" VerticalAlignment="Top" Width="65" />
+        <Button x:Name="BTN_AutoRun" Content="设置为开机启动" HorizontalAlignment="Left" Height="30" Margin="105,28,0,0" VerticalAlignment="Top" Width="123" Click="BTN_AutoRun_Click" />
+        <Label x:Name="label_Copy" Content="展示窗口：" HorizontalAlignment="Left" Height="30" Margin="35,65,0,0" VerticalAlignment="Top" Width="65" />
+        <Button x:Name="BTN_SetDesktopWndPos" Content="设置展示窗口位置" HorizontalAlignment="Left" Height="30" Margin="105,63,0,0" VerticalAlignment="Top" Width="123" Click="BTN_SetDesktopWndPos_Click" />
     </Grid>
 </Window>

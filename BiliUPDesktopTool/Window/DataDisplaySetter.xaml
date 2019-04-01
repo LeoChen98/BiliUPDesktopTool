@@ -7,7 +7,7 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="window" x:Class="BiliUPDesktopTool.DataDisplaySetter"
         mc:Ignorable="d"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        Title="数据展示设置 - B站up主桌面工具" Height="430" Width="966" ResizeMode="CanMinimize" Icon="/BiliUPDesktopTool;component/icon.ico">
+        Title="数据展示设置 - B站up主桌面工具" Height="430" Width="966" ResizeMode="CanMinimize" Icon="/BiliUPDesktopTool;component/icon.ico" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

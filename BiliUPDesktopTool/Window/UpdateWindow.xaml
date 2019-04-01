@@ -1,0 +1,17 @@
+﻿<Window x:Class="BiliUPDesktopTool.UpdateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BiliUPDesktopTool"
+        mc:Ignorable="d"
+        x:Name="window"
+        Title="检查更新 - B站UP主桌面工具" Height="450" Width="311.369" Background="#66000000" WindowStyle="None" Foreground="LightGray" Icon="/BiliUPDesktopTool;component/Upateicon.ico" AllowsTransparency="True">
+    <Grid>
+        <Label x:Name="LBL_Title" Content="B站UP主桌面工具更新工具" HorizontalAlignment="Left" VerticalAlignment="Top" Width="305" Foreground="{Binding Foreground, ElementName=window}" Height="31" FontSize="18" Margin="0,0,-0.2,0" />
+        <TextBox x:Name="TB_UpdateText" Height="340" Margin="10,36,9.8,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="{Binding Foreground, ElementName=window}" Background="{x:Null}" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
+        <Label x:Name="LBL_Status" Content="状态：等待更新" HorizontalAlignment="Left" Height="24" Margin="10,381,0,0" VerticalAlignment="Top" Width="285" Foreground="{Binding Foreground, ElementName=window}" />
+        <Button x:Name="BTN_Update" Content="更新" HorizontalAlignment="Left" Height="23" Margin="122,410,0,0" VerticalAlignment="Top" Width="84" Background="{x:Null}" Foreground="{Binding Foreground, ElementName=window}" Click="BTN_Update_Click" />
+        <Button x:Name="BTN_Cancel" Content="取消" HorizontalAlignment="Left" Height="23" Margin="211,410,0,0" VerticalAlignment="Top" Width="84" Background="{x:Null}" Foreground="{Binding Foreground, ElementName=window}" Click="BTN_Cancel_Click" />
+    </Grid>
+</Window>

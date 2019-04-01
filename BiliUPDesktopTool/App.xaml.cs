@@ -58,6 +58,7 @@ namespace BiliUPDesktopTool
             Bas.account = new Account();
             Bas.biliupdata = new BiliUPData();
             Bas.notifyIcon = new NotifyIconHelper();
+            Bas.update = new Update();
 
             if (Bas.settings.IsFirstRun)
             {

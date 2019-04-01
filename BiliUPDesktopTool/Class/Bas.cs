@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ICSharpCode.SharpZipLib.Zip;
+using System;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -38,9 +39,67 @@ namespace BiliUPDesktopTool
         /// </summary>
         public static Skin skin;
 
+        /// <summary>
+        /// 更新实例
+        /// </summary>
+        public static Update update;
+
         #endregion Public Fields
 
+        #region Public Properties
+
+        /// <summary>
+        /// 开源许可
+        /// </summary>
+        public string Thanks
+        {
+            get
+            {
+                return Properties.Resources.Thanks;
+            }
+        }
+
+        /// <summary>
+        /// 主程序版本号
+        /// </summary>
+        public string Version
+        {
+            get
+            {
+                return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
+        }
+
+        #endregion Public Properties
+
         #region Public Methods
+
+        /// <summary>
+        /// 获取文件md5
+        /// </summary>
+        /// <param name="fileName">文件路径</param>
+        /// <returns>md5</returns>
+        public static string GetFileHash(string fileName)
+        {
+            try
+            {
+                FileStream file = new FileStream(fileName, FileMode.Open);
+                System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                byte[] retVal = md5.ComputeHash(file);
+                file.Close();
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
+            catch
+            {
+                return "";
+            }
+        }
 
         /// <summary>
         /// 获取指定url的内容
@@ -166,6 +225,86 @@ namespace BiliUPDesktopTool
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// 解压功能
+        /// </summary>
+        /// <param name="fileToUnZip">待解压的文件</param>
+        /// <param name="zipedFolder">指定解压目标目录</param>
+        /// <param name="password">密码</param>
+        /// <returns>解压结果</returns>
+        public static bool UnZip(string fileToUnZip, string zipedFolder, string password)
+        {
+            bool result = true;
+            FileStream fs = null;
+            ZipInputStream zipStream = null;
+            ZipEntry ent = null;
+            string fileName;
+
+            if (!File.Exists(fileToUnZip))
+                return false;
+
+            if (!Directory.Exists(zipedFolder))
+                Directory.CreateDirectory(zipedFolder);
+
+            try
+            {
+                zipStream = new ZipInputStream(File.OpenRead(fileToUnZip.Trim()));
+                if (!string.IsNullOrEmpty(password)) zipStream.Password = password;
+                while ((ent = zipStream.GetNextEntry()) != null)
+                {
+                    if (!string.IsNullOrEmpty(ent.Name))
+                    {
+                        fileName = Path.Combine(zipedFolder, ent.Name);
+                        fileName = fileName.Replace('/', '\\');
+
+                        if (fileName.EndsWith("\\"))
+                        {
+                            Directory.CreateDirectory(fileName);
+                            continue;
+                        }
+
+                        using (fs = File.Create(fileName))
+                        {
+                            int size = 2048;
+                            byte[] data = new byte[size];
+                            while (true)
+                            {
+                                size = zipStream.Read(data, 0, data.Length);
+                                if (size > 0)
+                                    fs.Write(data, 0, size);
+                                else
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                result = false;
+            }
+            finally
+            {
+                if (fs != null)
+                {
+                    fs.Close();
+                    fs.Dispose();
+                }
+                if (zipStream != null)
+                {
+                    zipStream.Close();
+                    zipStream.Dispose();
+                }
+                if (ent != null)
+                {
+                    ent = null;
+                }
+                GC.Collect();
+                GC.Collect(1);
+            }
+            return result;
         }
 
         #endregion Public Methods

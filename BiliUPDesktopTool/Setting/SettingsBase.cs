@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
 using System.IO;
-using System.Windows.Forms;
 
 namespace BiliUPDesktopTool
 {
@@ -37,8 +37,11 @@ namespace BiliUPDesktopTool
         /// </summary>
         public SettingsBase(T _ST, string _savepath)
         {
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\"))
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\");
+
             ST = _ST;
-            savepath = Application.StartupPath + "\\" + _savepath;
+            savepath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\" + _savepath;
 
             if (File.Exists(savepath))
             {

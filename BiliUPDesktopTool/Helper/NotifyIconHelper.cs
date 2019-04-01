@@ -11,6 +11,8 @@ namespace BiliUPDesktopTool
     {
         #region Private Fields
 
+        private About about;
+
         private DataDisplaySetter DSetter;
 
         private DesktopWindowSetter DWS;
@@ -84,6 +86,14 @@ namespace BiliUPDesktopTool
             MI_DataDisplaySetting.Click += MI_DataDisplaySetting_Click;
             m.Add(MI_DataDisplaySetting);
 
+            ToolStripMenuItem MI_CheckUpdate = new ToolStripMenuItem() { Text = "检查更新" };
+            MI_CheckUpdate.Click += MI_CheckUpdate_Click;
+            m.Add(MI_CheckUpdate);
+
+            ToolStripMenuItem MI_About = new ToolStripMenuItem() { Text = "关于" };
+            MI_About.Click += MI_About_Click;
+            m.Add(MI_About);
+
             m.Add(MI_Separator2);
 
             ToolStripMenuItem MI_Exit = new ToolStripMenuItem() { Text = "退出" };
@@ -91,6 +101,17 @@ namespace BiliUPDesktopTool
             m.Add(MI_Exit);
 
             return new ToolStripItemCollection(ni.ContextMenuStrip, m.ToArray());
+        }
+
+        private void MI_About_Click(object sender, EventArgs e)
+        {
+            about = (about == null || about.IsVisible == false) ? new About() : about;
+            about.Show();
+        }
+
+        private void MI_CheckUpdate_Click(object sender, EventArgs e)
+        {
+            Bas.update.CheckUpdate();
         }
 
         private void MI_DataDisplaySetting_Click(object sender, EventArgs e)
