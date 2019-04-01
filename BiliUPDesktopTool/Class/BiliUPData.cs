@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
 using System.ComponentModel;
 using System.Threading;
 
@@ -50,6 +51,15 @@ namespace BiliUPDesktopTool
         #region Public Methods
 
         /// <summary>
+        /// 更改刷新间隔
+        /// </summary>
+        /// <param name="value">新的刷新间隔</param>
+        public void ChangeInterval(int value)
+        {
+            Refresher.Change(0, value);
+        }
+
+        /// <summary>
         /// 刷新数据
         /// </summary>
         /// <returns>刷新后的实例</returns>
@@ -75,6 +85,8 @@ namespace BiliUPDesktopTool
             #region Private Fields
 
             private int _coin, _coin_incr, _fav, _fav_incr, _like, _like_incr, _reply, _reply_incr, _share, _share_incr, _view, _view_incr;
+            private int _coin_real, _coin_real_last, _fav_real, _fav_real_last, _like_real, _like_real_last, _reply_real, _reply_real_last, _share_real, _share_real_last, _view_real, _view_real_last;
+            private DateTime? LastTime = null;
 
             #endregion Private Fields
 
@@ -102,7 +114,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int coin
             {
-                get { return _coin; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _coin + _coin_real - _coin_real_last;
+                    }
+                    else
+                    {
+                        return _coin;
+                    }
+                }
                 set
                 {
                     _coin = value;
@@ -115,7 +137,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int coin_incr
             {
-                get { return _coin_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _coin_incr + _coin_real - _coin_real_last;
+                    }
+                    else
+                    {
+                        return _coin_incr;
+                    }
+                }
                 set
                 {
                     _coin_incr = value;
@@ -128,7 +160,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int fav
             {
-                get { return _fav; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _fav + _fav_real - _fav_real_last;
+                    }
+                    else
+                    {
+                        return _fav;
+                    }
+                }
                 set
                 {
                     _fav = value;
@@ -141,7 +183,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int fav_incr
             {
-                get { return _fav_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _fav_incr + _fav_real - _fav_real_last;
+                    }
+                    else
+                    {
+                        return _fav_incr;
+                    }
+                }
                 set
                 {
                     _fav_incr = value;
@@ -154,7 +206,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int like
             {
-                get { return _like; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _like + _like_real - _like_real_last;
+                    }
+                    else
+                    {
+                        return _like;
+                    }
+                }
                 set
                 {
                     _like = value;
@@ -167,7 +229,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int like_incr
             {
-                get { return _like_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _like_incr + _like_real - _like_real_last;
+                    }
+                    else
+                    {
+                        return _like_incr;
+                    }
+                }
                 set
                 {
                     _like_incr = value;
@@ -180,7 +252,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int reply
             {
-                get { return _reply; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _reply + _reply_real - _reply_real_last;
+                    }
+                    else
+                    {
+                        return _reply;
+                    }
+                }
                 set
                 {
                     _reply = value;
@@ -193,7 +275,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int reply_incr
             {
-                get { return _reply_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _reply_incr + _reply_real - _reply_real_last;
+                    }
+                    else
+                    {
+                        return _reply_incr;
+                    }
+                }
                 set
                 {
                     _reply_incr = value;
@@ -206,7 +298,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int share
             {
-                get { return _share; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _share + _share_real - _share_real_last;
+                    }
+                    else
+                    {
+                        return _share;
+                    }
+                }
                 set
                 {
                     _share = value;
@@ -219,7 +321,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int share_incr
             {
-                get { return _share_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _share_incr + _share_real - _share_real_last;
+                    }
+                    else
+                    {
+                        return _share_incr;
+                    }
+                }
                 set
                 {
                     _share_incr = value;
@@ -232,7 +344,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int view
             {
-                get { return _view; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _view + _view_real - _view_real_last;
+                    }
+                    else
+                    {
+                        return _view;
+                    }
+                }
                 set
                 {
                     _view = value;
@@ -245,7 +367,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int view_incr
             {
-                get { return _view_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _view_incr + _view_real - _view_real_last;
+                    }
+                    else
+                    {
+                        return _view_incr;
+                    }
+                }
                 set
                 {
                     _view_incr = value;
@@ -263,6 +395,8 @@ namespace BiliUPDesktopTool
             /// <returns>刷新数据后的实例</returns>
             public Article Refresh()
             {
+                GetRealTime();
+
                 string str = Bas.GetHTTPBody("https://member.bilibili.com/x/h5/data/article", Bas.account.Cookies, "https://member.bilibili.com/studio/gabriel/data-center/overview");
                 if (!string.IsNullOrEmpty(str))
                 {
@@ -289,10 +423,117 @@ namespace BiliUPDesktopTool
                     {
                     }
                 }
+
                 return this;
             }
 
             #endregion Public Methods
+
+            #region Private Methods
+
+            /// <summary>
+            /// 获取实时数据
+            /// </summary>
+            private void GetRealTime()
+            {
+                //清除旧数据
+                _coin_real = 0;
+                _fav_real = 0;
+                _like_real = 0;
+                _reply_real = 0;
+                _share_real = 0;
+                _view_real = 0;
+                if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                {
+                    _coin_real_last = 0;
+                    _fav_real_last = 0;
+                    _like_real_last = 0;
+                    _reply_real_last = 0;
+                    _share_real_last = 0;
+                    _view_real_last = 0;
+                }
+
+                bool IsChangeLast = false;
+                string str = Bas.GetHTTPBody("https://api.bilibili.com/x/article/creative/article/list?group=0&sort=&pn=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
+                if (!string.IsNullOrEmpty(str))
+                {
+                    try
+                    {
+                        JObject obj = JObject.Parse(str);
+                        if ((int)obj["code"] == 0)
+                        {
+                            foreach (JToken i in obj["artlist"]["articles"])
+                            {
+                                _coin_real += (int)i["stats"]["coin"];
+                                _fav_real += (int)i["stats"]["favorite"];
+                                _like_real += (int)i["stats"]["like"];
+                                _reply_real += (int)i["stats"]["reply"];
+                                _share_real += (int)i["stats"]["share"];
+                                _view_real += (int)i["stats"]["view"];
+
+                                if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                                {
+                                    _coin_real_last += (int)i["stats"]["coin"];
+                                    _fav_real_last += (int)i["stats"]["favorite"];
+                                    _like_real_last += (int)i["stats"]["like"];
+                                    _reply_real_last += (int)i["stats"]["reply"];
+                                    _share_real_last += (int)i["stats"]["share"];
+                                    _view_real_last += (int)i["stats"]["view"];
+
+                                    IsChangeLast = true;
+                                }
+                            }
+
+                            if ((int)obj["artlist"]["page"]["pn"] * (int)obj["artlist"]["page"]["ps"] > (int)obj["artlist"]["page"]["total"])
+                            {
+                                int pn = 2;
+                                while (pn * (int)obj["artlist"]["page"]["ps"] <= (int)obj["artlist"]["page"]["total"])
+                                {
+                                    string str1 = Bas.GetHTTPBody("https://api.bilibili.com/x/article/creative/article/list?group=0&sort=&pn=" + pn, Bas.account.Cookies, "https://member.bilibili.com/v2");
+                                    if (!string.IsNullOrEmpty(str1))
+                                    {
+                                        try
+                                        {
+                                            JObject obj1 = JObject.Parse(str1);
+
+                                            if ((int)obj1["code"] == 0)
+                                            {
+                                                foreach (JToken i in obj1["artlist"]["articles"])
+                                                {
+                                                    _coin_real += (int)i["stats"]["coin"];
+                                                    _fav_real += (int)i["stats"]["favorite"];
+                                                    _like_real += (int)i["stats"]["like"];
+                                                    _reply_real += (int)i["stats"]["reply"];
+                                                    _share_real += (int)i["stats"]["share"];
+                                                    _view_real += (int)i["stats"]["view"];
+
+                                                    if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                                                    {
+                                                        _coin_real_last += (int)i["stats"]["coin"];
+                                                        _fav_real_last += (int)i["stats"]["favorite"];
+                                                        _like_real_last += (int)i["stats"]["like"];
+                                                        _reply_real_last += (int)i["stats"]["reply"];
+                                                        _share_real_last += (int)i["stats"]["share"];
+                                                        _view_real_last += (int)i["stats"]["view"];
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        catch
+                                        {
+                                        }
+                                    }
+                                    pn++;
+                                }
+                            }
+                        }
+                        if (IsChangeLast) LastTime = DateTime.Now.Date.AddHours(12);//设定为当天12点数据
+                    }
+                    catch { }
+                }
+            }
+
+            #endregion Private Methods
         }
 
         /// <summary>
@@ -303,8 +544,9 @@ namespace BiliUPDesktopTool
             #region Private Fields
 
             private int _coin, _coin_incr, _dm, _dm_incr, _fan, _fan_incr, _fav, _fav_incr, _like, _like_incr, _play, _play_incr, _share, _share_incr, _comment, _comment_incr;
-
+            private int _coin_real, _coin_real_last, _dm_real, _dm_real_last, _fav_real, _fav_real_last, _like_real, _like_real_last, _play_real, _play_real_last, _share_real, _share_real_last, _comment_real, _comment_real_last;
             private double _elec, _elec_incr, _growup, _growup_incr;
+            private DateTime? LastTime = null;
 
             #endregion Private Fields
 
@@ -332,7 +574,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int coin
             {
-                get { return _coin; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _coin + _coin_real - _coin_real_last;
+                    }
+                    else
+                    {
+                        return _coin;
+                    }
+                }
                 set
                 {
                     _coin = value;
@@ -345,7 +597,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int coin_incr
             {
-                get { return _coin_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _coin_incr + _coin_real - _coin_real_last;
+                    }
+                    else
+                    {
+                        return _coin_incr;
+                    }
+                }
                 set
                 {
                     _coin_incr = value;
@@ -358,7 +620,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int comment
             {
-                get { return _comment; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _comment + _comment_real - _comment_real_last;
+                    }
+                    else
+                    {
+                        return _comment;
+                    }
+                }
                 set
                 {
                     _comment = value;
@@ -371,7 +643,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int comment_incr
             {
-                get { return _comment_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _comment_incr + _comment_real - _comment_real_last;
+                    }
+                    else
+                    {
+                        return _comment_incr;
+                    }
+                }
                 set
                 {
                     _comment_incr = value;
@@ -384,7 +666,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int dm
             {
-                get { return _dm; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _dm + _dm_real - _dm_real_last;
+                    }
+                    else
+                    {
+                        return _dm;
+                    }
+                }
                 set
                 {
                     _dm = value;
@@ -397,7 +689,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int dm_incr
             {
-                get { return _dm_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _dm_incr + _dm_real - _dm_real_last;
+                    }
+                    else
+                    {
+                        return _dm_incr;
+                    }
+                }
                 set
                 {
                     _dm_incr = value;
@@ -462,7 +764,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int fav
             {
-                get { return _fav; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _fav + _fav_real - _fav_real_last;
+                    }
+                    else
+                    {
+                        return _fav;
+                    }
+                }
                 set
                 {
                     _fav = value;
@@ -475,7 +787,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int fav_incr
             {
-                get { return _fav_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _fav_incr + _fav_real - _fav_real_last;
+                    }
+                    else
+                    {
+                        return _fav_incr;
+                    }
+                }
                 set
                 {
                     _fav_incr = value;
@@ -514,7 +836,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int like
             {
-                get { return _like; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _like + _like_real - _like_real_last;
+                    }
+                    else
+                    {
+                        return _like;
+                    }
+                }
                 set
                 {
                     _like = value;
@@ -527,7 +859,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int like_incr
             {
-                get { return _like_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _like_incr + _like_real - _like_real_last;
+                    }
+                    else
+                    {
+                        return _like_incr;
+                    }
+                }
                 set
                 {
                     _like_incr = value;
@@ -540,7 +882,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int play
             {
-                get { return _play; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _play + _play_real - _play_real_last;
+                    }
+                    else
+                    {
+                        return _play;
+                    }
+                }
                 set
                 {
                     _play = value;
@@ -553,7 +905,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int play_incr
             {
-                get { return _play_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _play_incr + _play_real - _play_real_last;
+                    }
+                    else
+                    {
+                        return _play_incr;
+                    }
+                }
                 set
                 {
                     _play_incr = value;
@@ -566,7 +928,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int share
             {
-                get { return _share; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _share + _share_real - _share_real_last;
+                    }
+                    else
+                    {
+                        return _share;
+                    }
+                }
                 set
                 {
                     _share = value;
@@ -579,7 +951,17 @@ namespace BiliUPDesktopTool
             /// </summary>
             public int share_incr
             {
-                get { return _share_incr; }
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _share_incr + _share_real - _share_real_last;
+                    }
+                    else
+                    {
+                        return _share_incr;
+                    }
+                }
                 set
                 {
                     _share_incr = value;
@@ -597,6 +979,8 @@ namespace BiliUPDesktopTool
             /// <returns>刷新后的实例</returns>
             public Video Refresh()
             {
+                GetRealTime();
+
                 string str = Bas.GetHTTPBody("https://member.bilibili.com/x/h5/data/overview?type=0", Bas.account.Cookies, "https://member.bilibili.com/studio/gabriel/data-center/overview");
                 if (!string.IsNullOrEmpty(str))
                 {
@@ -704,6 +1088,117 @@ namespace BiliUPDesktopTool
                     }
                 }
                 else { return new double[2] { -1, -1 }; }
+            }
+
+            /// <summary>
+            /// 获取实时数据
+            /// </summary>
+            private void GetRealTime()
+            {
+                //清除旧数据
+                _coin_real = 0;
+                _dm_real = 0;
+                _fav_real = 0;
+                _like_real = 0;
+                _play_real = 0;
+                _share_real = 0;
+                _comment_real = 0;
+                if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                {
+                    _coin_real_last = 0;
+                    _dm_real_last = 0;
+                    _fav_real_last = 0;
+                    _like_real_last = 0;
+                    _play_real_last = 0;
+                    _share_real_last = 0;
+                    _comment_real_last = 0;
+                }
+                bool IsChangeLast = false;
+                string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=1&ps=10&coop=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
+                if (!string.IsNullOrEmpty(str))
+                {
+                    try
+                    {
+                        JObject obj = JObject.Parse(str);
+
+                        if ((int)obj["code"] == 0)
+                        {
+                            foreach (JToken i in obj["data"]["arc_audits"])
+                            {
+                                _coin_real += (int)i["stat"]["coin"];
+                                _dm_real += (int)i["stat"]["danmaku"];
+                                _fav_real += (int)i["stat"]["favorite"];
+                                _like_real += (int)i["stat"]["like"];
+                                _play_real += (int)i["stat"]["view"];
+                                _share_real += (int)i["stat"]["share"];
+                                _comment_real += (int)i["stat"]["reply"];
+
+                                if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                                {
+                                    _coin_real_last += (int)i["stat"]["coin"];
+                                    _dm_real_last += (int)i["stat"]["danmaku"];
+                                    _fav_real_last += (int)i["stat"]["favorite"];
+                                    _like_real_last += (int)i["stat"]["like"];
+                                    _play_real_last += (int)i["stat"]["view"];
+                                    _share_real_last += (int)i["stat"]["share"];
+                                    _comment_real_last += (int)i["stat"]["reply"];
+
+                                    IsChangeLast = true;
+                                }
+                            }
+
+                            if ((int)obj["data"]["page"]["pn"] * (int)obj["data"]["page"]["ps"] > (int)obj["data"]["page"]["count"])
+                            {
+                                int pn = 2;
+                                while (pn * (int)obj["data"]["page"]["ps"] > (int)obj["data"]["page"]["count"])
+                                {
+                                    string str1 = Bas.GetHTTPBody("https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=" + pn + "&ps=10&coop=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
+
+                                    if (!string.IsNullOrEmpty(str1))
+                                    {
+                                        try
+                                        {
+                                            JObject obj1 = JObject.Parse(str1);
+
+                                            if ((int)obj1["code"] == 0)
+                                            {
+                                                foreach (JToken i in obj["data"]["arc_audits"])
+                                                {
+                                                    _coin_real += (int)i["stat"]["coin"];
+                                                    _dm_real += (int)i["stat"]["danmaku"];
+                                                    _fav_real += (int)i["stat"]["favorite"];
+                                                    _like_real += (int)i["stat"]["like"];
+                                                    _play_real += (int)i["stat"]["view"];
+                                                    _share_real += (int)i["stat"]["share"];
+                                                    _comment_real += (int)i["stat"]["reply"];
+
+                                                    if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                                                    {
+                                                        _coin_real_last += (int)i["stat"]["coin"];
+                                                        _dm_real_last += (int)i["stat"]["danmaku"];
+                                                        _fav_real_last += (int)i["stat"]["favorite"];
+                                                        _like_real_last += (int)i["stat"]["like"];
+                                                        _play_real_last += (int)i["stat"]["view"];
+                                                        _share_real_last += (int)i["stat"]["share"];
+                                                        _comment_real_last += (int)i["stat"]["reply"];
+
+                                                        IsChangeLast = true;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        catch
+                                        {
+                                        }
+                                    }
+                                    pn++;
+                                }
+                            }
+                        }
+                        if (IsChangeLast) LastTime = DateTime.Now.Date.AddHours(12);//设定为当天12点数据
+                    }
+                    catch { }
+                }
             }
 
             #endregion Private Methods

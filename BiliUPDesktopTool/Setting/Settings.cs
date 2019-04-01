@@ -46,8 +46,17 @@ namespace BiliUPDesktopTool
         /// </summary>
         public int DataRefreshInterval
         {
-            get { return ST.DataRefreshInterval; }
-            set { ST.DataRefreshInterval = value; Save(); }
+            get
+            {
+                return ST.DataRefreshInterval;
+            }
+            set
+            {
+                if (value <= 0) value = 60000;
+                ST.DataRefreshInterval = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("DataRefreshInterval"));
+                Save();
+            }
         }
 
         /// <summary>
@@ -80,9 +89,8 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
-        /// （未启用）指示可选实时数据是否启动实时
+        /// 指示可选实时数据是否启动实时
         /// </summary>
-        [Obsolete("实时数据功能未实现。")]
         public bool IsRealTime
         {
             get { return ST.IsRealTime; }
@@ -124,7 +132,6 @@ namespace BiliUPDesktopTool
 
             public bool IsFirstRun = true;
 
-            //TODO 实时功能未实现
             public bool IsRealTime = false;
 
             #endregion Public Fields

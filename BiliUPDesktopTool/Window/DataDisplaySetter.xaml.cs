@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -28,6 +30,8 @@ namespace BiliUPDesktopTool
             InitializeComponent();
 
             BindingInit();
+
+            TBN_RealMode.Status = Bas.settings.IsRealTime;
         }
 
         #endregion Public Constructors
@@ -101,6 +105,16 @@ namespace BiliUPDesktopTool
                 Path = new PropertyPath("IsRealTime")
             };
             TBN_RealMode.SetBinding(ToggleButton.StatusProperty, bind_RealMode);
+
+            Binding bind_RefreshInterval = new Binding()
+            {
+                Source = Bas.settings,
+                Mode = BindingMode.TwoWay,
+                Path = new PropertyPath("DataRefreshInterval"),
+                Converter = new IntervalConverter(),
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            };
+            TB_RefreshInterval.SetBinding(TextBox.TextProperty, bind_RefreshInterval);
         }
 
         private void DataViewer_MouseUp(object sender, MouseButtonEventArgs e)
@@ -359,6 +373,13 @@ namespace BiliUPDesktopTool
             Bg_Overall.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0x42, 0xb7, 0xdd));
             Bg_Article.Stroke = new SolidColorBrush(Color.FromArgb(0xff, 0x42, 0xb7, 0xdd));
             Bg_Article.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0x42, 0xb7, 0xdd));
+        }
+
+        private void TB_RefreshInterval_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex re = new Regex("[^0-9.-]+");
+
+            e.Handled = re.IsMatch(e.Text);
         }
 
         #endregion Private Methods

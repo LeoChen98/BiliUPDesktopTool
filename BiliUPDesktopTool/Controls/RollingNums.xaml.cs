@@ -57,9 +57,12 @@ namespace BiliUPDesktopTool
         /// <param name="e"></param>
         public static void ChangeNum(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            RollingNums r = (RollingNums)sender;
-            double v = Convert.ToDouble(e.NewValue);
-            r.ChangeNum(v);
+            if (e.OldValue != e.NewValue)
+            {
+                RollingNums r = (RollingNums)sender;
+                double v = Convert.ToDouble(e.NewValue);
+                r.ChangeNum(v);
+            }
         }
 
         /// <summary>
@@ -70,6 +73,7 @@ namespace BiliUPDesktopTool
         {
             if (num != -1)
             {
+                num = Math.Abs(num);
                 string numstr = num.ToString();
                 if (numstr.IndexOf("E+") >= 0)
                 {
@@ -96,7 +100,7 @@ namespace BiliUPDesktopTool
                         string tmp3 = tmp1.Substring(tmp2.Length, 1);//小数部分
 
                         numids[5] = -2;
-                        numids[4] = int.Parse(tmp3);
+                        numids[4] = int.Parse(tmp1.Substring(tmp2.Length + 1, 1)) >= 5 ? int.Parse(tmp3) + 1 : int.Parse(tmp3);
 
                         for (int i = 1; i <= 4; i++)
                         {
@@ -124,7 +128,7 @@ namespace BiliUPDesktopTool
                         string tmp3 = tmp1.Substring(tmp2.Length, 1);//小数部分
 
                         numids[5] = -1;
-                        numids[4] = int.Parse(tmp3);
+                        numids[4] = int.Parse(tmp1.Substring(tmp2.Length + 1, 1)) >= 5 ? int.Parse(tmp3) + 1 : int.Parse(tmp3);
 
                         for (int i = 1; i <= 4; i++)
                         {

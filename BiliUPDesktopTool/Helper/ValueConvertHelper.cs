@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Data;
 
@@ -21,6 +22,28 @@ namespace BiliUPDesktopTool
             Visibility v = (Visibility)value;
             if (v == Visibility.Visible) return true;
             else return false;
+        }
+
+        #endregion Public Methods
+    }
+
+    /// <summary>
+    /// 间隔转换器
+    /// </summary>
+    public class IntervalConverter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((int)value / 1000).ToString();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (string.IsNullOrEmpty((string)value)) value = "60";
+            value = Regex.Replace((string)value, @"[^0-9]+", "");
+            return int.Parse((string)value) * 1000;
         }
 
         #endregion Public Methods
