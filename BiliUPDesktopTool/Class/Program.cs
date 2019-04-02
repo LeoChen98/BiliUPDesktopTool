@@ -21,10 +21,6 @@ namespace BiliUPDesktopTool
             //初始化公共变量
             Bas.skin = new Skin();
             Bas.settings = new Settings();
-            Bas.account = new Account();
-            Bas.biliupdata = new BiliUPData();
-            Bas.notifyIcon = new NotifyIconHelper();
-            Bas.update = new Update();
 
             if (Bas.settings.IsFirstRun)
             {
@@ -36,6 +32,11 @@ namespace BiliUPDesktopTool
                 }
                 Bas.settings.IsFirstRun = false;
             }
+
+            Bas.account = new Account();
+            Bas.biliupdata = new BiliUPData();
+            Bas.notifyIcon = new NotifyIconHelper();
+            Bas.update = new Update();
 
             Application app = new Application();
             app.Run(new DesktopWindow());
