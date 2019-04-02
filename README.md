@@ -1,8 +1,8 @@
 ﻿# BiliUPDesktopTool
  B站UP主桌面工具
 
-[![Version](https://img.shields.io/github/release/LeoChen98/BiliUPDesktopTool.svg?label=Version)](https://github.com/LeoChen98/AutoLiveRecorder/releases)
-[![GitHub issues](https://img.shields.io/github/issues/LeoChen98/BiliUPDesktopTool.svg)](https://github.com/LeoChen98/AutoLiveRecorder/issues)
+[![Version](https://img.shields.io/github/release/LeoChen98/BiliUPDesktopTool.svg?label=Version)](https://github.com/LeoChen98/BiliUPDesktopTool/releases)
+[![GitHub issues](https://img.shields.io/github/issues/LeoChen98/BiliUPDesktopTool.svg)](https://github.com/LeoChen98/BiliUPDesktopTool/issues)
 [![需要帮助的 issue](https://img.shields.io/github/issues/LeoChen98/BiliUPDesktopTool/help%20wanted.svg?label=需要帮助的%20issue)](https://github.com/LeoChen98/BiliUPDesktopTool/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
 [![Language](https://img.shields.io/badge/%E8%AF%AD%E8%A8%80-%E4%B8%AD%E6%96%87-brightgreen.svg)](#)
 [![DevLanguage](https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80-C%23-brightgreen.svg)](#)
@@ -19,7 +19,7 @@
 
 
 ## 下载地址
-[![Downloads](https://img.shields.io/badge/%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6@2.0.4.21--brightgreen.svg)](https://zhangbudademao.com/SoftwareList.html)
+[![Downloads](https://img.shields.io/badge/%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6--brightgreen.svg)](https://zhangbudademao.com/SoftwareList.html)
 
 ## 开发计划
 * 即将加入动态抽奖和评论区抽奖功能。
