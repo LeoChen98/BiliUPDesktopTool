@@ -96,7 +96,7 @@ namespace BiliUPDesktopTool
                         }
                         else
                         {
-                            UpdateText = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + "->" + jobj["data"]["version"].ToString() + "\r\n\r\n" + jobj["data"]["content"].ToString();
+                            UpdateText = "当前版本：" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\r\n最新版本：" + jobj["data"]["version"].ToString() + "(" + jobj["data"]["updatetime"].ToString() + "更新)\r\n\r\n更新内容：\r\n" + jobj["data"]["content"].ToString();
                             uw = (uw == null || uw.IsVisible == false) ? new UpdateWindow() : uw;
                             uw.Show();
                         }
