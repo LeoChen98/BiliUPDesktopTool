@@ -35,7 +35,7 @@ namespace BiliUPDesktopTool
             }
             else
             {
-                key.SetValue("BiliUPDesktopTool", "\"" + Process.GetCurrentProcess().MainModule.FileName + "\"");
+                key.SetValue("BiliUPDesktopTool", "\"" + Process.GetCurrentProcess().MainModule.FileName + " -s\"");
             }
             SetAutoRunShow();
         }
