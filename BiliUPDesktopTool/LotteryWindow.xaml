@@ -1,0 +1,14 @@
+﻿<Window x:Class="BiliUPDesktopTool.LotteryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BiliUPDesktopTool"
+        mc:Ignorable="d"
+        Title="抽奖窗口 - B站up主桌面工具" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="label" Content="输入抽奖地址：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,40,0,0"/>
+        <TextBox x:Name="TB_LotteryUrl" HorizontalAlignment="Left" Height="26" Margin="294,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="246" VerticalContentAlignment="Center"/>
+
+    </Grid>
+</Window>
