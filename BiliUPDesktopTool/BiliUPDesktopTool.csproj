@@ -178,10 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BiliLottery.cs" />
+    <Compile Include="Class\BiliLottery.cs" />
     <Compile Include="Class\Update.cs" />
     <Compile Include="Class\Program.cs" />
-    <Compile Include="LotteryWindow.xaml.cs">
+    <Compile Include="Window\LotteryWindow.xaml.cs">
       <DependentUpon>LotteryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Window\LisenceWindow.xaml.cs">
@@ -227,7 +227,7 @@
     </Compile>
     <Compile Include="Helper\DesktopEmbeddedWindowHelper.cs" />
     <Compile Include="Helper\WinAPIHelper.cs" />
-    <Page Include="LotteryWindow.xaml">
+    <Page Include="Window\LotteryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
