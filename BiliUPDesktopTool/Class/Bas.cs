@@ -25,6 +25,11 @@ namespace BiliUPDesktopTool
         public static BiliUPData biliupdata;
 
         /// <summary>
+        /// 登录窗体
+        /// </summary>
+        public static LoginWindow LoginWindow;
+
+        /// <summary>
         /// 系统托盘
         /// </summary>
         public static NotifyIconHelper notifyIcon;

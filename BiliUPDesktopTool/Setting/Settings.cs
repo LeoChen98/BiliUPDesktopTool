@@ -73,6 +73,20 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
+        /// 指示是否自动检查更新
+        /// </summary>
+        public bool IsAutoCheckUpdate
+        {
+            get { return ST.IsAutoCheckUpdate; }
+            set
+            {
+                ST.IsAutoCheckUpdate = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("IsAutoCheckUpdate"));
+                Save();
+            }
+        }
+
+        /// <summary>
         /// 指示是否第一次启动
         /// </summary>
         public bool IsFirstRun
@@ -130,6 +144,7 @@ namespace BiliUPDesktopTool
 
             public List<string[]> DataViewSelected;
 
+            public bool IsAutoCheckUpdate = true;
             public bool IsFirstRun = true;
 
             public bool IsRealTime = false;

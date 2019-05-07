@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace BiliUPDesktopTool
 {
@@ -20,6 +22,8 @@ namespace BiliUPDesktopTool
         public SettingWindow()
         {
             InitializeComponent();
+
+            setBinding();
         }
 
         #endregion Public Constructors
@@ -57,6 +61,17 @@ namespace BiliUPDesktopTool
             {
                 BTN_AutoRun.Content = "设置为开机启动";
             }
+        }
+
+        private void setBinding()
+        {
+            Binding bindAutoCheckUpdate = new Binding()
+            {
+                Source = Bas.settings,
+                Mode = BindingMode.TwoWay,
+                Path = new PropertyPath("IsAutoCheckUpdate")
+            };
+            CB_IsAutoCheckUpdate.SetBinding(CheckBox.IsCheckedProperty, bindAutoCheckUpdate);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
