@@ -19,7 +19,7 @@
 
 
 ## 下载地址
-[![Downloads](https://img.shields.io/badge/%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6--brightgreen.svg)](https://github.com/LeoChen98/BiliUPDesktopTool/releases/download/v1.0.0.0/BiliUpDesktopTool_v1.0.0.0_release.zip)
+[![Downloads](https://img.shields.io/badge/%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6--brightgreen.svg)](https://github.com/LeoChen98/BiliUPDesktopTool/releases/download/1.0.2.2/1.0.2.2.zip)
 
 ## 开发计划
 * 即将加入动态抽奖和评论区抽奖功能。
