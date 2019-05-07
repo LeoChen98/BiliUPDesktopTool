@@ -44,6 +44,11 @@ namespace BiliUPDesktopTool
         /// </summary>
         public static Update update;
 
+        /// <summary>
+        /// 登录窗体
+        /// </summary>
+        public static LoginWindow LoginWindow;
+
         #endregion Public Fields
 
         #region Public Properties

@@ -102,6 +102,20 @@ namespace BiliUPDesktopTool
             }
         }
 
+        /// <summary>
+        /// 指示是否自动检查更新
+        /// </summary>
+        public bool IsAutoCheckUpdate
+        {
+            get { return ST.IsAutoCheckUpdate; }
+            set
+            {
+                ST.IsAutoCheckUpdate = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("IsAutoCheckUpdate"));
+                Save();
+            }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -133,6 +147,8 @@ namespace BiliUPDesktopTool
             public bool IsFirstRun = true;
 
             public bool IsRealTime = false;
+
+            public bool IsAutoCheckUpdate = true;
 
             #endregion Public Fields
         }

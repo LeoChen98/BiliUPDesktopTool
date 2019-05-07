@@ -77,7 +77,7 @@ namespace BiliUPDesktopTool
 
         #region Public Methods
 
-        public void CheckUpdate()
+        public void CheckUpdate(bool IsGUI = true)
         {
             IsFinished = false;
             string str = Bas.GetHTTPBody("https://cloud.api.zhangbudademao.com/117/Update");
@@ -91,14 +91,21 @@ namespace BiliUPDesktopTool
                     {
                         if (jobj["data"]["version"].ToString() == System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
                         {
-                            MessageBox.Show("当前版本已是最新");
+                            if(IsGUI) MessageBox.Show("当前版本已是最新");
                             return;
                         }
                         else
                         {
-                            UpdateText = "当前版本：" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\r\n最新版本：" + jobj["data"]["version"].ToString() + "(" + jobj["data"]["updatetime"].ToString() + "更新)\r\n\r\n更新内容：\r\n" + jobj["data"]["content"].ToString();
-                            uw = (uw == null || uw.IsVisible == false) ? new UpdateWindow() : uw;
-                            uw.Show();
+                            if (IsGUI)
+                            {
+                                UpdateText = "当前版本：" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\r\n最新版本：" + jobj["data"]["version"].ToString() + "(" + jobj["data"]["updatetime"].ToString() + "更新)\r\n\r\n更新内容：\r\n" + jobj["data"]["content"].ToString();
+                                uw = (uw == null || uw.IsVisible == false) ? new UpdateWindow() : uw;
+                                uw.Show();
+                            }
+                            else
+                            {
+                                Bas.notifyIcon.ShowToolTip("检查到新版本！请通过“检查更新”屏幕更新。");
+                            }
                         }
                     }
                 }

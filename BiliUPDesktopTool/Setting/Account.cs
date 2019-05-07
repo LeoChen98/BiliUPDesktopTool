@@ -73,7 +73,11 @@ namespace BiliUPDesktopTool
             {
                 if (DateTime.Compare(DateTime.Now, Expires) >= 0)//如果过期
                 {
-                    App.Current.Dispatcher.Invoke(() => { LoginWindow LWnd = new LoginWindow(); LWnd.ShowDialog(); });
+                    System.Windows.Application.Current?.Dispatcher.Invoke(() => {
+                        if(Bas.LoginWindow == null || !Bas.LoginWindow.IsVisible)
+                            Bas.LoginWindow = new LoginWindow();
+                        Bas.LoginWindow.ShowDialog();
+                    });
                 }
                 return ST.Cookies;
             }

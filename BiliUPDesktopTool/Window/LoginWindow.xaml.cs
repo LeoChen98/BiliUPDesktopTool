@@ -25,7 +25,7 @@ namespace BiliUPDesktopTool
         public LoginWindow()
         {
             InitializeComponent();
-
+            
             //if (Bas.account == null) Bas.account = new Account();
         }
 

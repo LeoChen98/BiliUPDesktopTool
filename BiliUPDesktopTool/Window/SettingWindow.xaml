@@ -11,5 +11,6 @@
         <Button x:Name="BTN_AutoRun" Content="设置为开机启动" HorizontalAlignment="Left" Height="30" Margin="105,28,0,0" VerticalAlignment="Top" Width="123" Click="BTN_AutoRun_Click" />
         <Label x:Name="label_Copy" Content="展示窗口：" HorizontalAlignment="Left" Height="30" Margin="35,65,0,0" VerticalAlignment="Top" Width="65" />
         <Button x:Name="BTN_SetDesktopWndPos" Content="设置展示窗口位置" HorizontalAlignment="Left" Height="30" Margin="105,63,0,0" VerticalAlignment="Top" Width="123" Click="BTN_SetDesktopWndPos_Click" />
+        <CheckBox x:Name="CB_IsAutoCheckUpdate" Content="自动检查更新" HorizontalAlignment="Left" Margin="42,100,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
