@@ -73,8 +73,9 @@ namespace BiliUPDesktopTool
             {
                 if (DateTime.Compare(DateTime.Now, Expires) >= 0)//如果过期
                 {
-                    System.Windows.Application.Current?.Dispatcher.Invoke(() => {
-                        if(Bas.LoginWindow == null || !Bas.LoginWindow.IsVisible)
+                    System.Windows.Application.Current?.Dispatcher.Invoke(() =>
+                    {
+                        if (Bas.LoginWindow == null || !Bas.LoginWindow.IsVisible)
                             Bas.LoginWindow = new LoginWindow();
                         Bas.LoginWindow.ShowDialog();
                     });

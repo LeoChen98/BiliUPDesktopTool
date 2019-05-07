@@ -78,11 +78,11 @@ namespace BiliUPDesktopTool
             Bas.update.DoUpdate();
         }
 
-        #endregion Private Methods
-
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             DragMove();
         }
+
+        #endregion Private Methods
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace BiliUPDesktopTool
 {
-    class Program
+    internal class Program
     {
+        #region Public Methods
+
         [STAThread]
         public static void Main(string[] args)
         {
@@ -40,7 +38,7 @@ namespace BiliUPDesktopTool
 
             if (Bas.settings.IsAutoCheckUpdate) Bas.update.CheckUpdate(false);
 
-            if(Environment.CommandLine.ToLower().IndexOf("-s") == -1)
+            if (Environment.CommandLine.ToLower().IndexOf("-s") == -1)
             {
                 Bas.notifyIcon.ShowToolTip("工具主程序已最小化到托盘，调整数据窗口、设置和退出程序请通过图盘图标的菜单。");
             }
@@ -73,5 +71,7 @@ namespace BiliUPDesktopTool
             } //No other instance was found, return null.
             return null;
         }
+
+        #endregion Public Methods
     }
 }

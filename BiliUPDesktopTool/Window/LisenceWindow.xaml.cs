@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BiliUPDesktopTool
 {
@@ -20,9 +8,20 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class LisenceWindow : Window
     {
+        #region Public Constructors
+
         public LisenceWindow()
         {
             InitializeComponent();
+        }
+
+        #endregion Public Constructors
+
+        #region Private Methods
+
+        private void BTN_No_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
         }
 
         private void BTN_ShowLisence_Click(object sender, RoutedEventArgs e)
@@ -35,14 +34,10 @@ namespace BiliUPDesktopTool
             DialogResult = true;
         }
 
-        private void BTN_No_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
-        }
-
         private new void Show()
         {
-            
         }
+
+        #endregion Private Methods
     }
 }

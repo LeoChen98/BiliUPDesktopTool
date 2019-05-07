@@ -91,7 +91,7 @@ namespace BiliUPDesktopTool
                     {
                         if (jobj["data"]["version"].ToString() == System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
                         {
-                            if(IsGUI) MessageBox.Show("当前版本已是最新");
+                            if (IsGUI) MessageBox.Show("当前版本已是最新");
                             return;
                         }
                         else
