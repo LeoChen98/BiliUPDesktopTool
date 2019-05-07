@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
         x:Name="window"
-        Title="检查更新 - B站UP主桌面工具" Height="450" Width="311.369" Background="#66000000" WindowStyle="None" Foreground="LightGray" Icon="/BiliUPDesktopTool;component/Upateicon.ico" AllowsTransparency="True">
+        Title="检查更新 - B站UP主桌面工具" Height="450" Width="311.369" Background="#66000000" WindowStyle="None" Foreground="LightGray" Icon="/BiliUPDesktopTool;component/Upateicon.ico" AllowsTransparency="True" MouseDown="Window_MouseDown">
     <Grid>
         <Label x:Name="LBL_Title" Content="B站UP主桌面工具更新工具" HorizontalAlignment="Left" VerticalAlignment="Top" Width="305" Foreground="{Binding Foreground, ElementName=window}" Height="31" FontSize="18" Margin="0,0,-0.2,0" />
         <TextBox x:Name="TB_UpdateText" Height="340" Margin="10,36,9.8,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="{Binding Foreground, ElementName=window}" Background="{x:Null}" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />

@@ -79,5 +79,10 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Private Methods
+
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }
