@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BiliUPDesktopTool
 {
+    //TODO 重构为VM，跟Lottery窗体绑定
     /// <summary>
     /// B站抽奖
     /// </summary>
