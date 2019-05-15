@@ -545,7 +545,7 @@ namespace BiliUPDesktopTool
 
             private int _coin, _coin_incr, _dm, _dm_incr, _fan, _fan_incr, _fav, _fav_incr, _like, _like_incr, _play, _play_incr, _share, _share_incr, _comment, _comment_incr;
             private int _coin_real, _coin_real_last, _dm_real, _dm_real_last, _fav_real, _fav_real_last, _like_real, _like_real_last, _play_real, _play_real_last, _share_real, _share_real_last, _comment_real, _comment_real_last;
-            private double _elec, _elec_incr, _growup, _growup_incr;
+            private double _elec, _elec_last, _elec_incr, _growup, _growup_incr;
             private DateTime? LastTime = null;
 
             #endregion Private Fields
@@ -725,7 +725,16 @@ namespace BiliUPDesktopTool
             /// </summary>
             public double elec_incr
             {
-                get { return _elec_incr; }
+                get {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _elec - _elec_last + _elec_incr;
+                    }
+                    else
+                    {
+                        return _elec_incr;
+                    }
+                }
                 set
                 {
                     _elec_incr = value;
@@ -1112,6 +1121,7 @@ namespace BiliUPDesktopTool
                     _play_real_last = 0;
                     _share_real_last = 0;
                     _comment_real_last = 0;
+                    _elec_last = GetCharge();
                 }
                 bool IsChangeLast = false;
                 string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=1&ps=10&coop=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
