@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 
 namespace BiliUPDesktopTool
@@ -44,9 +45,43 @@ namespace BiliUPDesktopTool
             }
 
             Application app = new Application();
-            app.Run(new DesktopWindow());
+            app.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+            Thread DesktopWnd_Monitor = new Thread(DesktopWnd_Monitor_Handler);
+            DesktopWnd_Monitor.IsBackground = false;
+            DesktopWnd_Monitor.Start(app);
+
+            app.Run();
         }
 
+
+        private static void DesktopWnd_Monitor_Handler(object e)
+        {
+            Application app = e as Application;
+
+            DesktopWindow dw = null;
+            app.Dispatcher.Invoke(() =>
+            {
+                dw = new DesktopWindow();
+                dw.Show();
+            });
+
+            while (true)
+            {
+                try
+                {
+                    if (dw == null || !dw.IsVisible)
+                    {
+                        app.Dispatcher.Invoke(() =>
+                        {
+                            dw = new DesktopWindow();
+                            dw.Show();
+                        });
+                    }
+                }
+                catch { }
+            }
+        }
         /// <summary>
         /// 查找相同进程
         /// </summary>
