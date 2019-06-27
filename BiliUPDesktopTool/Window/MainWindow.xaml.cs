@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading;
+using System.Windows;
 
 namespace BiliUPDesktopTool
 {
@@ -18,6 +20,8 @@ namespace BiliUPDesktopTool
         public MainWindow()
         {
             InitializeComponent();
+
+            
         }
 
         #endregion Public Constructors
@@ -32,15 +36,33 @@ namespace BiliUPDesktopTool
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Hide();
+            //Hide();
             DesktopWindow dw = new DesktopWindow();
             dw.Show();
             //DesktopWindowSetter dws = new DesktopWindowSetter();
             //dws.Show();
-            Close();
+            Thread t = new Thread(DesktopWnd_Monitor);
+            t.Start(dw);
             //LoginWindow lw = new LoginWindow();
             //lw.ShowDialog();
             //DesktopEmbeddedWindowHelper.DesktopEmbedWindow(this);
+        }
+
+        private void DesktopWnd_Monitor(object e)
+        {
+            DesktopWindow dw = e as DesktopWindow;
+
+            while (true)
+            {
+                if(dw == null || !dw.IsVisible)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        dw = new DesktopWindow();
+                        dw.Show();
+                    });
+                }
+            }
         }
 
         #endregion Private Methods
