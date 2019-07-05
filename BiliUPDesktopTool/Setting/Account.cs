@@ -75,9 +75,8 @@ namespace BiliUPDesktopTool
                 {
                     System.Windows.Application.Current?.Dispatcher.Invoke(() =>
                     {
-                        if (Bas.LoginWindow == null || !Bas.LoginWindow.IsVisible)
-                            Bas.LoginWindow = new LoginWindow();
-                        Bas.LoginWindow.ShowDialog();
+                        if (Bas.LoginWindow == null) Bas.LoginWindow = new LoginWindow();
+                        if (!Bas.LoginWindow.IsVisible) Bas.LoginWindow.ShowDialog();
                     });
                 }
                 return ST.Cookies;
