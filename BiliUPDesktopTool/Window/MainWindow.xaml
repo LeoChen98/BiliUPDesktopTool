@@ -5,10 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" ResizeMode="CanMinimize" Opacity="1">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" ResizeMode="CanMinimize" Opacity="1" WindowStyle="None">
     <Grid>
-        <local:RollingNum x:Name="num1" HorizontalAlignment="Left" Height="50" Margin="126,122,0,0" VerticalAlignment="Top" Width="28" ScrollViewer.VerticalScrollBarVisibility="Disabled" />
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="389,157,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" />
-        <local:RollingNums x:Name="nums1" HorizontalAlignment="Left" Height="100" Margin="65,201,0,0" VerticalAlignment="Top" Width="290" />
+        <Grid x:Name="Left_Box" HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="60" Margin="0,0,0,-0.4" Background="#FF3D3D3D" >
+            <Grid x:Name="Nav_Box" HorizontalAlignment="Left" Height="421" Margin="0,40,0,-11" VerticalAlignment="Top" Width="60">
+                <Grid x:Name="Btn_Home" Margin="0,0,0,361" Background="#FF23ADE5" Height="50">
+                    <Image x:Name="image" Height="50" VerticalAlignment="Center" Source="pack://siteoforigin:,,,/Image/Home.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="60">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+                <Grid x:Name="Btn_Statistics" Margin="0,55,0,316" Background="#33FFFFFF" Height="50">
+                    <Image x:Name="image1" HorizontalAlignment="Center" Height="50" VerticalAlignment="Center" Width="60" Source="pack://siteoforigin:,,,/Image/statistics.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+                <Grid x:Name="Btn_More" Margin="0,105,0,0" Height="50" VerticalAlignment="Top">
+                    <Image x:Name="image2" HorizontalAlignment="Center" Height="50" VerticalAlignment="Center" Width="60" Source="pack://siteoforigin:,,,/Image/More.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid x:Name="Right_Box" HorizontalAlignment="Left" Height="405" Margin="60,45,0,-0.4" VerticalAlignment="Top" Width="740">
+            <Grid x:Name="Home_Box" HorizontalAlignment="Left" Height="411" VerticalAlignment="Bottom" Width="740" Margin="0,-6,0,0"/>
+            <Grid x:Name="Statistics_Box" HorizontalAlignment="Left" Height="411" VerticalAlignment="Bottom" Width="740" Margin="0,-6,0,0"/>
+            <Grid x:Name="More_Box" HorizontalAlignment="Left" Height="411" VerticalAlignment="Bottom" Width="740" Margin="0,-6,0,0"/>
+        </Grid>
+        <Grid x:Name="Control_Box" Margin="60,0,0,404.6">
+            <Label x:Name="Btn_MinSize" Content="-" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#7F23ADE5" Margin="0,0,39,0" Padding="0"/>
+            <Label x:Name="Btn_Close" Content="×" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#BFFF0000" Padding="0"/>
+            <Label x:Name="Title" Content="首页" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="18"/>
+            <Rectangle x:Name="rectangle" Fill="#FFD4D4D4" Height="1" Margin="0,39,0,0" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Window>

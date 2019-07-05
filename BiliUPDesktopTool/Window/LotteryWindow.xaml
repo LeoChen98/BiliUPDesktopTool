@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="抽奖窗口 - B站up主桌面工具" Height="450" Width="800">
     <Grid>
-        <Label x:Name="label" Content="输入抽奖地址：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,40,0,0"/>
-        <TextBox x:Name="TB_LotteryUrl" HorizontalAlignment="Left" Height="26" Margin="294,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="246" VerticalContentAlignment="Center"/>
-
+        <Label x:Name="label" Content="输入抽奖地址：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,40,0,0" />
+        <TextBox x:Name="TB_LotteryUrl" HorizontalAlignment="Left" Height="26" Margin="294,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="246" VerticalContentAlignment="Center" />
     </Grid>
 </Window>

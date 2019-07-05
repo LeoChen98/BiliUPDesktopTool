@@ -181,6 +181,10 @@
     <Compile Include="Class\BiliLottery.cs" />
     <Compile Include="Class\Update.cs" />
     <Compile Include="Class\Program.cs" />
+    <Compile Include="Pages\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Todo.cs" />
     <Compile Include="Window\LotteryWindow.xaml.cs">
       <DependentUpon>LotteryWindow.xaml</DependentUpon>
     </Compile>
@@ -227,6 +231,10 @@
     </Compile>
     <Compile Include="Helper\DesktopEmbeddedWindowHelper.cs" />
     <Compile Include="Helper\WinAPIHelper.cs" />
+    <Page Include="Pages\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window\LotteryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -325,7 +333,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -354,6 +364,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Upateicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\More.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\statistics.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

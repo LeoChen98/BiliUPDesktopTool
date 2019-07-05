@@ -725,7 +725,8 @@ namespace BiliUPDesktopTool
             /// </summary>
             public double elec_incr
             {
-                get {
+                get
+                {
                     if (Bas.settings.IsRealTime)
                     {
                         return _elec - _elec_last + _elec_incr;

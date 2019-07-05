@@ -82,6 +82,16 @@ namespace BiliUPDesktopTool.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Home {
+            get {
+                object obj = ResourceManager.GetObject("Home", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Icon icon {
@@ -97,6 +107,26 @@ namespace BiliUPDesktopTool.Properties {
         internal static System.Drawing.Bitmap icon1 {
             get {
                 object obj = ResourceManager.GetObject("icon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap More {
+            get {
+                object obj = ResourceManager.GetObject("More", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap statistics {
+            get {
+                object obj = ResourceManager.GetObject("statistics", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -54,6 +54,34 @@ namespace BiliUPDesktopTool
             app.Run();
         }
 
+        /// <summary>
+        /// 查找相同进程
+        /// </summary>
+        /// <returns>相同的进程</returns>
+        public static System.Diagnostics.Process RunningInstance()
+        {
+            System.Diagnostics.Process current = System.Diagnostics.Process.GetCurrentProcess();
+            System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcesses();
+            foreach (System.Diagnostics.Process process in processes) //查找相同名称的进程
+            {
+                if (process.Id != current.Id) //忽略当前进程
+                {
+                    if (process.ProcessName == current.ProcessName)
+                    {
+                        //确认相同进程的程序运行位置是否一样.
+                        if (process.MainModule.FileName == current.MainModule.FileName)
+                        { //Return the other process instance.
+                            return process;
+                        }
+                    }
+                }
+            } //No other instance was found, return null.
+            return null;
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private static void DesktopWnd_Monitor_Handler(object e)
         {
@@ -83,31 +111,7 @@ namespace BiliUPDesktopTool
                 Thread.Sleep(1000);
             }
         }
-        /// <summary>
-        /// 查找相同进程
-        /// </summary>
-        /// <returns>相同的进程</returns>
-        public static System.Diagnostics.Process RunningInstance()
-        {
-            System.Diagnostics.Process current = System.Diagnostics.Process.GetCurrentProcess();
-            System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcesses();
-            foreach (System.Diagnostics.Process process in processes) //查找相同名称的进程
-            {
-                if (process.Id != current.Id) //忽略当前进程
-                {
-                    if (process.ProcessName == current.ProcessName)
-                    {
-                        //确认相同进程的程序运行位置是否一样.
-                        if (process.MainModule.FileName == current.MainModule.FileName)
-                        { //Return the other process instance.
-                            return process;
-                        }
-                    }
-                }
-            } //No other instance was found, return null.
-            return null;
-        }
 
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }
