@@ -49,6 +49,26 @@ namespace BiliUPDesktopTool
         #endregion Public Methods
     }
 
+    /// <summary>
+    /// 简介ToolTip文本转换器
+    /// </summary>
+    public class Tooltip_UserInfo_Desc_Converter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return "(单击以编辑)" + value.ToString() ;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value.ToString().Replace("(单击以编辑)", "");
+        }
+
+        #endregion Public Methods
+    }
+
     public class NoticeVisbilityConverter : IValueConverter
     {
         #region Public Methods

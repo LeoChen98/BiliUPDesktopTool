@@ -52,6 +52,7 @@ namespace BiliUPDesktopTool
 
             public static LotteryInfo CreateLottery(string url)
             {
+                return null;
             }
 
             #endregion Public Methods
@@ -66,6 +67,7 @@ namespace BiliUPDesktopTool
 
             public static LotteryInfo CreateLottery(string url)
             {
+                return null;
             }
 
             #endregion Public Methods
@@ -134,6 +136,7 @@ namespace BiliUPDesktopTool
 
             public static LotteryInfo CreateLottery(string url)
             {
+                return null;
             }
 
             #endregion Public Methods

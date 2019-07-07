@@ -114,9 +114,29 @@ namespace BiliUPDesktopTool.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap level {
+            get {
+                object obj = ResourceManager.GetObject("level", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap More {
             get {
                 object obj = ResourceManager.GetObject("More", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap noface {
+            get {
+                object obj = ResourceManager.GetObject("noface", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

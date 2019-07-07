@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" ResizeMode="CanMinimize" Opacity="1" WindowStyle="None">
+        Title="B站UP主桌面工具" Height="450" Width="800" ResizeMode="NoResize" Opacity="1" WindowStyle="None" Icon="/BiliUPDesktopTool;component/Image/icon.ico" MouseDown="Window_MouseDown" Focusable="True">
+    <Window.Effect>
+        <DropShadowEffect Opacity="0.4" Direction="300"/>
+    </Window.Effect>
     <Grid>
-        <Grid x:Name="Left_Box" HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="60" Margin="0,0,0,-0.4" Background="#FF3D3D3D" >
-            <Grid x:Name="Nav_Box" HorizontalAlignment="Left" Height="421" Margin="0,40,0,-11" VerticalAlignment="Top" Width="60">
-                <Grid x:Name="Btn_Home" Margin="0,0,0,361" Background="#FF23ADE5" Height="50">
-                    <Image x:Name="image" Height="50" VerticalAlignment="Center" Source="pack://siteoforigin:,,,/Image/Home.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="60">
+        <Grid x:Name="Left_Box" HorizontalAlignment="Left" Width="60" Margin="0,0,0,-1.4" Background="#FF3D3D3D" Height="451" VerticalAlignment="Top">
+            <Grid MouseDown="Control_Box_MouseDown" Background="#02FFFFFF"/>
+            <Grid x:Name="Nav_Box" HorizontalAlignment="Left" Margin="0,33,0,1" Width="60">
+                <Rectangle x:Name="Active_Bg" Fill="#FF23ADE5" HorizontalAlignment="Left" Height="50" Margin="0,6,0,0" Stroke="Black" VerticalAlignment="Top" Width="60" StrokeThickness="0"/>
+                <Grid x:Name="Btn_Home" Margin="0,6,0,0" Background="#02FFFFFF" Height="50" VerticalAlignment="Top" MouseEnter="Btn_Home_MouseEnter" MouseLeave="Btn_Home_MouseLeave" MouseUp="Btn_Home_MouseUp">
+                    <Image x:Name="image" Height="50" VerticalAlignment="Center" Source="/BiliUPDesktopTool;component/Image/Home.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="60">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
@@ -21,8 +26,8 @@
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
-                <Grid x:Name="Btn_Statistics" Margin="0,55,0,316" Background="#33FFFFFF" Height="50">
-                    <Image x:Name="image1" HorizontalAlignment="Center" Height="50" VerticalAlignment="Center" Width="60" Source="pack://siteoforigin:,,,/Image/statistics.png" RenderTransformOrigin="0.5,0.5">
+                <Grid x:Name="Btn_Statistics" Margin="0,56,0,0" Background="#02FFFFFF" Height="50" VerticalAlignment="Top" MouseEnter="Btn_Statistics_MouseEnter" MouseLeave="Btn_Statistics_MouseLeave" MouseUp="Btn_Statistics_MouseUp">
+                    <Image x:Name="image1" HorizontalAlignment="Center" Height="50" VerticalAlignment="Center" Width="60" Source="/BiliUPDesktopTool;component/Image/statistics.png" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
@@ -33,8 +38,8 @@
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
-                <Grid x:Name="Btn_More" Margin="0,105,0,0" Height="50" VerticalAlignment="Top">
-                    <Image x:Name="image2" HorizontalAlignment="Center" Height="50" VerticalAlignment="Center" Width="60" Source="pack://siteoforigin:,,,/Image/More.png" RenderTransformOrigin="0.5,0.5">
+                <Grid x:Name="Btn_More" Margin="0,105,0,0" Height="50" VerticalAlignment="Top" Background="#02FFFFFF" MouseEnter="Btn_More_MouseEnter" MouseLeave="Btn_More_MouseLeave" MouseUp="Btn_More_MouseUp">
+                    <Image x:Name="image2" HorizontalAlignment="Center" Height="50" VerticalAlignment="Center" Width="60" Source="/BiliUPDesktopTool;component/Image/More.png" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
@@ -47,15 +52,20 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid x:Name="Right_Box" HorizontalAlignment="Left" Height="405" Margin="60,45,0,-0.4" VerticalAlignment="Top" Width="740">
-            <Grid x:Name="Home_Box" HorizontalAlignment="Left" Height="411" VerticalAlignment="Bottom" Width="740" Margin="0,-6,0,0"/>
-            <Grid x:Name="Statistics_Box" HorizontalAlignment="Left" Height="411" VerticalAlignment="Bottom" Width="740" Margin="0,-6,0,0"/>
-            <Grid x:Name="More_Box" HorizontalAlignment="Left" Height="411" VerticalAlignment="Bottom" Width="740" Margin="0,-6,0,0"/>
+        <Grid x:Name="Right_Box" HorizontalAlignment="Left" Height="411" Margin="60,39,0,-0.4" VerticalAlignment="Top" Width="740" ClipToBounds="True">
+            <Grid x:Name="RB_Wrap" Margin="0,0,0,-822">
+                <Grid x:Name="Home_Box" HorizontalAlignment="Left" Height="411" VerticalAlignment="Bottom" Width="740" Margin="0,0,0,821.8">
+                    <local:HomePage HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="740"/>
+                </Grid>
+                <Grid x:Name="Statistics_Box" HorizontalAlignment="Left" Height="411" Margin="0,0,0,410.8" VerticalAlignment="Bottom" Width="740" />
+                <Grid x:Name="More_Box" HorizontalAlignment="Left" Height="411" Margin="0,0,0,-0.2" VerticalAlignment="Bottom" Width="740" />
+            </Grid>
         </Grid>
         <Grid x:Name="Control_Box" Margin="60,0,0,404.6">
-            <Label x:Name="Btn_MinSize" Content="-" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#7F23ADE5" Margin="0,0,39,0" Padding="0"/>
-            <Label x:Name="Btn_Close" Content="×" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#BFFF0000" Padding="0"/>
-            <Label x:Name="Title" Content="首页" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="18"/>
+            <Grid Margin="0,0,78,0"  MouseDown="Control_Box_MouseDown" Background="#02FFFFFF"/>
+            <Label x:Name="Btn_MinSize" Content="-" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#02FFFFFF" Margin="0,0,39,0" Padding="0" MouseEnter="Btn_MinSize_MouseEnter" MouseLeave="Btn_MinSize_MouseLeave" MouseUp="Btn_MinSize_MouseUp" ToolTip="最小化"/>
+            <Label x:Name="Btn_Close" Content="×" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#02FFFFFF" Padding="0" MouseEnter="Btn_Close_MouseEnter" MouseLeave="Btn_Close_MouseLeave" MouseUp="Btn_Close_MouseUp" ToolTip="关闭"/>
+            <Label x:Name="Lbl_Title" Content="首页" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="18"/>
             <Rectangle x:Name="rectangle" Fill="#FFD4D4D4" Height="1" Margin="0,39,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
