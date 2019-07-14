@@ -60,7 +60,15 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid x:Name="DashBoard" HorizontalAlignment="Left" Height="256" Margin="24,145,0,0" VerticalAlignment="Top" Width="692"/>
+        <Grid x:Name="DashBoard" HorizontalAlignment="Left" Height="256" Margin="24,145,0,0" VerticalAlignment="Top" Width="692">
+            <Label x:Name="label6" Content="最新活动" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="100" FontSize="18" FontWeight="Bold" Margin="10,10,0,0"/>
+            <ScrollViewer HorizontalAlignment="Left" Height="210" Margin="0,46,0,0" VerticalAlignment="Top" Width="692" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="EventList" HorizontalAlignment="Left" VerticalAlignment="Top" Width="692" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
+                    <local:EventItem Margin="1,0,20,0"/>
+                    <local:EventItem Margin="1,0,20,0"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
 
     </Grid>
 </UserControl>

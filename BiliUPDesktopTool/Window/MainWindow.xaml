@@ -18,7 +18,7 @@
                     <Image x:Name="image" Height="50" VerticalAlignment="Center" Source="/BiliUPDesktopTool;component/Image/Home.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="60">
                         <Image.RenderTransform>
                             <TransformGroup>
-                                <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                                <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                                 <SkewTransform/>
                                 <RotateTransform/>
                                 <TranslateTransform/>

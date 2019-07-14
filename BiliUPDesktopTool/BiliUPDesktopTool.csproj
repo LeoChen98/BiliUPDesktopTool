@@ -181,6 +181,9 @@
     <Compile Include="Class\BiliLottery.cs" />
     <Compile Include="Class\Update.cs" />
     <Compile Include="Class\Program.cs" />
+    <Compile Include="Controls\EventItem.xaml.cs">
+      <DependentUpon>EventItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,10 @@
     </Compile>
     <Compile Include="Helper\DesktopEmbeddedWindowHelper.cs" />
     <Compile Include="Helper\WinAPIHelper.cs" />
+    <Page Include="Controls\EventItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

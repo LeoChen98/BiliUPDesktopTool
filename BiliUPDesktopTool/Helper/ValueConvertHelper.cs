@@ -69,6 +69,30 @@ namespace BiliUPDesktopTool
         #endregion Public Methods
     }
 
+    /// <summary>
+    /// 宽高值转换器
+    /// </summary>
+    public class WidthNHeightValue_Converter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double v = double.IsNaN(double.Parse(parameter.ToString())) ? 0 : double.Parse(value.ToString());
+            double p = double.IsNaN(double.Parse(parameter.ToString())) ? 0 : double.Parse(parameter.ToString());
+            return v + p;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double v = value == null ? 0 : (double)value;
+            double p = parameter == null ? 0 : (double)parameter;
+            return v - p;
+        }
+
+        #endregion Public Methods
+    }
+
     public class NoticeVisbilityConverter : IValueConverter
     {
         #region Public Methods
