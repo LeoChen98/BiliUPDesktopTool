@@ -142,7 +142,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>BiliUPDesktopTool.Program</StartupObject>
+    <StartupObject>BiliUPDesktopTool.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
@@ -382,10 +382,10 @@
     <Resource Include="Image\statistics.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\level.png" />
+    <Resource Include="Image\noface.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\noface.gif" />
+    <Resource Include="Image\level.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

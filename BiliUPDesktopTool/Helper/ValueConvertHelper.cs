@@ -72,7 +72,7 @@ namespace BiliUPDesktopTool
     /// <summary>
     /// 宽高值转换器
     /// </summary>
-    public class WidthNHeightValue_Converter : IValueConverter
+    public class WidthNHeightValue_Plus_Converter : IValueConverter
     {
         #region Public Methods
 
@@ -88,6 +88,52 @@ namespace BiliUPDesktopTool
             double v = value == null ? 0 : (double)value;
             double p = parameter == null ? 0 : (double)parameter;
             return v - p;
+        }
+
+        #endregion Public Methods
+    }
+
+    /// <summary>
+    /// 宽高值乘法转换器
+    /// </summary>
+    public class WidthNHeightValue_Times_Converter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double v = double.IsNaN(double.Parse(parameter.ToString())) ? 0 : double.Parse(value.ToString());
+            double p = double.IsNaN(double.Parse(parameter.ToString())) ? 0 : double.Parse(parameter.ToString());
+            return v * p;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double v = value == null ? 0 : (double)value;
+            double p = parameter == null ? 0 : (double)parameter;
+            return v / p;
+        }
+
+        #endregion Public Methods
+    }
+
+    /// <summary>
+    /// 百分数转换器
+    /// </summary>
+    public class Percentage_Converter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Math.Round(double.Parse(value.ToString()) *100 ).ToString() + "%";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string v = value.ToString().Replace("%","");
+            double dv = double.Parse(v);
+            return (double)value * 0.01;
         }
 
         #endregion Public Methods

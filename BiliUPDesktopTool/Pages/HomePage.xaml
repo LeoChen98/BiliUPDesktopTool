@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BiliUPDesktopTool"
              mc:Ignorable="d" 
-             d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411">
+             d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <local:Tooltip_UserInfo_Desc_Converter x:Key="Tooltip_UserInfo_Desc_Converter"/>
     </UserControl.Resources>
     <Grid>
         <Grid x:Name="InfoBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top">
-            <Image x:Name="Img_Face" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="/BiliUPDesktopTool;component/Image/noface.gif"/>
+            <Image x:Name="Img_Face_Default" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="/BiliUPDesktopTool;component/Image/noface.gif"/>
+            <Image x:Name="Img_Face" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" />
             <Label x:Name="Lbl_UserName" HorizontalAlignment="Left" Height="28" Margin="95,10,0,0" VerticalAlignment="Top" Width="460" FontSize="16" FontWeight="Bold" Foreground="#FF252525" Padding="0">
                 <TextBlock x:Name="TBk_UserName" Width="{Binding Width, ElementName=Lbl_UserName}" Padding="5" TextTrimming="CharacterEllipsis" >
                     Username
@@ -24,8 +25,8 @@
                 <TextBox x:Name="TB_Desc" HorizontalAlignment="Left" Height="28" Text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription" VerticalAlignment="Top" Width="560" VerticalContentAlignment="Center" Background="White" Padding="3,0,0,2" LostKeyboardFocus="TB_Desc_LostKeyboardFocus" Visibility="Hidden" LostFocus="TB_Desc_LostFocus" KeyDown="TB_Desc_KeyDown" VerticalScrollBarVisibility="Disabled" MaxLines="1" TextWrapping="NoWrap"/>
             </Grid>
             <Grid x:Name="LevelBox" Margin="95,71,112,0" Height="19" VerticalAlignment="Top">
-                <Canvas x:Name="Canvas_Level" Margin="0,0,445,0" ClipToBounds="True" Height="19" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40">
-                    <Image x:Name="Img_level" HorizontalAlignment="Left" Height="283" VerticalAlignment="Top" Width="242" Source="/BiliUPDesktopTool;component/Image/level.png" Stretch="None" Canvas.Left="-14" Canvas.Top="-9" d:IsLocked="True" />
+                <Canvas x:Name="Canvas_Level" Margin="0,0,445,0"  Height="18" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" ClipToBounds="True">
+                    <Image x:Name="Img_level" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/BiliUPDesktopTool;component/Image/level.png" Canvas.Left="-15" Height="386" Width="228" Canvas.Top="0" d:IsLocked="True"/>
                 </Canvas>
                 <Canvas x:Name="Bar_level" HorizontalAlignment="Left" Margin="40,7,0,8" Width="400" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#66FFFFFF" ClipToBounds="True">
                     <Rectangle x:Name="Bar_level_top" Fill="#FF4FBDEA" HorizontalAlignment="Left" Height="4" VerticalAlignment="Top" Width="398" ClipToBounds="True" StrokeThickness="0" RadiusX="5" RadiusY="5" Canvas.Left="1"/>
@@ -60,13 +61,15 @@
                 </Grid>
             </Grid>
         </Grid>
+        <Grid x:Name="NeedLoginBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top" Visibility="Hidden">
+            <Border x:Name="Btn_Login" BorderThickness="1" Margin="277,38,276,37" CornerRadius="5" BorderBrush="#FF747474" Background="#02ffffff" MouseEnter="Btn_Login_MouseEnter" MouseLeave="Btn_Login_MouseLeave" MouseUp="Btn_Login_MouseUp" Cursor="Hand">
+                <Label x:Name="label7" Content="登陆Bilibili账号" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            </Border>
+        </Grid>
         <Grid x:Name="DashBoard" HorizontalAlignment="Left" Height="256" Margin="24,145,0,0" VerticalAlignment="Top" Width="692">
             <Label x:Name="label6" Content="最新活动" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="100" FontSize="18" FontWeight="Bold" Margin="10,10,0,0"/>
             <ScrollViewer HorizontalAlignment="Left" Height="210" Margin="0,46,0,0" VerticalAlignment="Top" Width="692" VerticalScrollBarVisibility="Auto">
-                <StackPanel x:Name="EventList" HorizontalAlignment="Left" VerticalAlignment="Top" Width="692" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
-                    <local:EventItem Margin="1,0,20,0"/>
-                    <local:EventItem Margin="1,0,20,0"/>
-                </StackPanel>
+                <StackPanel x:Name="EventList" HorizontalAlignment="Left" VerticalAlignment="Top" Width="692" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True"/>
             </ScrollViewer>
         </Grid>
 

@@ -45,6 +45,15 @@ namespace BiliUPDesktopTool
             }
         }
 
+        /// <summary>
+        /// 广播信息
+        /// </summary>
+        /// <param name="msg">信息内容</param>
+        public void NotifyMsg(string msg)
+        {
+
+        }
+
         private void Btn_Home_MouseLeave(object sender, MouseEventArgs e)
         {
             Btn_Home.Background = new SolidColorBrush(Color.FromArgb(0x02, 0xff, 0xff, 0xff));

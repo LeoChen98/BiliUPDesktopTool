@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,21 @@ namespace BiliUPDesktopTool
         {
             InitializeComponent();
         }
+        private EventInfo Info;
+        public EventItem(EventInfo info)
+        {
+            InitializeComponent();
+
+            Info = info;
+
+            
+        }
+
+        public class EventInfo
+        {
+            public string Title, Desc, Start_Time, End_Time, Link;
+        }
+
         bool IsMoreClicked = false;
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
@@ -60,6 +76,19 @@ namespace BiliUPDesktopTool
 
                 IsMoreClicked = true;
             }
+        }
+
+        private void Btn_EventPage_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(Info.Link);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TBk_EventTitle.Text = Info.Title;
+            Lbl_Desc.Content = Info.Desc;
+            Lbl_StartTime.Content = Info.Start_Time;
+            Lbl_EndTime.Content = Info.End_Time;
         }
     }
 }

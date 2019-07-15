@@ -152,6 +152,7 @@ namespace BiliUPDesktopTool
 
                         Bas.account.Cookies = cookies;
                         Bas.account.Expires = expires;
+                        Bas.account.Islogin = true;
                         Bas.account.Save();
                         Dispatcher.Invoke(delegate ()
                         {

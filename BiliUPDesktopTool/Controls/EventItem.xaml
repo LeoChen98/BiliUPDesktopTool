@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BiliUPDesktopTool"
-             mc:Ignorable="d" d:DesignWidth="670" Width="670" Height="50">
+             mc:Ignorable="d" d:DesignWidth="670" Width="670" Height="50" Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <local:WidthNHeightValue_Converter x:Key="WidthNHeightValue_Converter"/>
+        <local:WidthNHeightValue_Plus_Converter x:Key="WidthNHeightValue_Plus_Converter"/>
     </UserControl.Resources>
-    <Grid Height="{Binding Height, ConverterParameter=50, Converter={StaticResource WidthNHeightValue_Converter}, ElementName=MoreInfoBox}" VerticalAlignment="Top">
+    <Grid Height="{Binding Height, ConverterParameter=50, Converter={StaticResource WidthNHeightValue_Plus_Converter}, ElementName=MoreInfoBox}" VerticalAlignment="Top">
         <Label x:Name="label" Height="50" Margin="10,0,55,0" VerticalAlignment="Top" ToolTip="{Binding Text, ElementName=TBk_EventTitle}" VerticalContentAlignment="Center" >
             <TextBlock x:Name="TBk_EventTitle" TextWrapping="NoWrap" TextTrimming="WordEllipsis" Width="595" Text="弹唱新势力" FontSize="16" FontWeight="Bold" />
         </Label>
@@ -27,16 +27,16 @@
             </Path>
 
         </Canvas>
-        <Grid x:Name="MoreInfoBox" HorizontalAlignment="Left"  Margin="0,50,0,0" VerticalAlignment="Top" Width="670" Height="{Binding Height, ConverterParameter=62, Converter={StaticResource WidthNHeightValue_Converter}, ElementName=Lbl_Desc}">
+        <Grid x:Name="MoreInfoBox" HorizontalAlignment="Left"  Margin="0,50,0,0" VerticalAlignment="Top" Width="670" Height="{Binding Height, ConverterParameter=62, Converter={StaticResource WidthNHeightValue_Plus_Converter}, ElementName=Lbl_Desc}">
             <Label x:Name="label1" Content="开始时间：" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="80"/>
             <Label x:Name="label2" Content="结束时间：" HorizontalAlignment="Left" Height="25" Margin="10,35,0,0" VerticalAlignment="Top" Width="108"/>
             <Label x:Name="label3" Content="活动简述：" HorizontalAlignment="Left" Height="25" Margin="10,60,0,0" VerticalAlignment="Top" Width="67"/>
             <Label x:Name="Lbl_StartTime" Content="Label" HorizontalAlignment="Left" Height="25" Margin="78,10,0,0" VerticalAlignment="Top" Width="161"/>
             <Label x:Name="Lbl_EndTime" Content="Label" HorizontalAlignment="Left" Height="25" Margin="78,35,0,0" VerticalAlignment="Top" Width="161"/>
-            <Label x:Name="Lbl_Desc" HorizontalAlignment="Left" Margin="78,60,0,0" VerticalAlignment="Top" Width="582" Height="{Binding Height, ConverterParameter=10, Converter={StaticResource WidthNHeightValue_Converter}, ElementName=TBk_Desc}">
-                <TextBlock x:Name="TBk_Desc" TextWrapping="Wrap" Width="572">asdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdaf</TextBlock>
+            <Label x:Name="Lbl_Desc" HorizontalAlignment="Left" Margin="78,60,0,0" VerticalAlignment="Top" Width="582" Height="{Binding Height, ConverterParameter=10, Converter={StaticResource WidthNHeightValue_Plus_Converter}, ElementName=TBk_Desc}">
+                <TextBlock x:Name="TBk_Desc" TextWrapping="Wrap" Width="572"></TextBlock>
             </Label>
-            <Label x:Name="label4" HorizontalAlignment="Left" Height="25" Margin="601,10,0,0" VerticalAlignment="Top" Width="59" Background="#02FFFFFF" Cursor="Hand">
+            <Label x:Name="Btn_EventPage" HorizontalAlignment="Left" Height="25" Margin="601,10,0,0" VerticalAlignment="Top" Width="59" Background="#02FFFFFF" Cursor="Hand" MouseUp="Btn_EventPage_MouseUp">
                 <TextBlock Foreground="#FF0059C3" TextDecorations="Underline">活动页面</TextBlock>
             </Label>
         </Grid>

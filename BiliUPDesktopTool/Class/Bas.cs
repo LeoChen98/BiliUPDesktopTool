@@ -30,6 +30,11 @@ namespace BiliUPDesktopTool
         public static LoginWindow LoginWindow;
 
         /// <summary>
+        /// 主窗口
+        /// </summary>
+        public static MainWindow MainWindow;
+
+        /// <summary>
         /// 系统托盘
         /// </summary>
         public static NotifyIconHelper notifyIcon;
@@ -171,10 +176,6 @@ namespace BiliUPDesktopTool
                 req = (HttpWebRequest)WebRequest.Create(url);
                 req.Method = "POST";
 
-                Stream writer = req.GetRequestStream();
-                writer.Write(bdata, 0, bdata.Length);
-                writer.Close();
-
                 if (!string.IsNullOrEmpty(Cookies))
                 {
                     CookieCollection CookiesC = SetCookies(Cookies, url);
@@ -189,6 +190,10 @@ namespace BiliUPDesktopTool
                 req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
                 req.Referer = Referer;
                 req.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+
+                Stream writer = req.GetRequestStream();
+                writer.Write(bdata, 0, bdata.Length);
+                writer.Close();           
 
                 rep = (HttpWebResponse)req.GetResponse();
                 reader = new StreamReader(rep.GetResponseStream());

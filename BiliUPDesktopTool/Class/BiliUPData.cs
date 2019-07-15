@@ -65,7 +65,7 @@ namespace BiliUPDesktopTool
         /// <returns>刷新后的实例</returns>
         public BiliUPData Refresh()
         {
-            if (Bas.account != null)
+            if (Bas.account.Islogin == true)
             {
                 article.Refresh();
                 video.Refresh();
