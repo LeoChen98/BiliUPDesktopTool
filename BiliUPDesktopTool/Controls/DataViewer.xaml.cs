@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Markup;
 
 namespace BiliUPDesktopTool
 {
@@ -112,6 +111,7 @@ namespace BiliUPDesktopTool
                 r.Visibility = Visibility.Hidden;
             }
         }
+
         public void ChangeView(List<string> value)
         {
             DataViewer r = this;

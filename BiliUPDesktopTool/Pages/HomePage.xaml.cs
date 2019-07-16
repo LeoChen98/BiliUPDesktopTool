@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows;
@@ -15,8 +14,14 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class HomePage : UserControl
     {
-        #region Public Constructors
+        #region Private Fields
+
         private Timer Refresher;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
         public HomePage()
         {
             InitializeComponent();
@@ -27,34 +32,9 @@ namespace BiliUPDesktopTool
             Refresher.Change(0, 1800000);
         }
 
-        private void Refresh(object state)
-        {
-            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/index/operation", Bas.account.Cookies);
-            if (!string.IsNullOrEmpty(str))
-            {
-                JObject obj = JObject.Parse(str);
-                if((int)obj["code"] == 0)
-                {
-                    foreach(JToken i in obj["data"]["collect_arc"])
-                    {
-                        if((int)i["state"] == 1)
-                        {
-                            Dispatcher.Invoke(() =>
-                            {
-                                EventList.Children.Add(new EventItem(new EventItem.EventInfo()
-                                {
-                                    Title=i["content"].ToString(),
-                                    Desc=i["remark"].ToString(),
-                                    Link =i["link"].ToString(),
-                                    Start_Time = i["start_time"].ToString(),
-                                    End_Time=i["end_time"].ToString()
-                                }));
-                            });
-                        }
-                    }
-                }
-            }
-        }
+        #endregion Public Constructors
+
+        #region Private Methods
 
         private void BindingInit()
         {
@@ -111,10 +91,6 @@ namespace BiliUPDesktopTool
             };
             Lbl_Level.SetBinding(ContentProperty, bindlevelpercentage);
         }
-
-        #endregion Public Constructors
-
-        #region Private Methods
 
         private void Btn_Center_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -189,6 +165,35 @@ namespace BiliUPDesktopTool
             {
                 TB_Desc.Visibility = Visibility.Visible;
                 TB_Desc.Focus();
+            }
+        }
+
+        private void Refresh(object state)
+        {
+            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/index/operation", Bas.account.Cookies);
+            if (!string.IsNullOrEmpty(str))
+            {
+                JObject obj = JObject.Parse(str);
+                if ((int)obj["code"] == 0)
+                {
+                    foreach (JToken i in obj["data"]["collect_arc"])
+                    {
+                        if ((int)i["state"] == 1)
+                        {
+                            Dispatcher.Invoke(() =>
+                            {
+                                EventList.Children.Add(new EventItem(new EventItem.EventInfo()
+                                {
+                                    Title = i["content"].ToString(),
+                                    Desc = i["remark"].ToString(),
+                                    Link = i["link"].ToString(),
+                                    Start_Time = i["start_time"].ToString(),
+                                    End_Time = i["end_time"].ToString()
+                                }));
+                            });
+                        }
+                    }
+                }
             }
         }
 

@@ -29,6 +29,28 @@ namespace BiliUPDesktopTool
     }
 
     /// <summary>
+    /// 数据描述转换器
+    /// </summary>
+    public class DataDesc_Converter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string[] p = parameter.ToString().Split('-');
+            JObject obj = JObject.Parse(value.ToString());
+            return obj[p[0]][p[1]].ToString();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+
+        #endregion Public Methods
+    }
+
+    /// <summary>
     /// 间隔转换器
     /// </summary>
     public class IntervalConverter : IValueConverter
@@ -51,6 +73,28 @@ namespace BiliUPDesktopTool
     }
 
     /// <summary>
+    /// 百分数转换器
+    /// </summary>
+    public class Percentage_Converter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Math.Round(double.Parse(value.ToString()) * 100).ToString() + "%";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string v = value.ToString().Replace("%", "");
+            double dv = double.Parse(v);
+            return (double)value * 0.01;
+        }
+
+        #endregion Public Methods
+    }
+
+    /// <summary>
     /// 简介ToolTip文本转换器
     /// </summary>
     public class Tooltip_UserInfo_Desc_Converter : IValueConverter
@@ -59,7 +103,7 @@ namespace BiliUPDesktopTool
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return "(单击以编辑)" + value.ToString() ;
+            return "(单击以编辑)" + value.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -95,28 +139,6 @@ namespace BiliUPDesktopTool
     }
 
     /// <summary>
-    /// 数据描述转换器
-    /// </summary>
-    public class DataDesc_Converter : IValueConverter
-    {
-        #region Public Methods
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            string[] p = parameter.ToString().Split('-');
-            JObject obj = JObject.Parse(value.ToString());
-            return obj[p[0]][p[1]].ToString();
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
-
-        #endregion Public Methods
-    }
-
-    /// <summary>
     /// 宽高值乘法转换器
     /// </summary>
     public class WidthNHeightValue_Times_Converter : IValueConverter
@@ -139,28 +161,4 @@ namespace BiliUPDesktopTool
 
         #endregion Public Methods
     }
-
-    /// <summary>
-    /// 百分数转换器
-    /// </summary>
-    public class Percentage_Converter : IValueConverter
-    {
-        #region Public Methods
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return Math.Round(double.Parse(value.ToString()) *100 ).ToString() + "%";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            string v = value.ToString().Replace("%","");
-            double dv = double.Parse(v);
-            return (double)value * 0.01;
-        }
-
-        #endregion Public Methods
-    }
-
-   
 }

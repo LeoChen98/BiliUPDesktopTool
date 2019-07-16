@@ -20,6 +20,18 @@ namespace BiliUPDesktopTool
 
         #endregion Private Fields
 
+        #region Public Methods
+
+        /// <summary>
+        /// 广播信息
+        /// </summary>
+        /// <param name="msg">信息内容</param>
+        public void NotifyMsg(string msg)
+        {
+        }
+
+        #endregion Public Methods
+
         #region Private Methods
 
         private void Btn_Close_MouseEnter(object sender, MouseEventArgs e)
@@ -43,15 +55,6 @@ namespace BiliUPDesktopTool
             {
                 Btn_Home.Background = new SolidColorBrush(Color.FromArgb(0x33, 0xff, 0xff, 0xff));
             }
-        }
-
-        /// <summary>
-        /// 广播信息
-        /// </summary>
-        /// <param name="msg">信息内容</param>
-        public void NotifyMsg(string msg)
-        {
-
         }
 
         private void Btn_Home_MouseLeave(object sender, MouseEventArgs e)
@@ -162,11 +165,10 @@ namespace BiliUPDesktopTool
 
         private void Control_Box_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == MouseButton.Left)
             {
                 DragMove();
             }
-            
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BiliUPDesktopTool
 {
@@ -22,26 +13,36 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class EventItem : UserControl
     {
+        #region Private Fields
+
+        private EventInfo Info;
+
+        private bool IsMoreClicked = false;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
         public EventItem()
         {
             InitializeComponent();
         }
-        private EventInfo Info;
+
         public EventItem(EventInfo info)
         {
             InitializeComponent();
 
             Info = info;
-
-            
         }
 
-        public class EventInfo
+        #endregion Public Constructors
+
+        #region Private Methods
+
+        private void Btn_EventPage_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            public string Title, Desc, Start_Time, End_Time, Link;
+            Process.Start(Info.Link);
         }
-
-        bool IsMoreClicked = false;
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -62,7 +63,6 @@ namespace BiliUPDesktopTool
             }
             else
             {
-
                 DoubleAnimation an = new DoubleAnimation();
                 an.From = 0;
                 an.To = 180;
@@ -78,11 +78,6 @@ namespace BiliUPDesktopTool
             }
         }
 
-        private void Btn_EventPage_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Process.Start(Info.Link);
-        }
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             TBk_EventTitle.Text = Info.Title;
@@ -90,5 +85,20 @@ namespace BiliUPDesktopTool
             Lbl_StartTime.Content = Info.Start_Time;
             Lbl_EndTime.Content = Info.End_Time;
         }
+
+        #endregion Private Methods
+
+        #region Public Classes
+
+        public class EventInfo
+        {
+            #region Public Fields
+
+            public string Title, Desc, Start_Time, End_Time, Link;
+
+            #endregion Public Fields
+        }
+
+        #endregion Public Classes
     }
 }

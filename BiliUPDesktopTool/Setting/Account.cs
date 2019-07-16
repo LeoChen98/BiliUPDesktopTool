@@ -212,26 +212,13 @@ namespace BiliUPDesktopTool
             if (!string.IsNullOrEmpty(str))
             {
                 JObject obj = JObject.Parse(str);
-                if((int)obj["code"] == 0)
+                if ((int)obj["code"] == 0)
                 {
                     Bas.MainWindow.NotifyMsg("修改简介成功！");
                     return;
                 }
             }
             Bas.MainWindow.NotifyMsg("修改简介失败！" + str);
-        }
-
-        /// <summary>
-        /// 登陆
-        /// </summary>
-        public void Login()
-        {
-            System.Windows.Application.Current?.Dispatcher.Invoke(() =>
-            {
-                if (Bas.LoginWindow == null) Bas.LoginWindow = new LoginWindow();
-                if (!Bas.LoginWindow.IsVisible) Bas.LoginWindow.ShowDialog();
-                GetInfo();
-            });
         }
 
         /// <summary>
@@ -255,6 +242,19 @@ namespace BiliUPDesktopTool
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 登陆
+        /// </summary>
+        public void Login()
+        {
+            System.Windows.Application.Current?.Dispatcher.Invoke(() =>
+            {
+                if (Bas.LoginWindow == null) Bas.LoginWindow = new LoginWindow();
+                if (!Bas.LoginWindow.IsVisible) Bas.LoginWindow.ShowDialog();
+                GetInfo();
+            });
         }
 
         /// <summary>

@@ -51,7 +51,6 @@
                                         <sys:String>video</sys:String>
                                         <sys:String>fan</sys:String>
                                         <sys:String>fan_incr</sys:String>
-
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
@@ -71,7 +70,6 @@
                                         <sys:String>video</sys:String>
                                         <sys:String>growup</sys:String>
                                         <sys:String>growup_incr</sys:String>
-
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
@@ -82,77 +80,70 @@
                         <Border Height="150" Width="175" HorizontalAlignment="Left" d:LayoutOverrides="HorizontalAlignment" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="播放" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>video</sys:String>
                                         <sys:String>play</sys:String>
                                         <sys:String>play_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="175,0,0,0" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="硬币" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>video</sys:String>
                                         <sys:String>coin</sys:String>
                                         <sys:String>coin_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="350,0,0,0" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="评论" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>video</sys:String>
                                         <sys:String>comment</sys:String>
                                         <sys:String>comment_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="525,0,-60,0" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="弹幕" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>video</sys:String>
                                         <sys:String>dm</sys:String>
                                         <sys:String>dm_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="700,20,0,20" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="收藏" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>video</sys:String>
                                         <sys:String>fav</sys:String>
                                         <sys:String>fav_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="875,20,0,20" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="分享" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>video</sys:String>
                                         <sys:String>share</sys:String>
                                         <sys:String>share_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="1050,20,0,20" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="点赞" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>video</sys:String>
                                         <sys:String>like</sys:String>
                                         <sys:String>like_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
@@ -163,66 +154,60 @@
                         <Border Height="150" Width="175" HorizontalAlignment="Left" d:LayoutOverrides="HorizontalAlignment" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="点击" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>article</sys:String>
                                         <sys:String>view</sys:String>
                                         <sys:String>view_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="175,0,0,0" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="硬币" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>article</sys:String>
                                         <sys:String>coin</sys:String>
                                         <sys:String>coin_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="350,0,0,0" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="评论" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>article</sys:String>
                                         <sys:String>reply</sys:String>
                                         <sys:String>reply_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="525,0,-60,0" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="收藏" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>article</sys:String>
                                         <sys:String>fav</sys:String>
                                         <sys:String>fav_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="700,20,0,20" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="点赞" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>article</sys:String>
                                         <sys:String>like</sys:String>
                                         <sys:String>like_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>
                         <Border Height="150" Width="175" HorizontalAlignment="Left" Margin="875,20,0,20" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF">
                             <local:DataViewer Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="分享" MouseUp="DataViewer_MouseUp">
                                 <local:DataViewer.DataMode>
-                                    
+
                                         <sys:String>article</sys:String>
                                         <sys:String>share</sys:String>
                                         <sys:String>share_incr</sys:String>
-                                    
                                 </local:DataViewer.DataMode>
                             </local:DataViewer>
                         </Border>

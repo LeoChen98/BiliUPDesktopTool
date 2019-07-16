@@ -37,7 +37,7 @@ namespace BiliUPDesktopTool
             ThicknessAnimation an = new ThicknessAnimation();
             an.From = nums.Margin;
             //an.To = new Thickness(nums.Margin.Left, -Math.Abs((num % 10) * CharacterHeight), nums.Margin.Right, -450 + (num % 10) * CharacterHeight);
-            an.To = new Thickness(nums.Margin.Left,nums.Margin.Top, nums.Margin.Right, -450 + (num % 10) * CharacterHeight);
+            an.To = new Thickness(nums.Margin.Left, nums.Margin.Top, nums.Margin.Right, -450 + (num % 10) * CharacterHeight);
             an.Duration = new Duration(TimeSpan.FromMilliseconds(500));
             nums.BeginAnimation(MarginProperty, an);
         }

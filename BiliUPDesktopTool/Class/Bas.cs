@@ -193,7 +193,7 @@ namespace BiliUPDesktopTool
 
                 Stream writer = req.GetRequestStream();
                 writer.Write(bdata, 0, bdata.Length);
-                writer.Close();           
+                writer.Close();
 
                 rep = (HttpWebResponse)req.GetResponse();
                 reader = new StreamReader(rep.GetResponseStream());
