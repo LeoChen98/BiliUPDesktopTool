@@ -73,6 +73,8 @@ namespace BiliUPDesktopTool
                 an.To = new Thickness(0, 0, 0, -822);
                 RB_Wrap.BeginAnimation(MarginProperty, an);
 
+                Lbl_Title.Content = "首页";
+
                 current_page_index = 0;
             }
         }
@@ -119,6 +121,8 @@ namespace BiliUPDesktopTool
                 an.To = new Thickness(0, -822, 0, 0);
                 RB_Wrap.BeginAnimation(MarginProperty, an);
 
+                Lbl_Title.Content = "更多";
+
                 current_page_index = 2;
             }
         }
@@ -149,6 +153,8 @@ namespace BiliUPDesktopTool
                 an.From = RB_Wrap.Margin;
                 an.To = new Thickness(0, -411, 0, -411);
                 RB_Wrap.BeginAnimation(MarginProperty, an);
+
+                Lbl_Title.Content = "数据展示设置";
 
                 current_page_index = 1;
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -94,6 +95,28 @@ namespace BiliUPDesktopTool
     }
 
     /// <summary>
+    /// 数据描述转换器
+    /// </summary>
+    public class DataDesc_Converter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string[] p = parameter.ToString().Split('-');
+            JObject obj = JObject.Parse(value.ToString());
+            return obj[p[0]][p[1]].ToString();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+
+        #endregion Public Methods
+    }
+
+    /// <summary>
     /// 宽高值乘法转换器
     /// </summary>
     public class WidthNHeightValue_Times_Converter : IValueConverter
@@ -139,20 +162,5 @@ namespace BiliUPDesktopTool
         #endregion Public Methods
     }
 
-    public class NoticeVisbilityConverter : IValueConverter
-    {
-        #region Public Methods
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Public Methods
-    }
+   
 }

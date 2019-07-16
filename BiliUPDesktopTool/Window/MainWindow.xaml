@@ -57,7 +57,9 @@
                 <Grid x:Name="Home_Box" HorizontalAlignment="Left" Height="411" VerticalAlignment="Bottom" Width="740" Margin="0,0,0,821.8">
                     <local:HomePage HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="740"/>
                 </Grid>
-                <Grid x:Name="Statistics_Box" HorizontalAlignment="Left" Height="411" Margin="0,0,0,410.8" VerticalAlignment="Bottom" Width="740" />
+                <Grid x:Name="Statistics_Box" HorizontalAlignment="Left" Height="411" Margin="0,0,0,410.8" VerticalAlignment="Bottom" Width="740" >
+                    <local:StatisticsPage/>
+                </Grid>
                 <Grid x:Name="More_Box" HorizontalAlignment="Left" Height="411" Margin="0,0,0,-0.2" VerticalAlignment="Bottom" Width="740" />
             </Grid>
         </Grid>
@@ -65,7 +67,7 @@
             <Grid Margin="0,0,78,0"  MouseDown="Control_Box_MouseDown" Background="#02FFFFFF"/>
             <Label x:Name="Btn_MinSize" Content="-" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#02FFFFFF" Margin="0,0,39,0" Padding="0" MouseEnter="Btn_MinSize_MouseEnter" MouseLeave="Btn_MinSize_MouseLeave" MouseUp="Btn_MinSize_MouseUp" ToolTip="最小化"/>
             <Label x:Name="Btn_Close" Content="×" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#02FFFFFF" Padding="0" MouseEnter="Btn_Close_MouseEnter" MouseLeave="Btn_Close_MouseLeave" MouseUp="Btn_Close_MouseUp" ToolTip="关闭"/>
-            <Label x:Name="Lbl_Title" Content="首页" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="18"/>
+            <Label x:Name="Lbl_Title" Content="首页" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
             <Rectangle x:Name="rectangle" Fill="#FFD4D4D4" Height="1" Margin="0,39,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>

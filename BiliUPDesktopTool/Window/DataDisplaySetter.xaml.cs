@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -135,7 +136,7 @@ namespace BiliUPDesktopTool
 
             int id = -1;
 
-            foreach (string[] item in Bas.settings.DataViewSelected)
+            foreach (List<string> item in Bas.settings.DataViewSelected)
             {
                 if (item != null && item[0] == s.DataMode[0] && item[1] == s.DataMode[1])
                 {
@@ -172,7 +173,7 @@ namespace BiliUPDesktopTool
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        private string GetDataTile(string[] v)
+        private string GetDataTile(List<string> v)
         {
             string title = "";
             switch (v[0])
@@ -289,7 +290,7 @@ namespace BiliUPDesktopTool
 
             int id = -1;
 
-            foreach (string[] item in Bas.settings.DataViewSelected)
+            foreach (List<string> item in Bas.settings.DataViewSelected)
             {
                 if (item != null && item[0] == DV_Selected.DataMode[0] && item[1] == DV_Selected.DataMode[1])
                 {

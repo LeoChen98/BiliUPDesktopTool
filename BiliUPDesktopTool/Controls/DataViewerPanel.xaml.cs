@@ -91,7 +91,7 @@ namespace BiliUPDesktopTool
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        private string GetDataTile(string[] v)
+        private string GetDataTile(List<string> v)
         {
             if (v == null) return "";
             string title = "";

@@ -27,7 +27,7 @@ namespace BiliUPDesktopTool
         {
             if (DataViewSelected == null)
             {
-                DataViewSelected = new List<string[]>() { new string[3] { "video", "play", "play_incr" }, new string[3] { "video", "fan", "fan_incr" }, new string[3] { "video", "growup", "growup_incr" }, new string[3] { "video", "elec", "elec_incr" } };
+                DataViewSelected = new List<List<string>>() { new List<string> { "video", "play", "play_incr" }, new List<string> { "video", "fan", "fan_incr" }, new List<string> { "video", "growup", "growup_incr" }, new List<string> { "video", "elec", "elec_incr" } };
             }
         }
 
@@ -62,7 +62,7 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 数据展示选择的项目
         /// </summary>
-        public List<string[]> DataViewSelected
+        public List<List<string>> DataViewSelected
         {
             get { return ST.DataViewSelected; }
             set
@@ -142,7 +142,7 @@ namespace BiliUPDesktopTool
 
             public int DataRefreshInterval = 60000;
 
-            public List<string[]> DataViewSelected;
+            public List<List<string>> DataViewSelected;
 
             public bool IsAutoCheckUpdate = true;
             public bool IsFirstRun = true;

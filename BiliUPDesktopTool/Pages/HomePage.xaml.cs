@@ -214,6 +214,16 @@ namespace BiliUPDesktopTool
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            if (Bas.account.Islogin)
+            {
+                InfoBox.Visibility = Visibility.Visible;
+                NeedLoginBox.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                InfoBox.Visibility = Visibility.Hidden;
+                NeedLoginBox.Visibility = Visibility.Visible;
+            }
         }
 
         #endregion Private Methods

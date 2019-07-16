@@ -36,6 +36,7 @@ namespace BiliUPDesktopTool
             Bas.biliupdata = new BiliUPData();
             Bas.notifyIcon = new NotifyIconHelper();
             Bas.update = new Update();
+            Bas.MainWindow = new MainWindow();
 
             if (Bas.settings.IsAutoCheckUpdate) Bas.update.CheckUpdate(false);
 
@@ -50,6 +51,8 @@ namespace BiliUPDesktopTool
             Thread DesktopWnd_Monitor = new Thread(DesktopWnd_Monitor_Handler);
             DesktopWnd_Monitor.IsBackground = false;
             DesktopWnd_Monitor.Start(app);
+
+            Bas.MainWindow.Show();
 
             app.Run();
         }

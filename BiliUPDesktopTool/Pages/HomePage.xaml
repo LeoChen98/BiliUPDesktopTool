@@ -10,7 +10,7 @@
         <local:Tooltip_UserInfo_Desc_Converter x:Key="Tooltip_UserInfo_Desc_Converter"/>
     </UserControl.Resources>
     <Grid>
-        <Grid x:Name="InfoBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top">
+        <Grid x:Name="InfoBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top" Visibility="Hidden">
             <Image x:Name="Img_Face_Default" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="/BiliUPDesktopTool;component/Image/noface.gif"/>
             <Image x:Name="Img_Face" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" />
             <Label x:Name="Lbl_UserName" HorizontalAlignment="Left" Height="28" Margin="95,10,0,0" VerticalAlignment="Top" Width="460" FontSize="16" FontWeight="Bold" Foreground="#FF252525" Padding="0">
@@ -61,7 +61,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid x:Name="NeedLoginBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top" Visibility="Hidden">
+        <Grid x:Name="NeedLoginBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top">
             <Border x:Name="Btn_Login" BorderThickness="1" Margin="277,38,276,37" CornerRadius="5" BorderBrush="#FF747474" Background="#02ffffff" MouseEnter="Btn_Login_MouseEnter" MouseLeave="Btn_Login_MouseLeave" MouseUp="Btn_Login_MouseUp" Cursor="Hand">
                 <Label x:Name="label7" Content="登陆Bilibili账号" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             </Border>
