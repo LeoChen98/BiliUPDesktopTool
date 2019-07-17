@@ -7,7 +7,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Properties="clr-namespace:BiliUPDesktopTool.Properties" x:Class="BiliUPDesktopTool.StatisticsPage"
              mc:Ignorable="d"
-             d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411">
+             d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411" MouseUp="UserControl_MouseUp" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <local:DataDesc_Converter x:Key="DataDesc_Converter" />
         <sys:String x:Key="DataDesc">{
@@ -34,475 +34,484 @@
 }</sys:String>
     </UserControl.Resources>
     <Grid>
-        <Grid x:Name="TabBtnBox" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="720">
-            <Label x:Name="Btn_OverallData" Content="全局数据" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Foreground="#FF00A1D6" Background="#02FFFFFF" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_OverallData_MouseUp" MouseEnter="Btn_OverallData_MouseEnter" MouseLeave="Btn_OverallData_MouseLeave" Tag="0" />
-            <Label x:Name="Btn_VideoData" Content="视频数据" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_OverallData_MouseUp" Tag="1" Foreground="Black" MouseEnter="Btn_OverallData_MouseEnter" MouseLeave="Btn_OverallData_MouseLeave" />
-            <Label x:Name="Btn_ArticleData" Content="专栏数据" Margin="170,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_OverallData_MouseUp" Tag="2" MouseEnter="Btn_OverallData_MouseEnter" MouseLeave="Btn_OverallData_MouseLeave" HorizontalAlignment="Left" Width="75" />
-            <Label x:Name="Btn_OtherSettings" Content="其他设置" Margin="250,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_OverallData_MouseUp" Tag="3" MouseEnter="Btn_OverallData_MouseEnter" MouseLeave="Btn_OverallData_MouseLeave" HorizontalAlignment="Left" Width="75" />
+        <Grid>
+            <Grid.Effect>
+                <BlurEffect Radius="0" x:Name="Blur"/>
+                <!--5-->
+            </Grid.Effect>
             <Canvas>
-                <Path x:Name="TabSelectedLine" Stroke="#FF00A1D6" Canvas.Left="10" Fill="#FF00A1D6">
+                <Path Canvas.Top="40.5" Stroke="#FFC3C3C3">
                     <Path.Data>
-                        <PathGeometry Figures="M 0,30 L 35,30 L 38,29 L 41,30 L 70,30 L 0,30" />
+                        <PathGeometry Figures="M 0,0 L 740,0"/>
                     </Path.Data>
                 </Path>
             </Canvas>
-        </Grid>
-        <Grid x:Name="SettingBox" Margin="0,40,0,0" Width="740" ClipToBounds="True">
-            <Grid x:Name="SettingBoxWrapper" Width="1480" Margin="0,0,0,0">
-                <Grid x:Name="DisplaySettingBox" Margin="0,0,740,0">
-                    <Grid x:Name="SelectBox" Margin="0,0,240,0" ClipToBounds="True">
-                        <Grid x:Name="SelectBoxWrapper" HorizontalAlignment="Left" Width="1500" Margin="0,0,-1000,0">
-                            <Grid x:Name="OverallTab" Width="500" Margin="0,0,1000,0">
-                                <ScrollViewer  VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-                                    <StackPanel Height="351" Width="485" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+            <Grid x:Name="TabBtnBox" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="720">
+                <Label x:Name="Btn_OverallData" Content="全局数据" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Foreground="#FF00A1D6" Background="#02FFFFFF" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" Tag="0" />
+                <Label x:Name="Btn_VideoData" Content="视频数据" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="1" Foreground="Black" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" />
+                <Label x:Name="Btn_ArticleData" Content="专栏数据" Margin="170,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="2" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" HorizontalAlignment="Left" Width="75" />
+                <Label x:Name="Btn_OtherSettings" Content="其他设置" Margin="250,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="3" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" HorizontalAlignment="Left" Width="75" />
+                <Canvas>
+                    <Path x:Name="TabSelectedLine" Stroke="#FF00A1D6" Canvas.Left="10" Fill="#FF00A1D6">
+                        <Path.Data>
+                            <PathGeometry Figures="M 0,30 L 35,30 L 38,29 L 41,30 L 70,30 L 0,30" />
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Grid>
+            <Grid x:Name="SettingBox" Margin="0,40,0,0" Width="740" ClipToBounds="True">
+                <Grid x:Name="SettingBoxWrapper" Width="1480" Margin="0,0,0,0">
+                    <Grid x:Name="DisplaySettingBox" Margin="0,0,740,0" d:IsHidden="True">
+                        <Grid x:Name="SelectBox" Margin="0,0,240,0" ClipToBounds="True">
+                            <Grid x:Name="SelectBoxWrapper" HorizontalAlignment="Left" Width="1500" Margin="0,0,-1000,0">
+                                <Grid x:Name="OverallTab" Width="500" Margin="0,0,1000,0">
+                                    <ScrollViewer  VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                        <StackPanel Height="351" Width="485" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
+
+                                            <Grid Margin="0" Height="120" Width="485"  Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp" ClipToBounds="True">
+                                                <local:DataViewer  Foreground="Black" Title="粉丝" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="粉丝">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>video</System:String>
-                                                            <System:String>fan</System:String>
-                                                            <System:String>fan_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label1" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-fan, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>fan</System:String>
+                                                        <System:String>fan_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label123" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="粉丝"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label1" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=video-fan, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="电池" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="电池">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>video</System:String>
-                                                            <System:String>elec</System:String>
-                                                            <System:String>elec_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label2" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-elec, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>elec</System:String>
+                                                        <System:String>elec_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label2" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="电池"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label3" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=video-elec, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="创作激励" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="创作激励">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>video</System:String>
-                                                            <System:String>growup</System:String>
-                                                            <System:String>growup_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label3" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-growup, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>growup</System:String>
+                                                        <System:String>growup_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label4" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="创作激励"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label5" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=video-growup, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
-                            </Grid>
-                            <Grid x:Name="VideoTab" Width="500">
-                                <ScrollViewer  VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-                                    <StackPanel Height="351" Width="485" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
+                                <Grid x:Name="VideoTab" Width="500">
+                                    <ScrollViewer  VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                        <StackPanel Height="351" Width="485" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="播放" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="播放">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>video</System:String>
-                                                            <System:String>play</System:String>
-                                                            <System:String>play_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label4" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-play, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>play</System:String>
+                                                        <System:String>play_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label6" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="视频播放"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label7" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=video-play, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="硬币" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="硬币">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>video</System:String>
-                                                            <System:String>coin</System:String>
-                                                            <System:String>coin_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label5" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-coin, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>coin</System:String>
+                                                        <System:String>coin_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label8" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="视频硬币"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label9" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=video-coin, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="评论" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="评论">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>video</System:String>
-                                                            <System:String>comment</System:String>
-                                                            <System:String>comment_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label6" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-comment, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>comment</System:String>
+                                                        <System:String>comment_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label10" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="视频评论"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label11" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=video-comment, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="弹幕" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="弹幕">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>video</System:String>
-                                                            <System:String>dm</System:String>
-                                                            <System:String>dm_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label10" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-dm, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>dm</System:String>
+                                                        <System:String>dm_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label12" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="视频弹幕"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label13" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=video-dm, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="收藏" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="收藏">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>video</System:String>
-                                                            <System:String>fav</System:String>
-                                                            <System:String>fav_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label11" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-fav, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>fav</System:String>
+                                                        <System:String>fav_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label14" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="视频收藏"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label15" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=video-fav, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="分享" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="分享">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>video</System:String>
-                                                            <System:String>share</System:String>
-                                                            <System:String>share_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label12" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-share, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>share</System:String>
+                                                        <System:String>share_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label16" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="视频分享"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label21" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=video-share, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="点赞" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="点赞">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>video</System:String>
-                                                            <System:String>like</System:String>
-                                                            <System:String>like_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label13" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-like, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>like</System:String>
+                                                        <System:String>like_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label22" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="视频点赞"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label23" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=video-like, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
-                            </Grid>
-                            <Grid x:Name="ArticleTab" Width="500" Margin="1000,0,0,0">
-                                <ScrollViewer  VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-                                    <StackPanel Height="351" Width="485" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
+                                <Grid x:Name="ArticleTab" Width="500" Margin="1000,0,0,0">
+                                    <ScrollViewer  VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                        <StackPanel Height="351" Width="485" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="点击" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="点击">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>article</System:String>
-                                                            <System:String>view</System:String>
-                                                            <System:String>view_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label7" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-view, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>article</System:String>
+                                                        <System:String>view</System:String>
+                                                        <System:String>view_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label24" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="文章点击"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label25" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=article-view, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="硬币" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="硬币">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>article</System:String>
-                                                            <System:String>coin</System:String>
-                                                            <System:String>coin_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label8" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-coin, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>article</System:String>
+                                                        <System:String>coin</System:String>
+                                                        <System:String>coin_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label26" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="文章硬币"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label27" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=article-coin, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="评论" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="评论">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>article</System:String>
-                                                            <System:String>reply</System:String>
-                                                            <System:String>reply_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label9" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-reply, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>article</System:String>
+                                                        <System:String>reply</System:String>
+                                                        <System:String>reply_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label28" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="文章评论"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label29" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=article-reply, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="收藏" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="收藏">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>article</System:String>
-                                                            <System:String>fav</System:String>
-                                                            <System:String>fav_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label14" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-fav, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>article</System:String>
+                                                        <System:String>fav</System:String>
+                                                        <System:String>fav_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label30" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="文章收藏"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label31" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=article-fav, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="点赞" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="点赞">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>article</System:String>
-                                                            <System:String>like</System:String>
-                                                            <System:String>like_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label15" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-like, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>article</System:String>
+                                                        <System:String>like</System:String>
+                                                        <System:String>like_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label32" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="文章点赞"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label33" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=article-like, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                        <Border Height="120" Width="485" HorizontalAlignment="Left" BorderThickness="0,1" BorderBrush="Black" Background="#02FFFFFF" RenderTransformOrigin="0.5,0.5">
-                                            <Grid Margin="-15,-15,-1,-14">
-                                                <Border Height="150" Width="175" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Background="#02FFFFFF" Margin="-3,-1,0,-2" RenderTransformOrigin="0.5,0.5">
-                                                    <Border.RenderTransform>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="分享" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
                                                         <TransformGroup>
-                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                                            <SkewTransform />
-                                                            <RotateTransform />
-                                                            <TranslateTransform />
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform/>
                                                         </TransformGroup>
-                                                    </Border.RenderTransform>
-                                                    <local:DataViewer Padding="0" Height="Auto" Margin="0,0,0.2,0.4" Width="Auto" Foreground="Black" Title="分享">
-                                                        <local:DataViewer.DataMode>
-                                                            <System:String>article</System:String>
-                                                            <System:String>share</System:String>
-                                                            <System:String>share_incr</System:String>
-                                                        </local:DataViewer.DataMode>
-                                                    </local:DataViewer>
-                                                </Border>
-                                                <Label x:Name="label16" HorizontalAlignment="Left" Margin="161,19,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-share, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" />
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>article</System:String>
+                                                        <System:String>share</System:String>
+                                                        <System:String>share_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <Label x:Name="label34" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
+                                                    <TextBlock FontWeight="Bold"><Run Text="文章分享"/></TextBlock>
+                                                </Label>
+                                                <Label x:Name="label35" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding ConverterParameter=article-share, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
                                                 </Label>
                                             </Grid>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
                         </Grid>
+                        <Grid x:Name="PreviewBox" Margin="500,0,0,0">
+                            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="181" Margin="14,47,0,0" Stroke="Black" VerticalAlignment="Top" Width="212" />
+                            <local:DataViewerPanel RenderTransformOrigin="0.5,0.5" Margin="-55,-13,-55,79">
+                                <local:DataViewerPanel.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="0.6" ScaleY="0.6" />
+                                        <SkewTransform />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </local:DataViewerPanel.RenderTransform>
+                            </local:DataViewerPanel>
+                            <Label x:Name="label" Content="预览" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" />
+                            <Grid Margin="10,250,10,10">
+                                <Label x:Name="label_Copy" Content="设置到：" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="75" FontWeight="Bold" />
+                                <Border x:Name="ST_Block_LT" HorizontalAlignment="Left" Margin="33,41,0,0" VerticalAlignment="Top" Width="75" BorderThickness="1" Height="29" Tag="LT" Background="#02FFFFFF" MouseUp="ST_Block_MouseUp" MouseEnter="ST_Block_MouseEnter" MouseLeave="ST_Block_MouseLeave">
+                                    <Label x:Name="label17" Content="左上" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25" BorderBrush="Black" BorderThickness="1" Background="#02FFFFFF" />
+                                </Border>
+                                <Border x:Name="ST_Block_RT" HorizontalAlignment="Left" Margin="113,41,-9,0" VerticalAlignment="Top" Width="75" BorderThickness="1" Height="29" Tag="RT" Background="#02FFFFFF" MouseUp="ST_Block_MouseUp" MouseEnter="ST_Block_MouseEnter" MouseLeave="ST_Block_MouseLeave">
+                                    <Label x:Name="label18" Content="右上" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25" BorderBrush="Black" BorderThickness="1" Background="#02FFFFFF" />
+                                </Border>
+                                <Border x:Name="ST_Block_LB" HorizontalAlignment="Left" Margin="33,70,0,-3" VerticalAlignment="Top" Width="75" BorderThickness="1" Height="29" Tag="LB" Background="#02FFFFFF" MouseUp="ST_Block_MouseUp" MouseEnter="ST_Block_MouseEnter" MouseLeave="ST_Block_MouseLeave">
+                                    <Label x:Name="label19" Content="左下" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25" BorderBrush="Black" BorderThickness="1" Background="#02FFFFFF" />
+                                </Border>
+                                <Border x:Name="ST_Block_RB" HorizontalAlignment="Left" Margin="113,70,-9,-3" VerticalAlignment="Top" Width="75" BorderThickness="1" Height="29" Tag="RB" Background="#02FFFFFF" MouseUp="ST_Block_MouseUp" MouseEnter="ST_Block_MouseEnter" MouseLeave="ST_Block_MouseLeave">
+                                    <Label x:Name="label20" Content="右下" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25" BorderBrush="Black" BorderThickness="1" Background="#02FFFFFF" />
+                                </Border>
+                            </Grid>
+                        </Grid>
+                        <Rectangle HorizontalAlignment="Left" Height="346" Margin="500,10,0,0" Stroke="#FFCBCBCB" VerticalAlignment="Top" Width="1" />
                     </Grid>
-                    <Grid x:Name="PreviewBox" Margin="500,0,0,0">
-                        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="181" Margin="14,47,0,0" Stroke="Black" VerticalAlignment="Top" Width="212" />
-                        <local:DataViewerPanel RenderTransformOrigin="0.5,0.5" Margin="-55,-13,-55,79">
-                            <local:DataViewerPanel.RenderTransform>
+                    <Grid x:Name="OtherSettingBox" Margin="740,0,0,0" Width="740">
+                        <Label x:Name="label00" Content="实时模式：" HorizontalAlignment="Left" Height="23" Margin="11,15,0,0" VerticalAlignment="Top" Width="66" />
+                        <local:ToggleButton x:Name="TBN_RealMode" HorizontalAlignment="Left" Height="28" Margin="72,13,0,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.5,0.5">
+                            <local:ToggleButton.RenderTransform>
                                 <TransformGroup>
-                                    <ScaleTransform ScaleX="0.6" ScaleY="0.6" />
+                                    <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
                                     <SkewTransform />
                                     <RotateTransform />
                                     <TranslateTransform />
                                 </TransformGroup>
-                            </local:DataViewerPanel.RenderTransform>
-                        </local:DataViewerPanel>
-                        <Label x:Name="label" Content="预览" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" />
-                        <Grid Margin="10,247,51,23">
-                            <Label x:Name="label_Copy" Content="设置到：" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="75" FontWeight="Bold" />
-                            <Border HorizontalAlignment="Left" Margin="33,41,0,0" VerticalAlignment="Top" Width="75" BorderThickness="1" Height="29">
-                                <Label x:Name="label17" Content="左上" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25" BorderBrush="Black" BorderThickness="1" Background="#02FFFFFF" />
-                            </Border>
-                            <Border HorizontalAlignment="Left" Margin="113,41,-9,0" VerticalAlignment="Top" Width="75" BorderThickness="1" Height="29">
-                                <Label x:Name="label18" Content="右上" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25" BorderBrush="Black" BorderThickness="1" Background="#02FFFFFF" />
-                            </Border>
-                            <Border HorizontalAlignment="Left" Margin="33,70,0,-3" VerticalAlignment="Top" Width="75" BorderThickness="1" Height="29">
-                                <Label x:Name="label19" Content="左下" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25" BorderBrush="Black" BorderThickness="1" Background="#02FFFFFF" />
-                            </Border>
-                            <Border HorizontalAlignment="Left" Margin="113,70,-9,-3" VerticalAlignment="Top" Width="75" BorderThickness="1" Height="29">
-                                <Label x:Name="label20" Content="右下" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25" BorderBrush="Black" BorderThickness="1" Background="#02FFFFFF" />
-                            </Border>
-                        </Grid>
+                            </local:ToggleButton.RenderTransform>
+                        </local:ToggleButton>
+                        <Label x:Name="label40" Content="刷新频率：                     秒" HorizontalAlignment="Left" Margin="11,61,0,0" VerticalAlignment="Top" />
+                        <TextBox x:Name="TB_RefreshInterval" HorizontalAlignment="Left" Height="26" Margin="77,61,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="67" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" PreviewTextInput="TB_RefreshInterval_PreviewTextInput" LostKeyboardFocus="TB_RefreshInterval_LostKeyboardFocus" />
+                        <Border x:Name="Btn_DeActiveDataViewer" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="0,324,-2,10" VerticalAlignment="Center" Width="181" CornerRadius="20" Background="#FFFF3939" MouseEnter="Btn_DeActiveDataViewer_MouseEnter" MouseLeave="Btn_DeActiveDataViewer_MouseLeave" MouseUp="Btn_DeActiveDataViewer_MouseUp">
+                            <Label x:Name="label38" Content="停用" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="129" Height="37" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="White" Padding="0" FontSize="16"/>
+                        </Border>
                     </Grid>
-                    <Rectangle HorizontalAlignment="Left" Height="346" Margin="500,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="1" />
-                </Grid>
-                <Grid x:Name="OtherSettingBox" Margin="740,0,0,0" Width="740">
-                    <Label x:Name="label00" Content="实时模式：" HorizontalAlignment="Left" Height="23" Margin="11,15,0,0" VerticalAlignment="Top" Width="66" />
-                    <local:ToggleButton x:Name="TBN_RealMode" HorizontalAlignment="Left" Height="28" Margin="72,13,0,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.5,0.5">
-                        <local:ToggleButton.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-                                <SkewTransform />
-                                <RotateTransform />
-                                <TranslateTransform />
-                            </TransformGroup>
-                        </local:ToggleButton.RenderTransform>
-                    </local:ToggleButton>
-                    <Label x:Name="label40" Content="刷新频率：                     秒" HorizontalAlignment="Left" Margin="11,61,0,0" VerticalAlignment="Top" />
-                    <TextBox x:Name="TB_RefreshInterval" HorizontalAlignment="Left" Height="26" Margin="77,61,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="67" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" PreviewTextInput="TB_RefreshInterval_PreviewTextInput" />
                 </Grid>
             </Grid>
+        </Grid>
+        <Grid x:Name="DisActived" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="740" Background="#02ffffff" d:IsHidden="True">
+            <Label x:Name="label36" Content="数据展示组件未启用" HorizontalAlignment="Center" Margin="0,-60,0,0" VerticalAlignment="Center" FontSize="36"/>
+            <Border x:Name="Btn_ActiveDataViewer" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="0,60,0,0" VerticalAlignment="Center" Width="130" CornerRadius="20" Background="#FF00A1D6" MouseEnter="Btn_ActiveDataViewer_MouseEnter" MouseLeave="Btn_ActiveDataViewer_MouseLeave" MouseUp="Btn_ActiveDataViewer_MouseUp">
+                <Label x:Name="label37" Content="立即启用" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="129" Height="37" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="White" Padding="0" FontSize="16"/>
+            </Border>
+
+
         </Grid>
     </Grid>
 </UserControl>

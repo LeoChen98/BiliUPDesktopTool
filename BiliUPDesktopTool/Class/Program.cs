@@ -101,12 +101,19 @@ namespace BiliUPDesktopTool
             {
                 try
                 {
-                    if (dw == null || !dw.IsVisible)
+                    if ((dw == null || !dw.IsVisible) && Bas.settings.IsDataViewerDisplay)
                     {
                         app.Dispatcher.Invoke(() =>
                         {
                             dw = new DesktopWindow();
                             dw.Show();
+                        });
+                    }
+                    else if (!Bas.settings.IsDataViewerDisplay)
+                    {
+                        app.Dispatcher.Invoke(() =>
+                        {
+                            dw.Close();
                         });
                     }
                 }

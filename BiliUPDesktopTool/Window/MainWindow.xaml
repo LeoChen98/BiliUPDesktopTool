@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="B站UP主桌面工具" Height="450" Width="800" ResizeMode="NoResize" Opacity="1" WindowStyle="None" Icon="/BiliUPDesktopTool;component/Image/icon.ico" MouseDown="Window_MouseDown" Focusable="True" WindowStartupLocation="CenterScreen">
     <Window.Effect>
-        <DropShadowEffect Opacity="0.4" Direction="300" />
+        <DropShadowEffect Opacity="0.6" Direction="300" />
     </Window.Effect>
     <Grid>
         <Grid x:Name="Left_Box" HorizontalAlignment="Left" Width="60" Margin="0,0,0,-1.4" Background="#FF3D3D3D" Height="451" VerticalAlignment="Top">
@@ -58,7 +58,7 @@
                     <local:HomePage HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="740" />
                 </Grid>
                 <Grid x:Name="Statistics_Box" HorizontalAlignment="Left" Height="411" Margin="0,0,0,410.8" VerticalAlignment="Bottom" Width="740">
-                    <local:StatisticsPage />
+                    
                 </Grid>
                 <Grid x:Name="More_Box" HorizontalAlignment="Left" Height="411" Margin="0,0,0,-0.2" VerticalAlignment="Bottom" Width="740" />
             </Grid>

@@ -20,6 +20,28 @@ namespace BiliUPDesktopTool
 
         #endregion Private Fields
 
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            Statistics_Box.Children.Add(new StatisticsPage());
+        }
+
+        public void ToTab(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    Btn_Home_MouseUp(null, null);
+                    break;
+                case 1:
+                    Btn_Statistics_MouseUp(null, null);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         #region Public Methods
 
         /// <summary>
@@ -66,10 +88,12 @@ namespace BiliUPDesktopTool
         {
             if (current_page_index != 0)
             {
-                ThicknessAnimation an = new ThicknessAnimation();
-                an.From = Active_Bg.Margin;
-                an.To = new Thickness(0, 6, 0, 0);
-                an.Duration = new Duration(TimeSpan.FromMilliseconds(500));
+                ThicknessAnimation an = new ThicknessAnimation
+                {
+                    From = Active_Bg.Margin,
+                    To = new Thickness(0, 6, 0, 0),
+                    Duration = new Duration(TimeSpan.FromMilliseconds(500))
+                };
                 Active_Bg.BeginAnimation(MarginProperty, an);
 
                 an.From = RB_Wrap.Margin;
@@ -114,10 +138,12 @@ namespace BiliUPDesktopTool
         {
             if (current_page_index != 2)
             {
-                ThicknessAnimation an = new ThicknessAnimation();
-                an.From = Active_Bg.Margin;
-                an.To = new Thickness(0, 106, 0, 0);
-                an.Duration = new Duration(TimeSpan.FromMilliseconds(500));
+                ThicknessAnimation an = new ThicknessAnimation
+                {
+                    From = Active_Bg.Margin,
+                    To = new Thickness(0, 106, 0, 0),
+                    Duration = new Duration(TimeSpan.FromMilliseconds(500))
+                };
                 Active_Bg.BeginAnimation(MarginProperty, an);
 
                 an.From = RB_Wrap.Margin;
@@ -147,10 +173,12 @@ namespace BiliUPDesktopTool
         {
             if (current_page_index != 1)
             {
-                ThicknessAnimation an = new ThicknessAnimation();
-                an.From = Active_Bg.Margin;
-                an.To = new Thickness(0, 56, 0, 0);
-                an.Duration = new Duration(TimeSpan.FromMilliseconds(500));
+                ThicknessAnimation an = new ThicknessAnimation
+                {
+                    From = Active_Bg.Margin,
+                    To = new Thickness(0, 56, 0, 0),
+                    Duration = new Duration(TimeSpan.FromMilliseconds(500))
+                };
                 Active_Bg.BeginAnimation(MarginProperty, an);
 
                 an.From = RB_Wrap.Margin;

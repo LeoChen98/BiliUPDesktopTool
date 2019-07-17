@@ -116,6 +116,17 @@ namespace BiliUPDesktopTool
             }
         }
 
+        public bool IsDataViewerDisplay
+        {
+            get { return ST.IsDataViewerDisplay; }
+            set
+            {
+                ST.IsDataViewerDisplay = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("IsDataViewerDisplay"));
+                Save();
+            }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -148,6 +159,8 @@ namespace BiliUPDesktopTool
             public bool IsFirstRun = true;
 
             public bool IsRealTime = false;
+
+            public bool IsDataViewerDisplay = true;
 
             #endregion Public Fields
         }

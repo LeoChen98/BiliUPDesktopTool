@@ -13,8 +13,6 @@ namespace BiliUPDesktopTool
 
         private About about;
 
-        private DataDisplaySetter DSetter;
-
         private DesktopWindowSetter DWS;
 
         private NotifyIcon NI;
@@ -116,16 +114,12 @@ namespace BiliUPDesktopTool
 
         private void MI_DataDisplaySetting_Click(object sender, EventArgs e)
         {
-            if (DSetter == null || !DSetter.IsVisible)
+            if(Bas.MainWindow == null || !Bas.MainWindow.IsVisible)
             {
-                DSetter = new DataDisplaySetter();
-                DSetter.Show();
+                Bas.MainWindow = new MainWindow();
+                Bas.MainWindow.Show();
             }
-            else
-            {
-                DSetter.Activate();
-                DSetter.WindowState = System.Windows.WindowState.Normal;
-            }
+            Bas.MainWindow.ToTab(1);
         }
 
         private void MI_DesktopWndPosSetting_Click(object sender, EventArgs e)

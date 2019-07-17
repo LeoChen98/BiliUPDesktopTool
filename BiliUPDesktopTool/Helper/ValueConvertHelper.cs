@@ -88,7 +88,7 @@ namespace BiliUPDesktopTool
         {
             string v = value.ToString().Replace("%", "");
             double dv = double.Parse(v);
-            return (double)value * 0.01;
+            return dv * 0.01;
         }
 
         #endregion Public Methods

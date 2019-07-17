@@ -219,9 +219,6 @@
     <Compile Include="Window\SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window\DataDisplaySetter.xaml.cs">
-      <DependentUpon>DataDisplaySetter.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helper\NotifyIconHelper.cs" />
     <Compile Include="Setting\SettingsBase.cs" />
     <Compile Include="Setting\Settings.cs" />
@@ -286,14 +283,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Window\SettingWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Style\SelectPanel_ScrollViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window\DataDisplaySetter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
