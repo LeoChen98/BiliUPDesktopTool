@@ -13,8 +13,6 @@ namespace BiliUPDesktopTool
 
         private About about;
 
-        private DesktopWindowSetter DWS;
-
         private NotifyIcon NI;
         private SettingWindow OSetter;
 
@@ -68,13 +66,19 @@ namespace BiliUPDesktopTool
         {
             List<ToolStripItem> m = new List<ToolStripItem>();
 
-            ToolStripSeparator MI_Separator1 = new ToolStripSeparator(), MI_Separator2 = new ToolStripSeparator();
+            ToolStripSeparator MI_Separator1 = new ToolStripSeparator(), MI_Separator2 = new ToolStripSeparator(),MI_Separator3 = new ToolStripSeparator();
+
+            ToolStripMenuItem MI_ShowMainWindow = new ToolStripMenuItem() { Text = "显示主窗口" };
+            MI_ShowMainWindow.Click += MI_ShowMainWindow_Click;
+            m.Add(MI_ShowMainWindow);
+
+            m.Add(MI_Separator1);
 
             ToolStripMenuItem MI_DesktopWndPosSetting = new ToolStripMenuItem() { Text = "设置桌面挂件位置" };
             MI_DesktopWndPosSetting.Click += MI_DesktopWndPosSetting_Click;
             m.Add(MI_DesktopWndPosSetting);
 
-            m.Add(MI_Separator1);
+            m.Add(MI_Separator2);
 
             ToolStripMenuItem MI_OverallSetting = new ToolStripMenuItem() { Text = "全局设置" };
             MI_OverallSetting.Click += MI_OverallSetting_Click;
@@ -92,13 +96,22 @@ namespace BiliUPDesktopTool
             MI_About.Click += MI_About_Click;
             m.Add(MI_About);
 
-            m.Add(MI_Separator2);
+            m.Add(MI_Separator3);
 
             ToolStripMenuItem MI_Exit = new ToolStripMenuItem() { Text = "退出" };
             MI_Exit.Click += MI_Exit_Click;
             m.Add(MI_Exit);
 
             return new ToolStripItemCollection(ni.ContextMenuStrip, m.ToArray());
+        }
+
+        private void MI_ShowMainWindow_Click(object sender, EventArgs e)
+        {
+            if (Bas.MainWindow == null || !Bas.MainWindow.IsVisible)
+            {
+                Bas.MainWindow = new MainWindow();
+                Bas.MainWindow.Show();
+            }
         }
 
         private void MI_About_Click(object sender, EventArgs e)
@@ -124,15 +137,15 @@ namespace BiliUPDesktopTool
 
         private void MI_DesktopWndPosSetting_Click(object sender, EventArgs e)
         {
-            if (DWS == null || !DWS.IsVisible)
+            if (Bas.desktopwindowsetter == null || !Bas.desktopwindowsetter.IsVisible)
             {
-                DWS = new DesktopWindowSetter();
-                DWS.Show();
+                Bas.desktopwindowsetter = new DesktopWindowSetter();
+                Bas.desktopwindowsetter.Show();
             }
             else
             {
-                DWS.Activate();
-                DWS.WindowState = System.Windows.WindowState.Normal;
+                Bas.desktopwindowsetter.Activate();
+                Bas.desktopwindowsetter.WindowState = System.Windows.WindowState.Normal;
             }
         }
 

@@ -282,5 +282,29 @@ namespace BiliUPDesktopTool
                 Blur.Radius = 5;
             }
         }
+
+        private void Btn_SetDataViewerPos_MouseEnter(object sender, MouseEventArgs e)
+        {
+            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xc0, 0xff));
+        }
+
+        private void Btn_SetDataViewerPos_MouseLeave(object sender, MouseEventArgs e)
+        {
+            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xa1, 0xd6));
+        }
+
+        private void Btn_SetDataViewerPos_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Bas.desktopwindowsetter == null || !Bas.desktopwindowsetter.IsVisible)
+            {
+                Bas.desktopwindowsetter = new DesktopWindowSetter();
+                Bas.desktopwindowsetter.Show();
+            }
+            else
+            {
+                Bas.desktopwindowsetter.Activate();
+                Bas.desktopwindowsetter.WindowState = WindowState.Normal;
+            }
+        }
     }
 }

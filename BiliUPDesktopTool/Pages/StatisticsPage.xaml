@@ -498,8 +498,11 @@
                         </local:ToggleButton>
                         <Label x:Name="label40" Content="刷新频率：                     秒" HorizontalAlignment="Left" Margin="11,61,0,0" VerticalAlignment="Top" />
                         <TextBox x:Name="TB_RefreshInterval" HorizontalAlignment="Left" Height="26" Margin="77,61,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="67" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" PreviewTextInput="TB_RefreshInterval_PreviewTextInput" LostKeyboardFocus="TB_RefreshInterval_LostKeyboardFocus" />
-                        <Border x:Name="Btn_DeActiveDataViewer" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="0,324,-2,10" VerticalAlignment="Center" Width="181" CornerRadius="20" Background="#FFFF3939" MouseEnter="Btn_DeActiveDataViewer_MouseEnter" MouseLeave="Btn_DeActiveDataViewer_MouseLeave" MouseUp="Btn_DeActiveDataViewer_MouseUp">
-                            <Label x:Name="label38" Content="停用" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="129" Height="37" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="White" Padding="0" FontSize="16"/>
+                        <Border x:Name="Btn_SetDataViewerPos" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="10,104,572,230" VerticalAlignment="Center" Width="158" CornerRadius="10" Background="#FF00A1D6" MouseEnter="Btn_SetDataViewerPos_MouseEnter" MouseLeave="Btn_SetDataViewerPos_MouseLeave" MouseUp="Btn_SetDataViewerPos_MouseUp">
+                            <Label x:Name="label38" Content="设置桌面挂件位置" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="129" Height="37" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="White" Padding="0" FontSize="16"/>
+                        </Border>
+                        <Border x:Name="Btn_DeActiveDataViewer" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="280.5,324,278.5,10" VerticalAlignment="Center" Width="181" CornerRadius="20" Background="#FFFF3939" MouseEnter="Btn_DeActiveDataViewer_MouseEnter" MouseLeave="Btn_DeActiveDataViewer_MouseLeave" MouseUp="Btn_DeActiveDataViewer_MouseUp">
+                            <Label x:Name="label39" Content="停用" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="129" Height="37" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="White" Padding="0" FontSize="16"/>
                         </Border>
                     </Grid>
                 </Grid>

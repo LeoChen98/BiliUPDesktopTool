@@ -54,6 +54,11 @@ namespace BiliUPDesktopTool
         /// </summary>
         public static Update update;
 
+        /// <summary>
+        /// 桌面挂件位置设置窗口
+        /// </summary>
+        public static DesktopWindowSetter desktopwindowsetter;
+
         #endregion Public Fields
 
         #region Public Properties
