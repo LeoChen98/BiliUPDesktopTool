@@ -42,7 +42,7 @@ namespace BiliUPDesktopTool
 
             if (Environment.CommandLine.ToLower().IndexOf("-s") == -1)
             {
-                Bas.notifyIcon.ShowToolTip("工具主程序已最小化到托盘，调整数据窗口、设置和退出程序请通过图盘图标的菜单。");
+                Bas.MainWindow.Show();
             }
 
             Application app = new Application();
@@ -52,7 +52,7 @@ namespace BiliUPDesktopTool
             DesktopWnd_Monitor.IsBackground = false;
             DesktopWnd_Monitor.Start(app);
 
-            Bas.MainWindow.Show();
+            
 
             app.Run();
         }
