@@ -93,8 +93,6 @@ namespace BiliUPDesktopTool
             }
         }
 
-        #endregion Private Methods
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (Status)
@@ -116,5 +114,7 @@ namespace BiliUPDesktopTool
                 Background = new SolidColorBrush(Color.FromArgb(0xff, 0x96, 0x96, 0x96));
             }
         }
+
+        #endregion Private Methods
     }
 }

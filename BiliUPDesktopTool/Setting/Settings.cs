@@ -86,6 +86,17 @@ namespace BiliUPDesktopTool
             }
         }
 
+        public bool IsDataViewerDisplay
+        {
+            get { return ST.IsDataViewerDisplay; }
+            set
+            {
+                ST.IsDataViewerDisplay = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("IsDataViewerDisplay"));
+                Save();
+            }
+        }
+
         /// <summary>
         /// 指示是否第一次启动
         /// </summary>
@@ -112,17 +123,6 @@ namespace BiliUPDesktopTool
             {
                 ST.IsRealTime = value;
                 PropertyChangedA(this, new PropertyChangedEventArgs("IsRealTime"));
-                Save();
-            }
-        }
-
-        public bool IsDataViewerDisplay
-        {
-            get { return ST.IsDataViewerDisplay; }
-            set
-            {
-                ST.IsDataViewerDisplay = value;
-                PropertyChangedA(this, new PropertyChangedEventArgs("IsDataViewerDisplay"));
                 Save();
             }
         }
@@ -156,11 +156,10 @@ namespace BiliUPDesktopTool
             public List<List<string>> DataViewSelected;
 
             public bool IsAutoCheckUpdate = true;
+            public bool IsDataViewerDisplay = true;
             public bool IsFirstRun = true;
 
             public bool IsRealTime = false;
-
-            public bool IsDataViewerDisplay = true;
 
             #endregion Public Fields
         }

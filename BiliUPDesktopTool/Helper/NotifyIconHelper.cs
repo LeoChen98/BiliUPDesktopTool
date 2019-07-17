@@ -66,7 +66,7 @@ namespace BiliUPDesktopTool
         {
             List<ToolStripItem> m = new List<ToolStripItem>();
 
-            ToolStripSeparator MI_Separator1 = new ToolStripSeparator(), MI_Separator2 = new ToolStripSeparator(),MI_Separator3 = new ToolStripSeparator();
+            ToolStripSeparator MI_Separator1 = new ToolStripSeparator(), MI_Separator2 = new ToolStripSeparator(), MI_Separator3 = new ToolStripSeparator();
 
             ToolStripMenuItem MI_ShowMainWindow = new ToolStripMenuItem() { Text = "显示主窗口" };
             MI_ShowMainWindow.Click += MI_ShowMainWindow_Click;
@@ -105,15 +105,6 @@ namespace BiliUPDesktopTool
             return new ToolStripItemCollection(ni.ContextMenuStrip, m.ToArray());
         }
 
-        private void MI_ShowMainWindow_Click(object sender, EventArgs e)
-        {
-            if (Bas.MainWindow == null || !Bas.MainWindow.IsVisible)
-            {
-                Bas.MainWindow = new MainWindow();
-                Bas.MainWindow.Show();
-            }
-        }
-
         private void MI_About_Click(object sender, EventArgs e)
         {
             about = (about == null || about.IsVisible == false) ? new About() : about;
@@ -127,7 +118,7 @@ namespace BiliUPDesktopTool
 
         private void MI_DataDisplaySetting_Click(object sender, EventArgs e)
         {
-            if(Bas.MainWindow == null || !Bas.MainWindow.IsVisible)
+            if (Bas.MainWindow == null || !Bas.MainWindow.IsVisible)
             {
                 Bas.MainWindow = new MainWindow();
                 Bas.MainWindow.Show();
@@ -165,6 +156,15 @@ namespace BiliUPDesktopTool
             {
                 OSetter.Activate();
                 OSetter.WindowState = System.Windows.WindowState.Normal;
+            }
+        }
+
+        private void MI_ShowMainWindow_Click(object sender, EventArgs e)
+        {
+            if (Bas.MainWindow == null || !Bas.MainWindow.IsVisible)
+            {
+                Bas.MainWindow = new MainWindow();
+                Bas.MainWindow.Show();
             }
         }
 

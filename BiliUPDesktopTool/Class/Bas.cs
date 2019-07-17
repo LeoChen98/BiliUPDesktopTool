@@ -25,6 +25,11 @@ namespace BiliUPDesktopTool
         public static BiliUPData biliupdata;
 
         /// <summary>
+        /// 桌面挂件位置设置窗口
+        /// </summary>
+        public static DesktopWindowSetter desktopwindowsetter;
+
+        /// <summary>
         /// 登录窗体
         /// </summary>
         public static LoginWindow LoginWindow;
@@ -53,11 +58,6 @@ namespace BiliUPDesktopTool
         /// 更新实例
         /// </summary>
         public static Update update;
-
-        /// <summary>
-        /// 桌面挂件位置设置窗口
-        /// </summary>
-        public static DesktopWindowSetter desktopwindowsetter;
 
         #endregion Public Fields
 

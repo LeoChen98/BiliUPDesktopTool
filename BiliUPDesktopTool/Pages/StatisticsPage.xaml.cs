@@ -20,6 +20,8 @@ namespace BiliUPDesktopTool
 
         private int _TabIndex = 0;
 
+        private DataViewer DV_Selected;
+
         #endregion Private Fields
 
         #region Public Constructors
@@ -34,6 +36,7 @@ namespace BiliUPDesktopTool
         #endregion Public Constructors
 
         #region Private Methods
+
         private void BindingInit()
         {
             Binding bind_RealMode = new Binding()
@@ -53,6 +56,65 @@ namespace BiliUPDesktopTool
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             };
             TB_RefreshInterval.SetBinding(TextBox.TextProperty, bind_RefreshInterval);
+        }
+
+        private void Btn_ActiveDataViewer_MouseEnter(object sender, MouseEventArgs e)
+        {
+            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xc0, 0xff));
+        }
+
+        private void Btn_ActiveDataViewer_MouseLeave(object sender, MouseEventArgs e)
+        {
+            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xa1, 0xd6));
+        }
+
+        private void Btn_ActiveDataViewer_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Bas.settings.IsDataViewerDisplay = true;
+            DisActived.Visibility = Visibility.Collapsed;
+            Blur.Radius = 0;
+        }
+
+        private void Btn_DeActiveDataViewer_MouseEnter(object sender, MouseEventArgs e)
+        {
+            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x04, 0x04));
+        }
+
+        private void Btn_DeActiveDataViewer_MouseLeave(object sender, MouseEventArgs e)
+        {
+            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x39, 0x39));
+        }
+
+        private void Btn_DeActiveDataViewer_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Bas.settings.IsDataViewerDisplay = false;
+            Btn_Tab_MouseUp(Btn_OverallData, null);
+            DisActived.Visibility = Visibility.Visible;
+            Blur.Radius = 5;
+        }
+
+        private void Btn_SetDataViewerPos_MouseEnter(object sender, MouseEventArgs e)
+        {
+            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xc0, 0xff));
+        }
+
+        private void Btn_SetDataViewerPos_MouseLeave(object sender, MouseEventArgs e)
+        {
+            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xa1, 0xd6));
+        }
+
+        private void Btn_SetDataViewerPos_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Bas.desktopwindowsetter == null || !Bas.desktopwindowsetter.IsVisible)
+            {
+                Bas.desktopwindowsetter = new DesktopWindowSetter();
+                Bas.desktopwindowsetter.Show();
+            }
+            else
+            {
+                Bas.desktopwindowsetter.Activate();
+                Bas.desktopwindowsetter.WindowState = WindowState.Normal;
+            }
         }
 
         private void Btn_Tab_MouseEnter(object sender, MouseEventArgs e)
@@ -126,7 +188,7 @@ namespace BiliUPDesktopTool
 
         private void DataViewer_MouseEnter(object sender, MouseEventArgs e)
         {
-            if(DV_Selected != ((sender as Grid).Children[0] as DataViewer))
+            if (DV_Selected != ((sender as Grid).Children[0] as DataViewer))
                 (sender as Grid).Background = new SolidColorBrush(Color.FromArgb(0xcc, 0xe6, 0xe6, 0xe6));
         }
 
@@ -135,8 +197,6 @@ namespace BiliUPDesktopTool
             if (DV_Selected != ((sender as Grid).Children[0] as DataViewer))
                 (sender as Grid).Background = new SolidColorBrush(Color.FromArgb(0x02, 0xff, 0xff, 0xff));
         }
-
-        private DataViewer DV_Selected;
 
         private void DataViewer_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -163,16 +223,21 @@ namespace BiliUPDesktopTool
             ST_Block_RB.Background = id == 3 ? new SolidColorBrush(Color.FromArgb(0xcc, 0xb2, 0xb2, 0xb2)) : new SolidColorBrush(Color.FromArgb(0x02, 0xff, 0xff, 0xff));
         }
 
-        private void TB_RefreshInterval_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void ST_Block_MouseEnter(object sender, MouseEventArgs e)
         {
-            Regex re = new Regex("[^0-9.-]+");
+            if ((Color)(sender as Border).Background.GetValue(SolidColorBrush.ColorProperty) != Color.FromArgb(0xcc, 0xb2, 0xb2, 0xb2))
+                (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xcc, 0xe6, 0xe6, 0xe6));
+        }
 
-            e.Handled = re.IsMatch(e.Text);
+        private void ST_Block_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if ((Color)(sender as Border).Background.GetValue(SolidColorBrush.ColorProperty) != Color.FromArgb(0xcc, 0xb2, 0xb2, 0xb2))
+                (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0x02, 0xff, 0xff, 0xff));
         }
 
         private void ST_Block_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            for(int i =0; i <= 3; i++)
+            for (int i = 0; i <= 3; i++)
             {
                 if (Bas.settings.DataViewSelected[i] == DV_Selected.DataMode)
                 {
@@ -191,12 +256,15 @@ namespace BiliUPDesktopTool
                 case "LT":
                     Bas.settings.DataViewSelected[0] = DV_Selected.DataMode;
                     break;
+
                 case "RT":
                     Bas.settings.DataViewSelected[1] = DV_Selected.DataMode;
                     break;
+
                 case "LB":
                     Bas.settings.DataViewSelected[2] = DV_Selected.DataMode;
                     break;
+
                 case "RB":
                     Bas.settings.DataViewSelected[3] = DV_Selected.DataMode;
                     break;
@@ -208,63 +276,16 @@ namespace BiliUPDesktopTool
             (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xcc, 0xb2, 0xb2, 0xb2));
         }
 
-        private void ST_Block_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if((Color)(sender as Border).Background.GetValue(SolidColorBrush.ColorProperty) != Color.FromArgb(0xcc, 0xb2, 0xb2, 0xb2))
-                (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xcc, 0xe6, 0xe6, 0xe6));
-        }
-
-        private void ST_Block_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if ((Color)(sender as Border).Background.GetValue(SolidColorBrush.ColorProperty) != Color.FromArgb(0xcc, 0xb2, 0xb2, 0xb2))
-                (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0x02, 0xff, 0xff, 0xff));
-        }
-
-        #endregion Private Methods
-
         private void TB_RefreshInterval_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-                Bas.settings.DataRefreshInterval = string.IsNullOrEmpty((sender as TextBox).Text) ? 0 : int.Parse((sender as TextBox).Text);
+            Bas.settings.DataRefreshInterval = string.IsNullOrEmpty((sender as TextBox).Text) ? 0 : int.Parse((sender as TextBox).Text);
         }
 
-        private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
+        private void TB_RefreshInterval_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Keyboard.ClearFocus();
-        }
+            Regex re = new Regex("[^0-9.-]+");
 
-        private void Btn_ActiveDataViewer_MouseEnter(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff,0x00,0xc0,0xff));
-        }
-
-        private void Btn_ActiveDataViewer_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xa1, 0xd6));
-        }
-
-        private void Btn_ActiveDataViewer_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Bas.settings.IsDataViewerDisplay = true;
-            DisActived.Visibility = Visibility.Collapsed;
-            Blur.Radius = 0;
-        }
-
-        private void Btn_DeActiveDataViewer_MouseEnter(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x04, 0x04));
-        }
-
-        private void Btn_DeActiveDataViewer_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x39, 0x39));
-        }
-
-        private void Btn_DeActiveDataViewer_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Bas.settings.IsDataViewerDisplay = false;
-            Btn_Tab_MouseUp(Btn_OverallData, null);
-            DisActived.Visibility = Visibility.Visible;
-            Blur.Radius = 5;
+            e.Handled = re.IsMatch(e.Text);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -283,28 +304,11 @@ namespace BiliUPDesktopTool
             }
         }
 
-        private void Btn_SetDataViewerPos_MouseEnter(object sender, MouseEventArgs e)
+        private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xc0, 0xff));
+            Keyboard.ClearFocus();
         }
 
-        private void Btn_SetDataViewerPos_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xa1, 0xd6));
-        }
-
-        private void Btn_SetDataViewerPos_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (Bas.desktopwindowsetter == null || !Bas.desktopwindowsetter.IsVisible)
-            {
-                Bas.desktopwindowsetter = new DesktopWindowSetter();
-                Bas.desktopwindowsetter.Show();
-            }
-            else
-            {
-                Bas.desktopwindowsetter.Activate();
-                Bas.desktopwindowsetter.WindowState = WindowState.Normal;
-            }
-        }
+        #endregion Private Methods
     }
 }

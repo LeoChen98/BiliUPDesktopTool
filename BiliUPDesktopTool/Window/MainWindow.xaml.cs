@@ -20,6 +20,8 @@ namespace BiliUPDesktopTool
 
         #endregion Private Fields
 
+        #region Public Constructors
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,20 +29,7 @@ namespace BiliUPDesktopTool
             Statistics_Box.Children.Add(new StatisticsPage());
         }
 
-        public void ToTab(int id)
-        {
-            switch (id)
-            {
-                case 0:
-                    Btn_Home_MouseUp(null, null);
-                    break;
-                case 1:
-                    Btn_Statistics_MouseUp(null, null);
-                    break;
-                default:
-                    break;
-            }
-        }
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -50,6 +39,23 @@ namespace BiliUPDesktopTool
         /// <param name="msg">信息内容</param>
         public void NotifyMsg(string msg)
         {
+        }
+
+        public void ToTab(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    Btn_Home_MouseUp(null, null);
+                    break;
+
+                case 1:
+                    Btn_Statistics_MouseUp(null, null);
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         #endregion Public Methods

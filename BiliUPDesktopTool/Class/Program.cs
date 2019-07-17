@@ -52,8 +52,6 @@ namespace BiliUPDesktopTool
             DesktopWnd_Monitor.IsBackground = false;
             DesktopWnd_Monitor.Start(app);
 
-            
-
             app.Run();
         }
 
