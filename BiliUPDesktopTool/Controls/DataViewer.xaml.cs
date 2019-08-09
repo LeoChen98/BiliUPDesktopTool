@@ -208,14 +208,13 @@ namespace BiliUPDesktopTool
             //}
         }
 
-        #endregion Private Methods
-
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-
             BindingOperations.ClearAllBindings(this);
             BindingOperations.ClearAllBindings(num);
             BindingOperations.ClearAllBindings(incr);
         }
+
+        #endregion Private Methods
     }
 }

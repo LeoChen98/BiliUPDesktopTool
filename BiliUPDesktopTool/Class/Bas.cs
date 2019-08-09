@@ -64,17 +64,6 @@ namespace BiliUPDesktopTool
         #region Public Properties
 
         /// <summary>
-        /// 开源许可
-        /// </summary>
-        public string Thanks
-        {
-            get
-            {
-                return Properties.Resources.Thanks;
-            }
-        }
-
-        /// <summary>
         /// 主程序版本号
         /// </summary>
         public static string Version
@@ -82,6 +71,17 @@ namespace BiliUPDesktopTool
             get
             {
                 return "2.0.0.9 Preview 1";
+            }
+        }
+
+        /// <summary>
+        /// 开源许可
+        /// </summary>
+        public string Thanks
+        {
+            get
+            {
+                return Properties.Resources.Thanks;
             }
         }
 

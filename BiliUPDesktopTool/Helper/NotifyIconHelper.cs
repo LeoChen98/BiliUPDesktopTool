@@ -37,12 +37,6 @@ namespace BiliUPDesktopTool
             NI.DoubleClick += NI_DoubleClick;
         }
 
-        private void NI_DoubleClick(object sender, EventArgs e)
-        {
-            if (Bas.MainWindow == null) Bas.MainWindow = new MainWindow();
-            Bas.MainWindow.Show();
-        }
-
         #endregion Public Constructors
 
         #region Public Methods
@@ -76,7 +70,7 @@ namespace BiliUPDesktopTool
 
             ToolStripSeparator MI_Separator1 = new ToolStripSeparator(), MI_Separator2 = new ToolStripSeparator(), MI_Separator3 = new ToolStripSeparator();
 
-            ToolStripMenuItem MI_ShowMainWindow = new ToolStripMenuItem() { Text = "显示主窗口"};
+            ToolStripMenuItem MI_ShowMainWindow = new ToolStripMenuItem() { Text = "显示主窗口" };
             MI_ShowMainWindow.Font = new System.Drawing.Font(MI_ShowMainWindow.Font, System.Drawing.FontStyle.Bold);
             MI_ShowMainWindow.Click += MI_ShowMainWindow_Click;
             m.Add(MI_ShowMainWindow);
@@ -175,6 +169,12 @@ namespace BiliUPDesktopTool
                 Bas.MainWindow = new MainWindow();
                 Bas.MainWindow.Show();
             }
+        }
+
+        private void NI_DoubleClick(object sender, EventArgs e)
+        {
+            if (Bas.MainWindow == null) Bas.MainWindow = new MainWindow();
+            Bas.MainWindow.Show();
         }
 
         #endregion Private Methods

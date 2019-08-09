@@ -231,8 +231,6 @@ namespace BiliUPDesktopTool
             }
         }
 
-        #endregion Private Methods
-
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             BindingOperations.ClearAllBindings(TBk_UserName);
@@ -244,5 +242,7 @@ namespace BiliUPDesktopTool
 
             EventList.Children.Clear();
         }
+
+        #endregion Private Methods
     }
 }

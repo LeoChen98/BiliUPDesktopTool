@@ -59,8 +59,8 @@
                 </Grid>
                 <Grid x:Name="Statistics_Box" HorizontalAlignment="Left" Height="411" Margin="0,0,0,410.8" VerticalAlignment="Bottom" Width="740">
                 </Grid>
-                <Grid x:Name="More_Box" HorizontalAlignment="Left" Height="411" Margin="0,0,0,-0.2" VerticalAlignment="Bottom" Width="740" >
-                    <local:MorePage HorizontalAlignment="Left" VerticalAlignment="Top" Height="411"/>
+                <Grid x:Name="More_Box" HorizontalAlignment="Left" Height="411" Margin="0,0,0,-0.2" VerticalAlignment="Bottom" Width="740">
+                    <local:MorePage HorizontalAlignment="Left" VerticalAlignment="Top" Height="411" />
                 </Grid>
             </Grid>
         </Grid>

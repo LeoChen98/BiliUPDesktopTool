@@ -30,7 +30,7 @@
                     <Rectangle x:Name="Bar_level_top" Fill="#FF4FBDEA" HorizontalAlignment="Left" Height="4" VerticalAlignment="Top" Width="398" ClipToBounds="True" StrokeThickness="0" RadiusX="5" RadiusY="5" Canvas.Left="1" />
                     <Rectangle x:Name="Bar_level_bottom" HorizontalAlignment="Left" Height="4" VerticalAlignment="Top" Width="400" ClipToBounds="True" Stroke="#FF252525" RadiusX="2" RadiusY="2" />
                 </Canvas>
-                <TextBlock x:Name="Lbl_Level" Text="100%" HorizontalAlignment="Left" Height="19" Margin="445,0,0,0" VerticalAlignment="Top" Width="40" Padding="1"/>
+                <TextBlock x:Name="Lbl_Level" Text="100%" HorizontalAlignment="Left" Height="19" Margin="445,0,0,0" VerticalAlignment="Top" Width="40" Padding="1" />
             </Grid>
             <Grid x:Name="BtnBox" HorizontalAlignment="Left" Height="16" Margin="10,95,0,0" VerticalAlignment="Top" Width="672">
                 <Grid x:Name="Btn_Space" Margin="0,0,607,0" MouseEnter="Btn_Space_MouseEnter" MouseUp="Btn_Space_MouseUp" MouseLeave="Btn_Space_MouseLeave" Cursor="Hand">

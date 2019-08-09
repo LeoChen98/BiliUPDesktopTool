@@ -145,11 +145,13 @@ namespace BiliUPDesktopTool
                                     "start \"\" \"" + Application.ExecutablePath + "\" -s\r\n" +                                                                     //启动程序
                                     "del %0", Encoding.Default);
                     Process p = new Process();
+
                     p.StartInfo.FileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\update.bat";
                     p.StartInfo.CreateNoWindow = true;
                     p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     p.StartInfo.Verb = "runas";//管理员启动
                     p.Start();
+
                     Environment.Exit(2);
                 }
             }
@@ -158,6 +160,7 @@ namespace BiliUPDesktopTool
                 MessageBox.Show("校验错误，请稍后再试！");
                 IsFinished = true;
             }
+            (sender as WebClient).Dispose();
         }
 
         private void Downloader_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)

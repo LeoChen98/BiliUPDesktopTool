@@ -33,11 +33,10 @@ namespace BiliUPDesktopTool
                 Bas.settings.IsFirstRun = false;
             }
 
-            
             Bas.biliupdata = new BiliUPData();
             Bas.notifyIcon = new NotifyIconHelper();
             Bas.update = new Update();
-           
+
             if (Bas.settings.IsAutoCheckUpdate) Bas.update.CheckUpdate(false);
 
             if (Environment.CommandLine.ToLower().IndexOf("-s") == -1)

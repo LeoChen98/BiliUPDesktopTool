@@ -205,15 +205,15 @@ namespace BiliUPDesktopTool
             }
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+        }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Keyboard.ClearFocus();
         }
 
         #endregion Private Methods
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-        }
     }
 }

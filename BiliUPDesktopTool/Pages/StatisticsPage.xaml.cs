@@ -284,7 +284,7 @@ namespace BiliUPDesktopTool
         private void TB_RefreshInterval_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex re = new Regex("[^0-9.-]+");
-            
+
             e.Handled = re.IsMatch(e.Text);
         }
 
@@ -309,12 +309,12 @@ namespace BiliUPDesktopTool
             Keyboard.ClearFocus();
         }
 
-        #endregion Private Methods
-
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             BindingOperations.ClearAllBindings(TBN_RealMode);
             BindingOperations.ClearAllBindings(TB_RefreshInterval);
         }
+
+        #endregion Private Methods
     }
 }
