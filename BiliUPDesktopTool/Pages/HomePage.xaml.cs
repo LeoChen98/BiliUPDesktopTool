@@ -176,6 +176,10 @@ namespace BiliUPDesktopTool
                 JObject obj = JObject.Parse(str);
                 if ((int)obj["code"] == 0)
                 {
+                    Dispatcher.Invoke(() =>
+                    {
+                        EventList.Children.Clear();
+                    });
                     foreach (JToken i in obj["data"]["collect_arc"])
                     {
                         if ((int)i["state"] == 1)

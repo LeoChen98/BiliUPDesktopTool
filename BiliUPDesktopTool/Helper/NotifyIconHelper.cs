@@ -121,11 +121,11 @@ namespace BiliUPDesktopTool
 
         private void MI_DataDisplaySetting_Click(object sender, EventArgs e)
         {
-            if (Bas.MainWindow == null || !Bas.MainWindow.IsVisible)
+            if (Bas.MainWindow == null)
             {
                 Bas.MainWindow = new MainWindow();
-                Bas.MainWindow.Show();
             }
+            Bas.MainWindow.Show();
             Bas.MainWindow.ToTab(1);
         }
 
@@ -164,11 +164,11 @@ namespace BiliUPDesktopTool
 
         private void MI_ShowMainWindow_Click(object sender, EventArgs e)
         {
-            if (Bas.MainWindow == null || !Bas.MainWindow.IsVisible)
+            if (Bas.MainWindow == null)
             {
                 Bas.MainWindow = new MainWindow();
-                Bas.MainWindow.Show();
             }
+            Bas.MainWindow.Show();
         }
 
         private void NI_DoubleClick(object sender, EventArgs e)
