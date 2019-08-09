@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="150" d:DesignWidth="175" Width= "175" Height="150" Loaded="UserControl_Loaded" Background="#02FFFFFF" Unloaded="UserControl_Unloaded">
     <Grid x:Name="DV_Holder">
-        <TextBlock x:Name="DataTitle" Margin="10,10,55.2,106.4" Text="播放" Foreground="{Binding Foreground, ElementName=userControl}" FontSize="14" Padding="0,8,0,0" />
+        <TextBlock x:Name="DataTitle" Margin="10,10,55.2,106.4" Text="播放" Foreground="{Binding Foreground, ElementName=userControl}" FontSize="14" Padding="8,8,0,0" />
         <local:RollingNums x:Name="num" HorizontalAlignment="Center" Height="50" Margin="10,49,0,0" VerticalAlignment="Top" Width="140" Foreground="{Binding Foreground, ElementName=userControl}" />
         <local:RollingNums x:Name="incr" HorizontalAlignment="Center" Height="50" Margin="45,100,-9.8,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.5,0.5" Foreground="{Binding Foreground, ElementName=userControl}">
             <local:RollingNums.RenderTransform>
