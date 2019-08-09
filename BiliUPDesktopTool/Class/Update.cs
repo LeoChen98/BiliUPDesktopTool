@@ -142,7 +142,7 @@ namespace BiliUPDesktopTool
                                     "choice /t 5 /d y /n >nul\r\n" +                                                                                   //等待5s开始
                                     "xcopy \"" + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\UpdateTemp" + "\" \"" + Application.StartupPath + "\" /s /e /y\r\n" +     //覆盖程序
                                     "rmdir /s /q \"" + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\UpdateTemp\\" + "\"\r\n" +                                                //删除更新缓存
-                                    "start \"\" \"" + Application.ExecutablePath + "\"\r\n" +                                                                     //启动程序
+                                    "start \"\" \"" + Application.ExecutablePath + "\" -s\r\n" +                                                                     //启动程序
                                     "del %0", Encoding.Default);
                     Process p = new Process();
                     p.StartInfo.FileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\update.bat";
