@@ -18,8 +18,9 @@ namespace BiliUPDesktopTool
             }
 
             //初始化公共变量
-            Bas.skin = new Skin();
             Bas.settings = new Settings();
+            Bas.account = new Account();
+            Bas.skin = new Skin();
 
             if (Bas.settings.IsFirstRun)
             {
@@ -32,16 +33,16 @@ namespace BiliUPDesktopTool
                 Bas.settings.IsFirstRun = false;
             }
 
-            Bas.account = new Account();
+            
             Bas.biliupdata = new BiliUPData();
             Bas.notifyIcon = new NotifyIconHelper();
             Bas.update = new Update();
-            Bas.MainWindow = new MainWindow();
-
+           
             if (Bas.settings.IsAutoCheckUpdate) Bas.update.CheckUpdate(false);
 
             if (Environment.CommandLine.ToLower().IndexOf("-s") == -1)
             {
+                Bas.MainWindow = new MainWindow();
                 Bas.MainWindow.Show();
             }
 

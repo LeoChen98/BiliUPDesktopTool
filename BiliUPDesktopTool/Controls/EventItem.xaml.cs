@@ -48,10 +48,12 @@ namespace BiliUPDesktopTool
         {
             if (IsMoreClicked)
             {
-                DoubleAnimation an = new DoubleAnimation();
-                an.From = 180;
-                an.To = 0;
-                an.Duration = new Duration(TimeSpan.FromMilliseconds(250));
+                DoubleAnimation an = new DoubleAnimation
+                {
+                    From = 180,
+                    To = 0,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
+                };
                 trans.BeginAnimation(RotateTransform.AngleProperty, an);
 
                 an.From = 122 + TBk_Desc.ActualHeight;
@@ -63,10 +65,12 @@ namespace BiliUPDesktopTool
             }
             else
             {
-                DoubleAnimation an = new DoubleAnimation();
-                an.From = 0;
-                an.To = 180;
-                an.Duration = new Duration(TimeSpan.FromMilliseconds(250));
+                DoubleAnimation an = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 180,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
+                };
                 trans.BeginAnimation(RotateTransform.AngleProperty, an);
 
                 an.From = 50;
@@ -81,9 +85,9 @@ namespace BiliUPDesktopTool
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             TBk_EventTitle.Text = Info.Title;
-            Lbl_Desc.Content = Info.Desc;
-            Lbl_StartTime.Content = Info.Start_Time;
-            Lbl_EndTime.Content = Info.End_Time;
+            TBk_Desc.Text = Info.Desc;
+            Lbl_StartTime.Text = Info.Start_Time;
+            Lbl_EndTime.Text = Info.End_Time;
         }
 
         #endregion Private Methods

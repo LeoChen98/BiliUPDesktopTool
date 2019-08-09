@@ -77,11 +77,11 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 主程序版本号
         /// </summary>
-        public string Version
+        public static string Version
         {
             get
             {
-                return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                return "2.0.0.9 Preview 1";
             }
         }
 

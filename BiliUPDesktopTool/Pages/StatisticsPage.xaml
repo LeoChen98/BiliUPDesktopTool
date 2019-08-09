@@ -7,7 +7,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Properties="clr-namespace:BiliUPDesktopTool.Properties" x:Class="BiliUPDesktopTool.StatisticsPage"
              mc:Ignorable="d"
-             d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411" MouseUp="UserControl_MouseUp" Loaded="UserControl_Loaded">
+             d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411" MouseUp="UserControl_MouseUp" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <UserControl.Resources>
         <local:DataDesc_Converter x:Key="DataDesc_Converter" />
         <sys:String x:Key="DataDesc">{
@@ -47,10 +47,10 @@
                 </Path>
             </Canvas>
             <Grid x:Name="TabBtnBox" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="720">
-                <Label x:Name="Btn_OverallData" Content="全局数据" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Foreground="#FF00A1D6" Background="#02FFFFFF" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" Tag="0" />
-                <Label x:Name="Btn_VideoData" Content="视频数据" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="1" Foreground="Black" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" />
-                <Label x:Name="Btn_ArticleData" Content="专栏数据" Margin="170,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="2" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" HorizontalAlignment="Left" Width="75" />
-                <Label x:Name="Btn_OtherSettings" Content="其他设置" Margin="250,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="3" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" HorizontalAlignment="Left" Width="75" />
+                <TextBlock x:Name="Btn_OverallData" Text="全局数据" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Foreground="#FF00A1D6" Background="#02FFFFFF" Padding="5" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" Tag="0" />
+                <TextBlock x:Name="Btn_VideoData" Text="视频数据" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="5" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="1" Foreground="Black" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" />
+                <TextBlock x:Name="Btn_ArticleData" Text="专栏数据" Margin="170,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="5" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="2" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" HorizontalAlignment="Left" Width="75" />
+                <TextBlock x:Name="Btn_OtherSettings" Text="其他设置" Margin="250,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="5" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="3" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" HorizontalAlignment="Left" Width="75" />
                 <Canvas>
                     <Path x:Name="TabSelectedLine" Stroke="#FF00A1D6" Canvas.Left="10" Fill="#FF00A1D6">
                         <Path.Data>
@@ -61,7 +61,7 @@
             </Grid>
             <Grid x:Name="SettingBox" Margin="0,40,0,0" Width="740" ClipToBounds="True">
                 <Grid x:Name="SettingBoxWrapper" Width="1480" Margin="0,0,0,0">
-                    <Grid x:Name="DisplaySettingBox" Margin="0,0,740,0" d:IsHidden="True">
+                    <Grid x:Name="DisplaySettingBox" Margin="0,0,740,0">
                         <Grid x:Name="SelectBox" Margin="0,0,240,0" ClipToBounds="True">
                             <Grid x:Name="SelectBoxWrapper" HorizontalAlignment="Left" Width="1500" Margin="0,0,-1000,0">
                                 <Grid x:Name="OverallTab" Width="500" Margin="0,0,1000,0">
@@ -84,12 +84,8 @@
                                                         <System:String>fan_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label123" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="粉丝" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label1" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-fan, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="粉丝" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=video-fan, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"  Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="电池" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -107,12 +103,9 @@
                                                         <System:String>elec_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label2" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="电池" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label3" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-elec, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="电池" /></TextBlock>
+
+                                                <TextBlock Text="{Binding ConverterParameter=video-elec, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="创作激励" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -130,12 +123,8 @@
                                                         <System:String>growup_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label4" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="创作激励" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label5" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-growup, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="创作激励" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=video-growup, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                         </StackPanel>
                                     </ScrollViewer>
@@ -159,12 +148,8 @@
                                                         <System:String>play_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label6" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="视频播放" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label7" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-play, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="视频播放" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=video-play, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="硬币" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -182,12 +167,8 @@
                                                         <System:String>coin_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label8" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="视频硬币" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label9" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-coin, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="视频硬币" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=video-coin, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="评论" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -205,12 +186,8 @@
                                                         <System:String>comment_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label10" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="视频评论" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label11" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-comment, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="视频评论" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=video-comment, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="弹幕" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -228,12 +205,8 @@
                                                         <System:String>dm_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label12" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="视频弹幕" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label13" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-dm, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="视频弹幕" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=video-dm, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="收藏" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -251,12 +224,8 @@
                                                         <System:String>fav_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label14" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="视频收藏" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label15" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-fav, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="视频收藏" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=video-fav, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="分享" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -274,12 +243,8 @@
                                                         <System:String>share_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label16" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="视频分享" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label21" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-share, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="视频分享" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=video-share, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="点赞" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -297,12 +262,8 @@
                                                         <System:String>like_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label22" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="视频点赞" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label23" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=video-like, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="视频点赞" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=video-like, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                         </StackPanel>
                                     </ScrollViewer>
@@ -326,12 +287,8 @@
                                                         <System:String>view_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label24" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="文章点击" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label25" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-view, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="文章点击" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=article-view, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="硬币" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -349,12 +306,8 @@
                                                         <System:String>coin_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label26" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="文章硬币" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label27" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-coin, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="文章硬币" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=article-coin, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="评论" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -372,12 +325,8 @@
                                                         <System:String>reply_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label28" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="文章评论" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label29" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-reply, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="文章评论" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=article-reply, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="收藏" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -395,12 +344,8 @@
                                                         <System:String>fav_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label30" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="文章收藏" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label31" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-fav, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="文章收藏" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=article-fav, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="点赞" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -418,12 +363,8 @@
                                                         <System:String>like_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label32" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="文章点赞" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label33" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-like, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="文章点赞" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=article-like, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                             <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
                                                 <local:DataViewer Padding="0" Foreground="Black" Title="分享" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
@@ -441,12 +382,8 @@
                                                         <System:String>share_incr</System:String>
                                                     </local:DataViewer.DataMode>
                                                 </local:DataViewer>
-                                                <Label x:Name="label34" HorizontalAlignment="Left" Margin="161,25,0,0" VerticalAlignment="Top">
-                                                    <TextBlock FontWeight="Bold"><Run Text="文章分享" /></TextBlock>
-                                                </Label>
-                                                <Label x:Name="label35" HorizontalAlignment="Left" Margin="161,55,0,0" VerticalAlignment="Top">
-                                                    <TextBlock Text="{Binding ConverterParameter=article-share, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F" />
-                                                </Label>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="文章分享" /></TextBlock>
+                                                <TextBlock Text="{Binding ConverterParameter=article-share, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0"/>
                                             </Grid>
                                         </StackPanel>
                                     </ScrollViewer>
@@ -467,7 +404,7 @@
                             </local:DataViewerPanel>
                             <Label x:Name="label" Content="预览" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" />
                             <Grid Margin="10,250,10,10">
-                                <Label x:Name="label_Copy" Content="设置到：" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="75" FontWeight="Bold" />
+                                <TextBlock x:Name="label_Copy" Text="设置到：" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="75" FontWeight="Bold" Padding="5"/>
                                 <Border x:Name="ST_Block_LT" HorizontalAlignment="Left" Margin="33,41,0,0" VerticalAlignment="Top" Width="75" BorderThickness="1" Height="29" Tag="LT" Background="#02FFFFFF" MouseUp="ST_Block_MouseUp" MouseEnter="ST_Block_MouseEnter" MouseLeave="ST_Block_MouseLeave">
                                     <Label x:Name="label17" Content="左上" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25" BorderBrush="Black" BorderThickness="1" Background="#02FFFFFF" />
                                 </Border>

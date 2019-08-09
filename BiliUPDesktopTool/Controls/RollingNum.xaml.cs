@@ -66,5 +66,15 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Private Methods
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < nums.Children.Count; i++)
+            {
+                BindingOperations.ClearAllBindings(nums.Children[i]);
+            }
+
+            BindingOperations.ClearAllBindings(this);
+        }
     }
 }

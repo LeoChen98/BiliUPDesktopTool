@@ -89,7 +89,7 @@ namespace BiliUPDesktopTool
                 Mode = BindingMode.OneWay,
                 Converter = new Percentage_Converter()
             };
-            Lbl_Level.SetBinding(ContentProperty, bindlevelpercentage);
+            Lbl_Level.SetBinding(TextBlock.TextProperty, bindlevelpercentage);
         }
 
         private void Btn_Center_MouseUp(object sender, MouseButtonEventArgs e)
@@ -232,5 +232,17 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Private Methods
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            BindingOperations.ClearAllBindings(TBk_UserName);
+            BindingOperations.ClearAllBindings(Img_Face);
+            BindingOperations.ClearAllBindings(TB_Desc);
+            BindingOperations.ClearAllBindings(Img_level);
+            BindingOperations.ClearAllBindings(Bar_level_top);
+            BindingOperations.ClearAllBindings(Lbl_Level);
+
+            EventList.Children.Clear();
+        }
     }
 }

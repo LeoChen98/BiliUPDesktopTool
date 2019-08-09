@@ -89,7 +89,7 @@ namespace BiliUPDesktopTool
 
                     if ((int)jobj["code"] == 0)
                     {
-                        if (jobj["data"]["version"].ToString() == System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
+                        if (jobj["data"]["version"].ToString() == Bas.Version)
                         {
                             if (IsGUI) MessageBox.Show("当前版本已是最新");
                             return;
@@ -98,7 +98,7 @@ namespace BiliUPDesktopTool
                         {
                             if (IsGUI)
                             {
-                                UpdateText = "当前版本：" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\r\n最新版本：" + jobj["data"]["version"].ToString() + "(" + jobj["data"]["updatetime"].ToString() + "更新)\r\n\r\n更新内容：\r\n" + jobj["data"]["content"].ToString();
+                                UpdateText = "当前版本：" + Bas.Version + "\r\n最新版本：" + jobj["data"]["version"].ToString() + "(" + jobj["data"]["updatetime"].ToString() + "更新)\r\n\r\n更新内容：\r\n" + jobj["data"]["content"].ToString();
                                 uw = (uw == null || uw.IsVisible == false) ? new UpdateWindow() : uw;
                                 uw.Show();
                             }

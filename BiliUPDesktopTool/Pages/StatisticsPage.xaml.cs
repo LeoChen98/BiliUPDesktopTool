@@ -119,17 +119,17 @@ namespace BiliUPDesktopTool
 
         private void Btn_Tab_MouseEnter(object sender, MouseEventArgs e)
         {
-            if ((Color)(sender as Label).Foreground.GetValue(SolidColorBrush.ColorProperty) == Color.FromArgb(0xff, 0x00, 0x00, 0x00))
+            if ((Color)(sender as TextBlock).Foreground.GetValue(SolidColorBrush.ColorProperty) == Color.FromArgb(0xff, 0x00, 0x00, 0x00))
             {
-                (sender as Label).Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x7c, 0x7c, 0x7c));
+                (sender as TextBlock).Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x7c, 0x7c, 0x7c));
             }
         }
 
         private void Btn_Tab_MouseLeave(object sender, MouseEventArgs e)
         {
-            if ((Color)(sender as Label).Foreground.GetValue(SolidColorBrush.ColorProperty) == Color.FromArgb(0xff, 0x7c, 0x7c, 0x7c))
+            if ((Color)(sender as TextBlock).Foreground.GetValue(SolidColorBrush.ColorProperty) == Color.FromArgb(0xff, 0x7c, 0x7c, 0x7c))
             {
-                (sender as Label).Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0x00, 0x00));
+                (sender as TextBlock).Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0x00, 0x00));
             }
         }
 
@@ -140,8 +140,8 @@ namespace BiliUPDesktopTool
             Btn_ArticleData.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0x00, 0x00));
             Btn_OtherSettings.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0x00, 0x00));
 
-            (sender as Label).Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xa1, 0xd6));
-            int index = int.Parse((sender as Label).Tag.ToString());
+            (sender as TextBlock).Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xa1, 0xd6));
+            int index = int.Parse((sender as TextBlock).Tag.ToString());
 
             DoubleAnimation an = new DoubleAnimation()
             {
@@ -284,7 +284,7 @@ namespace BiliUPDesktopTool
         private void TB_RefreshInterval_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex re = new Regex("[^0-9.-]+");
-
+            
             e.Handled = re.IsMatch(e.Text);
         }
 
@@ -310,5 +310,11 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Private Methods
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            BindingOperations.ClearAllBindings(TBN_RealMode);
+            BindingOperations.ClearAllBindings(TB_RefreshInterval);
+        }
     }
 }

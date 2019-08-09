@@ -41,8 +41,8 @@ namespace BiliUPDesktopTool
         /// </summary>
         public string Title
         {
-            get { return DataTitle.Content.ToString(); }
-            set { DataTitle.Content = value; }
+            get { return DataTitle.Text.ToString(); }
+            set { DataTitle.Text = value; }
         }
 
         #endregion Public Properties
@@ -209,5 +209,13 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Private Methods
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+
+            BindingOperations.ClearAllBindings(this);
+            BindingOperations.ClearAllBindings(num);
+            BindingOperations.ClearAllBindings(incr);
+        }
     }
 }

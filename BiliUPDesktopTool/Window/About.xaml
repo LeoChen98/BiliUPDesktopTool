@@ -12,8 +12,8 @@
     <Grid>
         <Label x:Name="label" Content="版本：" HorizontalAlignment="Left" Height="38" Margin="55,14,0,0" VerticalAlignment="Top" Width="137" VerticalContentAlignment="Center" />
         <Label x:Name="LBL_Version" Content="{Binding Version, Mode=OneWay}" HorizontalAlignment="Left" Height="38" Margin="97,14,0,0" VerticalAlignment="Top" Width="137" VerticalContentAlignment="Center" />
-        <Button x:Name="BTN_CheckUpdate" Content="检查更新" HorizontalAlignment="Left" Margin="159,24,0,0" VerticalAlignment="Top" Width="75" Click="BTN_CheckUpdate_Click" />
-        <Button x:Name="BTN_ShowLisence" Content="用户协议" HorizontalAlignment="Left" Margin="239,24,0,0" VerticalAlignment="Top" Width="75" Click="BTN_ShowLisence_Click" />
+        <Button x:Name="BTN_CheckUpdate" Content="检查更新" HorizontalAlignment="Left" Margin="286,24,0,0" VerticalAlignment="Top" Width="75" Click="BTN_CheckUpdate_Click" />
+        <Button x:Name="BTN_ShowLisence" Content="用户协议" HorizontalAlignment="Left" Margin="366,24,0,0" VerticalAlignment="Top" Width="75" Click="BTN_ShowLisence_Click" />
         <Label x:Name="LBL_Copyright" Content="Copyright © 2019 zhangbudademao.com. All rights reserved." HorizontalAlignment="Left" Height="38" Margin="55,44,0,0" VerticalAlignment="Top" Width="385" VerticalContentAlignment="Center" />
         <TextBox x:Name="TB_Thanks" HorizontalAlignment="Left" Height="153" Margin="55,87,0,0" TextWrapping="Wrap" Text="{Binding Thanks, Mode=OneWay}" VerticalAlignment="Top" Width="385" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Background="#FFEAEAEA" />
     </Grid>

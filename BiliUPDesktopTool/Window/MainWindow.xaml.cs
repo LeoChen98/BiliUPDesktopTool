@@ -74,7 +74,7 @@ namespace BiliUPDesktopTool
 
         private void Btn_Close_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Close();
+            Hide();
         }
 
         private void Btn_Home_MouseEnter(object sender, MouseEventArgs e)
@@ -106,7 +106,7 @@ namespace BiliUPDesktopTool
                 an.To = new Thickness(0, 0, 0, -822);
                 RB_Wrap.BeginAnimation(MarginProperty, an);
 
-                Lbl_Title.Content = "首页";
+                Lbl_Title.Text = "首页";
 
                 current_page_index = 0;
             }
@@ -156,7 +156,7 @@ namespace BiliUPDesktopTool
                 an.To = new Thickness(0, -822, 0, 0);
                 RB_Wrap.BeginAnimation(MarginProperty, an);
 
-                Lbl_Title.Content = "更多";
+                Lbl_Title.Text = "更多";
 
                 current_page_index = 2;
             }
@@ -191,7 +191,7 @@ namespace BiliUPDesktopTool
                 an.To = new Thickness(0, -411, 0, -411);
                 RB_Wrap.BeginAnimation(MarginProperty, an);
 
-                Lbl_Title.Content = "数据展示设置";
+                Lbl_Title.Text = "数据展示设置";
 
                 current_page_index = 1;
             }
@@ -211,5 +211,9 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Private Methods
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+        }
     }
 }

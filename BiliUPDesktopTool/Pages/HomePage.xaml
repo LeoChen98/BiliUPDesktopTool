@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:BiliUPDesktopTool"
              mc:Ignorable="d"
-             d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411" Loaded="UserControl_Loaded">
+             d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <UserControl.Resources>
         <local:Tooltip_UserInfo_Desc_Converter x:Key="Tooltip_UserInfo_Desc_Converter" />
     </UserControl.Resources>
@@ -13,12 +13,10 @@
         <Grid x:Name="InfoBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top" Visibility="Hidden">
             <Image x:Name="Img_Face_Default" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="/BiliUPDesktopTool;component/Image/noface.gif" />
             <Image x:Name="Img_Face" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" />
-            <Label x:Name="Lbl_UserName" HorizontalAlignment="Left" Height="28" Margin="95,10,0,0" VerticalAlignment="Top" Width="460" FontSize="16" FontWeight="Bold" Foreground="#FF252525" Padding="0">
-                <TextBlock x:Name="TBk_UserName" Width="{Binding Width, ElementName=Lbl_UserName}" Padding="5" TextTrimming="CharacterEllipsis">
+            <TextBlock x:Name="TBk_UserName" Width="{Binding Width, ElementName=Lbl_UserName}" Padding="5,2" TextTrimming="CharacterEllipsis" FontWeight="Bold" Foreground="#FF252525" FontSize="16" Margin="95,10,491,83">
                     Username
-                </TextBlock>
-            </Label>
-            <Grid x:Name="DescBox" Margin="95,38,37,50" MouseUp="Lbl_Desc_MouseUp">
+            </TextBlock>
+            <Grid x:Name="DescBox" Margin="95,38,37,50" MouseUp="Lbl_Desc_MouseUp" Cursor="IBeam">
                 <Label x:Name="Lbl_Desc" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="560" Foreground="#FF252525" Padding="0" VerticalContentAlignment="Center" MouseUp="Lbl_Desc_MouseUp" BorderThickness="1" MouseEnter="Lbl_Desc_MouseEnter" MouseLeave="Lbl_Desc_MouseLeave" ToolTip="{Binding Text, Converter={StaticResource Tooltip_UserInfo_Desc_Converter}, ElementName=TB_Desc}">
                     <TextBlock x:Name="TBk_desc" Width="{Binding Width, ElementName=Lbl_Desc}" Padding="5" TextTrimming="CharacterEllipsis" Text="{Binding Text, ElementName=TB_Desc}" ></TextBlock>
                 </Label>
@@ -32,42 +30,42 @@
                     <Rectangle x:Name="Bar_level_top" Fill="#FF4FBDEA" HorizontalAlignment="Left" Height="4" VerticalAlignment="Top" Width="398" ClipToBounds="True" StrokeThickness="0" RadiusX="5" RadiusY="5" Canvas.Left="1" />
                     <Rectangle x:Name="Bar_level_bottom" HorizontalAlignment="Left" Height="4" VerticalAlignment="Top" Width="400" ClipToBounds="True" Stroke="#FF252525" RadiusX="2" RadiusY="2" />
                 </Canvas>
-                <Label x:Name="Lbl_Level" Content="100%" HorizontalAlignment="Left" Height="19" Margin="445,0,0,0" VerticalAlignment="Top" Width="40" Padding="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                <TextBlock x:Name="Lbl_Level" Text="100%" HorizontalAlignment="Left" Height="19" Margin="445,0,0,0" VerticalAlignment="Top" Width="40" Padding="1"/>
             </Grid>
             <Grid x:Name="BtnBox" HorizontalAlignment="Left" Height="16" Margin="10,95,0,0" VerticalAlignment="Top" Width="672">
                 <Grid x:Name="Btn_Space" Margin="0,0,607,0" MouseEnter="Btn_Space_MouseEnter" MouseUp="Btn_Space_MouseUp" MouseLeave="Btn_Space_MouseLeave" Cursor="Hand">
                     <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label" Content="主站空间" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="10" />
+                    <TextBlock x:Name="label" Text="主站空间" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="13,1.3,0,0" FontSize="10" />
                 </Grid>
                 <Grid x:Name="Btn_Center" Margin="70,0,537,0" MouseEnter="Btn_Space_MouseEnter" MouseLeave="Btn_Space_MouseLeave" Cursor="Hand" MouseUp="Btn_Center_MouseUp">
                     <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label1" Content="创作中心" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="10" />
+                    <Label x:Name="label1" Content="创作中心" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65"  Padding="13,1.3,0,0" FontSize="10" />
                 </Grid>
                 <Grid x:Name="Btn_Manager" Margin="140,0,467,0" MouseEnter="Btn_Space_MouseEnter" MouseLeave="Btn_Space_MouseLeave" Cursor="Hand" MouseUp="Btn_Manager_MouseUp">
                     <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label2" Content="投稿管理" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="10" />
+                    <Label x:Name="label2" Content="投稿管理" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="13,1.3,0,0" FontSize="10" />
                 </Grid>
                 <Grid x:Name="Btn_Upload" Margin="210,0,397,0" MouseEnter="Btn_Space_MouseEnter" MouseLeave="Btn_Space_MouseLeave" Cursor="Hand" MouseUp="Btn_Upload_MouseUp">
                     <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label3" Content="投稿工具" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="10" />
+                    <Label x:Name="label3" Content="投稿工具" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="13,1.3,0,0" FontSize="10" />
                 </Grid>
                 <Grid x:Name="Btn_UpdateAccount" Margin="537,0,70,0" MouseEnter="Btn_Space_MouseEnter" MouseLeave="Btn_Space_MouseLeave" Cursor="Hand" MouseUp="Btn_UpdateAccount_MouseUp">
                     <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label4" Content="更新账号" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="10" />
+                    <Label x:Name="label4" Content="更新账号" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="13,1.3,0,0" FontSize="10" />
                 </Grid>
                 <Grid x:Name="Btn_SignOut" Margin="607,0,0,0" MouseEnter="Btn_Space_MouseEnter" MouseLeave="Btn_Space_MouseLeave" Cursor="Hand" MouseUp="Btn_SignOut_MouseUp">
                     <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label5" Content="退出登录" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="10" />
+                    <Label x:Name="label5" Content="退出登录" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="13,1.3,0,0" FontSize="10" />
                 </Grid>
             </Grid>
         </Grid>
         <Grid x:Name="NeedLoginBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top">
             <Border x:Name="Btn_Login" BorderThickness="1" Margin="277,38,276,37" CornerRadius="5" BorderBrush="#FF747474" Background="#02ffffff" MouseEnter="Btn_Login_MouseEnter" MouseLeave="Btn_Login_MouseLeave" MouseUp="Btn_Login_MouseUp" Cursor="Hand">
-                <Label x:Name="label7" Content="登陆Bilibili账号" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                <TextBlock x:Name="label7" Text="登陆Bilibili账号" Padding="28,12,0,0" />
             </Border>
         </Grid>
         <Grid x:Name="DashBoard" HorizontalAlignment="Left" Height="256" Margin="24,145,0,0" VerticalAlignment="Top" Width="692">
-            <Label x:Name="label6" Content="最新活动" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="100" FontSize="18" FontWeight="Bold" Margin="10,10,0,0" />
+            <TextBlock x:Name="label6" Text="最新活动" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="100" FontSize="18" FontWeight="Bold" Margin="10,10,0,0" />
             <ScrollViewer HorizontalAlignment="Left" Height="210" Margin="0,46,0,0" VerticalAlignment="Top" Width="692" VerticalScrollBarVisibility="Auto">
                 <StackPanel x:Name="EventList" HorizontalAlignment="Left" VerticalAlignment="Top" Width="692" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True" />
             </ScrollViewer>
