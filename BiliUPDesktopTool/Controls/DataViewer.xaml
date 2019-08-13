@@ -19,7 +19,7 @@
                 </TransformGroup>
             </local:RollingNums.RenderTransform>
         </local:RollingNums>
-        <Canvas HorizontalAlignment="Left" Height="30" Margin="41,110,0,0" VerticalAlignment="Top" Width="30">
+        <Canvas x:Name="CVS_T" HorizontalAlignment="Left" Height="30" Margin="41,110,0,0" VerticalAlignment="Top" Width="30">
             <Path x:Name="Triangle" Fill="{Binding Foreground, ElementName=userControl}" Stroke="{Binding Foreground, ElementName=userControl}">
                 <Path.Data>
                     <PathGeometry>

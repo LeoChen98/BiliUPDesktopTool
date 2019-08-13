@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace BiliUPDesktopTool
 {
@@ -24,6 +27,32 @@ namespace BiliUPDesktopTool
             InitializeComponent();
 
             SetValue(DataModeProperty, new List<string>(3));
+
+            incr.PostiveAndNegativeChanged += Incr_PostiveAndNegativeChanged;
+        }
+
+        private void Incr_PostiveAndNegativeChanged(object sender, RollingNums.PostiveAndNegativeChangedEventArgs e)
+        {
+            if(e.NewValue == true)
+            {
+                DoubleAnimation an = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 180,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
+                };
+                CVS_T.BeginAnimation(RotateTransform.AngleProperty, an);
+            }
+            else
+            {
+                DoubleAnimation an = new DoubleAnimation
+                {
+                    From = 180,
+                    To = 0,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
+                };
+                CVS_T.BeginAnimation(RotateTransform.AngleProperty, an);
+            }
         }
 
         #endregion Public Constructors

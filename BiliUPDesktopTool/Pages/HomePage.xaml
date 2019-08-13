@@ -13,7 +13,7 @@
         <Grid x:Name="InfoBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top" Visibility="Hidden">
             <Image x:Name="Img_Face_Default" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="/BiliUPDesktopTool;component/Image/noface.gif" />
             <Image x:Name="Img_Face" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" />
-            <TextBlock x:Name="TBk_UserName" Width="{Binding Width, ElementName=Lbl_UserName}" Padding="5,2" TextTrimming="CharacterEllipsis" FontWeight="Bold" Foreground="#FF252525" FontSize="16" Margin="95,10,491,83">
+            <TextBlock x:Name="TBk_UserName" Padding="5,2" TextTrimming="CharacterEllipsis" FontWeight="Bold" Foreground="#FF252525" FontSize="16" Margin="95,10,37,83">
                     Username
             </TextBlock>
             <Grid x:Name="DescBox" Margin="95,38,37,50" MouseUp="Lbl_Desc_MouseUp" Cursor="IBeam">
