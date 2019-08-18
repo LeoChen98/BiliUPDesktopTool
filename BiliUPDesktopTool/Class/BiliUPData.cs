@@ -29,6 +29,11 @@ namespace BiliUPDesktopTool
         #region Private Fields
 
         /// <summary>
+        /// 指示是否正在刷新数据。
+        /// </summary>
+        private bool IsRefreshing = false;
+
+        /// <summary>
         /// 数据刷新计时器
         /// </summary>
         private Timer Refresher;
@@ -67,10 +72,12 @@ namespace BiliUPDesktopTool
         /// <returns>刷新后的实例</returns>
         public BiliUPData Refresh()
         {
-            if (Bas.account.Islogin == true)
+            if (Bas.account.Islogin == true && !IsRefreshing)
             {
+                IsRefreshing = true;
                 article.Refresh();
                 video.Refresh();
+                IsRefreshing = false;
             }
             return this;
         }
