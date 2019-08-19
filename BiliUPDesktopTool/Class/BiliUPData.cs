@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.ComponentModel;
 using System.Threading;
@@ -411,21 +412,22 @@ namespace BiliUPDesktopTool
                 {
                     try
                     {
-                        JObject obj = JObject.Parse(str);
-                        if ((int)obj["code"] == 0)
+                        Article_Data_Template obj = JsonConvert.DeserializeObject<Article_Data_Template>(str);
+
+                        if (obj.code == 0)
                         {
-                            coin = (int)obj["data"]["stat"]["coin"];
-                            coin_incr = (int)obj["data"]["stat"]["incr_coin"];
-                            fav = (int)obj["data"]["stat"]["fav"];
-                            fav_incr = (int)obj["data"]["stat"]["incr_fav"];
-                            like = (int)obj["data"]["stat"]["like"];
-                            like_incr = (int)obj["data"]["stat"]["incr_like"];
-                            reply = (int)obj["data"]["stat"]["reply"];
-                            reply_incr = (int)obj["data"]["stat"]["incr_reply"];
-                            share = (int)obj["data"]["stat"]["share"];
-                            share_incr = (int)obj["data"]["stat"]["incr_share"];
-                            view = (int)obj["data"]["stat"]["view"];
-                            view_incr = (int)obj["data"]["stat"]["incr_view"];
+                            coin = obj.data.stat.coin;
+                            coin_incr = obj.data.stat.incr_coin;
+                            fav = obj.data.stat.fav;
+                            fav_incr = obj.data.stat.incr_fav;
+                            like = obj.data.stat.like;
+                            like_incr = obj.data.stat.incr_like;
+                            reply = obj.data.stat.reply;
+                            reply_incr = obj.data.stat.incr_reply;
+                            share = obj.data.stat.share;
+                            share_incr = obj.data.stat.incr_share;
+                            view = obj.data.stat.view;
+                            view_incr = obj.data.stat.incr_view;
                         }
                     }
                     catch
@@ -468,62 +470,63 @@ namespace BiliUPDesktopTool
                 {
                     try
                     {
-                        JObject obj = JObject.Parse(str);
-                        if ((int)obj["code"] == 0)
+                        Article_Real_Data_Template obj = JsonConvert.DeserializeObject<Article_Real_Data_Template>(str);
+                        if (obj.code == 0)
                         {
-                            foreach (JToken i in obj["artlist"]["articles"])
+                            foreach (Article_Real_Data_Template.Data_Template.Article_Template i in obj.artlist.articles)
                             {
-                                _coin_real += (int)i["stats"]["coin"];
-                                _fav_real += (int)i["stats"]["favorite"];
-                                _like_real += (int)i["stats"]["like"];
-                                _reply_real += (int)i["stats"]["reply"];
-                                _share_real += (int)i["stats"]["share"];
-                                _view_real += (int)i["stats"]["view"];
+                                _coin_real += i.stats.coin;
+                                _fav_real += i.stats.favorite;
+                                _like_real += i.stats.like;
+                                _reply_real += i.stats.reply;
+                                _share_real += i.stats.share;
+                                _view_real += i.stats.view;
 
                                 if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
                                 {
-                                    _coin_real_last += (int)i["stats"]["coin"];
-                                    _fav_real_last += (int)i["stats"]["favorite"];
-                                    _like_real_last += (int)i["stats"]["like"];
-                                    _reply_real_last += (int)i["stats"]["reply"];
-                                    _share_real_last += (int)i["stats"]["share"];
-                                    _view_real_last += (int)i["stats"]["view"];
+                                    _coin_real_last += i.stats.coin;
+                                    _fav_real_last += i.stats.favorite;
+                                    _like_real_last += i.stats.like;
+                                    _reply_real_last += i.stats.reply;
+                                    _share_real_last += i.stats.share;
+                                    _view_real_last += i.stats.view;
 
                                     IsChangeLast = true;
                                 }
                             }
 
-                            if ((int)obj["artlist"]["page"]["pn"] * (int)obj["artlist"]["page"]["ps"] > (int)obj["artlist"]["page"]["total"])
+                            if (obj.artlist.page.pn * obj.artlist.page.ps < obj.artlist.page.total)
                             {
                                 int pn = 2;
-                                while (pn * (int)obj["artlist"]["page"]["ps"] <= (int)obj["artlist"]["page"]["total"])
+                                while (pn * obj.artlist.page.ps <= obj.artlist.page.total)
                                 {
-                                    string str1 = Bas.GetHTTPBody("https://api.bilibili.com/x/article/creative/article/list?group=0&sort=&pn=" + pn, Bas.account.Cookies, "https://member.bilibili.com/v2");
-                                    if (!string.IsNullOrEmpty(str1))
+                                    str = Bas.GetHTTPBody("https://api.bilibili.com/x/article/creative/article/list?group=0&sort=&pn=" + pn, Bas.account.Cookies, "https://member.bilibili.com/v2");
+                                    if (!string.IsNullOrEmpty(str))
                                     {
                                         try
                                         {
-                                            JObject obj1 = JObject.Parse(str1);
-
-                                            if ((int)obj1["code"] == 0)
+                                            obj = JsonConvert.DeserializeObject<Article_Real_Data_Template>(str);
+                                            if (obj.code == 0)
                                             {
-                                                foreach (JToken i in obj1["artlist"]["articles"])
+                                                foreach (Article_Real_Data_Template.Data_Template.Article_Template i in obj.artlist.articles)
                                                 {
-                                                    _coin_real += (int)i["stats"]["coin"];
-                                                    _fav_real += (int)i["stats"]["favorite"];
-                                                    _like_real += (int)i["stats"]["like"];
-                                                    _reply_real += (int)i["stats"]["reply"];
-                                                    _share_real += (int)i["stats"]["share"];
-                                                    _view_real += (int)i["stats"]["view"];
+                                                    _coin_real += i.stats.coin;
+                                                    _fav_real += i.stats.favorite;
+                                                    _like_real += i.stats.like;
+                                                    _reply_real += i.stats.reply;
+                                                    _share_real += i.stats.share;
+                                                    _view_real += i.stats.view;
 
                                                     if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
                                                     {
-                                                        _coin_real_last += (int)i["stats"]["coin"];
-                                                        _fav_real_last += (int)i["stats"]["favorite"];
-                                                        _like_real_last += (int)i["stats"]["like"];
-                                                        _reply_real_last += (int)i["stats"]["reply"];
-                                                        _share_real_last += (int)i["stats"]["share"];
-                                                        _view_real_last += (int)i["stats"]["view"];
+                                                        _coin_real_last += i.stats.coin;
+                                                        _fav_real_last += i.stats.favorite;
+                                                        _like_real_last += i.stats.like;
+                                                        _reply_real_last += i.stats.reply;
+                                                        _share_real_last += i.stats.share;
+                                                        _view_real_last += i.stats.view;
+
+                                                        IsChangeLast = true;
                                                     }
                                                 }
                                             }
@@ -543,6 +546,112 @@ namespace BiliUPDesktopTool
             }
 
             #endregion Private Methods
+
+            #region Private Classes
+
+            /// <summary>
+            /// 专栏总览数据模板
+            /// </summary>
+            private class Article_Data_Template
+            {
+                #region Public Fields
+
+                public int code;
+                public Data_Template data;
+
+                #endregion Public Fields
+
+                #region Public Classes
+
+                public class Data_Template
+                {
+                    #region Public Fields
+
+                    public Stat_Template stat;
+
+                    #endregion Public Fields
+
+                    #region Public Classes
+
+                    public class Stat_Template
+                    {
+                        #region Public Fields
+
+                        public int coin, fav, like, reply, share, view;
+                        public int incr_coin, incr_fav, incr_like, incr_reply, incr_share, incr_view;
+
+                        #endregion Public Fields
+                    }
+
+                    #endregion Public Classes
+                }
+
+                #endregion Public Classes
+            }
+
+            /// <summary>
+            /// 专栏实时数据模板
+            /// </summary>
+            private class Article_Real_Data_Template
+            {
+                #region Public Fields
+
+                public Data_Template artlist;
+                public int code;
+
+                #endregion Public Fields
+
+                #region Public Classes
+
+                public class Data_Template
+                {
+                    #region Public Fields
+
+                    public Article_Template[] articles;
+                    public Page_Template page;
+
+                    #endregion Public Fields
+
+                    #region Public Classes
+
+                    public class Article_Template
+                    {
+                        #region Public Fields
+
+                        public Stats_Template stats;
+
+                        #endregion Public Fields
+
+                        #region Public Classes
+
+                        public class Stats_Template
+                        {
+                            #region Public Fields
+
+                            public int view, favorite, like, reply, share, coin, dynamic;
+
+                            #endregion Public Fields
+                        }
+
+                        #endregion Public Classes
+                    }
+
+                    public class Page_Template
+                    {
+                        #region Public Fields
+
+                        public int pn, ps, total;
+
+                        #endregion Public Fields
+                    }
+
+                    #endregion Public Classes
+                }
+
+                #endregion Public Classes
+            }
+
+            #endregion Private Classes
         }
 
         /// <summary>
@@ -554,7 +663,7 @@ namespace BiliUPDesktopTool
 
             private int _coin, _coin_incr, _dm, _dm_incr, _fan, _fan_incr, _fav, _fav_incr, _like, _like_incr, _play, _play_incr, _share, _share_incr, _comment, _comment_incr;
             private int _coin_real, _coin_real_last, _dm_real, _dm_real_last, _fav_real, _fav_real_last, _like_real, _like_real_last, _play_real, _play_real_last, _share_real, _share_real_last, _comment_real, _comment_real_last;
-            private double _elec, _elec_last, _elec_incr, _growup, _growup_incr;
+            private double _elec, _elec_last, _elec_incr, _elec_total, _growup, _growup_incr;
             private DateTime? LastTime = null;
 
             #endregion Private Fields
@@ -736,19 +845,35 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
-                    {
-                        return _elec - _elec_last + _elec_incr;
-                    }
-                    else
-                    {
-                        return _elec_incr;
-                    }
+                    return _elec - _elec_last + _elec_incr;
                 }
                 set
                 {
                     _elec_incr = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("elec_incr"));
+                }
+            }
+
+            /// <summary>
+            /// 电池总量
+            /// </summary>
+            public double elec_total
+            {
+                get
+                {
+                    if (Bas.settings.IsRealTime)
+                    {
+                        return _elec_total + _elec - _elec_last;
+                    }
+                    else
+                    {
+                        return _elec_total;
+                    }
+                }
+                set
+                {
+                    _elec_total = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("elec_total"));
                 }
             }
 
@@ -1005,40 +1130,40 @@ namespace BiliUPDesktopTool
                 {
                     try
                     {
-                        JObject obj = JObject.Parse(str);
-                        if ((int)obj["code"] == 0)
+                        Video_Data_Template obj = JsonConvert.DeserializeObject<Video_Data_Template>(str);
+                        if (obj.code == 0)
                         {
-                            coin = (int)obj["data"]["stat"]["coin"];
-                            coin_incr = (int)obj["data"]["stat"]["coin"] - (int)obj["data"]["stat"]["coin_last"];
-                            comment = (int)obj["data"]["stat"]["comment"];
-                            comment_incr = (int)obj["data"]["stat"]["comment"] - (int)obj["data"]["stat"]["comment_last"];
-                            dm = (int)obj["data"]["stat"]["dm"];
-                            dm_incr = (int)obj["data"]["stat"]["dm"] - (int)obj["data"]["stat"]["dm_last"];
-                            fav = (int)obj["data"]["stat"]["fav"];
-                            fav_incr = (int)obj["data"]["stat"]["fav"] - (int)obj["data"]["stat"]["fav_last"];
-                            like = (int)obj["data"]["stat"]["like"];
-                            like_incr = (int)obj["data"]["stat"]["like"] - (int)obj["data"]["stat"]["like_last"];
-                            play = (int)obj["data"]["stat"]["play"];
-                            play_incr = (int)obj["data"]["stat"]["play"] - (int)obj["data"]["stat"]["play_last"];
-                            share = (int)obj["data"]["stat"]["share"];
-                            share_incr = (int)obj["data"]["stat"]["share"] - (int)obj["data"]["stat"]["share_last"];
-                        }
-                        fan = (int)obj["data"]["stat"]["fan"];
-                        fan_incr = (int)obj["data"]["stat"]["fan"] - (int)obj["data"]["stat"]["fan_last"];
-                        double tmp1 = GetCharge();
-                        if (tmp1 != -1)
-                        {
-                            elec = tmp1;
-                            elec_incr = (double)obj["data"]["stat"]["elec"] - (double)obj["data"]["stat"]["elec_last"];
+                            coin = obj.data.stat.coin;
+                            coin_incr = obj.data.stat.coin - obj.data.stat.coin_last;
+                            comment = obj.data.stat.comment;
+                            comment_incr = obj.data.stat.comment - obj.data.stat.comment_last;
+                            dm = obj.data.stat.dm;
+                            dm_incr = obj.data.stat.dm - obj.data.stat.dm_last;
+                            fav = obj.data.stat.fav;
+                            fav_incr = obj.data.stat.fav - obj.data.stat.fav_last;
+                            like = obj.data.stat.like;
+                            like_incr = obj.data.stat.like - obj.data.stat.like_last;
+                            play = obj.data.stat.play;
+                            play_incr = obj.data.stat.play - obj.data.stat.play_last;
+                            share = obj.data.stat.share;
+                            share_incr = obj.data.stat.share - obj.data.stat.share_last;
+
+                            fan = obj.data.stat.fan;
+                            fan_incr = obj.data.stat.fan - obj.data.stat.fan_last;
+
+                            double tmp1 = GetCharge();
+                            elec = tmp1 == -1 ? obj.data.stat.elec : tmp1;
+                            elec_incr = obj.data.stat.elec - obj.data.stat.elec_last;
+                            elec_total = obj.data.stat.elec;
                         }
                     }
                     catch
                     {
                     }
                 }
+
                 double[] tmp = GetGrowUp();
                 if (tmp != new double[2] { -1, -1 })
-
                 {
                     growup_incr = tmp[0];
                     growup = tmp[1];
@@ -1133,74 +1258,75 @@ namespace BiliUPDesktopTool
                     _comment_real_last = 0;
                     _elec_last = GetCharge();
                 }
+
                 bool IsChangeLast = false;
                 string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=1&ps=10&coop=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
                 if (!string.IsNullOrEmpty(str))
                 {
                     try
                     {
-                        JObject obj = JObject.Parse(str);
+                        Video_Real_Data_Template obj = JsonConvert.DeserializeObject<Video_Real_Data_Template>(str);
 
-                        if ((int)obj["code"] == 0)
+                        if (obj.code == 0)
                         {
-                            foreach (JToken i in obj["data"]["arc_audits"])
+                            foreach (Video_Real_Data_Template.Data_Template.Video_Template i in obj.data.arc_audits)
                             {
-                                _coin_real += (int)i["stat"]["coin"];
-                                _dm_real += (int)i["stat"]["danmaku"];
-                                _fav_real += (int)i["stat"]["favorite"];
-                                _like_real += (int)i["stat"]["like"];
-                                _play_real += (int)i["stat"]["view"];
-                                _share_real += (int)i["stat"]["share"];
-                                _comment_real += (int)i["stat"]["reply"];
+                                _coin_real += i.stat.coin;
+                                _dm_real += i.stat.danmaku;
+                                _fav_real += i.stat.favorite;
+                                _like_real += i.stat.like;
+                                _play_real += i.stat.view;
+                                _share_real += i.stat.share;
+                                _comment_real += i.stat.reply;
 
                                 if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
                                 {
-                                    _coin_real_last += (int)i["stat"]["coin"];
-                                    _dm_real_last += (int)i["stat"]["danmaku"];
-                                    _fav_real_last += (int)i["stat"]["favorite"];
-                                    _like_real_last += (int)i["stat"]["like"];
-                                    _play_real_last += (int)i["stat"]["view"];
-                                    _share_real_last += (int)i["stat"]["share"];
-                                    _comment_real_last += (int)i["stat"]["reply"];
+                                    _coin_real_last += i.stat.coin;
+                                    _dm_real_last += i.stat.danmaku;
+                                    _fav_real_last += i.stat.favorite;
+                                    _like_real_last += i.stat.like;
+                                    _play_real_last += i.stat.view;
+                                    _share_real_last += i.stat.share;
+                                    _comment_real_last += i.stat.reply;
 
                                     IsChangeLast = true;
                                 }
                             }
 
-                            if ((int)obj["data"]["page"]["pn"] * (int)obj["data"]["page"]["ps"] > (int)obj["data"]["page"]["count"])
+                            if (obj.data.page.pn * obj.data.page.ps < obj.data.page.count)
                             {
                                 int pn = 2;
-                                while (pn * (int)obj["data"]["page"]["ps"] > (int)obj["data"]["page"]["count"])
+                                while (pn * obj.data.page.ps > obj.data.page.count)
                                 {
-                                    string str1 = Bas.GetHTTPBody("https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=" + pn + "&ps=10&coop=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
+                                    str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=" + pn + "&ps=10&coop=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
 
-                                    if (!string.IsNullOrEmpty(str1))
+                                    if (!string.IsNullOrEmpty(str))
                                     {
                                         try
                                         {
-                                            JObject obj1 = JObject.Parse(str1);
+                                            obj = JsonConvert.DeserializeObject<Video_Real_Data_Template>(str);
 
-                                            if ((int)obj1["code"] == 0)
+                                            if (obj.code == 0)
                                             {
-                                                foreach (JToken i in obj["data"]["arc_audits"])
+                                                foreach (Video_Real_Data_Template.Data_Template.Video_Template i in obj.data.arc_audits)
                                                 {
-                                                    _coin_real += (int)i["stat"]["coin"];
-                                                    _dm_real += (int)i["stat"]["danmaku"];
-                                                    _fav_real += (int)i["stat"]["favorite"];
-                                                    _like_real += (int)i["stat"]["like"];
-                                                    _play_real += (int)i["stat"]["view"];
-                                                    _share_real += (int)i["stat"]["share"];
-                                                    _comment_real += (int)i["stat"]["reply"];
+                                                    _coin_real += i.stat.coin;
+                                                    _dm_real += i.stat.danmaku;
+                                                    _fav_real += i.stat.favorite;
+                                                    _like_real += i.stat.like;
+                                                    _play_real += i.stat.view;
+                                                    _share_real += i.stat.share;
+                                                    _comment_real += i.stat.reply;
 
                                                     if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
                                                     {
-                                                        _coin_real_last += (int)i["stat"]["coin"];
-                                                        _dm_real_last += (int)i["stat"]["danmaku"];
-                                                        _fav_real_last += (int)i["stat"]["favorite"];
-                                                        _like_real_last += (int)i["stat"]["like"];
-                                                        _play_real_last += (int)i["stat"]["view"];
-                                                        _share_real_last += (int)i["stat"]["share"];
-                                                        _comment_real_last += (int)i["stat"]["reply"];
+                                                        _coin_real_last += i.stat.coin;
+                                                        _dm_real_last += i.stat.danmaku;
+                                                        _fav_real_last += i.stat.favorite;
+                                                        _like_real_last += i.stat.like;
+                                                        _play_real_last += i.stat.view;
+                                                        _share_real_last += i.stat.share;
+                                                        _comment_real_last += i.stat.reply;
 
                                                         IsChangeLast = true;
                                                     }
@@ -1222,6 +1348,113 @@ namespace BiliUPDesktopTool
             }
 
             #endregion Private Methods
+
+            #region Private Classes
+
+            /// <summary>
+            /// 视频总览数据模板
+            /// </summary>
+            private class Video_Data_Template
+            {
+                #region Public Fields
+
+                public int code;
+                public Data_Template data;
+
+                #endregion Public Fields
+
+                #region Public Classes
+
+                public class Data_Template
+                {
+                    #region Public Fields
+
+                    public Stat_Template stat;
+
+                    #endregion Public Fields
+
+                    #region Public Classes
+
+                    public class Stat_Template
+                    {
+                        #region Public Fields
+
+                        public int coin, comment, dm, fav, like, play, share, fan;
+                        public int coin_last, comment_last, dm_last, fav_last, like_last, play_last, share_last, fan_last;
+                        public double elec, elec_last;
+
+                        #endregion Public Fields
+                    }
+
+                    #endregion Public Classes
+                }
+
+                #endregion Public Classes
+            }
+
+            /// <summary>
+            /// 视频实时数据模板
+            /// </summary>
+            private class Video_Real_Data_Template
+            {
+                #region Public Fields
+
+                public int code;
+                public Data_Template data;
+
+                #endregion Public Fields
+
+                #region Public Classes
+
+                public class Data_Template
+                {
+                    #region Public Fields
+
+                    public Video_Template[] arc_audits;
+                    public Page_Template page;
+
+                    #endregion Public Fields
+
+                    #region Public Classes
+
+                    public class Page_Template
+                    {
+                        #region Public Fields
+
+                        public int pn, ps, count;
+
+                        #endregion Public Fields
+                    }
+
+                    public class Video_Template
+                    {
+                        #region Public Fields
+
+                        public Stat_Template stat;
+
+                        #endregion Public Fields
+
+                        #region Public Classes
+
+                        public class Stat_Template
+                        {
+                            #region Public Fields
+
+                            public int view, danmaku, reply, favorite, coin, share, like;
+
+                            #endregion Public Fields
+                        }
+
+                        #endregion Public Classes
+                    }
+
+                    #endregion Public Classes
+                }
+
+                #endregion Public Classes
+            }
+
+            #endregion Private Classes
         }
 
         #endregion Public Classes

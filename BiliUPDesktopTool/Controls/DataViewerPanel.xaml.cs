@@ -144,6 +144,10 @@ namespace BiliUPDesktopTool
                     title = "电池";
                     break;
 
+                case "elec_total":
+                    title = "电池总量";
+                    break;
+
                 case "fan":
                     title = "粉丝";
                     break;

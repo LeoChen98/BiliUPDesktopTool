@@ -29,7 +29,8 @@
     "like": "点赞。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
     "fan": "实时粉丝数。（实时更新，不受“实时模式”开关状态的影响）",
     "growup": "创作激励计划。（每天凌晨更新，不受“实时模式”开关状态的影响）",
-    "elec": "充电计划电池。（实时更新，实时模式下显示昨日增量+程序运行时增量，非实时模式显示实时电池数据和前一天增量）"
+    "elec": "充电计划电池。（实时更新，实时模式下显示昨日增量+程序运行时增量，非实时模式显示实时电池数据和前一天增量）",
+    "elec_total": "充电计划电池总量，包括历史。（实时更新，实时模式下显示昨日增量+程序运行时增量，非实时模式显示实时电池数据和前一天增量）"
   }
 }</sys:String>
     </UserControl.Resources>
@@ -125,6 +126,26 @@
                                                 </local:DataViewer>
                                                 <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="创作激励" /></TextBlock>
                                                 <TextBlock Text="{Binding ConverterParameter=video-growup, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0" />
+                                            </Grid>
+                                            <Grid Margin="0" Height="120" Width="485" Background="#02FFFFFF" MouseEnter="DataViewer_MouseEnter" MouseLeave="DataViewer_MouseLeave" MouseUp="DataViewer_MouseUp">
+                                                <local:DataViewer Padding="0" Foreground="Black" Title="电池总量" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="-17.5,-15,0,0">
+                                                    <local:DataViewer.RenderTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
+                                                            <SkewTransform />
+                                                            <RotateTransform />
+                                                            <TranslateTransform />
+                                                        </TransformGroup>
+                                                    </local:DataViewer.RenderTransform>
+                                                    <local:DataViewer.DataMode>
+                                                        <System:String>video</System:String>
+                                                        <System:String>elec_total</System:String>
+                                                        <System:String>elec_incr</System:String>
+                                                    </local:DataViewer.DataMode>
+                                                </local:DataViewer>
+                                                <TextBlock FontWeight="Bold" Margin="150,15,0,90"><Run Text="电池总量" /></TextBlock>
+
+                                                <TextBlock Text="{Binding ConverterParameter=video-elec_total, Converter={StaticResource DataDesc_Converter}, Mode=OneWay, Source={StaticResource DataDesc}}" TextWrapping="Wrap" Foreground="#FF4F4F4F"   Margin="150,40,0,0" />
                                             </Grid>
                                         </StackPanel>
                                     </ScrollViewer>
