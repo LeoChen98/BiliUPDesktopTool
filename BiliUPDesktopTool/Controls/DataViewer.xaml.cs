@@ -31,30 +31,6 @@ namespace BiliUPDesktopTool
             incr.PostiveAndNegativeChanged += Incr_PostiveAndNegativeChanged;
         }
 
-        private void Incr_PostiveAndNegativeChanged(object sender, RollingNums.PostiveAndNegativeChangedEventArgs e)
-        {
-            if(e.NewValue == true)
-            {
-                DoubleAnimation an = new DoubleAnimation
-                {
-                    From = 0,
-                    To = 180,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
-                };
-                CVS_T.BeginAnimation(RotateTransform.AngleProperty, an);
-            }
-            else
-            {
-                DoubleAnimation an = new DoubleAnimation
-                {
-                    From = 180,
-                    To = 0,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
-                };
-                CVS_T.BeginAnimation(RotateTransform.AngleProperty, an);
-            }
-        }
-
         #endregion Public Constructors
 
         #region Public Properties
@@ -221,20 +197,35 @@ namespace BiliUPDesktopTool
             SetBinding(ForegroundProperty, bind_datatitle_color);
         }
 
+        private void Incr_PostiveAndNegativeChanged(object sender, RollingNums.PostiveAndNegativeChangedEventArgs e)
+        {
+            if (e.NewValue == true)
+            {
+                DoubleAnimation an = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 180,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
+                };
+                CVS_T.BeginAnimation(RotateTransform.AngleProperty, an);
+            }
+            else
+            {
+                DoubleAnimation an = new DoubleAnimation
+                {
+                    From = 180,
+                    To = 0,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
+                };
+                CVS_T.BeginAnimation(RotateTransform.AngleProperty, an);
+            }
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             ChangeView(DataMode);
 
-            //FrameworkElement __do = Parent as FrameworkElement;
-            //while (__do != null)
-            //{
-            //    __do = __do.Parent as FrameworkElement;
-            //    if (__do.Parent == null) break;
-            //}
-            //if (Parent.GetValue(NameProperty).ToString() != "DVP_Holder" && __do.GetType() != typeof(DataDisplaySetter))
-            //{
-            //    BindingInit();
-            //}
+            BindingInit();
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
