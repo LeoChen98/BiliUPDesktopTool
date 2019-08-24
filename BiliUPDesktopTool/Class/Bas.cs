@@ -116,6 +116,8 @@ namespace BiliUPDesktopTool
             }
         }
 
+        
+
         /// <summary>
         /// 获取指定url的内容
         /// </summary>
@@ -169,7 +171,7 @@ namespace BiliUPDesktopTool
         /// <param name="data">要post的数据</param>
         /// <param name="Cookies">cookies</param>
         /// <returns>返回内容</returns>
-        public static string PostHTTPBody(string url, string data = "", string Cookies = "", string Referer = "")
+        public static string PostHTTPBody(string url, string data = "", string Cookies = "", string Referer = "",string ContentType = "application/x-www-form-urlencoded; charset=UTF-8")
         {
             HttpWebRequest req = null;
             HttpWebResponse rep = null;
@@ -194,7 +196,7 @@ namespace BiliUPDesktopTool
                 req.Accept = "*/*";
                 req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
                 req.Referer = Referer;
-                req.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                req.ContentType = ContentType;
 
                 Stream writer = req.GetRequestStream();
                 writer.Write(bdata, 0, bdata.Length);
@@ -204,7 +206,7 @@ namespace BiliUPDesktopTool
                 reader = new StreamReader(rep.GetResponseStream());
                 body = reader.ReadToEnd();
             }
-            catch
+            catch(WebException ex)
             {
             }
             finally
@@ -240,6 +242,16 @@ namespace BiliUPDesktopTool
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// 用户统计
+        /// </summary>
+        public static void User_Statistics()
+        {
+            string cpu = MachineInfoHelper.GetCPUInfo();
+            string json = "{\"pid\":117,\"version\":\"" + Version + "\",\"token\":\"" + cpu + "\"}";
+            PostHTTPBody("https://cloud.api.zhangbudademao.com/public/User_Statistics", json,"","application/json; charset=UTF-8");
         }
 
         /// <summary>

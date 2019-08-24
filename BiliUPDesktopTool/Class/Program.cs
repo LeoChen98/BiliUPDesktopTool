@@ -17,6 +17,9 @@ namespace BiliUPDesktopTool
                 Environment.Exit(0);
             }
 
+            //用户统计
+            Bas.User_Statistics();
+
             //初始化公共变量
             Bas.settings = new Settings();
             Bas.account = new Account();
