@@ -537,7 +537,8 @@ namespace BiliUPDesktopTool
                                 }
                             }
                         }
-                        if (IsChangeLast) LastTime = DateTime.Now.Date.AddHours(12);//设定为当天12点数据
+                        if (IsChangeLast)
+                            LastTime = DateTime.Compare(DateTime.Now.Date.AddHours(12), DateTime.Now) <= 0 ? DateTime.Now.Date.AddHours(12) : DateTime.Now.Date.AddDays(-1).AddHours(12);//设定为当天12点数据
                     }
                     catch { }
                 }
@@ -1339,7 +1340,8 @@ namespace BiliUPDesktopTool
                                 }
                             }
                         }
-                        if (IsChangeLast) LastTime = DateTime.Now.Date.AddHours(12);//设定为当天12点数据
+                        if (IsChangeLast)
+                            LastTime = DateTime.Compare(DateTime.Now.Date.AddHours(12), DateTime.Now) <= 0 ? DateTime.Now.Date.AddHours(12): DateTime.Now.Date.AddDays(-1).AddHours(12);//设定为当天12点数据
                     }
                     catch { }
                 }

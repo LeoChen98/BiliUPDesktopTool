@@ -225,7 +225,10 @@ namespace BiliUPDesktopTool
         {
             ChangeView(DataMode);
 
-            BindingInit();
+            if(Tag?.ToString() == "Desktop")
+            {
+                BindingInit();
+            }
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
