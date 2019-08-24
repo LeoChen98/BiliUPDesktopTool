@@ -59,6 +59,15 @@ namespace BiliUPDesktopTool
         /// </summary>
         public static Update update;
 
+        /// <summary>
+        /// 主程序版本号
+        /// </summary>
+        public const string _Version = "2.0.0.12 Preview 4";
+        /// <summary>
+        /// 主程序Build
+        /// </summary>
+        public const int _Build = 12;
+
         #endregion Public Fields
 
         #region Public Properties
@@ -70,7 +79,18 @@ namespace BiliUPDesktopTool
         {
             get
             {
-                return "2.0.0.11 Preview 3";
+                return _Version;
+            }
+        }
+
+        /// <summary>
+        /// 主程序Build
+        /// </summary>
+        public static int Build
+        {
+            get
+            {
+                return _Build;
             }
         }
 
@@ -250,7 +270,7 @@ namespace BiliUPDesktopTool
         public static void User_Statistics()
         {
             string cpu = MachineInfoHelper.GetCPUInfo();
-            string json = "{\"pid\":117,\"version\":\"" + Version + "\",\"token\":\"" + cpu + "\"}";
+            string json = "{\"pid\":117,\"version\":" + Build + ",\"token\":\"" + cpu + "\"}";
             PostHTTPBody("https://cloud.api.zhangbudademao.com/public/User_Statistics", json,"","application/json; charset=UTF-8");
         }
 
