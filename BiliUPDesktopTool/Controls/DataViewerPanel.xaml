@@ -10,8 +10,8 @@
         <Rectangle x:Name="Rx"  Fill="{Binding Foreground, ElementName=userControl}" HorizontalAlignment="Left" Height="1" Margin="20,150,20,0" Stroke="{Binding Foreground, ElementName=userControl}" VerticalAlignment="Top" Width="310" />
         <Rectangle x:Name="Ry"  Fill="{Binding Foreground, ElementName=userControl}" HorizontalAlignment="Left" Width="1" Margin="175,20,0,0" Stroke="{Binding Foreground, ElementName=userControl}" VerticalAlignment="Top" Height="260" />
         <local:DataViewer x:Name="ViewerLT" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" Visibility="Visible" Foreground="{Binding Foreground, ElementName=userControl}" Tag="{Binding Tag, ElementName=userControl}" />
-        <local:DataViewer x:Name="ViewerRT" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="170" Visibility="Visible" Margin="180,0,0,0" Foreground="{Binding Foreground, ElementName=userControl}" Tag="{Binding Tag, ElementName=userControl}"/>
-        <local:DataViewer x:Name="ViewerLB" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" Visibility="Visible" Margin="0,151,0,0" Foreground="{Binding Foreground, ElementName=userControl}" Tag="{Binding Tag, ElementName=userControl}"/>
-        <local:DataViewer x:Name="ViewerRB" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" Visibility="Visible" Margin="176,151,0,0" Foreground="{Binding Foreground, ElementName=userControl}" Tag="{Binding Tag, ElementName=userControl}"/>
+        <local:DataViewer x:Name="ViewerRT" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="170" Visibility="Visible" Margin="180,0,0,0" Foreground="{Binding Foreground, ElementName=userControl}" Tag="{Binding Tag, ElementName=userControl}" />
+        <local:DataViewer x:Name="ViewerLB" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" Visibility="Visible" Margin="0,151,0,0" Foreground="{Binding Foreground, ElementName=userControl}" Tag="{Binding Tag, ElementName=userControl}" />
+        <local:DataViewer x:Name="ViewerRB" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="175" Visibility="Visible" Margin="176,151,0,0" Foreground="{Binding Foreground, ElementName=userControl}" Tag="{Binding Tag, ElementName=userControl}" />
     </Grid>
 </UserControl>

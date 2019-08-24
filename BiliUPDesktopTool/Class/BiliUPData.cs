@@ -441,11 +441,10 @@ namespace BiliUPDesktopTool
             #region Private Methods
 
             /// <summary>
-            /// 获取实时数据
+            /// 清除旧数据
             /// </summary>
-            private void GetRealTime()
+            private void CleanData()
             {
-                //清除旧数据
                 _coin_real = 0;
                 _fav_real = 0;
                 _like_real = 0;
@@ -461,87 +460,59 @@ namespace BiliUPDesktopTool
                     _share_real_last = 0;
                     _view_real_last = 0;
                 }
+            }
+
+            /// <summary>
+            /// 获取实时数据
+            /// </summary>
+            private void GetRealTime()
+            {
+                CleanData();  //清除旧数据
 
                 bool IsChangeLast = false;
-                string str = Bas.GetHTTPBody("https://api.bilibili.com/x/article/creative/article/list?group=0&sort=&pn=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
-                if (!string.IsNullOrEmpty(str))
+                int pn = 1;
+                Article_Real_Data_Template obj = new Article_Real_Data_Template();
+                do
                 {
-                    try
+                    string str = Bas.GetHTTPBody("https://api.bilibili.com/x/article/creative/article/list?group=0&sort=&pn=" + pn, Bas.account.Cookies, "https://member.bilibili.com/v2");
+                    if (!string.IsNullOrEmpty(str))
                     {
-                        Article_Real_Data_Template obj = JsonConvert.DeserializeObject<Article_Real_Data_Template>(str);
-                        if (obj.code == 0)
+                        try
                         {
-                            foreach (Article_Real_Data_Template.Data_Template.Article_Template i in obj.artlist.articles)
+                            obj = JsonConvert.DeserializeObject<Article_Real_Data_Template>(str);
+                            if (obj.code == 0)
                             {
-                                _coin_real += i.stats.coin;
-                                _fav_real += i.stats.favorite;
-                                _like_real += i.stats.like;
-                                _reply_real += i.stats.reply;
-                                _share_real += i.stats.share;
-                                _view_real += i.stats.view;
-
-                                if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                                foreach (Article_Real_Data_Template.Data_Template.Article_Template i in obj.artlist.articles)
                                 {
-                                    _coin_real_last += i.stats.coin;
-                                    _fav_real_last += i.stats.favorite;
-                                    _like_real_last += i.stats.like;
-                                    _reply_real_last += i.stats.reply;
-                                    _share_real_last += i.stats.share;
-                                    _view_real_last += i.stats.view;
+                                    _coin_real += i.stats.coin;
+                                    _fav_real += i.stats.favorite;
+                                    _like_real += i.stats.like;
+                                    _reply_real += i.stats.reply;
+                                    _share_real += i.stats.share;
+                                    _view_real += i.stats.view;
 
-                                    IsChangeLast = true;
-                                }
-                            }
-
-                            if (obj.artlist.page.pn * obj.artlist.page.ps < obj.artlist.page.total)
-                            {
-                                int pn = 2;
-                                while (pn * obj.artlist.page.ps <= obj.artlist.page.total)
-                                {
-                                    str = Bas.GetHTTPBody("https://api.bilibili.com/x/article/creative/article/list?group=0&sort=&pn=" + pn, Bas.account.Cookies, "https://member.bilibili.com/v2");
-                                    if (!string.IsNullOrEmpty(str))
+                                    if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
                                     {
-                                        try
-                                        {
-                                            obj = JsonConvert.DeserializeObject<Article_Real_Data_Template>(str);
-                                            if (obj.code == 0)
-                                            {
-                                                foreach (Article_Real_Data_Template.Data_Template.Article_Template i in obj.artlist.articles)
-                                                {
-                                                    _coin_real += i.stats.coin;
-                                                    _fav_real += i.stats.favorite;
-                                                    _like_real += i.stats.like;
-                                                    _reply_real += i.stats.reply;
-                                                    _share_real += i.stats.share;
-                                                    _view_real += i.stats.view;
+                                        _coin_real_last += i.stats.coin;
+                                        _fav_real_last += i.stats.favorite;
+                                        _like_real_last += i.stats.like;
+                                        _reply_real_last += i.stats.reply;
+                                        _share_real_last += i.stats.share;
+                                        _view_real_last += i.stats.view;
 
-                                                    if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
-                                                    {
-                                                        _coin_real_last += i.stats.coin;
-                                                        _fav_real_last += i.stats.favorite;
-                                                        _like_real_last += i.stats.like;
-                                                        _reply_real_last += i.stats.reply;
-                                                        _share_real_last += i.stats.share;
-                                                        _view_real_last += i.stats.view;
-
-                                                        IsChangeLast = true;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        catch
-                                        {
-                                        }
+                                        IsChangeLast = true;
                                     }
-                                    pn++;
                                 }
                             }
                         }
-                        if (IsChangeLast)
-                            LastTime = DateTime.Compare(DateTime.Now.Date.AddHours(12), DateTime.Now) <= 0 ? DateTime.Now.Date.AddHours(12) : DateTime.Now.Date.AddDays(-1).AddHours(12);//设定为当天12点数据
+                        catch
+                        {
+                        }
                     }
-                    catch { }
-                }
+                } while (++pn * obj.artlist.page.ps <= obj.artlist.page.total);
+
+                if (IsChangeLast)
+                    LastTime = DateTime.Compare(DateTime.Now.Date.AddHours(12), DateTime.Now) <= 0 ? DateTime.Now.Date.AddHours(12) : DateTime.Now.Date.AddDays(-1).AddHours(12);//设定为当天12点数据
             }
 
             #endregion Private Methods
@@ -1176,6 +1147,31 @@ namespace BiliUPDesktopTool
             #region Private Methods
 
             /// <summary>
+            /// 清除旧数据
+            /// </summary>
+            private void CleanData()
+            {
+                _coin_real = 0;
+                _dm_real = 0;
+                _fav_real = 0;
+                _like_real = 0;
+                _play_real = 0;
+                _share_real = 0;
+                _comment_real = 0;
+                if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                {
+                    _coin_real_last = 0;
+                    _dm_real_last = 0;
+                    _fav_real_last = 0;
+                    _like_real_last = 0;
+                    _play_real_last = 0;
+                    _share_real_last = 0;
+                    _comment_real_last = 0;
+                    _elec_last = GetCharge();
+                }
+            }
+
+            /// <summary>
             /// 获得充电数据
             /// </summary>
             /// <returns>电池数</returns>
@@ -1238,113 +1234,57 @@ namespace BiliUPDesktopTool
             /// </summary>
             private void GetRealTime()
             {
-                //清除旧数据
-                _coin_real = 0;
-                _dm_real = 0;
-                _fav_real = 0;
-                _like_real = 0;
-                _play_real = 0;
-                _share_real = 0;
-                _comment_real = 0;
-                if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
-                {
-                    _coin_real_last = 0;
-                    _dm_real_last = 0;
-                    _fav_real_last = 0;
-                    _like_real_last = 0;
-                    _play_real_last = 0;
-                    _share_real_last = 0;
-                    _comment_real_last = 0;
-                    _elec_last = GetCharge();
-                }
+                CleanData();    //清除旧数据
 
                 bool IsChangeLast = false;
-                string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=1&ps=10&coop=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
-                if (!string.IsNullOrEmpty(str))
+                int pn = 1;
+                Video_Real_Data_Template obj = new Video_Real_Data_Template();
+
+                do
                 {
-                    try
+                    string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=" + pn + "&ps=10&coop=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
+
+                    if (!string.IsNullOrEmpty(str))
                     {
-                        Video_Real_Data_Template obj = JsonConvert.DeserializeObject<Video_Real_Data_Template>(str);
-
-                        if (obj.code == 0)
+                        try
                         {
-                            foreach (Video_Real_Data_Template.Data_Template.Video_Template i in obj.data.arc_audits)
+                            obj = JsonConvert.DeserializeObject<Video_Real_Data_Template>(str);
+
+                            if (obj.code == 0)
                             {
-                                _coin_real += i.stat.coin;
-                                _dm_real += i.stat.danmaku;
-                                _fav_real += i.stat.favorite;
-                                _like_real += i.stat.like;
-                                _play_real += i.stat.view;
-                                _share_real += i.stat.share;
-                                _comment_real += i.stat.reply;
-
-                                if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                                foreach (Video_Real_Data_Template.Data_Template.Video_Template i in obj.data.arc_audits)
                                 {
-                                    _coin_real_last += i.stat.coin;
-                                    _dm_real_last += i.stat.danmaku;
-                                    _fav_real_last += i.stat.favorite;
-                                    _like_real_last += i.stat.like;
-                                    _play_real_last += i.stat.view;
-                                    _share_real_last += i.stat.share;
-                                    _comment_real_last += i.stat.reply;
+                                    _coin_real += i.stat.coin;
+                                    _dm_real += i.stat.danmaku;
+                                    _fav_real += i.stat.favorite;
+                                    _like_real += i.stat.like;
+                                    _play_real += i.stat.view;
+                                    _share_real += i.stat.share;
+                                    _comment_real += i.stat.reply;
 
-                                    IsChangeLast = true;
-                                }
-                            }
-
-                            if (obj.data.page.pn * obj.data.page.ps < obj.data.page.count)
-                            {
-                                int pn = 2;
-                                while (pn * obj.data.page.ps > obj.data.page.count)
-                                {
-                                    str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=" + pn + "&ps=10&coop=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
-
-                                    if (!string.IsNullOrEmpty(str))
+                                    if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
                                     {
-                                        try
-                                        {
-                                            obj = JsonConvert.DeserializeObject<Video_Real_Data_Template>(str);
+                                        _coin_real_last += i.stat.coin;
+                                        _dm_real_last += i.stat.danmaku;
+                                        _fav_real_last += i.stat.favorite;
+                                        _like_real_last += i.stat.like;
+                                        _play_real_last += i.stat.view;
+                                        _share_real_last += i.stat.share;
+                                        _comment_real_last += i.stat.reply;
 
-                                            if (obj.code == 0)
-                                            {
-                                                foreach (Video_Real_Data_Template.Data_Template.Video_Template i in obj.data.arc_audits)
-                                                {
-                                                    _coin_real += i.stat.coin;
-                                                    _dm_real += i.stat.danmaku;
-                                                    _fav_real += i.stat.favorite;
-                                                    _like_real += i.stat.like;
-                                                    _play_real += i.stat.view;
-                                                    _share_real += i.stat.share;
-                                                    _comment_real += i.stat.reply;
-
-                                                    if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
-                                                    {
-                                                        _coin_real_last += i.stat.coin;
-                                                        _dm_real_last += i.stat.danmaku;
-                                                        _fav_real_last += i.stat.favorite;
-                                                        _like_real_last += i.stat.like;
-                                                        _play_real_last += i.stat.view;
-                                                        _share_real_last += i.stat.share;
-                                                        _comment_real_last += i.stat.reply;
-
-                                                        IsChangeLast = true;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        catch
-                                        {
-                                        }
+                                        IsChangeLast = true;
                                     }
-                                    pn++;
                                 }
                             }
                         }
-                        if (IsChangeLast)
-                            LastTime = DateTime.Compare(DateTime.Now.Date.AddHours(12), DateTime.Now) <= 0 ? DateTime.Now.Date.AddHours(12): DateTime.Now.Date.AddDays(-1).AddHours(12);//设定为当天12点数据
+                        catch
+                        {
+                        }
                     }
-                    catch { }
-                }
+                } while (++pn * obj.data.page.ps > obj.data.page.count);
+
+                if (IsChangeLast)
+                    LastTime = DateTime.Compare(DateTime.Now.Date.AddHours(12), DateTime.Now) <= 0 ? DateTime.Now.Date.AddHours(12) : DateTime.Now.Date.AddDays(-1).AddHours(12);//设定为当天12点数据
             }
 
             #endregion Private Methods

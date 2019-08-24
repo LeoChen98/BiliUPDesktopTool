@@ -70,7 +70,7 @@ namespace BiliUPDesktopTool
         {
             get
             {
-                return "2.0.0.10 Preview 2";
+                return "2.0.0.11 Preview 3";
             }
         }
 

@@ -225,7 +225,7 @@ namespace BiliUPDesktopTool
         {
             ChangeView(DataMode);
 
-            if(Tag?.ToString() == "Desktop")
+            if (Tag?.ToString() == "Desktop")
             {
                 BindingInit();
             }

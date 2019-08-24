@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
         Title="B站up主桌面助手" Height="300" Width="350" WindowStyle="None" ShowInTaskbar="False" Loaded="Window_Loaded" AllowsTransparency="True" Icon="/BiliUPDesktopTool;component/icon.ico" Background="{x:Null}">
-    <local:DataViewerPanel x:Name="ViewerPanel" HorizontalAlignment="Left" Height="300" Margin="0" VerticalAlignment="Top" Width="350" Tag="Desktop"/>
+    <local:DataViewerPanel x:Name="ViewerPanel" HorizontalAlignment="Left" Height="300" Margin="0" VerticalAlignment="Top" Width="350" Tag="Desktop" />
 </Window>
