@@ -89,7 +89,7 @@ namespace BiliUPDesktopTool
 
                     if ((int)jobj["code"] == 0)
                     {
-                        if (jobj["data"]["version"].ToString() == Bas.Version)
+                        if ((int)jobj["data"]["build"] <= Bas.Build)
                         {
                             if (IsGUI) MessageBox.Show("当前版本已是最新");
                             return;
