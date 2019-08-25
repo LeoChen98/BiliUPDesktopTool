@@ -526,8 +526,8 @@ namespace BiliUPDesktopTool
             {
                 #region Public Fields
 
-                public int code;
-                public Data_Template data;
+                public int code = -1;
+                public Data_Template data = new Data_Template();
 
                 #endregion Public Fields
 
@@ -566,7 +566,7 @@ namespace BiliUPDesktopTool
             {
                 #region Public Fields
 
-                public Data_Template artlist;
+                public Data_Template artlist = new Data_Template();
                 public int code;
 
                 #endregion Public Fields
@@ -578,7 +578,7 @@ namespace BiliUPDesktopTool
                     #region Public Fields
 
                     public Article_Template[] articles;
-                    public Page_Template page;
+                    public Page_Template page = new Page_Template() { pn = 0, ps = 10, total = 0 };
 
                     #endregion Public Fields
 
@@ -1281,7 +1281,7 @@ namespace BiliUPDesktopTool
                         {
                         }
                     }
-                } while (++pn * obj.data.page.ps > obj.data.page.count);
+                } while (++pn * obj.data.page.ps <= obj.data.page.count);
 
                 if (IsChangeLast)
                     LastTime = DateTime.Compare(DateTime.Now.Date.AddHours(12), DateTime.Now) <= 0 ? DateTime.Now.Date.AddHours(12) : DateTime.Now.Date.AddDays(-1).AddHours(12);//设定为当天12点数据
@@ -1299,7 +1299,7 @@ namespace BiliUPDesktopTool
                 #region Public Fields
 
                 public int code;
-                public Data_Template data;
+                public Data_Template data = new Data_Template();
 
                 #endregion Public Fields
 
@@ -1309,7 +1309,7 @@ namespace BiliUPDesktopTool
                 {
                     #region Public Fields
 
-                    public Stat_Template stat;
+                    public Stat_Template stat = new Stat_Template();
 
                     #endregion Public Fields
 
@@ -1340,7 +1340,7 @@ namespace BiliUPDesktopTool
                 #region Public Fields
 
                 public int code;
-                public Data_Template data;
+                public Data_Template data = new Data_Template();
 
                 #endregion Public Fields
 
@@ -1351,7 +1351,7 @@ namespace BiliUPDesktopTool
                     #region Public Fields
 
                     public Video_Template[] arc_audits;
-                    public Page_Template page;
+                    public Page_Template page = new Page_Template() { pn = 0, ps = 10, count = 0 };
 
                     #endregion Public Fields
 
