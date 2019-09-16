@@ -337,6 +337,7 @@
     </EmbeddedResource>
     <None Include="DataDesc.json" />
     <None Include="packages.config" />
+    <None Include="Plug-in_mainfirst_model.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

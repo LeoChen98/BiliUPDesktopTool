@@ -185,6 +185,53 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
+        /// 会抛出错误的获取指定url的内容
+        /// </summary>
+        /// <param name="url">url</param>
+        /// <param name="Cookies">cookies</param>
+        /// <returns>返回内容</returns>
+        public static string GetHTTPBodyThrow(string url, string Cookies = "", string Referer = "")
+        {
+            HttpWebRequest req = null;
+            HttpWebResponse rep = null;
+            StreamReader reader = null;
+            string body = "";
+            try
+            {
+                req = (HttpWebRequest)WebRequest.Create(url);
+
+                if (!string.IsNullOrEmpty(Cookies))
+                {
+                    CookieCollection CookiesC = SetCookies(Cookies, url);
+                    req.CookieContainer = new CookieContainer(CookiesC.Count)
+                    {
+                        PerDomainCapacity = CookiesC.Count
+                    };
+                    req.CookieContainer.Add(CookiesC);
+                }
+
+                req.Accept = "*/*";
+                req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
+                req.Referer = Referer;
+
+                rep = (HttpWebResponse)req.GetResponse();
+                reader = new StreamReader(rep.GetResponseStream());
+                body = reader.ReadToEnd();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (rep != null) rep.Close();
+                if (req != null) req.Abort();
+            }
+            return body;
+        }
+
+        /// <summary>
         /// POST方法
         /// </summary>
         /// <param name="url">地址</param>
