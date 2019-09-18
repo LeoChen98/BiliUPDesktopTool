@@ -69,8 +69,7 @@
             <TextBlock x:Name="Btn_MinSize" Text="-" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" Background="#02FFFFFF" Margin="0,0,39,0" Padding="17,11,0,0" MouseEnter="Btn_MinSize_MouseEnter" MouseLeave="Btn_MinSize_MouseLeave" MouseUp="Btn_MinSize_MouseUp" ToolTip="最小化" />
             <TextBlock x:Name="Btn_Close" Text="×" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" Background="#02FFFFFF" Padding="15,11,0,0" MouseEnter="Btn_Close_MouseEnter" MouseLeave="Btn_Close_MouseLeave" MouseUp="Btn_Close_MouseUp" ToolTip="关闭" />
             <TextBlock x:Name="Lbl_Title" Text="首页" HorizontalAlignment="Left" Margin="10,10,0,12.4" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
-            <Rectangle x:Name="rectangle" Fill="#FFD4D4D4" Height="1
-                       " Margin="0,39,0,0" VerticalAlignment="Top" />
+            <Rectangle x:Name="rectangle" Fill="#FFD4D4D4" Height="1" Margin="0,39,0,0" VerticalAlignment="Top" />
         </Grid>
     </Grid>
 </Window>

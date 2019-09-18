@@ -241,7 +241,8 @@ namespace BiliUPDesktopTool
                         if ((double)obj["data"]["level_exp"]["next_exp"] != -1)
                         {
                             ExpProgress = ((double)obj["data"]["level_exp"]["current_exp"] - (double)obj["data"]["level_exp"]["current_min"]) / ((double)obj["data"]["level_exp"]["next_exp"] - (double)obj["data"]["level_exp"]["current_min"]);
-                        }else
+                        }
+                        else
                         {
                             ExpProgress = 1;
                         }

@@ -447,8 +447,11 @@ namespace BiliUPDesktopTool
             private void GetRealTime()
             {
                 Data tmp_data;
+                bool IsChangeLast = false, IsError = false;
+
                 if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
                 {
+                    IsChangeLast = true;
                     tmp_data = new Data();
                 }
                 else
@@ -456,7 +459,6 @@ namespace BiliUPDesktopTool
                     tmp_data = new Data(data);
                 }
 
-                bool IsChangeLast = false, IsError = false;
                 int pn = 1;
                 Article_Real_Data_Template obj = new Article_Real_Data_Template();
                 do
@@ -478,7 +480,7 @@ namespace BiliUPDesktopTool
                                     tmp_data._share_real += i.stats.share;
                                     tmp_data._view_real += i.stats.view;
 
-                                    if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                                    if (IsChangeLast)
                                     {
                                         tmp_data._coin_real_last += i.stats.coin;
                                         tmp_data._fav_real_last += i.stats.favorite;
@@ -486,8 +488,6 @@ namespace BiliUPDesktopTool
                                         tmp_data._reply_real_last += i.stats.reply;
                                         tmp_data._share_real_last += i.stats.share;
                                         tmp_data._view_real_last += i.stats.view;
-
-                                        IsChangeLast = true;
                                     }
                                 }
                             }
@@ -1231,16 +1231,18 @@ namespace BiliUPDesktopTool
             private void GetRealTime()
             {
                 Data tmp_data;
+                bool IsChangeLast = false, IsError = false;
+
                 if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
                 {
                     tmp_data = new Data(GetCharge());
+                    IsChangeLast = true;
                 }
                 else
                 {
                     tmp_data = new Data(data);
                 }
 
-                bool IsChangeLast = false, IsError = false;
                 int pn = 1;
                 Video_Real_Data_Template obj = new Video_Real_Data_Template();
 
@@ -1266,7 +1268,7 @@ namespace BiliUPDesktopTool
                                     tmp_data._share_real += i.stat.share;
                                     tmp_data._comment_real += i.stat.reply;
 
-                                    if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
+                                    if (IsChangeLast)
                                     {
                                         tmp_data._coin_real_last += i.stat.coin;
                                         tmp_data._dm_real_last += i.stat.danmaku;
@@ -1275,8 +1277,6 @@ namespace BiliUPDesktopTool
                                         tmp_data._play_real_last += i.stat.view;
                                         tmp_data._share_real_last += i.stat.share;
                                         tmp_data._comment_real_last += i.stat.reply;
-
-                                        IsChangeLast = true;
                                     }
                                 }
                             }

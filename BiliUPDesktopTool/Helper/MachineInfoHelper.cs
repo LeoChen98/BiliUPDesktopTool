@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Management;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Management;
 
 namespace BiliUPDesktopTool
 {
-    class MachineInfoHelper
+    internal class MachineInfoHelper
     {
+        #region Public Methods
+
         public static string GetCPUInfo()
         {
-            using(ManagementClass cimobject = new ManagementClass("Win32_Processor"))
+            using (ManagementClass cimobject = new ManagementClass("Win32_Processor"))
             {
-                using(ManagementObjectCollection moc = cimobject.GetInstances())
+                using (ManagementObjectCollection moc = cimobject.GetInstances())
                 {
                     string strCpuID = null;
                     foreach (ManagementObject mo in moc)
@@ -24,9 +21,8 @@ namespace BiliUPDesktopTool
                     return strCpuID;
                 }
             }
-
-
         }
 
+        #endregion Public Methods
     }
 }
