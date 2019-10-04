@@ -9,8 +9,6 @@ namespace BiliUPDesktopTool
 {
     internal class MachineInfoHelper
     {
-        #region Public Methods
-
         public static string GetCPUInfo()
         {
             using (ManagementClass cimobject = new ManagementClass("Win32_Processor"))
