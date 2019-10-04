@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace BiliUPDesktopTool
 {
-    class MachineInfoHelper
+    internal class MachineInfoHelper
     {
+        #region Public Methods
+
         public static string GetCPUInfo()
         {
-            using(ManagementClass cimobject = new ManagementClass("Win32_Processor"))
+            using (ManagementClass cimobject = new ManagementClass("Win32_Processor"))
             {
-                using(ManagementObjectCollection moc = cimobject.GetInstances())
+                using (ManagementObjectCollection moc = cimobject.GetInstances())
                 {
                     string strCpuID = null;
                     foreach (ManagementObject mo in moc)
@@ -24,8 +26,6 @@ namespace BiliUPDesktopTool
                     return strCpuID;
                 }
             }
-
-
         }
 
         public static string GetMainDriveId()

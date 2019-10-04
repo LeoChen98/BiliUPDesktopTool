@@ -16,6 +16,16 @@ namespace BiliUPDesktopTool
         #region Public Fields
 
         /// <summary>
+        /// 主程序Build
+        /// </summary>
+        public const int _Build = 12;
+
+        /// <summary>
+        /// 主程序版本号
+        /// </summary>
+        public const string _Version = "2.0.0.12 Preview 4";
+
+        /// <summary>
         /// 账号信息实例
         /// </summary>
         public static Account account;
@@ -60,29 +70,9 @@ namespace BiliUPDesktopTool
         /// </summary>
         public static Update update;
 
-        /// <summary>
-        /// 主程序版本号
-        /// </summary>
-        public const string _Version = "2.0.0.12 Preview 4";
-        /// <summary>
-        /// 主程序Build
-        /// </summary>
-        public const int _Build = 12;
-
         #endregion Public Fields
 
         #region Public Properties
-
-        /// <summary>
-        /// 主程序版本号
-        /// </summary>
-        public static string Version
-        {
-            get
-            {
-                return _Version;
-            }
-        }
 
         /// <summary>
         /// 主程序Build
@@ -92,6 +82,17 @@ namespace BiliUPDesktopTool
             get
             {
                 return _Build;
+            }
+        }
+
+        /// <summary>
+        /// 主程序版本号
+        /// </summary>
+        public static string Version
+        {
+            get
+            {
+                return _Version;
             }
         }
 
@@ -136,8 +137,6 @@ namespace BiliUPDesktopTool
                 return "";
             }
         }
-
-        
 
         /// <summary>
         /// 获取指定url的内容
@@ -186,13 +185,60 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
+        /// 会抛出错误的获取指定url的内容
+        /// </summary>
+        /// <param name="url">url</param>
+        /// <param name="Cookies">cookies</param>
+        /// <returns>返回内容</returns>
+        public static string GetHTTPBodyThrow(string url, string Cookies = "", string Referer = "")
+        {
+            HttpWebRequest req = null;
+            HttpWebResponse rep = null;
+            StreamReader reader = null;
+            string body = "";
+            try
+            {
+                req = (HttpWebRequest)WebRequest.Create(url);
+
+                if (!string.IsNullOrEmpty(Cookies))
+                {
+                    CookieCollection CookiesC = SetCookies(Cookies, url);
+                    req.CookieContainer = new CookieContainer(CookiesC.Count)
+                    {
+                        PerDomainCapacity = CookiesC.Count
+                    };
+                    req.CookieContainer.Add(CookiesC);
+                }
+
+                req.Accept = "*/*";
+                req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
+                req.Referer = Referer;
+
+                rep = (HttpWebResponse)req.GetResponse();
+                reader = new StreamReader(rep.GetResponseStream());
+                body = reader.ReadToEnd();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (rep != null) rep.Close();
+                if (req != null) req.Abort();
+            }
+            return body;
+        }
+
+        /// <summary>
         /// POST方法
         /// </summary>
         /// <param name="url">地址</param>
         /// <param name="data">要post的数据</param>
         /// <param name="Cookies">cookies</param>
         /// <returns>返回内容</returns>
-        public static string PostHTTPBody(string url, string data = "", string Cookies = "", string Referer = "",string ContentType = "application/x-www-form-urlencoded; charset=UTF-8")
+        public static string PostHTTPBody(string url, string data = "", string Cookies = "", string Referer = "", string ContentType = "application/x-www-form-urlencoded; charset=UTF-8")
         {
             HttpWebRequest req = null;
             HttpWebResponse rep = null;
@@ -227,7 +273,7 @@ namespace BiliUPDesktopTool
                 reader = new StreamReader(rep.GetResponseStream());
                 body = reader.ReadToEnd();
             }
-            catch(WebException ex)
+            catch (WebException ex)
             {
             }
             finally

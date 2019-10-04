@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -52,8 +51,7 @@ namespace BiliUPDesktopTool
                 Source = Bas.settings,
                 Mode = BindingMode.OneWay,
                 Path = new PropertyPath("DataRefreshInterval"),
-                Converter = new IntervalConverter(),
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                Converter = new IntervalConverter()
             };
             TB_RefreshInterval.SetBinding(TextBox.TextProperty, bind_RefreshInterval);
         }
@@ -278,14 +276,16 @@ namespace BiliUPDesktopTool
 
         private void TB_RefreshInterval_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            Bas.settings.DataRefreshInterval = string.IsNullOrEmpty((sender as TextBox).Text) ? 0 : int.Parse((sender as TextBox).Text);
+            Bas.settings.DataRefreshInterval = string.IsNullOrEmpty((sender as TextBox).Text) ? 0 : int.Parse((sender as TextBox).Text) * 1000;
         }
 
         private void TB_RefreshInterval_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex re = new Regex("[^0-9.-]+");
-
-            e.Handled = re.IsMatch(e.Text);
+            int tmp;
+            if (int.TryParse(e.Text, out tmp) && tmp > 0)
+                e.Handled = false;
+            else
+                e.Handled = true;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

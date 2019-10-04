@@ -68,7 +68,7 @@ namespace BiliUPDesktopTool
                 Path = new PropertyPath("Level"),
                 Mode = BindingMode.OneWay,
                 Converter = new WidthNHeightValue_Times_Converter(),
-                ConverterParameter = -36
+                ConverterParameter = -36.5
             };
             Img_level.SetBinding(Canvas.TopProperty, bindlevel);
 

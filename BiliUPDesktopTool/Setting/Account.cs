@@ -238,7 +238,14 @@ namespace BiliUPDesktopTool
                         UName = obj["data"]["name"].ToString();
                         Desc = obj["data"]["sign"].ToString();
                         Level = (int)obj["data"]["level_exp"]["current_level"];
-                        ExpProgress = ((double)obj["data"]["level_exp"]["current_exp"] - (double)obj["data"]["level_exp"]["current_min"]) / ((double)obj["data"]["level_exp"]["next_exp"] - (double)obj["data"]["level_exp"]["current_min"]);
+                        if ((double)obj["data"]["level_exp"]["next_exp"] != -1)
+                        {
+                            ExpProgress = ((double)obj["data"]["level_exp"]["current_exp"] - (double)obj["data"]["level_exp"]["current_min"]) / ((double)obj["data"]["level_exp"]["next_exp"] - (double)obj["data"]["level_exp"]["current_min"]);
+                        }
+                        else
+                        {
+                            ExpProgress = 1;
+                        }
                     }
                 }
             }
