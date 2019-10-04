@@ -121,7 +121,7 @@ namespace BiliUPDesktopTool
             try
             {
                 FileStream file = new FileStream(fileName, FileMode.Open);
-                MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                using MD5 md5 = new MD5CryptoServiceProvider();
                 byte[] retVal = md5.ComputeHash(file);
                 file.Close();
 
