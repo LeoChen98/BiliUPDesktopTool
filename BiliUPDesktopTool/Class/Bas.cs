@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -119,7 +120,7 @@ namespace BiliUPDesktopTool
             try
             {
                 FileStream file = new FileStream(fileName, FileMode.Open);
-                System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
                 byte[] retVal = md5.ComputeHash(file);
                 file.Close();
 
@@ -270,7 +271,9 @@ namespace BiliUPDesktopTool
         public static void User_Statistics()
         {
             string cpu = MachineInfoHelper.GetCPUInfo();
-            string json = "{\"pid\":117,\"version\":" + Build + ",\"token\":\"" + cpu + "\"}";
+            string drive = MachineInfoHelper.GetMainDriveId();
+            string info = EncryptHelper.GetMD5_16(cpu+drive);
+            string json = "{\"pid\":117,\"version\":" + Build + ",\"token\":\"" + info + "\"}";
             PostHTTPBody("https://cloud.api.zhangbudademao.com/public/User_Statistics", json,"","application/json; charset=UTF-8");
         }
 

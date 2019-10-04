@@ -28,5 +28,17 @@ namespace BiliUPDesktopTool
 
         }
 
+        public static string GetMainDriveId()
+        {
+            ManagementClass mc = new ManagementClass("Win32_PhysicalMedia");
+            ManagementObjectCollection moc = mc.GetInstances();
+            string strID = null;
+            foreach (ManagementObject mo in moc)
+            {
+                strID = mo.Properties["SerialNumber"].Value.ToString();
+                break;
+            }
+            return strID;
+        }
     }
 }
