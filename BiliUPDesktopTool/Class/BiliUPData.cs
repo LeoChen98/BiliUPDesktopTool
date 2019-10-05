@@ -4,6 +4,10 @@ using System;
 using System.ComponentModel;
 using System.Threading;
 
+#pragma warning disable CS0649      //禁用初始值空警告
+#pragma warning disable IDE1006     //禁用命名规则信息
+#pragma warning disable IDE0044     //禁用只读提示
+
 namespace BiliUPDesktopTool
 {
     /// <summary>
