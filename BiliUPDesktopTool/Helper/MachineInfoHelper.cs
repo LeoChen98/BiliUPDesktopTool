@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Management;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Management;
 
 namespace BiliUPDesktopTool
 {
     internal class MachineInfoHelper
     {
+        #region Public Methods
+
         public static string GetCPUInfo()
         {
             using (ManagementClass cimobject = new ManagementClass("Win32_Processor"))
@@ -24,7 +21,6 @@ namespace BiliUPDesktopTool
                     return strCpuID;
                 }
             }
-            
         }
 
         public static string GetMainDriveId()
@@ -42,7 +38,8 @@ namespace BiliUPDesktopTool
                     return strID;
                 }
             }
-            
         }
+
+        #endregion Public Methods
     }
 }

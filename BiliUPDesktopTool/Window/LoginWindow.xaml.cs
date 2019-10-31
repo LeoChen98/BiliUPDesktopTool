@@ -1,10 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
-using QRCoder;
-using System;
+﻿using System;
 using System.Drawing;
-using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 namespace BiliUPDesktopTool
@@ -14,28 +13,32 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class LoginWindow : Window
     {
-        #region Private Fields
-
-        private Timer Monitor, Refresher;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public LoginWindow()
         {
             InitializeComponent();
 
-            //if (Bas.account == null) Bas.account = new Account();
+            BindingInit();
         }
 
         public LoginWindow(Account account)
         {
             InitializeComponent();
-            Bas.account = account;
+
+            BindingInit();
         }
 
         #endregion Public Constructors
+
+        #region Private Properties
+
+        private static int page
+        {
+            get; set;
+        }
+
+        #endregion Private Properties
 
         #region Public Methods
 
@@ -46,7 +49,7 @@ namespace BiliUPDesktopTool
         /// <returns>操作是否成功</returns>
         public bool? ShowDialog(string info)
         {
-            lbl_stauts.Dispatcher.Invoke(delegate () { lbl_stauts.Visibility = Visibility.Visible; lbl_stauts.Content = info; });
+            //lbl_stauts.Dispatcher.Invoke(delegate () { lbl_stauts.Visibility = Visibility.Visible; lbl_stauts.Content = info; });
             return ShowDialog();
         }
 
@@ -63,135 +66,186 @@ namespace BiliUPDesktopTool
 
         #region Private Methods
 
-        /// <summary>
-        /// 获取登陆二维码并显示
-        /// </summary>
-        private void GetQrcode()
+        private void BindingInit()
         {
-        re:
-            //获取二维码要包含的url
-            string str = Bas.GetHTTPBody("https://passport.bilibili.com/qrcode/getLoginUrl", "", "https://passport.bilibili.com/login");
-            if (!string.IsNullOrEmpty(str))
+            Binding bind_isautologin = new Binding
             {
-                JObject obj = JObject.Parse(str);
+                Source = Account.Instance,
+                Path = new PropertyPath("IsAutoLogin"),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            };
+            CB_AutoLogin.SetBinding(CheckBox.IsCheckedProperty, bind_isautologin);
 
-                if ((int)obj["code"] == 0)
-                {
-                    // 生成二维码的内容
-                    string strCode = obj["data"]["url"].ToString();
-                    QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                    QRCodeData qrCodeData = qrGenerator.CreateQrCode(strCode, QRCodeGenerator.ECCLevel.Q);
-                    QRCode qrcode = new QRCode(qrCodeData);
-
-                    //生成二维码位图
-                    Bitmap qrCodeImage = qrcode.GetGraphic(5, Color.Black, Color.White, null, 0, 6, false);
-
-                    qrcodeBox.Dispatcher.Invoke(delegate ()
-                    {
-                        IntPtr myImagePtr = qrCodeImage.GetHbitmap();     //创建GDI对象，返回指针
-
-                        BitmapSource imgsource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(myImagePtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());  //创建imgSource
-
-                        WinAPIHelper.DeleteObject(myImagePtr);
-
-                        qrcodeBox.Source = imgsource;
-                    });
-
-                    Monitor = new Timer(MonitorCallback, obj["data"]["oauthKey"].ToString(), 1000, 1000);
-                    Refresher = new Timer(RefresherCallback, null, 180000, Timeout.Infinite);
-                }
-            }
-            else goto re;
+            Binding bind_issavepwd = new Binding
+            {
+                Source = Account.Instance,
+                Path = new PropertyPath("IsSavePassword"),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            };
+            CB_MarkPwd.SetBinding(CheckBox.IsCheckedProperty, bind_issavepwd);
         }
 
         /// <summary>
-        /// 监视器回调
+        /// 关闭按钮
         /// </summary>
-        /// <param name="o">oauthKey</param>
-        private void MonitorCallback(object o)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Btn_Close_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            string oauthKey = o.ToString();
+            Close();
+        }
 
-            string str = Bas.PostHTTPBody("https://passport.bilibili.com/qrcode/getLoginInfo", "oauthKey=" + oauthKey + "&gourl=https%3A%2F%2Fwww.bilibili.com%2F", "", "https://passport.bilibili.com/login");
-            if (!string.IsNullOrEmpty(str))
+        private void Btn_Login_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TB_UName.Text))
             {
-                JObject obj = JObject.Parse(str);
+                System.Windows.Forms.MessageBox.Show("账号不能为空！");
+                return;
+            }
+            if (string.IsNullOrEmpty(TB_Pwd.Password))
+            {
+                System.Windows.Forms.MessageBox.Show("密码不能为空！");
+                return;
+            }
 
-                if (obj.Property("code") != null)
-                {
-                    if ((int)obj["code"] == 0)//登陆成功
-                    {
-                        //关闭监视器
-                        Monitor.Change(Timeout.Infinite, Timeout.Infinite);
-                        Refresher.Change(Timeout.Infinite, Timeout.Infinite);
+            Account.Instance.UserName = TB_UName.Text;
+            if ((bool)CB_MarkPwd.IsChecked)
+            {
+                Account.Instance.PassWord = TB_Pwd.Password;
+            }
 
-                        string Querystring = Regex.Split(obj["data"]["url"].ToString(), "\\?")[1];
-                        string[] KeyValuePair = Regex.Split(Querystring, "&");
-                        string cookies = "";
-                        for (int i = 0; i < KeyValuePair.Length - 1; i++)
-                        {
-                            cookies += KeyValuePair[i] + "; ";
+            BiliAccount.Account account = BiliAccount.Linq.ByPassword.LoginByPassword(TB_UName.Text, TB_Pwd.Password);
+            Account.Instance.Cookies = account.strCookies;
+            Account.Instance.Csrf_Token = account.CsrfToken;
+            Account.Instance.Expires = account.Expires_Cookies;
+            Account.Instance.AccessToken = account.AccessToken;
+            Account.Instance.RefreshToken = account.RefreshToken;
+            Account.Instance.Expires_AccessToken = account.Expires_AccessToken;
+            Account.Instance.Uid = account.Uid;
+            Account.Instance.LoginMode = Account.LOGINMODE.ByPassword;
+            Account.Instance.Islogin = true;
+            Account.Instance.GetInfo();
 
-                            string[] tmp = Regex.Split(KeyValuePair[i], "=");
-                            switch (tmp[0])
-                            {
-                                case "bili_jct":
-                                    Bas.account.Csrf_Token = tmp[1];
-                                    break;
+            Account.Instance.Save();
 
-                                case "DedeUserID":
-                                    Bas.account.Uid = tmp[1];
-                                    break;
+            Close();
+        }
 
-                                default:
-                                    break;
-                            }
-                        }
-                        cookies = cookies.Substring(0, cookies.Length - 2);
-                        DateTime expires = DateTime.Now.AddDays(29);
+        private void Btn_TabChange_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            switch (page)
+            {
+                case 0://账号密码
+                    ((Storyboard)this.FindResource("TabChangeA")).Begin();
+                    page = 1;
+                    break;
 
-                        Bas.account.Cookies = cookies;
-                        Bas.account.Expires = expires;
-                        Bas.account.Islogin = true;
-                        Bas.account.Save();
-                        Dispatcher.Invoke(delegate ()
-                        {
-                            DialogResult = true;
-                            Close();
-                        });
-                    }
-                }
-                else
-                {
-                    switch ((int)obj["data"])
-                    {
-                        case -4://未扫描
-                            break;
+                case 1://二维码
+                    ((Storyboard)this.FindResource("TabChangeB")).Begin();
+                    page = 0;
+                    break;
 
-                        case -5://已扫描
-                            lbl_stauts.Dispatcher.Invoke(delegate () { lbl_stauts.Visibility = Visibility.Visible; });
-                            break;
-
-                        case 0://登陆成功
-
-                            break;
-                    }
-                }
+                default:
+                    break;
             }
         }
 
         /// <summary>
-        /// 二维码过期刷新
+        /// 二维码刷新
         /// </summary>
-        /// <param name="o">忽略</param>
-        private void RefresherCallback(object o)
+        /// <param name="newQrCode"></param>
+        private void ByQRCode_QrCodeRefresh(Bitmap newQrCode)
         {
-            GetQrcode();
+            LoadQrCode(newQrCode);
+        }
+
+        /// <summary>
+        /// 二维码登陆状态刷新
+        /// </summary>
+        /// <param name="status"></param>
+        /// <param name="account"></param>
+        private void ByQRCode_QrCodeStatus_Changed(BiliAccount.Linq.ByQRCode.QrCodeStatus status, BiliAccount.Account account = null)
+        {
+            switch (status)
+            {
+                case BiliAccount.Linq.ByQRCode.QrCodeStatus.Wating:
+                    break;
+
+                case BiliAccount.Linq.ByQRCode.QrCodeStatus.Scaned:
+                    break;
+
+                case BiliAccount.Linq.ByQRCode.QrCodeStatus.Success:
+                    Account.Instance.Uid = account.Uid;
+                    Account.Instance.Expires = account.Expires_Cookies;
+                    Account.Instance.Cookies = account.strCookies;
+                    Account.Instance.Csrf_Token = account.CsrfToken;
+                    Account.Instance.Islogin = true;
+                    Account.Instance.LoginMode = Account.LOGINMODE.ByQrcode;
+                    Account.Instance.Save();
+                    Close();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 加载二维码
+        /// </summary>
+        private void LoadQrCode(Bitmap qrCodeImage)
+        {
+            qrcodeBox.Dispatcher.Invoke(delegate ()
+            {
+                IntPtr myImagePtr = qrCodeImage.GetHbitmap();     //创建GDI对象，返回指针
+
+                BitmapSource imgsource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(myImagePtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());  //创建imgSource
+
+                WinAPIHelper.DeleteObject(myImagePtr);
+
+                qrcodeBox.Source = imgsource;
+            });
+        }
+
+        /// <summary>
+        /// 拖动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TBk_Title_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void TextBlock_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                Btn_Login_MouseUp(null, null);
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            BindingOperations.ClearAllBindings(CB_AutoLogin);
+            BindingOperations.ClearAllBindings(CB_MarkPwd);
+
+            BiliAccount.Linq.ByQRCode.CancelLogin();
+            BiliAccount.Linq.ByQRCode.QrCodeStatus_Changed -= ByQRCode_QrCodeStatus_Changed;
+            BiliAccount.Linq.ByQRCode.QrCodeRefresh -= ByQRCode_QrCodeRefresh;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            GetQrcode();
+            TB_UName.Text = Account.Instance.UserName;
+            TB_Pwd.Password = Account.Instance.PassWord;
+
+            Bitmap qrCodeImage = BiliAccount.Linq.ByQRCode.LoginByQrCode();
+            LoadQrCode(qrCodeImage);
+            BiliAccount.Linq.ByQRCode.QrCodeStatus_Changed += ByQRCode_QrCodeStatus_Changed;
+            BiliAccount.Linq.ByQRCode.QrCodeRefresh += ByQRCode_QrCodeRefresh;
         }
 
         #endregion Private Methods

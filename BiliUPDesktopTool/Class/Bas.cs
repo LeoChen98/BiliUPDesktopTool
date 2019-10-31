@@ -18,57 +18,12 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 主程序Build
         /// </summary>
-        public const int _Build = 12;
+        public const int _Build = 13;
 
         /// <summary>
         /// 主程序版本号
         /// </summary>
-        public const string _Version = "2.0.0.12 Preview 4";
-
-        /// <summary>
-        /// 账号信息实例
-        /// </summary>
-        public static Account account;
-
-        /// <summary>
-        /// up主数据实例
-        /// </summary>
-        public static BiliUPData biliupdata;
-
-        /// <summary>
-        /// 桌面挂件位置设置窗口
-        /// </summary>
-        public static DesktopWindowSetter desktopwindowsetter;
-
-        /// <summary>
-        /// 登录窗体
-        /// </summary>
-        public static LoginWindow LoginWindow;
-
-        /// <summary>
-        /// 主窗口
-        /// </summary>
-        public static MainWindow MainWindow;
-
-        /// <summary>
-        /// 系统托盘
-        /// </summary>
-        public static NotifyIconHelper notifyIcon;
-
-        /// <summary>
-        /// 设置实例
-        /// </summary>
-        public static Settings settings;
-
-        /// <summary>
-        /// 皮肤实例
-        /// </summary>
-        public static Skin skin;
-
-        /// <summary>
-        /// 更新实例
-        /// </summary>
-        public static Update update;
+        public const string _Version = "2.0.0.13 Preview 5";
 
         #endregion Public Fields
 
@@ -86,6 +41,17 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
+        /// 开源许可
+        /// </summary>
+        public static string Thanks
+        {
+            get
+            {
+                return Properties.Resources.Thanks;
+            }
+        }
+
+        /// <summary>
         /// 主程序版本号
         /// </summary>
         public static string Version
@@ -93,17 +59,6 @@ namespace BiliUPDesktopTool
             get
             {
                 return _Version;
-            }
-        }
-
-        /// <summary>
-        /// 开源许可
-        /// </summary>
-        public string Thanks
-        {
-            get
-            {
-                return Properties.Resources.Thanks;
             }
         }
 
@@ -121,7 +76,8 @@ namespace BiliUPDesktopTool
             try
             {
                 FileStream file = new FileStream(fileName, FileMode.Open);
-                using (MD5 md5 = new MD5CryptoServiceProvider()) {
+                using (MD5 md5 = new MD5CryptoServiceProvider())
+                {
                     byte[] retVal = md5.ComputeHash(file);
                     file.Close();
 
@@ -132,7 +88,6 @@ namespace BiliUPDesktopTool
                     }
                     return sb.ToString();
                 }
-                    
             }
             catch
             {
@@ -314,18 +269,6 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
-        /// 用户统计
-        /// </summary>
-        public static void User_Statistics()
-        {
-            string cpu = MachineInfoHelper.GetCPUInfo();
-            string drive = MachineInfoHelper.GetMainDriveId();
-            string info = EncryptHelper.GetMD5_16(cpu+drive);
-            string json = "{\"pid\":117,\"version\":" + Build + ",\"token\":\"" + info + "\"}";
-            PostHTTPBody("https://cloud.api.zhangbudademao.com/public/User_Statistics", json,"","application/json; charset=UTF-8");
-        }
-
-        /// <summary>
         /// 解压功能
         /// </summary>
         /// <param name="fileToUnZip">待解压的文件</param>
@@ -403,6 +346,18 @@ namespace BiliUPDesktopTool
                 GC.Collect(1);
             }
             return result;
+        }
+
+        /// <summary>
+        /// 用户统计
+        /// </summary>
+        public static void User_Statistics()
+        {
+            string cpu = MachineInfoHelper.GetCPUInfo();
+            string drive = MachineInfoHelper.GetMainDriveId();
+            string info = EncryptHelper.GetMD5_16(cpu + drive);
+            string json = "{\"pid\":117,\"version\":" + Build + ",\"token\":\"" + info + "\"}";
+            PostHTTPBody("https://cloud.api.zhangbudademao.com/public/User_Statistics", json, "", "application/json; charset=UTF-8");
         }
 
         #endregion Public Methods

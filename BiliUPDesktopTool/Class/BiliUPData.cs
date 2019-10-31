@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading;
 
 #pragma warning disable CS0649      //禁用初始值空警告
@@ -15,6 +16,17 @@ namespace BiliUPDesktopTool
     /// </summary>
     internal class BiliUPData
     {
+        private static BiliUPData intance;
+
+        public static BiliUPData Intance
+        {
+            get
+            {
+                if (intance == null) intance = new BiliUPData();
+                return intance;
+            }
+        }
+
         #region Public Fields
 
         /// <summary>
@@ -48,12 +60,12 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 初始化up主数据
         /// </summary>
-        public BiliUPData()
+        private BiliUPData()
         {
             article = new Article();
             video = new Video();
 
-            Refresher = new Timer((o) => { Refresh(); }, null, 0, Bas.settings.DataRefreshInterval);
+            Refresher = new Timer((o) => { Refresh(); }, null, 0, Settings.Instance.DataRefreshInterval);
         }
 
         #endregion Public Constructors
@@ -75,7 +87,7 @@ namespace BiliUPDesktopTool
         /// <returns>刷新后的实例</returns>
         public BiliUPData Refresh()
         {
-            if (Bas.account.Islogin == true && !IsRefreshing)
+            if (Account.Instance.Islogin == true && !IsRefreshing)
             {
                 IsRefreshing = true;
                 article.Refresh();
@@ -129,7 +141,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._coin + data._coin_real - data._coin_real_last;
                     }
@@ -152,7 +164,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._coin_incr + data._coin_real - data._coin_real_last;
                     }
@@ -175,7 +187,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._fav + data._fav_real - data._fav_real_last;
                     }
@@ -198,7 +210,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._fav_incr + data._fav_real - data._fav_real_last;
                     }
@@ -221,7 +233,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._like + data._like_real - data._like_real_last;
                     }
@@ -244,7 +256,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._like_incr + data._like_real - data._like_real_last;
                     }
@@ -267,7 +279,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._reply + data._reply_real - data._reply_real_last;
                     }
@@ -290,7 +302,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._reply_incr + data._reply_real - data._reply_real_last;
                     }
@@ -313,7 +325,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._share + data._share_real - data._share_real_last;
                     }
@@ -336,7 +348,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._share_incr + data._share_real - data._share_real_last;
                     }
@@ -359,7 +371,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._view + data._view_real - data._view_real_last;
                     }
@@ -382,7 +394,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._view_incr + data._view_real - data._view_real_last;
                     }
@@ -410,7 +422,7 @@ namespace BiliUPDesktopTool
             {
                 GetRealTime();
 
-                string str = Bas.GetHTTPBody("https://member.bilibili.com/x/h5/data/article", Bas.account.Cookies, "https://member.bilibili.com/studio/gabriel/data-center/overview");
+                string str = Bas.GetHTTPBody("https://member.bilibili.com/x/h5/data/article", Account.Instance.Cookies, "https://member.bilibili.com/studio/gabriel/data-center/overview");
                 if (!string.IsNullOrEmpty(str))
                 {
                     try
@@ -469,7 +481,7 @@ namespace BiliUPDesktopTool
                 {
                     try
                     {
-                        string str = Bas.GetHTTPBodyThrow("https://api.bilibili.com/x/article/creative/article/list?group=0&sort=&pn=" + pn, Bas.account.Cookies, "https://member.bilibili.com/v2");
+                        string str = Bas.GetHTTPBodyThrow("https://api.bilibili.com/x/article/creative/article/list?group=0&sort=&pn=" + pn, Account.Instance.Cookies, "https://member.bilibili.com/v2");
                         if (!string.IsNullOrEmpty(str))
                         {
                             obj = JsonConvert.DeserializeObject<Article_Real_Data_Template>(str);
@@ -689,7 +701,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._coin + data._coin_real - data._coin_real_last;
                     }
@@ -712,7 +724,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._coin_incr + data._coin_real - data._coin_real_last;
                     }
@@ -735,7 +747,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._comment + data._comment_real - data._comment_real_last;
                     }
@@ -758,7 +770,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._comment_incr + data._comment_real - data._comment_real_last;
                     }
@@ -781,7 +793,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._dm + data._dm_real - data._dm_real_last;
                     }
@@ -804,7 +816,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._dm_incr + data._dm_real - data._dm_real_last;
                     }
@@ -856,7 +868,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._elec_total + data._elec - data._elec_last;
                     }
@@ -905,7 +917,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._fav + data._fav_real - data._fav_real_last;
                     }
@@ -928,7 +940,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._fav_incr + data._fav_real - data._fav_real_last;
                     }
@@ -977,7 +989,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._like + data._like_real - data._like_real_last;
                     }
@@ -1000,7 +1012,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._like_incr + data._like_real - data._like_real_last;
                     }
@@ -1023,7 +1035,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._play + data._play_real - data._play_real_last;
                     }
@@ -1046,7 +1058,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._play_incr + data._play_real - data._play_real_last;
                     }
@@ -1069,7 +1081,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._share + data._share_real - data._share_real_last;
                     }
@@ -1092,7 +1104,7 @@ namespace BiliUPDesktopTool
             {
                 get
                 {
-                    if (Bas.settings.IsRealTime)
+                    if (Settings.Instance.IsRealTime)
                     {
                         return data._share_incr + data._share_real - data._share_real_last;
                     }
@@ -1120,7 +1132,7 @@ namespace BiliUPDesktopTool
             {
                 GetRealTime();
 
-                string str = Bas.GetHTTPBody("https://member.bilibili.com/x/h5/data/overview?type=0", Bas.account.Cookies, "https://member.bilibili.com/studio/gabriel/data-center/overview");
+                string str = Bas.GetHTTPBody("https://member.bilibili.com/x/h5/data/overview?type=0", Account.Instance.Cookies, "https://member.bilibili.com/studio/gabriel/data-center/overview");
                 if (!string.IsNullOrEmpty(str))
                 {
                     try
@@ -1177,7 +1189,7 @@ namespace BiliUPDesktopTool
             /// <returns>电池数</returns>
             private double GetCharge()
             {
-                string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/elec/balance", Bas.account.Cookies);
+                string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/elec/balance", Account.Instance.Cookies);
                 if (!string.IsNullOrEmpty(str))
                 {
                     try
@@ -1206,7 +1218,7 @@ namespace BiliUPDesktopTool
             /// <returns>[0]:前天收入;[1]:本月收入</returns>
             private double[] GetGrowUp()
             {
-                string str = Bas.GetHTTPBody("https://api.bilibili.com/studio/growup/web/up/summary", Bas.account.Cookies);
+                string str = Bas.GetHTTPBody("https://api.bilibili.com/studio/growup/web/up/summary", Account.Instance.Cookies);
                 if (!string.IsNullOrWhiteSpace(str))
                 {
                     try
@@ -1254,7 +1266,7 @@ namespace BiliUPDesktopTool
                 {
                     try
                     {
-                        string str = Bas.GetHTTPBodyThrow("https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=" + pn + "&ps=10&coop=1", Bas.account.Cookies, "https://member.bilibili.com/v2");
+                        string str = Bas.GetHTTPBodyThrow("https://member.bilibili.com/x/web/archives?status=pubed&pn=" + pn + "&ps=10&coop=1&interactive=1", Account.Instance.Cookies, "https://member.bilibili.com/v2");
 
                         if (!string.IsNullOrEmpty(str))
                         {
@@ -1298,6 +1310,8 @@ namespace BiliUPDesktopTool
                     if (IsChangeLast)
                         LastTime = DateTime.Compare(DateTime.Now.Date.AddHours(12), DateTime.Now) <= 0 ? DateTime.Now.Date.AddHours(12) : DateTime.Now.Date.AddDays(-1).AddHours(12);//设定为当天12点数据
                 }
+
+                Debug.WriteLine(data._play_real);
             }
 
             #endregion Private Methods

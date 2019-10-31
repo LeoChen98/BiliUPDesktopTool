@@ -188,6 +188,7 @@
     </ApplicationDefinition>
     <Compile Include="Class\Update.cs" />
     <Compile Include="Class\Program.cs" />
+    <Compile Include="Class\WindowsManager.cs" />
     <Compile Include="Controls\EventItem.xaml.cs">
       <DependentUpon>EventItem.xaml</DependentUpon>
     </Compile>
@@ -391,6 +392,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\level.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\noun_Key_233117.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\noun_Key_233117_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\noun_small qr code_2002633.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\noun_small qr code_2002633_w.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

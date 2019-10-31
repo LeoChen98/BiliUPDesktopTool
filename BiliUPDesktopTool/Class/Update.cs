@@ -13,10 +13,10 @@ namespace BiliUPDesktopTool
     {
         #region Private Fields
 
+        private static Update instance;
         private bool _IsFinished;
         private string _Status;
         private string _UpdateText;
-        private UpdateWindow uw;
 
         #endregion Private Fields
 
@@ -27,6 +27,15 @@ namespace BiliUPDesktopTool
         #endregion Public Events
 
         #region Public Properties
+
+        public static Update Instance
+        {
+            get
+            {
+                if (instance == null) instance = new Update();
+                return instance;
+            }
+        }
 
         /// <summary>
         /// 是否已完成
@@ -99,12 +108,11 @@ namespace BiliUPDesktopTool
                             if (IsGUI)
                             {
                                 UpdateText = "当前版本：" + Bas.Version + "\r\n最新版本：" + jobj["data"]["version"].ToString() + "(" + jobj["data"]["updatetime"].ToString() + "更新)\r\n\r\n更新内容：\r\n" + jobj["data"]["content"].ToString();
-                                uw = (uw == null || uw.IsVisible == false) ? new UpdateWindow() : uw;
-                                uw.Show();
+                                WindowsManager.Instance.GetWindow<UpdateWindow>().Show();
                             }
                             else
                             {
-                                Bas.notifyIcon.ShowToolTip("检查到新版本！请通过“检查更新”屏幕更新。");
+                                NotifyIconHelper.Instance.ShowToolTip("检查到新版本！请通过“检查更新”屏幕更新。");
                             }
                         }
                     }

@@ -11,19 +11,17 @@ namespace BiliUPDesktopTool
     {
         #region Private Fields
 
-        private About about;
-
+        private static NotifyIconHelper instance;
         private NotifyIcon NI;
-        private SettingWindow OSetter;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
         /// 初始化系统托盘
         /// </summary>
-        public NotifyIconHelper()
+        private NotifyIconHelper()
         {
             NI = new NotifyIcon()
             {
@@ -37,7 +35,20 @@ namespace BiliUPDesktopTool
             NI.DoubleClick += NI_DoubleClick;
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
+
+        #region Public Properties
+
+        public static NotifyIconHelper Instance
+        {
+            get
+            {
+                if (instance == null) instance = new NotifyIconHelper();
+                return instance;
+            }
+        }
+
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -110,36 +121,30 @@ namespace BiliUPDesktopTool
 
         private void MI_About_Click(object sender, EventArgs e)
         {
-            about = (about == null || about.IsVisible == false) ? new About() : about;
-            about.Show();
+            WindowsManager.Instance.GetWindow<About>().Show();
         }
 
         private void MI_CheckUpdate_Click(object sender, EventArgs e)
         {
-            Bas.update.CheckUpdate();
+            Update.Instance.CheckUpdate();
         }
 
         private void MI_DataDisplaySetting_Click(object sender, EventArgs e)
         {
-            if (Bas.MainWindow == null)
-            {
-                Bas.MainWindow = new MainWindow();
-            }
-            Bas.MainWindow.Show();
-            Bas.MainWindow.ToTab(1);
+            WindowsManager.Instance.GetWindow<MainWindow>().Show();
+            WindowsManager.Instance.GetWindow<MainWindow>().ToTab(1);
         }
 
         private void MI_DesktopWndPosSetting_Click(object sender, EventArgs e)
         {
-            if (Bas.desktopwindowsetter == null || !Bas.desktopwindowsetter.IsVisible)
+            if (!WindowsManager.Instance.GetWindow<DesktopWindowSetter>().IsVisible)
             {
-                Bas.desktopwindowsetter = new DesktopWindowSetter();
-                Bas.desktopwindowsetter.Show();
+                WindowsManager.Instance.GetWindow<DesktopWindowSetter>().Show();
             }
             else
             {
-                Bas.desktopwindowsetter.Activate();
-                Bas.desktopwindowsetter.WindowState = System.Windows.WindowState.Normal;
+                WindowsManager.Instance.GetWindow<DesktopWindowSetter>().Activate();
+                WindowsManager.Instance.GetWindow<DesktopWindowSetter>().WindowState = System.Windows.WindowState.Normal;
             }
         }
 
@@ -150,31 +155,25 @@ namespace BiliUPDesktopTool
 
         private void MI_OverallSetting_Click(object sender, EventArgs e)
         {
-            if (OSetter == null || !OSetter.IsVisible)
+            if (!WindowsManager.Instance.GetWindow<SettingWindow>().IsVisible)
             {
-                OSetter = new SettingWindow();
-                OSetter.Show();
+                WindowsManager.Instance.GetWindow<SettingWindow>().Show();
             }
             else
             {
-                OSetter.Activate();
-                OSetter.WindowState = System.Windows.WindowState.Normal;
+                WindowsManager.Instance.GetWindow<SettingWindow>().Activate();
+                WindowsManager.Instance.GetWindow<SettingWindow>().WindowState = System.Windows.WindowState.Normal;
             }
         }
 
         private void MI_ShowMainWindow_Click(object sender, EventArgs e)
         {
-            if (Bas.MainWindow == null)
-            {
-                Bas.MainWindow = new MainWindow();
-            }
-            Bas.MainWindow.Show();
+            WindowsManager.Instance.GetWindow<MainWindow>().Show();
         }
 
         private void NI_DoubleClick(object sender, EventArgs e)
         {
-            if (Bas.MainWindow == null) Bas.MainWindow = new MainWindow();
-            Bas.MainWindow.Show();
+            WindowsManager.Instance.GetWindow<MainWindow>().Show();
         }
 
         #endregion Private Methods

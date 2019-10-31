@@ -40,7 +40,7 @@ namespace BiliUPDesktopTool
         {
             Binding bind_RealMode = new Binding()
             {
-                Source = Bas.settings,
+                Source = Settings.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("IsRealTime")
             };
@@ -48,7 +48,7 @@ namespace BiliUPDesktopTool
 
             Binding bind_RefreshInterval = new Binding()
             {
-                Source = Bas.settings,
+                Source = Settings.Instance,
                 Mode = BindingMode.OneWay,
                 Path = new PropertyPath("DataRefreshInterval"),
                 Converter = new IntervalConverter()
@@ -68,7 +68,7 @@ namespace BiliUPDesktopTool
 
         private void Btn_ActiveDataViewer_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Bas.settings.IsDataViewerDisplay = true;
+            Settings.Instance.IsDataViewerDisplay = true;
             DisActived.Visibility = Visibility.Collapsed;
             Blur.Radius = 0;
         }
@@ -85,7 +85,7 @@ namespace BiliUPDesktopTool
 
         private void Btn_DeActiveDataViewer_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Bas.settings.IsDataViewerDisplay = false;
+            Settings.Instance.IsDataViewerDisplay = false;
             Btn_Tab_MouseUp(Btn_OverallData, null);
             DisActived.Visibility = Visibility.Visible;
             Blur.Radius = 5;
@@ -103,15 +103,14 @@ namespace BiliUPDesktopTool
 
         private void Btn_SetDataViewerPos_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (Bas.desktopwindowsetter == null || !Bas.desktopwindowsetter.IsVisible)
+            if (!WindowsManager.Instance.GetWindow<DesktopWindowSetter>().IsVisible)
             {
-                Bas.desktopwindowsetter = new DesktopWindowSetter();
-                Bas.desktopwindowsetter.Show();
+                WindowsManager.Instance.GetWindow<DesktopWindowSetter>().Show();
             }
             else
             {
-                Bas.desktopwindowsetter.Activate();
-                Bas.desktopwindowsetter.WindowState = WindowState.Normal;
+                WindowsManager.Instance.GetWindow<DesktopWindowSetter>().Activate();
+                WindowsManager.Instance.GetWindow<DesktopWindowSetter>().WindowState = WindowState.Normal;
             }
         }
 
@@ -206,11 +205,11 @@ namespace BiliUPDesktopTool
 
             int id = -1;
 
-            foreach (List<string> item in Bas.settings.DataViewSelected)
+            foreach (List<string> item in Settings.Instance.DataViewSelected)
             {
                 if (item != null && item[0] == DV_Selected.DataMode[0] && item[1] == DV_Selected.DataMode[1])
                 {
-                    id = Bas.settings.DataViewSelected.IndexOf(item);
+                    id = Settings.Instance.DataViewSelected.IndexOf(item);
                     break;
                 }
             }
@@ -237,9 +236,9 @@ namespace BiliUPDesktopTool
         {
             for (int i = 0; i <= 3; i++)
             {
-                if (Bas.settings.DataViewSelected[i] == DV_Selected.DataMode)
+                if (Settings.Instance.DataViewSelected[i] == DV_Selected.DataMode)
                 {
-                    Bas.settings.DataViewSelected[i] = null;
+                    Settings.Instance.DataViewSelected[i] = null;
                     break;
                 }
             }
@@ -252,31 +251,31 @@ namespace BiliUPDesktopTool
             switch ((sender as Border).Tag)
             {
                 case "LT":
-                    Bas.settings.DataViewSelected[0] = DV_Selected.DataMode;
+                    Settings.Instance.DataViewSelected[0] = DV_Selected.DataMode;
                     break;
 
                 case "RT":
-                    Bas.settings.DataViewSelected[1] = DV_Selected.DataMode;
+                    Settings.Instance.DataViewSelected[1] = DV_Selected.DataMode;
                     break;
 
                 case "LB":
-                    Bas.settings.DataViewSelected[2] = DV_Selected.DataMode;
+                    Settings.Instance.DataViewSelected[2] = DV_Selected.DataMode;
                     break;
 
                 case "RB":
-                    Bas.settings.DataViewSelected[3] = DV_Selected.DataMode;
+                    Settings.Instance.DataViewSelected[3] = DV_Selected.DataMode;
                     break;
             }
 
-            Bas.settings.PropertyChangedA(Bas.settings, new PropertyChangedEventArgs("DataViewSelected"));
-            Bas.settings.DataViewSelected_Changed_Send();
+            Settings.Instance.PropertyChangedA(Settings.Instance, new PropertyChangedEventArgs("DataViewSelected"));
+            Settings.Instance.DataViewSelected_Changed_Send();
 
             (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xcc, 0xb2, 0xb2, 0xb2));
         }
 
         private void TB_RefreshInterval_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            Bas.settings.DataRefreshInterval = string.IsNullOrEmpty((sender as TextBox).Text) ? 0 : int.Parse((sender as TextBox).Text) * 1000;
+            Settings.Instance.DataRefreshInterval = string.IsNullOrEmpty((sender as TextBox).Text) ? 0 : int.Parse((sender as TextBox).Text) * 1000;
         }
 
         private void TB_RefreshInterval_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -290,15 +289,15 @@ namespace BiliUPDesktopTool
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Bas.settings.IsDataViewerDisplay)
+            if (Settings.Instance.IsDataViewerDisplay)
             {
-                Bas.settings.IsDataViewerDisplay = true;
+                Settings.Instance.IsDataViewerDisplay = true;
                 DisActived.Visibility = Visibility.Collapsed;
                 Blur.Radius = 0;
             }
             else
             {
-                Bas.settings.IsDataViewerDisplay = false;
+                Settings.Instance.IsDataViewerDisplay = false;
                 DisActived.Visibility = Visibility.Visible;
                 Blur.Radius = 5;
             }
@@ -311,6 +310,13 @@ namespace BiliUPDesktopTool
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
+            DV_Selected = null;
+
+            SettingBox.Children.Clear();
+            OverallTab.Children.Clear();
+            VideoTab.Children.Clear();
+            ArticleTab.Children.Clear();
+
             BindingOperations.ClearAllBindings(TBN_RealMode);
             BindingOperations.ClearAllBindings(TB_RefreshInterval);
         }

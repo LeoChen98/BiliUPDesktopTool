@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace BiliUPDesktopTool
 {
@@ -20,32 +21,26 @@ namespace BiliUPDesktopTool
             //用户统计
             Bas.User_Statistics();
 
-            //初始化公共变量
-            Bas.settings = new Settings();
-            Bas.account = new Account();
-            Bas.skin = new Skin();
+            _ = NotifyIconHelper.Instance;
 
-            if (Bas.settings.IsFirstRun)
+            if (Settings.Instance.IsFirstRun)
             {
                 //首次运行执行
-                LisenceWindow LW = new LisenceWindow();
-                if (LW.ShowDialog() != true)
+                if (WindowsManager.Instance.GetWindow<LisenceWindow>().ShowDialog() != true)
                 {
                     Environment.Exit(-2);
                 }
-                Bas.settings.IsFirstRun = false;
+                Settings.Instance.IsFirstRun = false;
             }
 
-            Bas.biliupdata = new BiliUPData();
-            Bas.notifyIcon = new NotifyIconHelper();
-            Bas.update = new Update();
+            //初始化WPF为20帧
+            Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata { DefaultValue = 25 });
 
-            if (Bas.settings.IsAutoCheckUpdate) Bas.update.CheckUpdate(false);
+            if (Settings.Instance.IsAutoCheckUpdate) Update.Instance.CheckUpdate(false);
 
             if (Environment.CommandLine.ToLower().IndexOf("-s") == -1)
             {
-                Bas.MainWindow = new MainWindow();
-                Bas.MainWindow.Show();
+                WindowsManager.Instance.GetWindow<MainWindow>().Show();
             }
 
             Application app = new Application();
@@ -91,30 +86,27 @@ namespace BiliUPDesktopTool
         {
             Application app = e as Application;
 
-            DesktopWindow dw = null;
             app.Dispatcher.Invoke(() =>
             {
-                dw = new DesktopWindow();
-                dw.Show();
+                WindowsManager.Instance.GetWindow<DesktopWindow>().Show();
             });
 
             while (true)
             {
                 try
                 {
-                    if ((dw == null || !dw.IsVisible) && Bas.settings.IsDataViewerDisplay)
+                    if ((!WindowsManager.Instance.GetWindow<DesktopWindow>().IsVisible) && Settings.Instance.IsDataViewerDisplay)
                     {
                         app.Dispatcher.Invoke(() =>
                         {
-                            dw = new DesktopWindow();
-                            dw.Show();
+                            WindowsManager.Instance.GetWindow<DesktopWindow>().Show();
                         });
                     }
-                    else if (!Bas.settings.IsDataViewerDisplay)
+                    else if (!Settings.Instance.IsDataViewerDisplay)
                     {
                         app.Dispatcher.Invoke(() =>
                         {
-                            dw.Close();
+                            WindowsManager.Instance.GetWindow<DesktopWindow>().Close();
                         });
                     }
                 }

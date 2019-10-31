@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
-        Title="B站UP主桌面工具" Height="450" Width="800" ResizeMode="NoResize" Opacity="1" WindowStyle="None" Icon="/BiliUPDesktopTool;component/Image/icon.ico" MouseDown="Window_MouseDown" Focusable="True" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+        Title="B站UP主桌面工具" Height="450" Width="800" ResizeMode="NoResize" Opacity="1" WindowStyle="None" Icon="/BiliUPDesktopTool;component/Image/icon.ico" MouseDown="Window_MouseDown" Focusable="True" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Window.Effect>
         <DropShadowEffect Opacity="0.6" Direction="300" />
     </Window.Effect>

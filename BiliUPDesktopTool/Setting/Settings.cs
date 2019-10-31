@@ -16,14 +16,16 @@ namespace BiliUPDesktopTool
         /// </summary>
         private const string savepath = "Settings.dms";
 
+        private static Settings instance;
+
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
         /// 初始化设置类
         /// </summary>
-        public Settings() : base(new SettingsTable(), savepath)
+        private Settings() : base(new SettingsTable(), savepath)
         {
             if (DataViewSelected == null)
             {
@@ -31,7 +33,7 @@ namespace BiliUPDesktopTool
             }
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Events
 
@@ -40,6 +42,15 @@ namespace BiliUPDesktopTool
         #endregion Public Events
 
         #region Public Properties
+
+        public static Settings Instance
+        {
+            get
+            {
+                if (instance == null) instance = new Settings();
+                return instance;
+            }
+        }
 
         /// <summary>
         /// 数据刷新间隔（单位：毫秒，默认值：60000（1分钟））

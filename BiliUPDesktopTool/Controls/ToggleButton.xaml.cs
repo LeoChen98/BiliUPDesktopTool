@@ -115,6 +115,11 @@ namespace BiliUPDesktopTool
             }
         }
 
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            StatusChanged -= ToggleButton_StatusChanged;
+        }
+
         #endregion Private Methods
     }
 }

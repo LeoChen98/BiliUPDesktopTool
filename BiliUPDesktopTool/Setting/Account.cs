@@ -29,6 +29,8 @@ namespace BiliUPDesktopTool
         /// </summary>
         private const string encryptKey = "{C6F403E9-53FF-4B75-8182-DC03BBE6944A}";
 
+        private static Account instance;
+
         /// <summary>
         /// 刷新器
         /// </summary>
@@ -36,12 +38,12 @@ namespace BiliUPDesktopTool
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
         /// 初始化账号数据
         /// </summary>
-        public Account()
+        private Account()
         {
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\"))
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\");
@@ -70,7 +72,7 @@ namespace BiliUPDesktopTool
         /// 空白初始化函数
         /// </summary>
         /// <param name="flag"></param>
-        public Account(EmptyInit flag)
+        private Account(EmptyInit flag)
         {
             ST = new AccountTable();
 
@@ -78,9 +80,59 @@ namespace BiliUPDesktopTool
             Refresher.Change(0, 1800000);
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
+
+        #region Public Enums
+
+        /// <summary>
+        /// 登录模式枚举
+        /// </summary>
+        public enum LOGINMODE
+        {
+            /// <summary>
+            /// 未知，通常为未登录
+            /// </summary>
+            Unknown = 0,
+
+            /// <summary>
+            /// 账号密码登陆
+            /// </summary>
+            ByPassword = 1,
+
+            /// <summary>
+            /// 二维码登录
+            /// </summary>
+            ByQrcode = 2
+        }
+
+        #endregion Public Enums
 
         #region Public Properties
+
+        public static Account Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Account();
+                }
+                return instance;
+            }
+        }
+
+        /// <summary>
+        /// AccessToken
+        /// </summary>
+        public string AccessToken
+        {
+            get { return ST.AccessToken; }
+            set
+            {
+                ST.AccessToken = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("AccessToken"));
+            }
+        }
 
         /// <summary>
         /// Cookies字符串
@@ -134,6 +186,19 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
+        /// AccessToken的过期时间
+        /// </summary>
+        public DateTime Expires_AccessToken
+        {
+            get { return ST.Expires_AccessToken; }
+            set
+            {
+                ST.Expires_AccessToken = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("Expires_AccessToken"));
+            }
+        }
+
+        /// <summary>
         /// 经验进度
         /// </summary>
         public double ExpProgress
@@ -143,6 +208,32 @@ namespace BiliUPDesktopTool
             {
                 ST.ExpProgress = value;
                 PropertyChangedA(this, new PropertyChangedEventArgs("ExpProgress"));
+            }
+        }
+
+        /// <summary>
+        /// 自动登录
+        /// </summary>
+        public bool IsAutoLogin
+        {
+            get { return ST.IsAutoLogin; }
+            set
+            {
+                ST.IsAutoLogin = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("IsAutoLogin"));
+            }
+        }
+
+        /// <summary>
+        /// 记住密码
+        /// </summary>
+        public bool IsSavePassword
+        {
+            get { return ST.IsSavePassword; }
+            set
+            {
+                ST.IsSavePassword = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("IsSavePassword"));
             }
         }
 
@@ -159,6 +250,29 @@ namespace BiliUPDesktopTool
             }
         }
 
+        public LOGINMODE LoginMode
+        {
+            get { return ST.LoginMode; }
+            set
+            {
+                ST.LoginMode = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("LoginMode"));
+            }
+        }
+
+        /// <summary>
+        /// 登陆密码
+        /// </summary>
+        public string PassWord
+        {
+            get { return ST.PassWord; }
+            set
+            {
+                ST.PassWord = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("PassWord"));
+            }
+        }
+
         /// <summary>
         /// 头像
         /// </summary>
@@ -169,6 +283,19 @@ namespace BiliUPDesktopTool
             {
                 ST.Pic = value;
                 PropertyChangedA(this, new PropertyChangedEventArgs("Pic"));
+            }
+        }
+
+        /// <summary>
+        /// RefreshToken
+        /// </summary>
+        public string RefreshToken
+        {
+            get { return ST.RefreshToken; }
+            set
+            {
+                ST.RefreshToken = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("RefreshToken"));
             }
         }
 
@@ -198,6 +325,22 @@ namespace BiliUPDesktopTool
             }
         }
 
+        /// <summary>
+        /// 登陆账号
+        /// </summary>
+        public string UserName
+        {
+            get
+            {
+                return ST.UserName;
+            }
+            set
+            {
+                ST.UserName = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("UserName"));
+            }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -214,11 +357,11 @@ namespace BiliUPDesktopTool
                 JObject obj = JObject.Parse(str);
                 if ((int)obj["code"] == 0)
                 {
-                    Bas.MainWindow.NotifyMsg("修改简介成功！");
+                    WindowsManager.Instance.GetWindow<MainWindow>().NotifyMsg("修改简介成功！");
                     return;
                 }
             }
-            Bas.MainWindow.NotifyMsg("修改简介失败！" + str);
+            WindowsManager.Instance.GetWindow<MainWindow>().NotifyMsg("修改简介失败！" + str);
         }
 
         /// <summary>
@@ -258,8 +401,7 @@ namespace BiliUPDesktopTool
         {
             System.Windows.Application.Current?.Dispatcher.Invoke(() =>
             {
-                if (Bas.LoginWindow == null) Bas.LoginWindow = new LoginWindow();
-                if (!Bas.LoginWindow.IsVisible) Bas.LoginWindow.ShowDialog();
+                if (WindowsManager.Instance.GetWindow<LoginWindow>() != null && !WindowsManager.Instance.GetWindow<LoginWindow>().IsVisible) WindowsManager.Instance.GetWindow<LoginWindow>().ShowDialog();
                 GetInfo();
             });
         }
@@ -287,7 +429,14 @@ namespace BiliUPDesktopTool
         public void SignOut()
         {
             Islogin = false;
-            ST = new AccountTable();
+
+            ST.AccessToken = "";
+            ST.Cookies = "";
+            ST.Csrf_Token = "";
+            ST.RefreshToken = "";
+            ST.PassWord = "";
+            ST.Uid = "";
+
             Save();
         }
 
@@ -296,11 +445,45 @@ namespace BiliUPDesktopTool
         /// </summary>
         public void Update()
         {
-            System.Windows.Application.Current?.Dispatcher.Invoke(() =>
+            switch (ST.LoginMode)
             {
-                if (Bas.LoginWindow == null) Bas.LoginWindow = new LoginWindow();
-                if (!Bas.LoginWindow.IsVisible) Bas.LoginWindow.ShowDialog();
-            });
+                case LOGINMODE.ByPassword:
+                    if (ST.IsAutoLogin)
+                    {
+                        if (!BiliAccount.Linq.ByPassword.IsTokenAvailable(AccessToken))
+                        {
+                            Expires_AccessToken = (DateTime)BiliAccount.Linq.ByPassword.RefreshToken(AccessToken, RefreshToken);
+                        }
+
+                        object[] o = BiliAccount.Linq.ByPassword.SSO(AccessToken);
+                        Cookies = o[0].ToString();
+                        Csrf_Token = o[1].ToString();
+                        Expires = (DateTime)o[2];
+
+                        Islogin = true;
+
+                        Save();
+                    }
+                    else
+                    {
+                        System.Windows.Application.Current?.Dispatcher.Invoke(() =>
+                        {
+                            if (WindowsManager.Instance.GetWindow<LoginWindow>() != null && !WindowsManager.Instance.GetWindow<LoginWindow>().IsVisible) WindowsManager.Instance.GetWindow<LoginWindow>().ShowDialog();
+                        });
+                    }
+                    break;
+
+                case LOGINMODE.ByQrcode:
+                    System.Windows.Application.Current?.Dispatcher.Invoke(() =>
+                    {
+                        if (WindowsManager.Instance.GetWindow<LoginWindow>() != null && !WindowsManager.Instance.GetWindow<LoginWindow>().IsVisible) WindowsManager.Instance.GetWindow<LoginWindow>().ShowDialog();
+                    });
+                    break;
+
+                case LOGINMODE.Unknown:
+                default:
+                    break;
+            }
         }
 
         #endregion Public Methods
@@ -314,15 +497,24 @@ namespace BiliUPDesktopTool
         {
             #region Public Fields
 
+            public string AccessToken;
             public string Cookies;
             public string Csrf_Token;
             public string Desc;
             public DateTime Expires;
+            public DateTime Expires_AccessToken;
             public double ExpProgress;
+            public bool IsAutoLogin = true;
+            public bool IsSavePassword = true;
             public int Level;
+            public LOGINMODE LoginMode;
+            public string PassWord;
             public string Pic;
+            public string RefreshToken;
             public string Uid;
             public string UName;
+
+            public string UserName;
 
             #endregion Public Fields
         }

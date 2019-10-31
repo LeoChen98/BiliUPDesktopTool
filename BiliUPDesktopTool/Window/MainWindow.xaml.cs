@@ -74,7 +74,10 @@ namespace BiliUPDesktopTool
 
         private void Btn_Close_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Hide();
+            Statistics_Box.Children.Clear();
+            Close();
+            GC.Collect();
+            GC.Collect(1);
         }
 
         private void Btn_Home_MouseEnter(object sender, MouseEventArgs e)
@@ -203,6 +206,10 @@ namespace BiliUPDesktopTool
             {
                 DragMove();
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

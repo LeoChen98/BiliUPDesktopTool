@@ -184,4 +184,16 @@
   <data name="noface" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\noface.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="noun_Key_233117" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\noun_Key_233117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noun_Key_233117_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\noun_Key_233117_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noun_small_qr_code_2002633" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\noun_small qr code_2002633.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noun_small_qr_code_2002633_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\noun_small qr code_2002633_w.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

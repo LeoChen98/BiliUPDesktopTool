@@ -67,13 +67,13 @@ namespace BiliUPDesktopTool
                     case "video":
                         binding_num = new Binding()
                         {
-                            Source = Bas.biliupdata.video,
+                            Source = BiliUPData.Intance.video,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[1])
                         };
                         binding_incr = new Binding()
                         {
-                            Source = Bas.biliupdata.video,
+                            Source = BiliUPData.Intance.video,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[2])
                         };
@@ -84,13 +84,13 @@ namespace BiliUPDesktopTool
                     case "article":
                         binding_num = new Binding()
                         {
-                            Source = Bas.biliupdata.article,
+                            Source = BiliUPData.Intance.article,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[1])
                         };
                         binding_incr = new Binding()
                         {
-                            Source = Bas.biliupdata.article,
+                            Source = BiliUPData.Intance.article,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[2])
                         };
@@ -129,13 +129,13 @@ namespace BiliUPDesktopTool
                     case "video":
                         binding_num = new Binding()
                         {
-                            Source = Bas.biliupdata.video,
+                            Source = BiliUPData.Intance.video,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[1])
                         };
                         binding_incr = new Binding()
                         {
-                            Source = Bas.biliupdata.video,
+                            Source = BiliUPData.Intance.video,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[2])
                         };
@@ -146,13 +146,13 @@ namespace BiliUPDesktopTool
                     case "article":
                         binding_num = new Binding()
                         {
-                            Source = Bas.biliupdata.article,
+                            Source = BiliUPData.Intance.article,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[1])
                         };
                         binding_incr = new Binding()
                         {
-                            Source = Bas.biliupdata.article,
+                            Source = BiliUPData.Intance.article,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[2])
                         };
@@ -190,7 +190,7 @@ namespace BiliUPDesktopTool
         {
             Binding bind_datatitle_color = new Binding()
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };
@@ -236,6 +236,8 @@ namespace BiliUPDesktopTool
             BindingOperations.ClearAllBindings(this);
             BindingOperations.ClearAllBindings(num);
             BindingOperations.ClearAllBindings(incr);
+
+            incr.PostiveAndNegativeChanged -= Incr_PostiveAndNegativeChanged;
         }
 
         #endregion Private Methods

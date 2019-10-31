@@ -11,12 +11,6 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class SettingWindow : Window
     {
-        #region Private Fields
-
-        private DesktopWindowSetter dws;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public SettingWindow()
@@ -46,8 +40,7 @@ namespace BiliUPDesktopTool
 
         private void BTN_SetDesktopWndPos_Click(object sender, RoutedEventArgs e)
         {
-            dws = (dws == null || dws.IsVisible == false) ? new DesktopWindowSetter() : dws;
-            dws.Show();
+            WindowsManager.Instance.GetWindow<DesktopWindowSetter>().Show();
         }
 
         private void SetAutoRunShow()
@@ -67,7 +60,7 @@ namespace BiliUPDesktopTool
         {
             Binding bindAutoCheckUpdate = new Binding()
             {
-                Source = Bas.settings,
+                Source = Settings.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("IsAutoCheckUpdate")
             };

@@ -43,7 +43,7 @@ namespace BiliUPDesktopTool
         {
             Binding bind_IsFinished = new Binding()
             {
-                Source = Bas.update,
+                Source = Update.Instance,
                 Mode = BindingMode.OneWay,
                 Path = new PropertyPath("IsFinished")
             };
@@ -51,7 +51,7 @@ namespace BiliUPDesktopTool
 
             Binding bind_UpdateText = new Binding()
             {
-                Source = Bas.update,
+                Source = Update.Instance,
                 Mode = BindingMode.OneWay,
                 Path = new PropertyPath("UpdateText")
             };
@@ -59,7 +59,7 @@ namespace BiliUPDesktopTool
 
             Binding bind_Status = new Binding()
             {
-                Source = Bas.update,
+                Source = Update.Instance,
                 Mode = BindingMode.OneWay,
                 Path = new PropertyPath("Status")
             };
@@ -75,7 +75,7 @@ namespace BiliUPDesktopTool
         {
             BTN_Cancel.IsEnabled = false;
             BTN_Update.IsEnabled = false;
-            Bas.update.DoUpdate();
+            Update.Instance.DoUpdate();
         }
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

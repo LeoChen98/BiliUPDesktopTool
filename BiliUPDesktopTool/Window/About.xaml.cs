@@ -21,12 +21,12 @@ namespace BiliUPDesktopTool
 
         private void BTN_CheckUpdate_Click(object sender, RoutedEventArgs e)
         {
-            Bas.update.CheckUpdate();
+            Update.Instance.CheckUpdate();
         }
 
         private void BTN_ShowLisence_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("Explorer.exe", "https://zhangbudademao.com/BiliUPDesktopTool/Lisence.html");
+            Process.Start("Explorer.exe", "https://www.zhangbudademao.com/BiliUPDesktopTool/Lisence.html");
         }
 
         #endregion Private Methods

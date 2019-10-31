@@ -29,7 +29,7 @@ namespace BiliUPDesktopTool
             //绑定窗体Top
             Binding bind_top = new Binding
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_Top")
             };
@@ -38,7 +38,7 @@ namespace BiliUPDesktopTool
             //绑定窗体Left
             Binding bind_left = new Binding
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_Left")
             };
@@ -47,7 +47,7 @@ namespace BiliUPDesktopTool
             //绑定窗体透明度
             Binding bind_opacity = new Binding
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_Opacity")
             };
@@ -56,7 +56,7 @@ namespace BiliUPDesktopTool
             //绑定背景
             Binding bind_background = new Binding
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_Bg")
             };

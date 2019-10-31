@@ -254,7 +254,7 @@ namespace BiliUPDesktopTool
         {
             Binding bind_fontcolor = new Binding()
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };

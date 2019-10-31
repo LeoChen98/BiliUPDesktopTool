@@ -30,7 +30,7 @@ namespace BiliUPDesktopTool
             ShowDesktop();
 
             //建立备份
-            _Backup = new double[2] { Bas.skin.DesktopWnd_Top, Bas.skin.DesktopWnd_Left };
+            _Backup = new double[2] { Skin.Instance.DesktopWnd_Top, Skin.Instance.DesktopWnd_Left };
 
             //初始化数据绑定
             BindingInit();
@@ -48,7 +48,7 @@ namespace BiliUPDesktopTool
             //绑定窗体Top
             Binding bind_top = new Binding
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_Top")
             };
@@ -57,7 +57,7 @@ namespace BiliUPDesktopTool
             //绑定窗体Left
             Binding bind_left = new Binding
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_Left")
             };
@@ -66,14 +66,14 @@ namespace BiliUPDesktopTool
 
         private void Btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-            Bas.skin.DesktopWnd_Top = _Backup[0];
-            Bas.skin.DesktopWnd_Left = _Backup[1];
+            Skin.Instance.DesktopWnd_Top = _Backup[0];
+            Skin.Instance.DesktopWnd_Left = _Backup[1];
             Close();
         }
 
         private void Btn_comfirm_Click(object sender, RoutedEventArgs e)
         {
-            Bas.skin.Save();
+            Skin.Instance.Save();
             Close();
         }
 

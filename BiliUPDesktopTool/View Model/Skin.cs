@@ -17,18 +17,29 @@ namespace BiliUPDesktopTool
         /// </summary>
         private const string savepath = "Skin.dms";
 
+        private static Skin instance;
+
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
         /// 初始化皮肤
         /// </summary>
-        public Skin() : base(new SkinTable(), savepath) { }
+        private Skin() : base(new SkinTable(), savepath) { }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Properties
+
+        public static Skin Instance
+        {
+            get
+            {
+                if (instance == null) instance = new Skin();
+                return instance;
+            }
+        }
 
         /// <summary>
         /// 桌面窗体的背景颜色

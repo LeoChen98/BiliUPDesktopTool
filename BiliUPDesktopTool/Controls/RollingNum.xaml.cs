@@ -50,7 +50,7 @@ namespace BiliUPDesktopTool
         {
             Binding bind_fontcolor = new Binding()
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };
@@ -67,11 +67,6 @@ namespace BiliUPDesktopTool
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < nums.Children.Count; i++)
-            {
-                BindingOperations.ClearAllBindings(nums.Children[i]);
-            }
-
             BindingOperations.ClearAllBindings(this);
         }
 

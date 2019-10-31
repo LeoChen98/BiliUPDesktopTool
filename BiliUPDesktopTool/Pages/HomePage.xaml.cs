@@ -40,7 +40,7 @@ namespace BiliUPDesktopTool
         {
             Binding binduname = new Binding()
             {
-                Source = Bas.account,
+                Source = Account.Instance,
                 Path = new PropertyPath("UName"),
                 Mode = BindingMode.OneWay
             };
@@ -48,7 +48,7 @@ namespace BiliUPDesktopTool
 
             Binding bindface = new Binding()
             {
-                Source = Bas.account,
+                Source = Account.Instance,
                 Path = new PropertyPath("Pic"),
                 Mode = BindingMode.OneWay
             };
@@ -56,7 +56,7 @@ namespace BiliUPDesktopTool
 
             Binding binddesc = new Binding()
             {
-                Source = Bas.account,
+                Source = Account.Instance,
                 Path = new PropertyPath("Desc"),
                 Mode = BindingMode.OneWay
             };
@@ -64,7 +64,7 @@ namespace BiliUPDesktopTool
 
             Binding bindlevel = new Binding()
             {
-                Source = Bas.account,
+                Source = Account.Instance,
                 Path = new PropertyPath("Level"),
                 Mode = BindingMode.OneWay,
                 Converter = new WidthNHeightValue_Times_Converter(),
@@ -74,7 +74,7 @@ namespace BiliUPDesktopTool
 
             Binding bindlevelprocess = new Binding()
             {
-                Source = Bas.account,
+                Source = Account.Instance,
                 Path = new PropertyPath("ExpProgress"),
                 Mode = BindingMode.OneWay,
                 Converter = new WidthNHeightValue_Times_Converter(),
@@ -84,7 +84,7 @@ namespace BiliUPDesktopTool
 
             Binding bindlevelpercentage = new Binding()
             {
-                Source = Bas.account,
+                Source = Account.Instance,
                 Path = new PropertyPath("ExpProgress"),
                 Mode = BindingMode.OneWay,
                 Converter = new Percentage_Converter()
@@ -109,7 +109,7 @@ namespace BiliUPDesktopTool
 
         private void Btn_Login_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Bas.account.Login();
+            Account.Instance.Login();
             NeedLoginBox.Visibility = Visibility.Hidden;
             InfoBox.Visibility = Visibility.Visible;
         }
@@ -121,7 +121,18 @@ namespace BiliUPDesktopTool
 
         private void Btn_SignOut_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Bas.account.SignOut();
+            Account.Instance.SignOut();
+
+            if (Account.Instance.Islogin)
+            {
+                InfoBox.Visibility = Visibility.Visible;
+                NeedLoginBox.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                InfoBox.Visibility = Visibility.Hidden;
+                NeedLoginBox.Visibility = Visibility.Visible;
+            }
         }
 
         private void Btn_Space_MouseEnter(object sender, MouseEventArgs e)
@@ -136,12 +147,13 @@ namespace BiliUPDesktopTool
 
         private void Btn_Space_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Process.Start("https://space.bilibili.com/" + Bas.account.Uid);
+            Process.Start("https://space.bilibili.com/" + Account.Instance.Uid);
         }
 
         private void Btn_UpdateAccount_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Bas.account.Update();
+            Account.Instance.SignOut();
+            Account.Instance.Login();
         }
 
         private void Btn_Upload_MouseUp(object sender, MouseButtonEventArgs e)
@@ -170,7 +182,7 @@ namespace BiliUPDesktopTool
 
         private void Refresh(object state)
         {
-            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/index/operation", Bas.account.Cookies);
+            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/index/operation", Account.Instance.Cookies);
             if (!string.IsNullOrEmpty(str))
             {
                 JObject obj = JObject.Parse(str);
@@ -211,19 +223,19 @@ namespace BiliUPDesktopTool
 
         private void TB_Desc_LostFocus(object sender, RoutedEventArgs e)
         {
-            Bas.account.ChangeDesc(TBk_desc.Text);
+            Account.Instance.ChangeDesc(TBk_desc.Text);
             TB_Desc.Visibility = Visibility.Hidden;
         }
 
         private void TB_Desc_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            Bas.account.ChangeDesc(TBk_desc.Text);
+            Account.Instance.ChangeDesc(TBk_desc.Text);
             TB_Desc.Visibility = Visibility.Hidden;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Bas.account.Islogin)
+            if (Account.Instance.Islogin)
             {
                 InfoBox.Visibility = Visibility.Visible;
                 NeedLoginBox.Visibility = Visibility.Hidden;
@@ -245,6 +257,8 @@ namespace BiliUPDesktopTool
             BindingOperations.ClearAllBindings(Lbl_Level);
 
             EventList.Children.Clear();
+
+            Refresher.Dispose();
         }
 
         #endregion Private Methods
