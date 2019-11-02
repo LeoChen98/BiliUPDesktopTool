@@ -12,5 +12,6 @@
         <Label x:Name="label_Copy" Content="展示窗口：" HorizontalAlignment="Left" Height="30" Margin="35,65,0,0" VerticalAlignment="Top" Width="65" />
         <Button x:Name="BTN_SetDesktopWndPos" Content="设置展示窗口位置" HorizontalAlignment="Left" Height="30" Margin="105,63,0,0" VerticalAlignment="Top" Width="123" Click="BTN_SetDesktopWndPos_Click" />
         <CheckBox x:Name="CB_IsAutoCheckUpdate" Content="自动检查更新" HorizontalAlignment="Left" Margin="42,100,0,0" VerticalAlignment="Top" />
+        <local:MsgBox x:Name="msgbox" Margin="0,0,0,25" MaxWidth="400" Height="24" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Opacity="0"/>
     </Grid>
 </Window>

@@ -165,7 +165,7 @@ namespace BiliUPDesktopTool
             }
             else
             {
-                MessageBox.Show("校验错误，请稍后再试！");
+                MsgBoxPushHelper.RaisePushMsg("校验错误，请稍后再试！");
                 IsFinished = true;
             }
             (sender as WebClient).Dispose();

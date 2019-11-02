@@ -158,7 +158,7 @@ namespace BiliUPDesktopTool
 
         private void Btn_Upload_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("功能暂未开放");
+            MsgBoxPushHelper.RaisePushMsg("功能暂未开放");
         }
 
         private void Lbl_Desc_MouseEnter(object sender, MouseEventArgs e)

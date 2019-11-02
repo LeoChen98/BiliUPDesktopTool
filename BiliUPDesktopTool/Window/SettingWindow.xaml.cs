@@ -18,6 +18,8 @@ namespace BiliUPDesktopTool
             InitializeComponent();
 
             setBinding();
+
+            MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
         }
 
         #endregion Public Constructors
@@ -66,7 +68,13 @@ namespace BiliUPDesktopTool
             };
             CB_IsAutoCheckUpdate.SetBinding(CheckBox.IsCheckedProperty, bindAutoCheckUpdate);
         }
-
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SetAutoRunShow();

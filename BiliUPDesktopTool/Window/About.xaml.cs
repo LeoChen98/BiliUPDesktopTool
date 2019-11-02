@@ -13,12 +13,20 @@ namespace BiliUPDesktopTool
         public About()
         {
             InitializeComponent();
+
+            MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
         }
 
         #endregion Public Constructors
 
         #region Private Methods
-
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
+        }
         private void BTN_CheckUpdate_Click(object sender, RoutedEventArgs e)
         {
             Update.Instance.CheckUpdate();

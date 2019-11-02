@@ -216,5 +216,6 @@
             <Image x:Name="Img_Qrcode" Source="/BiliUPDesktopTool;component/Image/noun_small qr code_2002633.png" Margin="97,0,-0.4,0" Opacity="0" />
             <Image x:Name="Img_Qrcode_B" Source="/BiliUPDesktopTool;component/Image/noun_small qr code_2002633_w.png" Margin="97,0,-0.4,0" />
         </Grid>
+        <local:MsgBox x:Name="msgbox" Margin="0,0,0,25" MaxWidth="400" Height="24" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Opacity="0"/>
     </Grid>
 </Window>

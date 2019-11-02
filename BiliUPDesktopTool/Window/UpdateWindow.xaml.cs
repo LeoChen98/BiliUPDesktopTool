@@ -23,6 +23,16 @@ namespace BiliUPDesktopTool
             InitializeComponent();
 
             BindingInit();
+
+            MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
+        }
+
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
         }
 
         #endregion Public Constructors

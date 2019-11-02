@@ -20,8 +20,16 @@ namespace BiliUPDesktopTool
             InitializeComponent();
 
             BindingInit();
-        }
 
+            MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
+        }
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
+        }
         public LoginWindow(Account account)
         {
             InitializeComponent();
@@ -49,7 +57,7 @@ namespace BiliUPDesktopTool
         /// <returns>操作是否成功</returns>
         public bool? ShowDialog(string info)
         {
-            //lbl_stauts.Dispatcher.Invoke(delegate () { lbl_stauts.Visibility = Visibility.Visible; lbl_stauts.Content = info; });
+            MsgBoxPushHelper.RaisePushMsg(info);
             return ShowDialog();
         }
 
@@ -101,12 +109,12 @@ namespace BiliUPDesktopTool
         {
             if (string.IsNullOrEmpty(TB_UName.Text))
             {
-                System.Windows.Forms.MessageBox.Show("账号不能为空！");
+                MsgBoxPushHelper.RaisePushMsg("账号不能为空！");
                 return;
             }
             if (string.IsNullOrEmpty(TB_Pwd.Password))
             {
-                System.Windows.Forms.MessageBox.Show("密码不能为空！");
+                MsgBoxPushHelper.RaisePushMsg("密码不能为空！");
                 return;
             }
 
@@ -117,20 +125,39 @@ namespace BiliUPDesktopTool
             }
 
             BiliAccount.Account account = BiliAccount.Linq.ByPassword.LoginByPassword(TB_UName.Text, TB_Pwd.Password);
-            Account.Instance.Cookies = account.strCookies;
-            Account.Instance.Csrf_Token = account.CsrfToken;
-            Account.Instance.Expires = account.Expires_Cookies;
-            Account.Instance.AccessToken = account.AccessToken;
-            Account.Instance.RefreshToken = account.RefreshToken;
-            Account.Instance.Expires_AccessToken = account.Expires_AccessToken;
-            Account.Instance.Uid = account.Uid;
-            Account.Instance.LoginMode = Account.LOGINMODE.ByPassword;
-            Account.Instance.Islogin = true;
-            Account.Instance.GetInfo();
 
-            Account.Instance.Save();
+            switch (account.LoginStatus)
+            {
 
-            Close();
+                case BiliAccount.Account.LoginStatusEnum.NeedCaptcha://验证码
+                    
+                    break;
+                case BiliAccount.Account.LoginStatusEnum.WrongPassword://密码错误
+                    
+                    break;
+
+                case BiliAccount.Account.LoginStatusEnum.ByPassword:
+                    Account.Instance.Cookies = account.strCookies;
+                    Account.Instance.Csrf_Token = account.CsrfToken;
+                    Account.Instance.Expires = account.Expires_Cookies;
+                    Account.Instance.AccessToken = account.AccessToken;
+                    Account.Instance.RefreshToken = account.RefreshToken;
+                    Account.Instance.Expires_AccessToken = account.Expires_AccessToken;
+                    Account.Instance.Uid = account.Uid;
+                    Account.Instance.LoginMode = Account.LOGINMODE.ByPassword;
+                    Account.Instance.Islogin = true;
+                    Account.Instance.GetInfo();
+
+                    Account.Instance.Save();
+
+                    MsgBoxPushHelper.PushMsg -= MsgBoxPushHelper_PushMsg;
+                    Close();
+
+                    MsgBoxPushHelper.RaisePushMsg($"登录成功！{account.LoginStatus}");
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void Btn_TabChange_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -170,10 +197,8 @@ namespace BiliUPDesktopTool
         {
             switch (status)
             {
-                case BiliAccount.Linq.ByQRCode.QrCodeStatus.Wating:
-                    break;
-
                 case BiliAccount.Linq.ByQRCode.QrCodeStatus.Scaned:
+                    MsgBoxPushHelper.RaisePushMsg("扫描成功，请在手机上确认登录。");
                     break;
 
                 case BiliAccount.Linq.ByQRCode.QrCodeStatus.Success:
@@ -184,7 +209,11 @@ namespace BiliUPDesktopTool
                     Account.Instance.Islogin = true;
                     Account.Instance.LoginMode = Account.LOGINMODE.ByQrcode;
                     Account.Instance.Save();
+
+                    MsgBoxPushHelper.PushMsg -= MsgBoxPushHelper_PushMsg;
                     Close();
+
+                    MsgBoxPushHelper.RaisePushMsg($"登录成功！{account.LoginStatus}");
                     break;
 
                 default:
