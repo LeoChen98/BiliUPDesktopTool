@@ -133,6 +133,8 @@ namespace BiliUPDesktopTool
                 InfoBox.Visibility = Visibility.Hidden;
                 NeedLoginBox.Visibility = Visibility.Visible;
             }
+
+            MsgBoxPushHelper.RaisePushMsg("已成功注销登录！");
         }
 
         private void Btn_Space_MouseEnter(object sender, MouseEventArgs e)

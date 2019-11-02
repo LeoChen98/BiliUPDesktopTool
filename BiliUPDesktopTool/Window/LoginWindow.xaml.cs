@@ -128,12 +128,8 @@ namespace BiliUPDesktopTool
 
             switch (account.LoginStatus)
             {
-
-                case BiliAccount.Account.LoginStatusEnum.NeedCaptcha://验证码
-                    
-                    break;
                 case BiliAccount.Account.LoginStatusEnum.WrongPassword://密码错误
-                    
+                    MsgBoxPushHelper.RaisePushMsg("账号或密码错误！");
                     break;
 
                 case BiliAccount.Account.LoginStatusEnum.ByPassword:
@@ -156,6 +152,8 @@ namespace BiliUPDesktopTool
                     MsgBoxPushHelper.RaisePushMsg($"登录成功！{account.LoginStatus}");
                     break;
                 default:
+                    MsgBoxPushHelper.RaisePushMsg($"登录错误，请尝试使用二维码登录。{account.LoginStatus}");
+                    Btn_TabChange_MouseUp(null, null);
                     break;
             }
         }
@@ -165,12 +163,12 @@ namespace BiliUPDesktopTool
             switch (page)
             {
                 case 0://账号密码
-                    ((Storyboard)this.FindResource("TabChangeA")).Begin();
+                    ((Storyboard)FindResource("TabChangeA")).Begin();
                     page = 1;
                     break;
 
                 case 1://二维码
-                    ((Storyboard)this.FindResource("TabChangeB")).Begin();
+                    ((Storyboard)FindResource("TabChangeB")).Begin();
                     page = 0;
                     break;
 
