@@ -10,6 +10,7 @@
              d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411" MouseUp="UserControl_MouseUp" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <UserControl.Resources>
         <local:DataDesc_Converter x:Key="DataDesc_Converter" />
+        <local:Brush2ColorValue_Converter x:Key="Brush2ColorValue_Converter"/>
         <sys:String x:Key="DataDesc">{
   "article": {
     "view": "文章点击量。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
@@ -48,12 +49,380 @@
                 </Path>
             </Canvas>
             <Grid x:Name="TabBtnBox" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="720">
-                <TextBlock x:Name="Btn_OverallData" Text="全局数据" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Foreground="#FF00A1D6" Background="#02FFFFFF" Padding="5" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" Tag="0" />
-                <TextBlock x:Name="Btn_VideoData" Text="视频数据" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="5" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="1" Foreground="Black" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" />
-                <TextBlock x:Name="Btn_ArticleData" Text="专栏数据" Margin="170,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="5" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="2" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" HorizontalAlignment="Left" Width="75" />
-                <TextBlock x:Name="Btn_OtherSettings" Text="其他设置" Margin="250,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="5" Cursor="Hand" MouseUp="Btn_Tab_MouseUp" Tag="3" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave" HorizontalAlignment="Left" Width="75" />
-                <Canvas>
-                    <Path x:Name="TabSelectedLine" Stroke="#FF00A1D6" Canvas.Left="10" Fill="#FF00A1D6">
+                <TextBlock x:Name="Btn_OverallData" Text="全局数据" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Foreground="#FF00A1D6" Background="#02FFFFFF" Padding="5" Cursor="Hand" Tag="0"  MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave">
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="TextBlock.MouseUp">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="Btn_Overall_Click">
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_OverallData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_OverallData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF00A1D6">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_VideoData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_VideoData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_ArticleData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_ArticleData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_OtherSettings">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_OtherSettings}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="TabSelectedLine">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=TabSelectedLine}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="10,0,0,0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="SettingBoxWrapper">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=SettingBoxWrapper}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="SelectBoxWrapper">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin,ElementName=SelectBoxWrapper}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,0,-1000,0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+                <TextBlock x:Name="Btn_VideoData" Text="视频数据" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="5" Cursor="Hand" Tag="1" Foreground="#FF000000" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave">
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="TextBlock.MouseUp">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_OverallData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_OverallData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_VideoData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_VideoData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF00A1D6">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_ArticleData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_ArticleData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_OtherSettings">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_OtherSettings}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="TabSelectedLine">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=TabSelectedLine}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="90,0,0,0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="SettingBoxWrapper">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=SettingBoxWrapper}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="SelectBoxWrapper">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin,ElementName=SelectBoxWrapper}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="-500,0,-500,0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+                <TextBlock x:Name="Btn_ArticleData" Text="专栏数据" Margin="170,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="5" Cursor="Hand" Tag="2" HorizontalAlignment="Left" Width="75" Foreground="#FF000000" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave">
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="TextBlock.MouseUp">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_OverallData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_OverallData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_VideoData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_VideoData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_ArticleData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_ArticleData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF00A1D6">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_OtherSettings">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_OtherSettings}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="TabSelectedLine">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=TabSelectedLine}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="170,0,0,0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="SettingBoxWrapper">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=SettingBoxWrapper}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="SelectBoxWrapper">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin,ElementName=SelectBoxWrapper}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="-1000,0,0,0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+                <TextBlock x:Name="Btn_OtherSettings" Text="其他设置" Margin="250,0,0,0" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" Background="#02FFFFFF" Padding="5" Cursor="Hand" Tag="3" HorizontalAlignment="Left" Width="75" Foreground="#FF000000" MouseEnter="Btn_Tab_MouseEnter" MouseLeave="Btn_Tab_MouseLeave">
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="TextBlock.MouseUp">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_OverallData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_OverallData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_VideoData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_VideoData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_ArticleData">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_ArticleData}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_OtherSettings">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_OtherSettings}">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF00A1D6">
+                                                <EasingColorKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingColorKeyFrame.EasingFunction>
+                                            </EasingColorKeyFrame>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="TabSelectedLine">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=TabSelectedLine}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="250,0,0,0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="SettingBoxWrapper">
+                                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=SettingBoxWrapper}">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="-740, 0, 0, 0">
+                                                <EasingThicknessKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </EasingThicknessKeyFrame.EasingFunction>
+                                            </EasingThicknessKeyFrame>
+                                        </ThicknessAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+                <Canvas x:Name="TabSelectedLine" Margin="10,0,0,0">
+                    <Path Stroke="#FF00A1D6" Fill="#FF00A1D6">
                         <Path.Data>
                             <PathGeometry Figures="M 0,30 L 35,30 L 38,29 L 41,30 L 70,30 L 0,30" />
                         </Path.Data>
@@ -456,11 +825,203 @@
                         </local:ToggleButton>
                         <Label x:Name="label40" Content="刷新频率：                     秒" HorizontalAlignment="Left" Margin="11,61,0,0" VerticalAlignment="Top" />
                         <TextBox x:Name="TB_RefreshInterval" HorizontalAlignment="Left" Height="26" Margin="77,61,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="67" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" PreviewTextInput="TB_RefreshInterval_PreviewTextInput" LostKeyboardFocus="TB_RefreshInterval_LostKeyboardFocus" />
-                        <Border x:Name="Btn_SetDataViewerPos" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="10,104,572,230" VerticalAlignment="Center" Width="158" CornerRadius="10" Background="#FF00A1D6" MouseEnter="Btn_SetDataViewerPos_MouseEnter" MouseLeave="Btn_SetDataViewerPos_MouseLeave" MouseUp="Btn_SetDataViewerPos_MouseUp">
+                        <Border x:Name="Btn_SetDataViewerPos" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="10,104,572,230" VerticalAlignment="Center" Width="158" CornerRadius="10" Background="#FF00A1D6" MouseUp="Btn_SetDataViewerPos_MouseUp">
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="Border.MouseEnter">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="#FF00A1D6">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF00C0FF">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Border.MouseLeave">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="#FF00C0FF">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF00A1D6">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Border.Triggers>
                             <Label x:Name="label38" Content="设置桌面挂件位置" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="129" Height="37" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="White" Padding="0" FontSize="16" />
                         </Border>
-                        <Border x:Name="Btn_DeActiveDataViewer" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="280.5,324,278.5,10" VerticalAlignment="Center" Width="181" CornerRadius="20" Background="#FFFF3939" MouseEnter="Btn_DeActiveDataViewer_MouseEnter" MouseLeave="Btn_DeActiveDataViewer_MouseLeave" MouseUp="Btn_DeActiveDataViewer_MouseUp">
-                            <Label x:Name="label39" Content="停用" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="129" Height="37" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="White" Padding="0" FontSize="16" />
+                        <Border x:Name="Btn_DeActiveDataViewer" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="280.5,324,278.5,10" VerticalAlignment="Center" Width="181" CornerRadius="20" Background="#FFFF3939" MouseUp="Btn_DeActiveDataViewer_MouseUp">
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="Border.MouseEnter">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="#FFFF3939">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FFFF0404">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Border.MouseLeave">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="#FFFF0404">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FFFF3939">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Border.MouseUp">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(BlurEffect.Radius)" Storyboard.TargetName="Blur">
+                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                                                        <EasingDoubleKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingDoubleKeyFrame.EasingFunction>
+                                                    </EasingDoubleKeyFrame>
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="5">
+                                                        <EasingDoubleKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingDoubleKeyFrame.EasingFunction>
+                                                    </EasingDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="DisActived">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Visible}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_OverallData">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_OverallData}">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                    <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF00A1D6">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                </ColorAnimationUsingKeyFrames>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_VideoData">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_VideoData}">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                    <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                </ColorAnimationUsingKeyFrames>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_ArticleData">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_ArticleData}">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                    <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                </ColorAnimationUsingKeyFrames>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_OtherSettings">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="{Binding Foreground, Converter={StaticResource Brush2ColorValue_Converter}, ElementName=Btn_OtherSettings}">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                    <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF000000">
+                                                        <EasingColorKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingColorKeyFrame.EasingFunction>
+                                                    </EasingColorKeyFrame>
+                                                </ColorAnimationUsingKeyFrames>
+                                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="TabSelectedLine">
+                                                    <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=TabSelectedLine}">
+                                                        <EasingThicknessKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingThicknessKeyFrame.EasingFunction>
+                                                    </EasingThicknessKeyFrame>
+                                                    <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="10,0,0,0">
+                                                        <EasingThicknessKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingThicknessKeyFrame.EasingFunction>
+                                                    </EasingThicknessKeyFrame>
+                                                </ThicknessAnimationUsingKeyFrames>
+                                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="SettingBoxWrapper">
+                                                    <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=SettingBoxWrapper}">
+                                                        <EasingThicknessKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingThicknessKeyFrame.EasingFunction>
+                                                    </EasingThicknessKeyFrame>
+                                                    <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0">
+                                                        <EasingThicknessKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingThicknessKeyFrame.EasingFunction>
+                                                    </EasingThicknessKeyFrame>
+                                                </ThicknessAnimationUsingKeyFrames>
+                                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="SelectBoxWrapper">
+                                                    <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin,ElementName=SelectBoxWrapper}">
+                                                        <EasingThicknessKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingThicknessKeyFrame.EasingFunction>
+                                                    </EasingThicknessKeyFrame>
+                                                    <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,0,-1000,0">
+                                                        <EasingThicknessKeyFrame.EasingFunction>
+                                                            <CircleEase EasingMode="EaseInOut"/>
+                                                        </EasingThicknessKeyFrame.EasingFunction>
+                                                    </EasingThicknessKeyFrame>
+                                                </ThicknessAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Border.Triggers>
+                            <TextBlock x:Name="label39" Text="停用" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="White" Padding="0" FontSize="16" TextAlignment="Center" />
                         </Border>
                     </Grid>
                 </Grid>
@@ -468,7 +1029,73 @@
         </Grid>
         <Grid x:Name="DisActived" HorizontalAlignment="Left" Height="411" VerticalAlignment="Top" Width="740" Background="#02ffffff" d:IsHidden="True">
             <Label x:Name="label36" Content="数据展示组件未启用" HorizontalAlignment="Center" Margin="0,-60,0,0" VerticalAlignment="Center" FontSize="36" />
-            <Border x:Name="Btn_ActiveDataViewer" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="0,60,0,0" VerticalAlignment="Center" Width="130" CornerRadius="20" Background="#FF00A1D6" MouseEnter="Btn_ActiveDataViewer_MouseEnter" MouseLeave="Btn_ActiveDataViewer_MouseLeave" MouseUp="Btn_ActiveDataViewer_MouseUp">
+            <Border x:Name="Btn_ActiveDataViewer" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="0,60,0,0" VerticalAlignment="Center" Width="130" CornerRadius="20" Background="#FF00A1D6" MouseUp="Btn_ActiveDataViewer_MouseUp">
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                        <EasingColorKeyFrame KeyTime="0" Value="#FF00A1D6">
+                                            <EasingColorKeyFrame.EasingFunction>
+                                                <CircleEase EasingMode="EaseInOut"/>
+                                            </EasingColorKeyFrame.EasingFunction>
+                                        </EasingColorKeyFrame>
+                                        <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF00C0FF">
+                                            <EasingColorKeyFrame.EasingFunction>
+                                                <CircleEase EasingMode="EaseInOut"/>
+                                            </EasingColorKeyFrame.EasingFunction>
+                                        </EasingColorKeyFrame>
+                                    </ColorAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Border.MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                        <EasingColorKeyFrame KeyTime="0" Value="#FF00C0FF">
+                                            <EasingColorKeyFrame.EasingFunction>
+                                                <CircleEase EasingMode="EaseInOut"/>
+                                            </EasingColorKeyFrame.EasingFunction>
+                                        </EasingColorKeyFrame>
+                                        <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF00A1D6">
+                                            <EasingColorKeyFrame.EasingFunction>
+                                                <CircleEase EasingMode="EaseInOut"/>
+                                            </EasingColorKeyFrame.EasingFunction>
+                                        </EasingColorKeyFrame>
+                                    </ColorAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Border.MouseUp">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(BlurEffect.Radius)" Storyboard.TargetName="Blur">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="5">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <CircleEase EasingMode="EaseInOut"/>
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <CircleEase EasingMode="EaseInOut"/>
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="DisActived">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Collapsed}"/>
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Border.Triggers>
                 <Label x:Name="label37" Content="立即启用" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="129" Height="37" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="White" Padding="0" FontSize="16" />
             </Border>
         </Grid>

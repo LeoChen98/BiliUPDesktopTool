@@ -13,6 +13,15 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class LoginWindow : Window
     {
+        #region Private Fields
+
+        /// <summary>
+        /// 指示是否已经扫描
+        /// </summary>
+        private bool HasScaned = false;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public LoginWindow()
@@ -23,13 +32,7 @@ namespace BiliUPDesktopTool
 
             MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
         }
-        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
-        {
-            if (IsActive && IsVisible)
-            {
-                msgbox.Show(msg);
-            }
-        }
+
         public LoginWindow(Account account)
         {
             InitializeComponent();
@@ -107,6 +110,7 @@ namespace BiliUPDesktopTool
 
         private void Btn_Login_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            MsgBoxPushHelper.RaisePushMsg("登录中...");
             if (string.IsNullOrEmpty(TB_UName.Text))
             {
                 MsgBoxPushHelper.RaisePushMsg("账号不能为空！");
@@ -151,6 +155,7 @@ namespace BiliUPDesktopTool
 
                     MsgBoxPushHelper.RaisePushMsg($"登录成功！{account.LoginStatus}");
                     break;
+
                 default:
                     MsgBoxPushHelper.RaisePushMsg($"登录错误，请尝试使用二维码登录。{account.LoginStatus}");
                     Btn_TabChange_MouseUp(null, null);
@@ -196,22 +201,32 @@ namespace BiliUPDesktopTool
             switch (status)
             {
                 case BiliAccount.Linq.ByQRCode.QrCodeStatus.Scaned:
-                    MsgBoxPushHelper.RaisePushMsg("扫描成功，请在手机上确认登录。");
+                    if (!HasScaned)
+                    {
+                        Dispatcher?.Invoke(() =>
+                        {
+                            HasScaned = true;
+                            MsgBoxPushHelper.RaisePushMsg("扫描成功，请在手机上确认登录。");
+                        });
+                    }
                     break;
 
                 case BiliAccount.Linq.ByQRCode.QrCodeStatus.Success:
-                    Account.Instance.Uid = account.Uid;
-                    Account.Instance.Expires = account.Expires_Cookies;
-                    Account.Instance.Cookies = account.strCookies;
-                    Account.Instance.Csrf_Token = account.CsrfToken;
-                    Account.Instance.Islogin = true;
-                    Account.Instance.LoginMode = Account.LOGINMODE.ByQrcode;
-                    Account.Instance.Save();
+                    Dispatcher?.Invoke(() =>
+                    {
+                        Account.Instance.Uid = account.Uid;
+                        Account.Instance.Expires = account.Expires_Cookies;
+                        Account.Instance.Cookies = account.strCookies;
+                        Account.Instance.Csrf_Token = account.CsrfToken;
+                        Account.Instance.Islogin = true;
+                        Account.Instance.LoginMode = Account.LOGINMODE.ByQrcode;
+                        Account.Instance.Save();
 
-                    MsgBoxPushHelper.PushMsg -= MsgBoxPushHelper_PushMsg;
-                    Close();
+                        MsgBoxPushHelper.PushMsg -= MsgBoxPushHelper_PushMsg;
+                        Close();
 
-                    MsgBoxPushHelper.RaisePushMsg($"登录成功！{account.LoginStatus}");
+                        MsgBoxPushHelper.RaisePushMsg($"登录成功！{account.LoginStatus}");
+                    });
                     break;
 
                 default:
@@ -236,6 +251,22 @@ namespace BiliUPDesktopTool
             });
         }
 
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
+        }
+
+        private void TB_UName_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                Btn_Login_MouseUp(null, null);
+            }
+        }
+
         /// <summary>
         /// 拖动
         /// </summary>
@@ -244,14 +275,6 @@ namespace BiliUPDesktopTool
         private void TBk_Title_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             DragMove();
-        }
-
-        private void TextBlock_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == System.Windows.Input.Key.Enter)
-            {
-                Btn_Login_MouseUp(null, null);
-            }
         }
 
         private void Window_Closed(object sender, EventArgs e)

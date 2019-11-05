@@ -82,6 +82,14 @@ namespace BiliUPDesktopTool
             };
             Bar_level_top.SetBinding(WidthProperty, bindlevelprocess);
 
+            Binding bindlevelprocessstr = new Binding()
+            {
+                Source = Account.Instance,
+                Path = new PropertyPath("str_ExpProgress"),
+                Mode = BindingMode.OneWay,
+            };
+            LevelBox.SetBinding(ToolTipProperty, bindlevelprocessstr);
+
             Binding bindlevelpercentage = new Binding()
             {
                 Source = Account.Instance,
@@ -137,16 +145,6 @@ namespace BiliUPDesktopTool
             MsgBoxPushHelper.RaisePushMsg("已成功注销登录！");
         }
 
-        private void Btn_Space_MouseEnter(object sender, MouseEventArgs e)
-        {
-            (sender as Grid).Background = new SolidColorBrush(Color.FromArgb(0x66, 0xb3, 0xb3, 0xb3));
-        }
-
-        private void Btn_Space_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Grid).Background = null;
-        }
-
         private void Btn_Space_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Process.Start("https://space.bilibili.com/" + Account.Instance.Uid);
@@ -154,23 +152,12 @@ namespace BiliUPDesktopTool
 
         private void Btn_UpdateAccount_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Account.Instance.SignOut();
             Account.Instance.Login();
         }
 
         private void Btn_Upload_MouseUp(object sender, MouseButtonEventArgs e)
         {
             MsgBoxPushHelper.RaisePushMsg("功能暂未开放");
-        }
-
-        private void Lbl_Desc_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Lbl_Desc.BorderBrush = new SolidColorBrush(Color.FromArgb(0xFF, 0x4f, 0xbd, 0xea));
-        }
-
-        private void Lbl_Desc_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Lbl_Desc.BorderBrush = null;
         }
 
         private void Lbl_Desc_MouseUp(object sender, MouseButtonEventArgs e)
@@ -184,32 +171,29 @@ namespace BiliUPDesktopTool
 
         private void Refresh(object state)
         {
-            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/index/operation", Account.Instance.Cookies);
+            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/app/h5/activity/videoall?platform=ios", Account.Instance.Cookies);
             if (!string.IsNullOrEmpty(str))
             {
                 JObject obj = JObject.Parse(str);
                 if ((int)obj["code"] == 0)
                 {
-                    Dispatcher.Invoke(() =>
+                    Dispatcher?.Invoke(() =>
                     {
                         EventList.Children.Clear();
                     });
-                    foreach (JToken i in obj["data"]["collect_arc"])
+                    foreach (JToken i in obj["data"])
                     {
-                        if ((int)i["state"] == 1)
+                        Dispatcher.Invoke(() =>
                         {
-                            Dispatcher.Invoke(() =>
+                            EventList.Children.Add(new EventItem(new EventItem.EventInfo()
                             {
-                                EventList.Children.Add(new EventItem(new EventItem.EventInfo()
-                                {
-                                    Title = i["content"].ToString(),
-                                    Desc = i["remark"].ToString(),
-                                    Link = i["link"].ToString(),
-                                    Start_Time = i["start_time"].ToString(),
-                                    End_Time = i["end_time"].ToString()
-                                }));
-                            });
-                        }
+                                Title = i["name"].ToString(),
+                                Desc = i["protocol"].ToString(),
+                                Link = i["act_url"].ToString(),
+                                Start_Time = i["stime"].ToString(),
+                                End_Time = "-"
+                            }));
+                        });
                     }
                 }
             }

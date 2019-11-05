@@ -20,13 +20,7 @@ namespace BiliUPDesktopTool
         #endregion Public Constructors
 
         #region Private Methods
-        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
-        {
-            if (IsActive && IsVisible)
-            {
-                msgbox.Show(msg);
-            }
-        }
+
         private void BTN_No_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
@@ -40,6 +34,14 @@ namespace BiliUPDesktopTool
         private void BTN_Yes_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+        }
+
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
         }
 
         private new void Show()

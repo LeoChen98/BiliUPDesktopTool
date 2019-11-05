@@ -10,7 +10,6 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class MainWindow : Window
     {
-
         #region Public Constructors
 
         public MainWindow()
@@ -21,13 +20,7 @@ namespace BiliUPDesktopTool
 
             MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
         }
-        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
-        {
-            if (IsActive && IsVisible)
-            {
-                msgbox.Show(msg);
-            }
-        }
+
         #endregion Public Constructors
 
         #region Public Methods
@@ -51,6 +44,7 @@ namespace BiliUPDesktopTool
                 case 1:
                     (FindResource("Btn_Statistics_MouseUp") as Storyboard).Begin();
                     break;
+
                 case 2:
                     (FindResource("Btn_Nore_MouseUp") as Storyboard).Begin();
                     break;
@@ -70,12 +64,19 @@ namespace BiliUPDesktopTool
             Close();
         }
 
-
         private void Control_Box_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
             {
                 DragMove();
+            }
+        }
+
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
             }
         }
 
@@ -93,6 +94,5 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Private Methods
-
     }
 }

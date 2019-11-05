@@ -33,7 +33,7 @@ namespace BiliUPDesktopTool
                 Settings.Instance.IsFirstRun = false;
             }
 
-            //初始化WPF为20帧
+            //初始化WPF为25帧
             Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata { DefaultValue = 25 });
 
             if (Settings.Instance.IsAutoCheckUpdate) Update.Instance.CheckUpdate(false);
@@ -95,14 +95,14 @@ namespace BiliUPDesktopTool
             {
                 try
                 {
-                    if ((!WindowsManager.Instance.GetWindow<DesktopWindow>().IsVisible) && Settings.Instance.IsDataViewerDisplay)
+                    if (!WindowsManager.Instance.HasWindow<DesktopWindow>() && Settings.Instance.IsDataViewerDisplay)
                     {
                         app.Dispatcher.Invoke(() =>
                         {
                             WindowsManager.Instance.GetWindow<DesktopWindow>().Show();
                         });
                     }
-                    else if (!Settings.Instance.IsDataViewerDisplay)
+                    else if (WindowsManager.Instance.HasWindow<DesktopWindow>() && !Settings.Instance.IsDataViewerDisplay)
                     {
                         app.Dispatcher.Invoke(() =>
                         {

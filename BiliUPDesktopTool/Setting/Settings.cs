@@ -16,7 +16,7 @@ namespace BiliUPDesktopTool
         /// </summary>
         private const string savepath = "Settings.dms";
 
-        private static Settings instance;
+        private static Settings instance = new Settings();
 
         #endregion Private Fields
 

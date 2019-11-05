@@ -17,7 +17,7 @@ namespace BiliUPDesktopTool
         /// </summary>
         private const string savepath = "Skin.dms";
 
-        private static Skin instance;
+        private static Skin instance = new Skin();
 
         #endregion Private Fields
 

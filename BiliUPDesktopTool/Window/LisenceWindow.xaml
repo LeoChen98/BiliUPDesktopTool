@@ -13,6 +13,6 @@
         <Button x:Name="BTN_Yes" Content="是" HorizontalAlignment="Left" Margin="78,119,0,0" VerticalAlignment="Top" Width="75" Click="BTN_Yes_Click" />
         <Button x:Name="BTN_No" Content="否" HorizontalAlignment="Left" Margin="199,119,0,0" VerticalAlignment="Top" Width="75" Click="BTN_No_Click" />
         <Button x:Name="BTN_ShowLisence" Content="查看协议" HorizontalAlignment="Left" Margin="320,119,0,0" VerticalAlignment="Top" Width="75" Click="BTN_ShowLisence_Click" />
-        <local:MsgBox x:Name="msgbox" Margin="0,0,0,25" MaxWidth="400" Height="24" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Opacity="0"/>
+                <local:MsgBox x:Name="msgbox" Margin="0,0,0,25" MaxWidth="400" Height="24" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Opacity="0" Visibility="Hidden" />
     </Grid>
 </Window>

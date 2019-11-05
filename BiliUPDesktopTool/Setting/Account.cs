@@ -29,7 +29,7 @@ namespace BiliUPDesktopTool
         /// </summary>
         private const string encryptKey = "{C6F403E9-53FF-4B75-8182-DC03BBE6944A}";
 
-        private static Account instance;
+        private static Account instance = new Account();
 
         /// <summary>
         /// 刷新器
@@ -300,6 +300,19 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
+        /// 字符串经验进度
+        /// </summary>
+        public string str_ExpProgress
+        {
+            get { return ST.str_ExpProgress; }
+            set
+            {
+                ST.str_ExpProgress = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("str_ExpProgress"));
+            }
+        }
+
+        /// <summary>
         /// 用户数字id
         /// </summary>
         public string Uid
@@ -384,10 +397,12 @@ namespace BiliUPDesktopTool
                         if ((double)obj["data"]["level_exp"]["next_exp"] != -1)
                         {
                             ExpProgress = ((double)obj["data"]["level_exp"]["current_exp"] - (double)obj["data"]["level_exp"]["current_min"]) / ((double)obj["data"]["level_exp"]["next_exp"] - (double)obj["data"]["level_exp"]["current_min"]);
+                            str_ExpProgress = $"{obj["data"]["level_exp"]["current_exp"].ToString()}/{obj["data"]["level_exp"]["next_exp"].ToString()}";
                         }
                         else
                         {
                             ExpProgress = 1;
+                            str_ExpProgress = $"{obj["data"]["level_exp"]["current_exp"].ToString()}/{obj["data"]["level_exp"]["current_min"].ToString()}";
                         }
                     }
                 }
@@ -430,12 +445,14 @@ namespace BiliUPDesktopTool
         {
             Islogin = false;
 
-            ST.AccessToken = "";
-            ST.Cookies = "";
-            ST.Csrf_Token = "";
-            ST.RefreshToken = "";
-            ST.PassWord = "";
-            ST.Uid = "";
+            if (ST.IsSavePassword)
+            {
+                ST = new AccountTable(ST.UserName, ST.PassWord);
+            }
+            else
+            {
+                ST = new AccountTable(ST.UserName);
+            }
 
             Save();
         }
@@ -501,22 +518,48 @@ namespace BiliUPDesktopTool
             public string Cookies;
             public string Csrf_Token;
             public string Desc;
-            public DateTime Expires;
-            public DateTime Expires_AccessToken;
+            public DateTime Expires = new DateTime();
+            public DateTime Expires_AccessToken = new DateTime();
             public double ExpProgress;
             public bool IsAutoLogin = true;
             public bool IsSavePassword = true;
             public int Level;
-            public LOGINMODE LoginMode;
+            public LOGINMODE LoginMode = LOGINMODE.Unknown;
             public string PassWord;
             public string Pic;
             public string RefreshToken;
+            public string str_ExpProgress;
             public string Uid;
             public string UName;
 
             public string UserName;
 
             #endregion Public Fields
+
+            #region Public Constructors
+
+            public AccountTable()
+            {
+            }
+
+            public AccountTable(string username, string password = "")
+            {
+                UserName = username;
+
+                if (!string.IsNullOrEmpty(password))
+                {
+                    PassWord = password;
+                    IsSavePassword = true;
+                }
+                else
+                {
+                    IsSavePassword = false;
+                }
+
+                IsAutoLogin = false;
+            }
+
+            #endregion Public Constructors
         }
 
         public class EmptyInit { };

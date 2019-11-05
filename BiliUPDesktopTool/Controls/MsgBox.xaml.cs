@@ -9,11 +9,16 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class MsgBox : UserControl
     {
+        #region Public Constructors
+
         public MsgBox()
         {
             InitializeComponent();
         }
 
+        #endregion Public Constructors
+
+        #region Public Methods
 
         public void Show(string msg)
         {
@@ -26,15 +31,20 @@ namespace BiliUPDesktopTool
                Tbk_ShowBox.FontWeight, Tbk_ShowBox.FontStretch),
                Tbk_ShowBox.FontSize, Tbk_ShowBox.Foreground, null);
 
-            Width = formattedText.Width +40;
+            Width = formattedText.Width + 40;
             Height = formattedText.Height + 20;
 
             (FindResource("Show") as Storyboard).Begin();
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
         private void userControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-
         }
+
+        #endregion Private Methods
     }
 }

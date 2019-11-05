@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace BiliUPDesktopTool
 {
@@ -160,5 +161,28 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Public Methods
+    }
+
+    /// <summary>
+    /// 笔刷-颜色转换器
+    /// </summary>
+    public class Brush2ColorValue_Converter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(value.GetType() == typeof(SolidColorBrush))
+            {
+                return ((SolidColorBrush)value).Color;
+            }
+            else
+            {
+                return Colors.Transparent;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return new SolidColorBrush((Color)value);
+        }
     }
 }

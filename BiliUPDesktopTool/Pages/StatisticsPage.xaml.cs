@@ -17,8 +17,6 @@ namespace BiliUPDesktopTool
     {
         #region Private Fields
 
-        private int _TabIndex = 0;
-
         private DataViewer DV_Selected;
 
         #endregion Private Fields
@@ -56,49 +54,14 @@ namespace BiliUPDesktopTool
             TB_RefreshInterval.SetBinding(TextBox.TextProperty, bind_RefreshInterval);
         }
 
-        private void Btn_ActiveDataViewer_MouseEnter(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xc0, 0xff));
-        }
-
-        private void Btn_ActiveDataViewer_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xa1, 0xd6));
-        }
-
         private void Btn_ActiveDataViewer_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Settings.Instance.IsDataViewerDisplay = true;
-            DisActived.Visibility = Visibility.Collapsed;
-            Blur.Radius = 0;
-        }
-
-        private void Btn_DeActiveDataViewer_MouseEnter(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x04, 0x04));
-        }
-
-        private void Btn_DeActiveDataViewer_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0x39, 0x39));
         }
 
         private void Btn_DeActiveDataViewer_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Settings.Instance.IsDataViewerDisplay = false;
-            Btn_Tab_MouseUp(Btn_OverallData, null);
-            DisActived.Visibility = Visibility.Visible;
-            Blur.Radius = 5;
-        }
-
-        private void Btn_SetDataViewerPos_MouseEnter(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xc0, 0xff));
-        }
-
-        private void Btn_SetDataViewerPos_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xa1, 0xd6));
         }
 
         private void Btn_SetDataViewerPos_MouseUp(object sender, MouseButtonEventArgs e)
@@ -128,59 +91,6 @@ namespace BiliUPDesktopTool
             {
                 (sender as TextBlock).Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0x00, 0x00));
             }
-        }
-
-        private void Btn_Tab_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Btn_OverallData.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0x00, 0x00));
-            Btn_VideoData.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0x00, 0x00));
-            Btn_ArticleData.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0x00, 0x00));
-            Btn_OtherSettings.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0x00, 0x00));
-
-            (sender as TextBlock).Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xa1, 0xd6));
-            int index = int.Parse((sender as TextBlock).Tag.ToString());
-
-            DoubleAnimation an = new DoubleAnimation()
-            {
-                From = (double)TabSelectedLine.GetValue(Canvas.LeftProperty),
-                To = 80 * index + 10,
-                Duration = new Duration(TimeSpan.FromMilliseconds(250))
-            };
-            TabSelectedLine.BeginAnimation(Canvas.LeftProperty, an);
-
-            if (index == 3 || _TabIndex == 3)
-            {
-                ThicknessAnimation ant = new ThicknessAnimation()
-                {
-                    From = SettingBoxWrapper.Margin,
-                    To = index == 3 ? new Thickness(-740, 0, 0, 0) : new Thickness(0, 0, 0, 0),
-                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
-                };
-                SettingBoxWrapper.BeginAnimation(MarginProperty, ant);
-
-                if (index != 3)
-                {
-                    ant = new ThicknessAnimation()
-                    {
-                        From = SelectBoxWrapper.Margin,
-                        To = new Thickness(-index * 500, 0, -1000 + index * 500, 0),
-                        Duration = new Duration(TimeSpan.FromMilliseconds(250))
-                    };
-                    SelectBoxWrapper.BeginAnimation(MarginProperty, ant);
-                }
-            }
-            else
-            {
-                ThicknessAnimation ant = new ThicknessAnimation()
-                {
-                    From = SelectBoxWrapper.Margin,
-                    To = new Thickness(-index * 500, 0, -1000 + index * 500, 0),
-                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
-                };
-                SelectBoxWrapper.BeginAnimation(MarginProperty, ant);
-            }
-
-            _TabIndex = index;
         }
 
         private void DataViewer_MouseEnter(object sender, MouseEventArgs e)
@@ -291,13 +201,11 @@ namespace BiliUPDesktopTool
         {
             if (Settings.Instance.IsDataViewerDisplay)
             {
-                Settings.Instance.IsDataViewerDisplay = true;
                 DisActived.Visibility = Visibility.Collapsed;
                 Blur.Radius = 0;
             }
             else
             {
-                Settings.Instance.IsDataViewerDisplay = false;
                 DisActived.Visibility = Visibility.Visible;
                 Blur.Radius = 5;
             }

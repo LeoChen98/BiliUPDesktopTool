@@ -12,72 +12,185 @@
     <Window.Resources>
         <Storyboard x:Name="TabChangeA" x:Key="TabChangeA">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ContentWrap">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-288" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-288" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Cvs_TabChange">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="96" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="96" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Cvs_TabChange">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.2" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.2" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Img_Key_B">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Img_Qrcode">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Img_Qrcode_B">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Img_Key">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="TabChangeB" Name="TabChangeB">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ContentWrap">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-288" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="-288" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Cvs_TabChange">
-                <EasingDoubleKeyFrame KeyTime="0" Value="96" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="96" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Cvs_TabChange">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1.2" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Img_Key_B">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Img_Qrcode">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Img_Qrcode_B">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Img_Key">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" >
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
 
-    <Grid>
-        <TextBlock x:Name="TBk_Title" HorizontalAlignment="Left" TextWrapping="Wrap" Text="登录 - B站UP主桌面工具" VerticalAlignment="Top" FontSize="16" Height="37" Width="300" Padding="12,8,0,0" MouseDown="TBk_Title_MouseDown" />
-        <TextBlock x:Name="Btn_Close" HorizontalAlignment="Left" TextWrapping="Wrap" Text="×" VerticalAlignment="Top" FontSize="16" Height="37" Width="37" Padding="12,8,0,0" Margin="305,0,-0.4,0" Background="Transparent" MouseUp="Btn_Close_MouseUp">
-            <TextBlock.Triggers>
-                <EventTrigger RoutedEvent="TextBlock.MouseEnter">
-                    <EventTrigger.Actions>
+    <Border BorderThickness="1" BorderBrush="#FFE5E5E5">
+
+        <Grid Margin="0,0,-0.4,-0.4">
+            <TextBlock x:Name="TBk_Title" HorizontalAlignment="Left" TextWrapping="Wrap" Text="登录 - B站UP主桌面工具" VerticalAlignment="Top" FontSize="16" Height="37" Width="300" Padding="12,8,0,0" MouseDown="TBk_Title_MouseDown" FontWeight="Bold" />
+            <TextBlock x:Name="Btn_Close" HorizontalAlignment="Left" TextWrapping="Wrap" Text="×" VerticalAlignment="Top" FontSize="16" Height="37" Width="37" Padding="12,8,0,0" Margin="305,0,-0.4,0" Background="Transparent" MouseUp="Btn_Close_MouseUp">
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
                         <BeginStoryboard>
                             <Storyboard x:Name="Btn_Close_MouseEnter">
 
@@ -95,10 +208,8 @@
                                 </ColorAnimationUsingKeyFrames>
                             </Storyboard>
                         </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="TextBlock.MouseLeave">
-                    <EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="UIElement.MouseLeave">
                         <BeginStoryboard>
                             <Storyboard x:Name="Btn_Close_MouseLeave">
 
@@ -116,106 +227,130 @@
                                 </ColorAnimationUsingKeyFrames>
                             </Storyboard>
                         </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </TextBlock.Triggers>
-        </TextBlock>
-        <Border x:Name="ContentBox" Margin="27,96,26.6,89.6" ClipToBounds="True" BorderBrush="DarkGray" BorderThickness="1">
-            <Grid x:Name="ContentWrap" Width="576" Margin="0,0,-288,0" RenderTransformOrigin="0.5,0.5">
-                <Grid.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Grid.RenderTransform>
-                <Grid  Margin="0,0,288,0" x:Name="ByPwdBox">
-                    <TextBlock Text="账号：" HorizontalAlignment="Right" Width="43" Height="19" VerticalAlignment="Bottom" Margin="0,0,235,201" KeyDown="TextBlock_KeyDown" />
-                    <TextBlock Text="密码：" HorizontalAlignment="Right" Width="43" Height="19" VerticalAlignment="Bottom" Margin="0,0,235,161" KeyDown="TextBlock_KeyDown" />
-                    <TextBox x:Name="TB_UName" Margin="58,39,45,201" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                    <PasswordBox x:Name="TB_Pwd" Margin="58,80,45,160" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                    <TextBlock x:Name="Btn_Login" HorizontalAlignment="Left" Height="40" Margin="43,164,0,0" TextWrapping="Wrap" Text="登录" VerticalAlignment="Top" Width="200" FontSize="16" Padding="85,8,0,0" Background="#FF0BA8DC" Foreground="White" MouseUp="Btn_Login_MouseUp">
-                        <TextBlock.Triggers>
-                            <EventTrigger RoutedEvent="TextBlock.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard x:Name="Login_MouseEnter">
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#FF00A7DE">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.05" Value="#FF46B5D9">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+            <Border x:Name="ContentBox" Margin="27,96,26.6,89.6" ClipToBounds="True" BorderBrush="DarkGray" BorderThickness="1">
+                <Grid x:Name="ContentWrap" Width="576" Margin="0,0,-288,0" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Grid  Margin="0,0,288,0" x:Name="ByPwdBox">
+                        <TextBlock Text="账号：" HorizontalAlignment="Right" Width="43" Height="19" VerticalAlignment="Bottom" Margin="0,0,235,201" />
+                        <TextBlock Text="密码：" HorizontalAlignment="Right" Width="43" Height="19" VerticalAlignment="Bottom" Margin="0,0,235,161" />
+                        <TextBox x:Name="TB_UName" Margin="58,39,45,201" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="TB_UName_KeyDown" />
+                        <PasswordBox x:Name="TB_Pwd" Margin="58,80,45,160" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="TB_UName_KeyDown" />
+                        <TextBlock x:Name="Btn_Login" HorizontalAlignment="Left" Height="40" Margin="43,164,0,0" TextWrapping="Wrap" Text="登录" VerticalAlignment="Top" Width="200" FontSize="16" Padding="85,8,0,0" Background="#FF0BA8DC" Foreground="White" MouseUp="Btn_Login_MouseUp">
+                            <TextBlock.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="Login_MouseEnter">
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FF00A7DE">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                                <EasingColorKeyFrame KeyTime="0:0:0.05" Value="#FF46B5D9">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
 
-                            <EventTrigger RoutedEvent="TextBlock.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard x:Name="Login_MouseLeave">
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#FF46B5D9">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.05" Value="#FF00A7DE">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </TextBlock.Triggers>
-                    </TextBlock>
-                    <CheckBox x:Name="CB_MarkPwd" Content="记住密码" HorizontalAlignment="Left" Margin="43,129,0,0" VerticalAlignment="Top" />
-                    <CheckBox x:Name="CB_AutoLogin" Content="自动登录" HorizontalAlignment="Left" Margin="175,129,0,0" VerticalAlignment="Top" />
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="Login_MouseLeave">
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FF46B5D9">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                                <EasingColorKeyFrame KeyTime="0:0:0.05" Value="#FF00A7DE">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </TextBlock.Triggers>
+                        </TextBlock>
+                        <CheckBox x:Name="CB_MarkPwd" Content="记住密码" HorizontalAlignment="Left" Margin="43,129,0,0" VerticalAlignment="Top" />
+                        <CheckBox x:Name="CB_AutoLogin" Content="自动登录" HorizontalAlignment="Left" Margin="175,129,0,0" VerticalAlignment="Top" />
+                    </Grid>
+                    <Grid Width="288" Margin="288,0,0,0" x:Name="ByQrCode">
+                        <Label Margin="27,11,26,227" FontSize="16"  Content="请使用Bilibili手机APP扫描二维码登录" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <Image x:Name="qrcodeBox" HorizontalAlignment="Left" Height="200" Margin="48,48,0,0" VerticalAlignment="Top" Width="200" />
+                    </Grid>
                 </Grid>
-                <Grid Width="288" Margin="288,0,0,0" x:Name="ByQrCode">
-                    <Label Margin="27,11,26,227" FontSize="16"  Content="请使用Bilibili手机APP扫描二维码登录" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                    <Image x:Name="qrcodeBox" HorizontalAlignment="Left" Height="200" Margin="48,48,0,0" VerticalAlignment="Top" Width="200" />
-                </Grid>
+            </Border>
+            <Grid x:Name="Btn_TabChange" Height="35" Margin="75,370,75,0" VerticalAlignment="Top" Background="#FFEDEDED" MouseUp="Btn_TabChange_MouseUp" Clip="M10,0 A10,10,0,0,0,0,10 L0,25 A10,10,0,0,0,10,35 L182,35 A10,10,0,0,0,192,25 L192,10 A10,10,0,0,0,182,0 z">
+
+                <Canvas x:Name="Cvs_TabChange" Margin="0,0,96,0" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+                    <Path Fill="#FF00A7DE" Data="M10,0 A10,10,0,0,0,0,10 L0,25 A10,10,0,0,0,10,35 L91,35 A10,10,0,0,0,96,25 L96,10 A10,10,0,0,0,91,0 z" />
+                </Canvas>
+                <Image x:Name="Img_Key" Source="/BiliUPDesktopTool;component/Image/noun_Key_233117.png" Margin="0,0,96.6,0" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform Y="3" />
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="Img_Key_B" Source="/BiliUPDesktopTool;component/Image/noun_Key_233117_B.png" Margin="0,0,96.6,0" Opacity="0" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform Y="3" />
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="Img_Qrcode" Source="/BiliUPDesktopTool;component/Image/noun_small qr code_2002633.png" Margin="97,0,-0.4,0" Opacity="0" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform Y="3" />
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="Img_Qrcode_B" Source="/BiliUPDesktopTool;component/Image/noun_small qr code_2002633_w.png" Margin="97,0,-0.4,0" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform Y="3" />
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
             </Grid>
-        </Border>
-        <Grid x:Name="Btn_TabChange" Height="35" Margin="75,370,75,0" VerticalAlignment="Top" Background="#FFEDEDED" MouseUp="Btn_TabChange_MouseUp">
-
-            <Grid.Clip>
-                <PathGeometry>
-                    <PathFigure IsClosed="True" StartPoint="10,0">
-                        <ArcSegment Point="0,10" Size="10,10" />
-                        <LineSegment Point="0,25" />
-                        <ArcSegment Point="10,35" Size="10,10" />
-                        <LineSegment Point="182,35" />
-                        <ArcSegment Point="192,25" Size="10,10" />
-                        <LineSegment Point="192,10" />
-                        <ArcSegment Point="182,0" Size="10,10" />
-                    </PathFigure>
-                </PathGeometry>
-            </Grid.Clip>
-            <Canvas x:Name="Cvs_TabChange" Margin="0,0,96,0" RenderTransformOrigin="0.5,0.5">
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Canvas.RenderTransform>
-                <Path Fill="#FF00A7DE" Data="M10,0 A10,10,0,0,0,0,10 L0,25 A10,10,0,0,0,10,35 L91,35 A10,10,0,0,0,96,25 L96,10 A10,10,0,0,0,91,0 z" />
-            </Canvas>
-            <Image x:Name="Img_Key" Source="/BiliUPDesktopTool;component/Image/noun_Key_233117.png" Margin="0,0,96.6,0" />
-            <Image x:Name="Img_Key_B" Source="/BiliUPDesktopTool;component/Image/noun_Key_233117_B.png" Margin="0,0,96.6,0" Opacity="0" />
-            <Image x:Name="Img_Qrcode" Source="/BiliUPDesktopTool;component/Image/noun_small qr code_2002633.png" Margin="97,0,-0.4,0" Opacity="0" />
-            <Image x:Name="Img_Qrcode_B" Source="/BiliUPDesktopTool;component/Image/noun_small qr code_2002633_w.png" Margin="97,0,-0.4,0" />
+                    <local:MsgBox x:Name="msgbox" Margin="0,0,0,25" MaxWidth="400" Height="24" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Opacity="0" Visibility="Hidden" />
+            <Rectangle x:Name="rectangle" Fill="#FFD4D4D4" Height="1" Margin="0,37,0,0" VerticalAlignment="Top" />
         </Grid>
-        <local:MsgBox x:Name="msgbox" Margin="0,0,0,25" MaxWidth="400" Height="24" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Opacity="0"/>
-    </Grid>
+    </Border>
 </Window>

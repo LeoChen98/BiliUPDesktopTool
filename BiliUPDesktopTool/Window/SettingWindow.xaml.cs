@@ -45,6 +45,14 @@ namespace BiliUPDesktopTool
             WindowsManager.Instance.GetWindow<DesktopWindowSetter>().Show();
         }
 
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
+        }
+
         private void SetAutoRunShow()
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
@@ -68,13 +76,7 @@ namespace BiliUPDesktopTool
             };
             CB_IsAutoCheckUpdate.SetBinding(CheckBox.IsCheckedProperty, bindAutoCheckUpdate);
         }
-        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
-        {
-            if (IsActive && IsVisible)
-            {
-                msgbox.Show(msg);
-            }
-        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SetAutoRunShow();

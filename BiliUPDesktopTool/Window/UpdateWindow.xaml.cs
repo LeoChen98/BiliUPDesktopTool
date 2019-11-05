@@ -27,14 +27,6 @@ namespace BiliUPDesktopTool
             MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
         }
 
-        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
-        {
-            if (IsActive && IsVisible)
-            {
-                msgbox.Show(msg);
-            }
-        }
-
         #endregion Public Constructors
 
         #region Public Properties
@@ -86,6 +78,14 @@ namespace BiliUPDesktopTool
             BTN_Cancel.IsEnabled = false;
             BTN_Update.IsEnabled = false;
             Update.Instance.DoUpdate();
+        }
+
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
         }
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

@@ -67,6 +67,11 @@ namespace BiliUPDesktopTool
             return (T)win;
         }
 
+        public bool HasWindow<T>() where T : Window
+        {
+            return Windows.Exists(i => i.GetType() == typeof(T));
+        }
+
         #endregion Public Methods
 
         #region Private Methods
