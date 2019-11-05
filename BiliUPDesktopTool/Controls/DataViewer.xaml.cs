@@ -199,7 +199,7 @@ namespace BiliUPDesktopTool
 
         private void Incr_PostiveAndNegativeChanged(object sender, RollingNums.PostiveAndNegativeChangedEventArgs e)
         {
-            if (e.NewValue == true)
+            if (!e.NewValue)
             {
                 DoubleAnimation an = new DoubleAnimation
                 {
@@ -207,7 +207,7 @@ namespace BiliUPDesktopTool
                     To = 180,
                     Duration = new Duration(TimeSpan.FromMilliseconds(250))
                 };
-                CVS_T.BeginAnimation(RotateTransform.AngleProperty, an);
+                trans.BeginAnimation(RotateTransform.AngleProperty, an);
             }
             else
             {
@@ -217,7 +217,7 @@ namespace BiliUPDesktopTool
                     To = 0,
                     Duration = new Duration(TimeSpan.FromMilliseconds(250))
                 };
-                CVS_T.BeginAnimation(RotateTransform.AngleProperty, an);
+                trans.BeginAnimation(RotateTransform.AngleProperty, an);
             }
         }
 

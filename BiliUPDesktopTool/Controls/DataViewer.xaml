@@ -19,16 +19,19 @@
                 </TransformGroup>
             </local:RollingNums.RenderTransform>
         </local:RollingNums>
-        <Canvas x:Name="CVS_T" HorizontalAlignment="Left" Height="30" Margin="41,110,0,0" VerticalAlignment="Top" Width="30">
+        <Canvas x:Name="CVS_T" HorizontalAlignment="Left" Height="30" Margin="65,129.4,0,-9" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5">
             <Path x:Name="Triangle" Fill="{Binding Foreground, ElementName=userControl}" Stroke="{Binding Foreground, ElementName=userControl}">
                 <Path.Data>
                     <PathGeometry>
-                        <PathFigure StartPoint="10,20" IsClosed="True">
-                            <LineSegment Point="15,16"></LineSegment>
-                            <LineSegment Point="20,20"></LineSegment>
+                        <PathFigure StartPoint="-5,2.5" IsClosed="True">
+                            <LineSegment Point="0,-2.5"></LineSegment>
+                            <LineSegment Point="5,2.5"></LineSegment>
                         </PathFigure>
                     </PathGeometry>
                 </Path.Data>
+                <Path.RenderTransform>
+                    <RotateTransform x:Name="trans" Angle="0" />
+                </Path.RenderTransform>
             </Path>
         </Canvas>
     </Grid>
