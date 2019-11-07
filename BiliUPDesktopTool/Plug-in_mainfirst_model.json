@@ -1,8 +1,11 @@
 ﻿{
   "name": "",
+  "description": "",
   "launch_file": "",
   "args": [],
   "version": 0,
   "version_str": "",
-  "update_url": ""
+  "update_url": "",
+  "agreement": "",
+  "is_first_run": true
 }

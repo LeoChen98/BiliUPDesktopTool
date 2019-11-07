@@ -100,18 +100,16 @@ namespace BiliUPDesktopTool
         /// <param name="num">数字</param>
         public void ChangeNum(double num)
         {
-            if (num >= 0 && IsPostive != true)
+            if (num >= 0 && !IsPostive)
             {
                 PostiveAndNegativeChanged?.Invoke(this, new PostiveAndNegativeChangedEventArgs { OldValue = IsPostive, NewValue = true });
                 IsPostive = true;
             }
-            else
+            else if(num <0 && IsPostive)
             {
                 PostiveAndNegativeChanged?.Invoke(this, new PostiveAndNegativeChangedEventArgs { OldValue = IsPostive, NewValue = false });
                 IsPostive = false;
             }
-            if (num != -1)
-            {
                 num = Math.Abs(num);
                 string numstr = num.ToString();
                 if (numstr.IndexOf("E+") >= 0)
@@ -243,7 +241,6 @@ namespace BiliUPDesktopTool
                     P1.ChangeNum(numids[4]);
                     P2.ChangeNum(numids[5]);
                 }
-            }
         }
 
         #endregion Public Methods
