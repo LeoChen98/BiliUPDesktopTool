@@ -127,6 +127,7 @@ namespace BiliUPDesktopTool
             #endregion Public Constructors
 
             #region Public Events
+            private readonly object balanceLock = new object();
 
             public event PropertyChangedEventHandler PropertyChanged;
 
@@ -153,7 +154,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._coin = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin"));
+                    PropertyChanged?.Invoke(coin, new PropertyChangedEventArgs("coin"));
                 }
             }
 
@@ -176,7 +177,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._coin_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin_incr"));
+                    PropertyChanged?.Invoke(coin_incr, new PropertyChangedEventArgs("coin_incr"));
                 }
             }
 
@@ -199,7 +200,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._fav = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav"));
+                    PropertyChanged?.Invoke(fav, new PropertyChangedEventArgs("fav"));
                 }
             }
 
@@ -222,7 +223,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._fav_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav_incr"));
+                    PropertyChanged?.Invoke(fav_incr, new PropertyChangedEventArgs("fav_incr"));
                 }
             }
 
@@ -245,7 +246,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._like = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like"));
+                    PropertyChanged?.Invoke(like, new PropertyChangedEventArgs("like"));
                 }
             }
 
@@ -268,7 +269,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._like_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like_incr"));
+                    PropertyChanged?.Invoke(like_incr, new PropertyChangedEventArgs("like_incr"));
                 }
             }
 
@@ -291,7 +292,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._reply = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("reply"));
+                    PropertyChanged?.Invoke(reply, new PropertyChangedEventArgs("reply"));
                 }
             }
 
@@ -314,7 +315,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._reply_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("reply_incr"));
+                    PropertyChanged?.Invoke(reply_incr, new PropertyChangedEventArgs("reply_incr"));
                 }
             }
 
@@ -337,7 +338,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._share = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share"));
+                    PropertyChanged?.Invoke(share, new PropertyChangedEventArgs("share"));
                 }
             }
 
@@ -360,7 +361,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._share_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share_incr"));
+                    PropertyChanged?.Invoke(share_incr, new PropertyChangedEventArgs("share_incr"));
                 }
             }
 
@@ -383,7 +384,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._view = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("view"));
+                    PropertyChanged?.Invoke(view, new PropertyChangedEventArgs("view"));
                 }
             }
 
@@ -406,7 +407,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._view_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("view_incr"));
+                    PropertyChanged?.Invoke(view_incr, new PropertyChangedEventArgs("view_incr"));
                 }
             }
 
@@ -688,6 +689,8 @@ namespace BiliUPDesktopTool
 
             #region Public Events
 
+            private readonly object balanceLock = new object();
+
             public event PropertyChangedEventHandler PropertyChanged;
 
             #endregion Public Events
@@ -713,7 +716,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._coin = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin"));
+                    PropertyChanged?.Invoke(coin, new PropertyChangedEventArgs("coin"));
                 }
             }
 
@@ -736,7 +739,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._coin_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("coin_incr"));
+                    PropertyChanged?.Invoke(coin_incr, new PropertyChangedEventArgs("coin_incr"));
                 }
             }
 
@@ -759,7 +762,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._comment = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("comment"));
+                    PropertyChanged?.Invoke(comment, new PropertyChangedEventArgs("comment"));
                 }
             }
 
@@ -782,7 +785,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._comment_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("comment_incr"));
+                    PropertyChanged?.Invoke(comment_incr, new PropertyChangedEventArgs("comment_incr"));
                 }
             }
 
@@ -805,7 +808,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._dm = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("dm"));
+                    PropertyChanged?.Invoke(dm, new PropertyChangedEventArgs("dm"));
                 }
             }
 
@@ -828,7 +831,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._dm_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("dm_incr"));
+                    PropertyChanged?.Invoke(dm_incr, new PropertyChangedEventArgs("dm_incr"));
                 }
             }
 
@@ -841,7 +844,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._elec = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("elec"));
+                    PropertyChanged?.Invoke(elec, new PropertyChangedEventArgs("elec"));
                 }
             }
 
@@ -857,7 +860,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._elec_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("elec_incr"));
+                    PropertyChanged?.Invoke(elec_incr, new PropertyChangedEventArgs("elec_incr"));
                 }
             }
 
@@ -880,7 +883,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._elec_total = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("elec_total"));
+                    PropertyChanged?.Invoke(elec_total, new PropertyChangedEventArgs("elec_total"));
                 }
             }
 
@@ -893,7 +896,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._fan = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fan"));
+                    PropertyChanged?.Invoke(fan, new PropertyChangedEventArgs("fan"));
                 }
             }
 
@@ -906,7 +909,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._fan_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fan_incr"));
+                    PropertyChanged?.Invoke(fan_incr, new PropertyChangedEventArgs("fan_incr"));
                 }
             }
 
@@ -929,7 +932,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._fav = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav"));
+                    PropertyChanged?.Invoke(fav, new PropertyChangedEventArgs("fav"));
                 }
             }
 
@@ -952,7 +955,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._fav_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("fav_incr"));
+                    PropertyChanged?.Invoke(fav_incr, new PropertyChangedEventArgs("fav_incr"));
                 }
             }
 
@@ -965,7 +968,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._growup = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("growup"));
+                    PropertyChanged?.Invoke(growup, new PropertyChangedEventArgs("growup"));
                 }
             }
 
@@ -978,7 +981,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._growup_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("growup_incr"));
+                    PropertyChanged?.Invoke(growup_incr, new PropertyChangedEventArgs("growup_incr"));
                 }
             }
 
@@ -1001,7 +1004,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._like = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like"));
+                    PropertyChanged?.Invoke(like, new PropertyChangedEventArgs("like"));
                 }
             }
 
@@ -1024,7 +1027,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._like_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("like_incr"));
+                    PropertyChanged?.Invoke(like_incr, new PropertyChangedEventArgs("like_incr"));
                 }
             }
 
@@ -1047,7 +1050,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._play = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("play"));
+                    PropertyChanged?.Invoke(play, new PropertyChangedEventArgs("play"));
                 }
             }
 
@@ -1070,7 +1073,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._play_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("play_incr"));
+                    PropertyChanged?.Invoke(play_incr, new PropertyChangedEventArgs("play_incr"));
                 }
             }
 
@@ -1093,7 +1096,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._share = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share"));
+                    PropertyChanged?.Invoke(share, new PropertyChangedEventArgs("share"));
                 }
             }
 
@@ -1116,7 +1119,7 @@ namespace BiliUPDesktopTool
                 set
                 {
                     data._share_incr = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("share_incr"));
+                    PropertyChanged?.Invoke(share_incr, new PropertyChangedEventArgs("share_incr"));
                 }
             }
 

@@ -59,7 +59,7 @@
         /// <param name="type">信息类型</param>
         public static void RaisePushMsg(string msg, MsgType type = MsgType.Info)
         {
-            PushMsg(msg, type);
+            PushMsg.Invoke(msg, type);
         }
 
         #endregion Public Methods

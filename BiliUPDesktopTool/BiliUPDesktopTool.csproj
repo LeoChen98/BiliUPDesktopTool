@@ -203,6 +203,7 @@
     <Compile Include="Pages\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Plug-ins\PluginManager.cs" />
     <Compile Include="Todo.cs" />
     <Compile Include="Window\LisenceWindow.xaml.cs">
       <DependentUpon>LisenceWindow.xaml</DependentUpon>
@@ -410,5 +411,6 @@
   <ItemGroup>
     <Resource Include="Image\noun_small qr code_2002633_w.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
