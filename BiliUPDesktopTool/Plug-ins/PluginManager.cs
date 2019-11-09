@@ -176,7 +176,7 @@ namespace BiliUPDesktopTool
         {
             if (ArticleDataSubscribed.Contains(e.PropertyName) && !process.HasExited)
             {
-                SendMsg($"data-article-{e.PropertyName} {sender.ToString()}");
+                SendMsg($"data-article-{e.PropertyName} {sender.GetType().GetProperty(e.PropertyName).GetValue(sender).ToString()}");
             }
         }
 
@@ -287,7 +287,7 @@ namespace BiliUPDesktopTool
         {
             if (VideoDataSubscribed.Contains(e.PropertyName))
             {
-                SendMsg($"data-video-{e.PropertyName} {sender.ToString()}");
+                SendMsg($"data-video-{e.PropertyName} {sender.GetType().GetProperty(e.PropertyName).GetValue(sender).ToString()}");
             }
         }
 
