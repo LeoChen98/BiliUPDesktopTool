@@ -34,11 +34,58 @@ namespace BiliUPDesktopTool
         /// <param name="num">数字</param>
         public void ChangeNum(int num)
         {
-            ThicknessAnimation an = new ThicknessAnimation();
-            an.From = nums.Margin;
-            an.To = new Thickness(nums.Margin.Left, -Math.Abs((num % 10) * CharacterHeight), nums.Margin.Right, -450 + (num % 10) * CharacterHeight);
-            //an.To = new Thickness(nums.Margin.Left, nums.Margin.Top, nums.Margin.Right, -450 + (num % 10) * CharacterHeight);
-            an.Duration = new Duration(TimeSpan.FromMilliseconds(500));
+            ThicknessAnimation an = new ThicknessAnimation
+            {
+                From = nums.Margin,
+                Duration = new Duration(TimeSpan.FromMilliseconds(500))
+            };
+
+            switch (num)
+            {
+                case 9:
+                    an.To = new Thickness(0,0,0,-6);
+                    break;
+                case 8:
+                    an.To = new Thickness(0, 0, 0, -56);
+                    break;
+                case 7:
+                    an.To = new Thickness(0, 0, 0, -106);
+                    break;
+                case 6:
+                    an.To = new Thickness(0, 0, 0, -156);
+                    break;
+                case 5:
+                    an.To = new Thickness(0, 0, 0, -206);
+                    break;
+                case 4:
+                    an.To = new Thickness(0, 0, 0, -256);
+                    break;
+                case 3:
+                    an.To = new Thickness(0, 0, 0, -306);
+                    break;
+                case 2:
+                    an.To = new Thickness(0, 0, 0, -356);
+                    break;
+                case 1:
+                    an.To = new Thickness(0, 0, 0, -406);
+                    break;
+                case 0:
+                    an.To = new Thickness(0, 0, 0, -456);
+                    break;
+                case -1:
+                    an.To = new Thickness(0, 0, 0, -515);
+                    break;
+                case -2:
+                    an.To = new Thickness(0, 0, 0, -565);
+                    break;
+                case -3:
+                    an.To = new Thickness(0, 0, 0, -600);
+                    break;
+
+                default:
+                    break;
+            }
+
             nums.BeginAnimation(MarginProperty, an);
         }
 
@@ -48,26 +95,16 @@ namespace BiliUPDesktopTool
 
         private void BindingInit()
         {
-            Binding bind_fontcolor = new Binding()
-            {
-                Source = Skin.Instance,
-                Mode = BindingMode.TwoWay,
-                Path = new PropertyPath("DesktopWnd_FontColor")
-            };
-            SetBinding(ForegroundProperty, bind_fontcolor);
+            
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Parent.GetValue(NameProperty).ToString() != "ViewPanel")
-            {
-                BindingInit();
-            }
+            
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            BindingOperations.ClearAllBindings(this);
         }
 
         #endregion Private Methods

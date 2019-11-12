@@ -247,28 +247,13 @@ namespace BiliUPDesktopTool
 
         #region Private Methods
 
-        private void BindingInit()
-        {
-            Binding bind_fontcolor = new Binding()
-            {
-                Source = Skin.Instance,
-                Mode = BindingMode.TwoWay,
-                Path = new PropertyPath("DesktopWnd_FontColor")
-            };
-            SetBinding(ForegroundProperty, bind_fontcolor);
-        }
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Parent.GetValue(NameProperty).ToString() != "DV_Holder")
-            {
-                BindingInit();
-            }
+
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            BindingOperations.ClearAllBindings(this);
         }
 
         #endregion Private Methods

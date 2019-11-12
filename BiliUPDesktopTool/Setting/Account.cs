@@ -370,11 +370,11 @@ namespace BiliUPDesktopTool
                 JObject obj = JObject.Parse(str);
                 if ((int)obj["code"] == 0)
                 {
-                    WindowsManager.Instance.GetWindow<MainWindow>().NotifyMsg("修改简介成功！");
+                    MsgBoxPushHelper.RaisePushMsg("修改简介成功！");
                     return;
                 }
             }
-            WindowsManager.Instance.GetWindow<MainWindow>().NotifyMsg("修改简介失败！" + str);
+            MsgBoxPushHelper.RaisePushMsg("修改简介失败！" + str);
         }
 
         /// <summary>

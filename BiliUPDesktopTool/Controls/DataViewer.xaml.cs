@@ -119,7 +119,6 @@ namespace BiliUPDesktopTool
 
         public void ChangeView(List<string> value)
         {
-            DataViewer r = this;
             Binding binding_num, binding_incr;
             if (value.Count > 3) value.RemoveRange(0, value.Count - 3);
             if (value != null && value.Count == 3)
@@ -139,8 +138,8 @@ namespace BiliUPDesktopTool
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[2])
                         };
-                        BindingOperations.SetBinding(r.num, RollingNums.numProperty, binding_num);
-                        BindingOperations.SetBinding(r.incr, RollingNums.numProperty, binding_incr);
+                        BindingOperations.SetBinding(num, RollingNums.numProperty, binding_num);
+                        BindingOperations.SetBinding(incr, RollingNums.numProperty, binding_incr);
                         break;
 
                     case "article":
@@ -156,26 +155,26 @@ namespace BiliUPDesktopTool
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[2])
                         };
-                        BindingOperations.SetBinding(r.num, RollingNums.numProperty, binding_num);
-                        BindingOperations.SetBinding(r.incr, RollingNums.numProperty, binding_incr);
+                        BindingOperations.SetBinding(num, RollingNums.numProperty, binding_num);
+                        BindingOperations.SetBinding(incr, RollingNums.numProperty, binding_incr);
                         break;
 
                     default:
-                        BindingOperations.ClearAllBindings(r.num);
-                        BindingOperations.ClearAllBindings(r.incr);
+                        BindingOperations.ClearAllBindings(num);
+                        BindingOperations.ClearAllBindings(incr);
                         break;
                 }
-                r.Visibility = Visibility.Visible;
+                Visibility = Visibility.Visible;
             }
             else if (value != null)
             {
-                BindingOperations.ClearAllBindings(r.num);
-                BindingOperations.ClearAllBindings(r.incr);
-                r.Visibility = Visibility.Visible;
+                BindingOperations.ClearAllBindings(num);
+                BindingOperations.ClearAllBindings(incr);
+                Visibility = Visibility.Visible;
             }
             else
             {
-                r.Visibility = Visibility.Hidden;
+                Visibility = Visibility.Hidden;
             }
         }
 

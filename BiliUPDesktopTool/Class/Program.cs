@@ -47,6 +47,7 @@ namespace BiliUPDesktopTool
             app.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
             Thread DesktopWnd_Monitor = new Thread(DesktopWnd_Monitor_Handler);
+            DesktopWnd_Monitor.Name = "DesktopWnd_Monitor";
             DesktopWnd_Monitor.IsBackground = false;
             DesktopWnd_Monitor.Start(app);
 

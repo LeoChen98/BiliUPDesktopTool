@@ -82,6 +82,7 @@ namespace BiliUPDesktopTool
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            MsgBoxPushHelper.PushMsg -= MsgBoxPushHelper_PushMsg;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

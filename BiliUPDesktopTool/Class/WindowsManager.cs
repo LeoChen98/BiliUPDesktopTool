@@ -81,6 +81,7 @@ namespace BiliUPDesktopTool
             var window = (Window)sender;
             window.Closed -= Win_Closed;
             Windows.Remove(window);
+            GC.Collect();
         }
 
         #endregion Private Methods
