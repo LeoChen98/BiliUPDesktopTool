@@ -26,14 +26,6 @@ namespace BiliUPDesktopTool
 
         #region Public Methods
 
-        /// <summary>
-        /// 广播信息
-        /// </summary>
-        /// <param name="msg">信息内容</param>
-        public void NotifyMsg(string msg)
-        {
-        }
-
         public void ToTab(int id)
         {
             switch (id)
