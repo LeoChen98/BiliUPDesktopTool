@@ -443,6 +443,8 @@ namespace BiliUPDesktopTool
         /// </summary>
         public void SignOut()
         {
+            Bas.GetHTTPBody("https://passport.bilibili.com/login?act=exit", Cookies, "");
+
             Islogin = false;
 
             if (ST.IsSavePassword)
