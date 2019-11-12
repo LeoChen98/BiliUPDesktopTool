@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -61,6 +62,12 @@ namespace BiliUPDesktopTool
         private void Btn_Close_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Statistics_Box.Children.Clear();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                WinAPIHelper.SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
+            }
             Close();
         }
 
