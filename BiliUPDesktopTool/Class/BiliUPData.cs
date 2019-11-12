@@ -671,6 +671,7 @@ namespace BiliUPDesktopTool
             private Data data;
 
             private DateTime? LastTime = null;
+            private DateTime? ChargeLastTime = null;
 
             #endregion Private Fields
 
@@ -1251,12 +1252,18 @@ namespace BiliUPDesktopTool
 
                 if (LastTime == null || DateTime.Compare(((DateTime)LastTime).AddDays(1), DateTime.Now) <= 0)
                 {
-                    tmp_data = new Data(GetCharge());
+                    tmp_data = new Data();
                     IsChangeLast = true;
                 }
                 else
                 {
                     tmp_data = new Data(data);
+                }
+
+                if(ChargeLastTime == null || DateTime.Compare(((DateTime)ChargeLastTime).AddDays(1), DateTime.Now) < 0)
+                {
+                    tmp_data._elec_last = GetCharge();
+                    ChargeLastTime = DateTime.Now.Date;//设定为当天0点数据
                 }
 
                 int pn = 1;
@@ -1310,8 +1317,6 @@ namespace BiliUPDesktopTool
                     if (IsChangeLast)
                         LastTime = DateTime.Compare(DateTime.Now.Date.AddHours(12), DateTime.Now) <= 0 ? DateTime.Now.Date.AddHours(12) : DateTime.Now.Date.AddDays(-1).AddHours(12);//设定为当天12点数据
                 }
-
-                Debug.WriteLine(data._play_real);
             }
 
             #endregion Private Methods
@@ -1329,6 +1334,8 @@ namespace BiliUPDesktopTool
                 #endregion Public Fields
 
                 #region Public Constructors
+
+                public Data() { }
 
                 public Data(double elec)
                 {
