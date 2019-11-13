@@ -26,7 +26,7 @@ namespace BiliUPDesktopTool
         {
             InitializeComponent();
 
-            Bas.settings.DataViewSelected_Changed += ModesChanged;
+            Settings.Instance.DataViewSelected_Changed += ModesChanged;
 
             //初始化数据
             ChangeView();
@@ -51,13 +51,13 @@ namespace BiliUPDesktopTool
         /// </summary>
         public void ChangeView()
         {
-            if (Bas.biliupdata != null)
+            if (BiliUPData.Intance != null)
             {
                 DataViewer[] viewers = new DataViewer[4] { ViewerLT, ViewerRT, ViewerLB, ViewerRB };
                 for (int i = 0; i < viewers.Length; i++)
                 {
-                    viewers[i].Title = GetDataTile(Bas.settings.DataViewSelected[i]);
-                    viewers[i].DataMode = Bas.settings.DataViewSelected[i];
+                    viewers[i].Title = GetDataTile(Settings.Instance.DataViewSelected[i]);
+                    viewers[i].DataMode = Settings.Instance.DataViewSelected[i];
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace BiliUPDesktopTool
         {
             Binding bind_R_color = new Binding()
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };
@@ -91,7 +91,7 @@ namespace BiliUPDesktopTool
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        private string GetDataTile(string[] v)
+        private string GetDataTile(List<string> v)
         {
             if (v == null) return "";
             string title = "";
@@ -144,6 +144,10 @@ namespace BiliUPDesktopTool
                     title = "电池";
                     break;
 
+                case "elec_total":
+                    title = "电池总量";
+                    break;
+
                 case "fan":
                     title = "粉丝";
                     break;
@@ -173,6 +177,13 @@ namespace BiliUPDesktopTool
             {
                 BindingInit();
             }
+        }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            BindingOperations.ClearAllBindings(this);
+
+            Settings.Instance.DataViewSelected_Changed -= ModesChanged;
         }
 
         #endregion Private Methods

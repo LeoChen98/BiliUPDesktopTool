@@ -13,5 +13,6 @@
         <Label x:Name="LBL_Status" Content="状态：等待更新" HorizontalAlignment="Left" Height="24" Margin="10,381,0,0" VerticalAlignment="Top" Width="285" Foreground="{Binding Foreground, ElementName=window}" />
         <Button x:Name="BTN_Update" Content="更新" HorizontalAlignment="Left" Height="23" Margin="122,410,0,0" VerticalAlignment="Top" Width="84" Background="{x:Null}" Foreground="{Binding Foreground, ElementName=window}" Click="BTN_Update_Click" />
         <Button x:Name="BTN_Cancel" Content="取消" HorizontalAlignment="Left" Height="23" Margin="211,410,0,0" VerticalAlignment="Top" Width="84" Background="{x:Null}" Foreground="{Binding Foreground, ElementName=window}" Click="BTN_Cancel_Click" />
+                <local:MsgBox x:Name="msgbox" Margin="0,0,0,25" MaxWidth="400" Height="24" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Opacity="0" Visibility="Hidden" />
     </Grid>
 </Window>

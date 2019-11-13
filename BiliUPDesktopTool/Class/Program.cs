@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace BiliUPDesktopTool
 {
@@ -17,72 +18,42 @@ namespace BiliUPDesktopTool
                 Environment.Exit(0);
             }
 
-            //初始化公共变量
-            Bas.skin = new Skin();
-            Bas.settings = new Settings();
+            //用户统计
+            Bas.User_Statistics();
 
-            if (Bas.settings.IsFirstRun)
+            _ = NotifyIconHelper.Instance;
+
+            if (Settings.Instance.IsFirstRun)
             {
                 //首次运行执行
-                LisenceWindow LW = new LisenceWindow();
-                if (LW.ShowDialog() != true)
+                if (WindowsManager.Instance.GetWindow<LisenceWindow>().ShowDialog() != true)
                 {
                     Environment.Exit(-2);
                 }
-                Bas.settings.IsFirstRun = false;
+                Settings.Instance.IsFirstRun = false;
             }
 
-            Bas.account = new Account();
-            Bas.biliupdata = new BiliUPData();
-            Bas.notifyIcon = new NotifyIconHelper();
-            Bas.update = new Update();
+            //初始化WPF为25帧
+            Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata { DefaultValue = 25 });
 
-            if (Bas.settings.IsAutoCheckUpdate) Bas.update.CheckUpdate(false);
+            if (Settings.Instance.IsAutoCheckUpdate) Update.Instance.CheckUpdate(false);
 
             if (Environment.CommandLine.ToLower().IndexOf("-s") == -1)
             {
-                Bas.notifyIcon.ShowToolTip("工具主程序已最小化到托盘，调整数据窗口、设置和退出程序请通过图盘图标的菜单。");
+                WindowsManager.Instance.GetWindow<MainWindow>().Show();
             }
 
             Application app = new Application();
             app.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
             Thread DesktopWnd_Monitor = new Thread(DesktopWnd_Monitor_Handler);
+            DesktopWnd_Monitor.Name = "DesktopWnd_Monitor";
             DesktopWnd_Monitor.IsBackground = false;
             DesktopWnd_Monitor.Start(app);
 
             app.Run();
         }
 
-
-        private static void DesktopWnd_Monitor_Handler(object e)
-        {
-            Application app = e as Application;
-
-            DesktopWindow dw = null;
-            app.Dispatcher.Invoke(() =>
-            {
-                dw = new DesktopWindow();
-                dw.Show();
-            });
-
-            while (true)
-            {
-                try
-                {
-                    if (dw == null || !dw.IsVisible)
-                    {
-                        app.Dispatcher.Invoke(() =>
-                        {
-                            dw = new DesktopWindow();
-                            dw.Show();
-                        });
-                    }
-                }
-                catch { }
-                Thread.Sleep(1000);
-            }
-        }
         /// <summary>
         /// 查找相同进程
         /// </summary>
@@ -109,5 +80,42 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private static void DesktopWnd_Monitor_Handler(object e)
+        {
+            Application app = e as Application;
+
+            app.Dispatcher.Invoke(() =>
+            {
+                WindowsManager.Instance.GetWindow<DesktopWindow>().Show();
+            });
+
+            while (true)
+            {
+                try
+                {
+                    if (!WindowsManager.Instance.HasWindow<DesktopWindow>() && Settings.Instance.IsDataViewerDisplay)
+                    {
+                        app.Dispatcher.Invoke(() =>
+                        {
+                            WindowsManager.Instance.GetWindow<DesktopWindow>().Show();
+                        });
+                    }
+                    else if (WindowsManager.Instance.HasWindow<DesktopWindow>() && !Settings.Instance.IsDataViewerDisplay)
+                    {
+                        app.Dispatcher.Invoke(() =>
+                        {
+                            WindowsManager.Instance.GetWindow<DesktopWindow>().Close();
+                        });
+                    }
+                }
+                catch { }
+                Thread.Sleep(1000);
+            }
+        }
+
+        #endregion Private Methods
     }
 }

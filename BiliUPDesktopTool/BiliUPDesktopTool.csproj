@@ -49,6 +49,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
@@ -81,6 +83,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <Optimize>false</Optimize>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -154,12 +158,11 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="QRCoder, Version=1.3.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\QRCoder.1.3.5\lib\net40\QRCoder.dll</HintPath>
-    </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Net" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
@@ -174,7 +177,6 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -183,6 +185,26 @@
     </ApplicationDefinition>
     <Compile Include="Class\Update.cs" />
     <Compile Include="Class\Program.cs" />
+    <Compile Include="Class\WindowsManager.cs" />
+    <Compile Include="Controls\EventItem.xaml.cs">
+      <DependentUpon>EventItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MsgBox.xaml.cs">
+      <DependentUpon>MsgBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\MachineInfoHelper.cs" />
+    <Compile Include="Helper\MsgBoxPushHelper.cs" />
+    <Compile Include="Pages\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MorePage.xaml.cs">
+      <DependentUpon>MorePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StatisticsPage.xaml.cs">
+      <DependentUpon>StatisticsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plug-ins\PluginManager.cs" />
+    <Compile Include="Todo.cs" />
     <Compile Include="Window\LisenceWindow.xaml.cs">
       <DependentUpon>LisenceWindow.xaml</DependentUpon>
     </Compile>
@@ -208,9 +230,6 @@
     <Compile Include="Window\SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window\DataDisplaySetter.xaml.cs">
-      <DependentUpon>DataDisplaySetter.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helper\NotifyIconHelper.cs" />
     <Compile Include="Setting\SettingsBase.cs" />
     <Compile Include="Setting\Settings.cs" />
@@ -226,6 +245,26 @@
     </Compile>
     <Compile Include="Helper\DesktopEmbeddedWindowHelper.cs" />
     <Compile Include="Helper\WinAPIHelper.cs" />
+    <Page Include="Controls\EventItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MsgBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MorePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StatisticsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window\LisenceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -259,14 +298,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Window\SettingWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Style\SelectPanel_ScrollViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window\DataDisplaySetter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,9 +349,12 @@
     </EmbeddedResource>
     <None Include="DataDesc.json" />
     <None Include="packages.config" />
+    <None Include="Plug-in_mainfirst_model.json" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -330,25 +364,53 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Image\TransparentBg.png" />
+    <Resource Include="Image\TransparentBg.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Image\icon.ico" />
+    <Resource Include="Image\icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Image\icon.png" />
+    <Resource Include="Image\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Thanks.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Image\Upateicon.ico" />
+    <Resource Include="Image\Upateicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Upateicon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\More.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\statistics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\noface.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\level.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\noun_Key_233117.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\noun_Key_233117_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\noun_small qr code_2002633.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\noun_small qr code_2002633_w.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

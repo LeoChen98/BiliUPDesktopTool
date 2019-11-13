@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace BiliUPDesktopTool
 {
@@ -46,26 +45,26 @@ namespace BiliUPDesktopTool
         /// <param name="e"></param>
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            if (RunningInstance() != null && Environment.CommandLine.ToLower().IndexOf("-m") == -1)
-            {
-                System.Windows.Forms.MessageBox.Show("已经有一个实例在运行！");
-                Environment.Exit(0);
-            }
+            //if (RunningInstance() != null && Environment.CommandLine.ToLower().IndexOf("-m") == -1)
+            //{
+            //    System.Windows.Forms.MessageBox.Show("已经有一个实例在运行！");
+            //    Environment.Exit(0);
+            //}
 
-            //初始化公共变量
-            Bas.skin = new Skin();
-            Bas.settings = new Settings();
-            Bas.account = new Account();
-            Bas.biliupdata = new BiliUPData();
-            Bas.notifyIcon = new NotifyIconHelper();
-            Bas.update = new Update();
+            ////初始化公共变量
+            //Skin.Instance = new Skin();
+            //Settings.Instance = new Settings();
+            //Account.Instance = new Account();
+            //BiliUPData.Intance = new BiliUPData();
+            //NotifyIconHelper.Instance = new NotifyIconHelper();
+            //Update.Instance = new Update();
 
-            if (Bas.settings.IsFirstRun)
-            {
-                //首次运行执行
+            //if (Settings.Instance.IsFirstRun)
+            //{
+            //    //首次运行执行
 
-                Bas.settings.IsFirstRun = false;
-            }
+            //    Settings.Instance.IsFirstRun = false;
+            //}
         }
 
         #endregion Private Methods

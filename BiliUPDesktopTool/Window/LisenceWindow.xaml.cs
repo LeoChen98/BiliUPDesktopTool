@@ -13,6 +13,8 @@ namespace BiliUPDesktopTool
         public LisenceWindow()
         {
             InitializeComponent();
+
+            MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
         }
 
         #endregion Public Constructors
@@ -32,6 +34,14 @@ namespace BiliUPDesktopTool
         private void BTN_Yes_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+        }
+
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
         }
 
         private new void Show()

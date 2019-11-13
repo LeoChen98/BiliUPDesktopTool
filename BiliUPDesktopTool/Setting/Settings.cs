@@ -16,22 +16,24 @@ namespace BiliUPDesktopTool
         /// </summary>
         private const string savepath = "Settings.dms";
 
+        private static Settings instance = new Settings();
+
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
         /// 初始化设置类
         /// </summary>
-        public Settings() : base(new SettingsTable(), savepath)
+        private Settings() : base(new SettingsTable(), savepath)
         {
             if (DataViewSelected == null)
             {
-                DataViewSelected = new List<string[]>() { new string[3] { "video", "play", "play_incr" }, new string[3] { "video", "fan", "fan_incr" }, new string[3] { "video", "growup", "growup_incr" }, new string[3] { "video", "elec", "elec_incr" } };
+                DataViewSelected = new List<List<string>>() { new List<string> { "video", "play", "play_incr" }, new List<string> { "video", "fan", "fan_incr" }, new List<string> { "video", "growup", "growup_incr" }, new List<string> { "video", "elec", "elec_incr" } };
             }
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Events
 
@@ -40,6 +42,15 @@ namespace BiliUPDesktopTool
         #endregion Public Events
 
         #region Public Properties
+
+        public static Settings Instance
+        {
+            get
+            {
+                if (instance == null) instance = new Settings();
+                return instance;
+            }
+        }
 
         /// <summary>
         /// 数据刷新间隔（单位：毫秒，默认值：60000（1分钟））
@@ -62,7 +73,7 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 数据展示选择的项目
         /// </summary>
-        public List<string[]> DataViewSelected
+        public List<List<string>> DataViewSelected
         {
             get { return ST.DataViewSelected; }
             set
@@ -82,6 +93,17 @@ namespace BiliUPDesktopTool
             {
                 ST.IsAutoCheckUpdate = value;
                 PropertyChangedA(this, new PropertyChangedEventArgs("IsAutoCheckUpdate"));
+                Save();
+            }
+        }
+
+        public bool IsDataViewerDisplay
+        {
+            get { return ST.IsDataViewerDisplay; }
+            set
+            {
+                ST.IsDataViewerDisplay = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("IsDataViewerDisplay"));
                 Save();
             }
         }
@@ -142,9 +164,10 @@ namespace BiliUPDesktopTool
 
             public int DataRefreshInterval = 60000;
 
-            public List<string[]> DataViewSelected;
+            public List<List<string>> DataViewSelected;
 
             public bool IsAutoCheckUpdate = true;
+            public bool IsDataViewerDisplay = true;
             public bool IsFirstRun = true;
 
             public bool IsRealTime = false;

@@ -13,10 +13,10 @@ namespace BiliUPDesktopTool
     {
         #region Private Fields
 
+        private static Update instance;
         private bool _IsFinished;
         private string _Status;
         private string _UpdateText;
-        private UpdateWindow uw;
 
         #endregion Private Fields
 
@@ -27,6 +27,15 @@ namespace BiliUPDesktopTool
         #endregion Public Events
 
         #region Public Properties
+
+        public static Update Instance
+        {
+            get
+            {
+                if (instance == null) instance = new Update();
+                return instance;
+            }
+        }
 
         /// <summary>
         /// 是否已完成
@@ -89,7 +98,7 @@ namespace BiliUPDesktopTool
 
                     if ((int)jobj["code"] == 0)
                     {
-                        if (jobj["data"]["version"].ToString() == System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
+                        if ((int)jobj["data"]["build"] <= Bas.Build)
                         {
                             if (IsGUI) MessageBox.Show("当前版本已是最新");
                             return;
@@ -98,13 +107,12 @@ namespace BiliUPDesktopTool
                         {
                             if (IsGUI)
                             {
-                                UpdateText = "当前版本：" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + "\r\n最新版本：" + jobj["data"]["version"].ToString() + "(" + jobj["data"]["updatetime"].ToString() + "更新)\r\n\r\n更新内容：\r\n" + jobj["data"]["content"].ToString();
-                                uw = (uw == null || uw.IsVisible == false) ? new UpdateWindow() : uw;
-                                uw.Show();
+                                UpdateText = "当前版本：" + Bas.Version + "\r\n最新版本：" + jobj["data"]["version"].ToString() + "(" + jobj["data"]["updatetime"].ToString() + "更新)\r\n\r\n更新内容：\r\n" + jobj["data"]["content"].ToString();
+                                WindowsManager.Instance.GetWindow<UpdateWindow>().Show();
                             }
                             else
                             {
-                                Bas.notifyIcon.ShowToolTip("检查到新版本！请通过“检查更新”屏幕更新。");
+                                NotifyIconHelper.Instance.ShowToolTip("检查到新版本！请通过“检查更新”屏幕更新。");
                             }
                         }
                     }
@@ -142,22 +150,25 @@ namespace BiliUPDesktopTool
                                     "choice /t 5 /d y /n >nul\r\n" +                                                                                   //等待5s开始
                                     "xcopy \"" + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\UpdateTemp" + "\" \"" + Application.StartupPath + "\" /s /e /y\r\n" +     //覆盖程序
                                     "rmdir /s /q \"" + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\UpdateTemp\\" + "\"\r\n" +                                                //删除更新缓存
-                                    "start \"\" \"" + Application.ExecutablePath + "\"\r\n" +                                                                     //启动程序
+                                    "start \"\" \"" + Application.ExecutablePath + "\" -s\r\n" +                                                                     //启动程序
                                     "del %0", Encoding.Default);
                     Process p = new Process();
+
                     p.StartInfo.FileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\update.bat";
                     p.StartInfo.CreateNoWindow = true;
                     p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     p.StartInfo.Verb = "runas";//管理员启动
                     p.Start();
+
                     Environment.Exit(2);
                 }
             }
             else
             {
-                MessageBox.Show("校验错误，请稍后再试！");
+                MsgBoxPushHelper.RaisePushMsg("校验错误，请稍后再试！");
                 IsFinished = true;
             }
+            (sender as WebClient).Dispose();
         }
 
         private void Downloader_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)

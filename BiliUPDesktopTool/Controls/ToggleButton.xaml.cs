@@ -75,22 +75,29 @@ namespace BiliUPDesktopTool
         {
             if ((bool)e)
             {
-                ThicknessAnimation an = new ThicknessAnimation();
-                an.From = new Thickness(0, 0, 36, 0);
-                an.To = new Thickness(36, 0, 0, 0);
-                an.Duration = new Duration(TimeSpan.FromMilliseconds(100));
-                slider.BeginAnimation(MarginProperty, an);
-                Background = new SolidColorBrush(Color.FromArgb(0xff, 0x21, 0xc7, 0x3b));
+                ((Storyboard)FindResource("Status_On")).Begin();
             }
             else
             {
-                ThicknessAnimation an = new ThicknessAnimation();
-                an.From = new Thickness(36, 0, 0, 0);
-                an.To = new Thickness(0, 0, 36, 0);
-                an.Duration = new Duration(TimeSpan.FromMilliseconds(100));
-                slider.BeginAnimation(MarginProperty, an);
-                Background = new SolidColorBrush(Color.FromArgb(0xff, 0x96, 0x96, 0x96));
+                ((Storyboard)FindResource("Status_Off")).Begin();
             }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Status)
+            {
+                ((Storyboard)FindResource("Status_On")).Begin();
+            }
+            else
+            {
+                ((Storyboard)FindResource("Status_Off")).Begin();
+            }
+        }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            StatusChanged -= ToggleButton_StatusChanged;
         }
 
         #endregion Private Methods

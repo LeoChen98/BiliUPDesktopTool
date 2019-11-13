@@ -21,6 +21,15 @@ namespace BiliUPDesktopTool
 
         #endregion Public Fields
 
+        #region Private Fields
+
+        /// <summary>
+        /// 指示当前是否正数
+        /// </summary>
+        private bool IsPostive = true;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public RollingNums()
@@ -31,6 +40,26 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Public Constructors
+
+        #region Public Delegates
+
+        /// <summary>
+        /// 正负变更委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void PostiveAndNegativeChangedHandler(object sender, PostiveAndNegativeChangedEventArgs e);
+
+        #endregion Public Delegates
+
+        #region Public Events
+
+        /// <summary>
+        /// 正负变更事件
+        /// </summary>
+        public event PostiveAndNegativeChangedHandler PostiveAndNegativeChanged;
+
+        #endregion Public Events
 
         #region Public Properties
 
@@ -71,8 +100,16 @@ namespace BiliUPDesktopTool
         /// <param name="num">数字</param>
         public void ChangeNum(double num)
         {
-            if (num != -1)
+            if (num >= 0 && !IsPostive)
             {
+                PostiveAndNegativeChanged?.Invoke(this, new PostiveAndNegativeChangedEventArgs { OldValue = IsPostive, NewValue = true });
+                IsPostive = true;
+            }
+            else if(num <0 && IsPostive)
+            {
+                PostiveAndNegativeChanged?.Invoke(this, new PostiveAndNegativeChangedEventArgs { OldValue = IsPostive, NewValue = false });
+                IsPostive = false;
+            }
                 num = Math.Abs(num);
                 string numstr = num.ToString();
                 if (numstr.IndexOf("E+") >= 0)
@@ -102,6 +139,12 @@ namespace BiliUPDesktopTool
                         numids[5] = -2;
                         numids[4] = int.Parse(tmp1.Substring(tmp2.Length + 1, 1)) >= 5 ? int.Parse(tmp3) + 1 : int.Parse(tmp3);
 
+                        if (numids[4] >= 10)
+                        {
+                            numids[4] -= 10;
+                            tmp2 = (int.Parse(tmp2) + 1).ToString();
+                        }
+
                         for (int i = 1; i <= 4; i++)
                         {
                             if (tmp2.Length - i >= 0)
@@ -129,6 +172,12 @@ namespace BiliUPDesktopTool
 
                         numids[5] = -1;
                         numids[4] = int.Parse(tmp1.Substring(tmp2.Length + 1, 1)) >= 5 ? int.Parse(tmp3) + 1 : int.Parse(tmp3);
+
+                        if (numids[4] >= 10)
+                        {
+                            numids[4] -= 10;
+                            tmp2 = (int.Parse(tmp2) + 1).ToString();
+                        }
 
                         for (int i = 1; i <= 4; i++)
                         {
@@ -192,32 +241,38 @@ namespace BiliUPDesktopTool
                     P1.ChangeNum(numids[4]);
                     P2.ChangeNum(numids[5]);
                 }
-            }
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void BindingInit()
-        {
-            Binding bind_fontcolor = new Binding()
-            {
-                Source = Bas.skin,
-                Mode = BindingMode.TwoWay,
-                Path = new PropertyPath("DesktopWnd_FontColor")
-            };
-            SetBinding(ForegroundProperty, bind_fontcolor);
-        }
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Parent.GetValue(NameProperty).ToString() != "DV_Holder")
-            {
-                BindingInit();
-            }
+
+        }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion Private Methods
+
+        #region Public Classes
+
+        /// <summary>
+        /// 正负变更传参
+        /// </summary>
+        public class PostiveAndNegativeChangedEventArgs
+        {
+            #region Public Fields
+
+            public bool NewValue;
+            public bool OldValue;
+
+            #endregion Public Fields
+        }
+
+        #endregion Public Classes
     }
 }

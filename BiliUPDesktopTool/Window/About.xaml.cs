@@ -13,6 +13,8 @@ namespace BiliUPDesktopTool
         public About()
         {
             InitializeComponent();
+
+            MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
         }
 
         #endregion Public Constructors
@@ -21,12 +23,20 @@ namespace BiliUPDesktopTool
 
         private void BTN_CheckUpdate_Click(object sender, RoutedEventArgs e)
         {
-            Bas.update.CheckUpdate();
+            Update.Instance.CheckUpdate();
         }
 
         private void BTN_ShowLisence_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("Explorer.exe", "https://zhangbudademao.com/BiliUPDesktopTool/Lisence.html");
+            Process.Start("Explorer.exe", "https://www.zhangbudademao.com/BiliUPDesktopTool/Lisence.html");
+        }
+
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
         }
 
         #endregion Private Methods

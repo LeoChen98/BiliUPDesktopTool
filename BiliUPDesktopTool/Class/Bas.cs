@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -15,48 +16,34 @@ namespace BiliUPDesktopTool
         #region Public Fields
 
         /// <summary>
-        /// 账号信息实例
+        /// 主程序Build
         /// </summary>
-        public static Account account;
+        public const int _Build = 13;
 
         /// <summary>
-        /// up主数据实例
+        /// 主程序版本号
         /// </summary>
-        public static BiliUPData biliupdata;
-
-        /// <summary>
-        /// 登录窗体
-        /// </summary>
-        public static LoginWindow LoginWindow;
-
-        /// <summary>
-        /// 系统托盘
-        /// </summary>
-        public static NotifyIconHelper notifyIcon;
-
-        /// <summary>
-        /// 设置实例
-        /// </summary>
-        public static Settings settings;
-
-        /// <summary>
-        /// 皮肤实例
-        /// </summary>
-        public static Skin skin;
-
-        /// <summary>
-        /// 更新实例
-        /// </summary>
-        public static Update update;
+        public const string _Version = "2.0.0.13 Preview 5";
 
         #endregion Public Fields
 
         #region Public Properties
 
         /// <summary>
+        /// 主程序Build
+        /// </summary>
+        public static int Build
+        {
+            get
+            {
+                return _Build;
+            }
+        }
+
+        /// <summary>
         /// 开源许可
         /// </summary>
-        public string Thanks
+        public static string Thanks
         {
             get
             {
@@ -67,11 +54,11 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 主程序版本号
         /// </summary>
-        public string Version
+        public static string Version
         {
             get
             {
-                return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                return _Version;
             }
         }
 
@@ -89,16 +76,18 @@ namespace BiliUPDesktopTool
             try
             {
                 FileStream file = new FileStream(fileName, FileMode.Open);
-                System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-                byte[] retVal = md5.ComputeHash(file);
-                file.Close();
-
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < retVal.Length; i++)
+                using (MD5 md5 = new MD5CryptoServiceProvider())
                 {
-                    sb.Append(retVal[i].ToString("x2"));
+                    byte[] retVal = md5.ComputeHash(file);
+                    file.Close();
+
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < retVal.Length; i++)
+                    {
+                        sb.Append(retVal[i].ToString("x2"));
+                    }
+                    return sb.ToString();
                 }
-                return sb.ToString();
             }
             catch
             {
@@ -153,27 +142,20 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
-        /// POST方法
+        /// 会抛出错误的获取指定url的内容
         /// </summary>
-        /// <param name="url">地址</param>
-        /// <param name="data">要post的数据</param>
+        /// <param name="url">url</param>
         /// <param name="Cookies">cookies</param>
         /// <returns>返回内容</returns>
-        public static string PostHTTPBody(string url, string data = "", string Cookies = "", string Referer = "")
+        public static string GetHTTPBodyThrow(string url, string Cookies = "", string Referer = "")
         {
             HttpWebRequest req = null;
             HttpWebResponse rep = null;
             StreamReader reader = null;
             string body = "";
-            byte[] bdata = Encoding.UTF8.GetBytes(data);
             try
             {
                 req = (HttpWebRequest)WebRequest.Create(url);
-                req.Method = "POST";
-
-                Stream writer = req.GetRequestStream();
-                writer.Write(bdata, 0, bdata.Length);
-                writer.Close();
 
                 if (!string.IsNullOrEmpty(Cookies))
                 {
@@ -188,13 +170,67 @@ namespace BiliUPDesktopTool
                 req.Accept = "*/*";
                 req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
                 req.Referer = Referer;
-                req.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
 
                 rep = (HttpWebResponse)req.GetResponse();
                 reader = new StreamReader(rep.GetResponseStream());
                 body = reader.ReadToEnd();
             }
             catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (rep != null) rep.Close();
+                if (req != null) req.Abort();
+            }
+            return body;
+        }
+
+        /// <summary>
+        /// POST方法
+        /// </summary>
+        /// <param name="url">地址</param>
+        /// <param name="data">要post的数据</param>
+        /// <param name="Cookies">cookies</param>
+        /// <returns>返回内容</returns>
+        public static string PostHTTPBody(string url, string data = "", string Cookies = "", string Referer = "", string ContentType = "application/x-www-form-urlencoded; charset=UTF-8")
+        {
+            HttpWebRequest req = null;
+            HttpWebResponse rep = null;
+            StreamReader reader = null;
+            string body = "";
+            byte[] bdata = Encoding.UTF8.GetBytes(data);
+            try
+            {
+                req = (HttpWebRequest)WebRequest.Create(url);
+                req.Method = "POST";
+
+                if (!string.IsNullOrEmpty(Cookies))
+                {
+                    CookieCollection CookiesC = SetCookies(Cookies, url);
+                    req.CookieContainer = new CookieContainer(CookiesC.Count)
+                    {
+                        PerDomainCapacity = CookiesC.Count
+                    };
+                    req.CookieContainer.Add(CookiesC);
+                }
+
+                req.Accept = "*/*";
+                req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
+                req.Referer = Referer;
+                req.ContentType = ContentType;
+
+                Stream writer = req.GetRequestStream();
+                writer.Write(bdata, 0, bdata.Length);
+                writer.Close();
+
+                rep = (HttpWebResponse)req.GetResponse();
+                reader = new StreamReader(rep.GetResponseStream());
+                body = reader.ReadToEnd();
+            }
+            catch (WebException ex)
             {
             }
             finally
@@ -310,6 +346,18 @@ namespace BiliUPDesktopTool
                 GC.Collect(1);
             }
             return result;
+        }
+
+        /// <summary>
+        /// 用户统计
+        /// </summary>
+        public static void User_Statistics()
+        {
+            string cpu = MachineInfoHelper.GetCPUInfo();
+            string drive = MachineInfoHelper.GetMainDriveId();
+            string info = EncryptHelper.GetMD5_16(cpu + drive);
+            string json = "{\"pid\":117,\"version\":" + Build + ",\"token\":\"" + info + "\"}";
+            PostHTTPBody("https://cloud.api.zhangbudademao.com/public/User_Statistics", json, "", "application/json; charset=UTF-8");
         }
 
         #endregion Public Methods

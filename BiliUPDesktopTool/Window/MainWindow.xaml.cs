@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Threading;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace BiliUPDesktopTool
 {
@@ -9,60 +11,86 @@ namespace BiliUPDesktopTool
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region Private Fields
-
-        private int i;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public MainWindow()
         {
             InitializeComponent();
 
-            
+            Statistics_Box.Children.Add(new StatisticsPage());
+
+            MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
         }
 
         #endregion Public Constructors
 
+        #region Public Methods
+
+        public void ToTab(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    (FindResource("Btn_Home_MouseUp") as Storyboard).Begin();
+                    break;
+
+                case 1:
+                    (FindResource("Btn_Statistics_MouseUp") as Storyboard).Begin();
+                    break;
+
+                case 2:
+                    (FindResource("Btn_Nore_MouseUp") as Storyboard).Begin();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        #endregion Public Methods
+
         #region Private Methods
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Btn_Close_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            //num1.ChangeNum(i++);
-            nums1.ChangeNum(1234.56);
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //Hide();
-            DesktopWindow dw = new DesktopWindow();
-            dw.Show();
-            //DesktopWindowSetter dws = new DesktopWindowSetter();
-            //dws.Show();
-            Thread t = new Thread(DesktopWnd_Monitor);
-            t.Start(dw);
-            //LoginWindow lw = new LoginWindow();
-            //lw.ShowDialog();
-            //DesktopEmbeddedWindowHelper.DesktopEmbedWindow(this);
-        }
-
-        private void DesktopWnd_Monitor(object e)
-        {
-            DesktopWindow dw = e as DesktopWindow;
-
-            while (true)
+            Statistics_Box.Children.Clear();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                if(dw == null || !dw.IsVisible)
-                {
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        dw = new DesktopWindow();
-                        dw.Show();
-                    });
-                }
+                WinAPIHelper.SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
             }
+            Close();
+        }
+
+        private void Control_Box_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
+        }
+
+        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        {
+            if (IsActive && IsVisible)
+            {
+                msgbox.Show(msg);
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            MsgBoxPushHelper.PushMsg -= MsgBoxPushHelper_PushMsg;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Keyboard.ClearFocus();
         }
 
         #endregion Private Methods

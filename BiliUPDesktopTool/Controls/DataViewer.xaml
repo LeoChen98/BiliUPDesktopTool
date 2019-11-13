@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:BiliUPDesktopTool"
              mc:Ignorable="d"
-             d:DesignHeight="150" d:DesignWidth="175" Width= "175" Height="150" Loaded="UserControl_Loaded" Background="#02FFFFFF">
+             d:DesignHeight="150" d:DesignWidth="175" Width= "175" Height="150" Loaded="UserControl_Loaded" Background="#02FFFFFF" Unloaded="UserControl_Unloaded" Foreground="Black" Tag="-1">
     <Grid x:Name="DV_Holder">
-        <Label x:Name="DataTitle" Margin="10,10,55.2,106.4" Content="播放" Foreground="{Binding Foreground, ElementName=userControl}" VerticalContentAlignment="Center" FontSize="14" />
-        <local:RollingNums x:Name="num" HorizontalAlignment="Center" Height="50" Margin="10,49,0,0" VerticalAlignment="Top" Width="140" Foreground="{Binding Foreground, ElementName=userControl}" />
-        <local:RollingNums x:Name="incr" HorizontalAlignment="Center" Height="50" Margin="45,100,-9.8,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.5,0.5" Foreground="{Binding Foreground, ElementName=userControl}">
+        <TextBlock x:Name="DataTitle" Foreground="{Binding Foreground, ElementName=userControl}" Margin="10,10,55.2,106.4" Text="播放" FontSize="14" Padding="8,8,0,0" />
+        <local:RollingNums x:Name="num" Foreground="{Binding Foreground, ElementName=userControl}" HorizontalAlignment="Center" Height="50" Margin="10,49,0,0" VerticalAlignment="Top" Width="140" />
+        <local:RollingNums x:Name="incr" Foreground="{Binding Foreground, ElementName=userControl}" HorizontalAlignment="Center" Height="50" Margin="45,100,-9.8,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.5,0.5">
             <local:RollingNums.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="0.6" ScaleY="0.6" />
@@ -19,16 +19,19 @@
                 </TransformGroup>
             </local:RollingNums.RenderTransform>
         </local:RollingNums>
-        <Canvas HorizontalAlignment="Left" Height="30" Margin="41,110,0,0" VerticalAlignment="Top" Width="30">
+        <Canvas x:Name="CVS_T" HorizontalAlignment="Left" Height="30" Margin="65,129.4,0,-9" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5">
             <Path x:Name="Triangle" Fill="{Binding Foreground, ElementName=userControl}" Stroke="{Binding Foreground, ElementName=userControl}">
                 <Path.Data>
                     <PathGeometry>
-                        <PathFigure StartPoint="10,20" IsClosed="True">
-                            <LineSegment Point="15,16"></LineSegment>
-                            <LineSegment Point="20,20"></LineSegment>
+                        <PathFigure StartPoint="-5,2.5" IsClosed="True">
+                            <LineSegment Point="0,-2.5"></LineSegment>
+                            <LineSegment Point="5,2.5"></LineSegment>
                         </PathFigure>
                     </PathGeometry>
                 </Path.Data>
+                <Path.RenderTransform>
+                    <RotateTransform x:Name="trans" Angle="0" />
+                </Path.RenderTransform>
             </Path>
         </Canvas>
     </Grid>

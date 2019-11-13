@@ -137,7 +137,8 @@
     "like": "点赞。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
     "fan": "实时粉丝数。（实时更新，不受“实时模式”开关状态的影响）",
     "growup": "创作激励计划。（每天凌晨更新，不受“实时模式”开关状态的影响）",
-    "elec": "充电计划电池。（实时更新，实时模式下显示昨日增量+程序运行时增量，非实时模式显示实时电池数据和前一天增量）"
+    "elec": "充电计划电池。（实时更新，实时模式下显示昨日增量+程序运行时增量，非实时模式显示实时电池数据和前一天增量）",
+    "elec_total": "充电计划电池总量，包括历史。（实时更新，实时模式下显示昨日增量+程序运行时增量，非实时模式显示实时电池数据和前一天增量）"
   }
 }</value>
     <comment>数据描述</comment>
@@ -170,5 +171,29 @@
   </data>
   <data name="Upateicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\Upateicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Home" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\Home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="More" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\More.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="statistics" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\statistics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noface" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\noface.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noun_Key_233117" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\noun_Key_233117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noun_Key_233117_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\noun_Key_233117_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noun_small_qr_code_2002633" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\noun_small qr code_2002633.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noun_small_qr_code_2002633_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\noun_small qr code_2002633_w.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

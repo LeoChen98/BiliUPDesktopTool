@@ -42,6 +42,9 @@ namespace BiliUPDesktopTool
         [DllImport("User32.dll")]
         public static extern bool ShowWindow(IntPtr hWnd, int cmdShow);
 
+        [DllImport("kernel32.dll")]
+        public static extern bool SetProcessWorkingSetSize(IntPtr process, int minSize, int maxSize);
+
         #endregion Public Methods
     }
 }

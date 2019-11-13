@@ -1,6 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace BiliUPDesktopTool
 {
@@ -12,7 +16,7 @@ namespace BiliUPDesktopTool
         #region Public Fields
 
         public static readonly DependencyProperty DataModeProperty =
-            DependencyProperty.Register("DataMode", typeof(string[]), typeof(UserControl), new PropertyMetadata(new string[3] { "video", "play", "play_incr" }, new PropertyChangedCallback(ChangeView)));
+            DependencyProperty.Register("DataMode", typeof(List<string>), typeof(UserControl), new PropertyMetadata(new List<string>(3), new PropertyChangedCallback(ChangeView)));
 
         #endregion Public Fields
 
@@ -21,15 +25,19 @@ namespace BiliUPDesktopTool
         public DataViewer()
         {
             InitializeComponent();
+
+            SetValue(DataModeProperty, new List<string>(3));
+
+            incr.PostiveAndNegativeChanged += Incr_PostiveAndNegativeChanged;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string[] DataMode
+        public List<string> DataMode
         {
-            get { return (string[])GetValue(DataModeProperty); }
+            get { return (List<string>)GetValue(DataModeProperty); }
             set { SetValue(DataModeProperty, value); }
         }
 
@@ -38,8 +46,8 @@ namespace BiliUPDesktopTool
         /// </summary>
         public string Title
         {
-            get { return DataTitle.Content.ToString(); }
-            set { DataTitle.Content = value; }
+            get { return DataTitle.Text.ToString(); }
+            set { DataTitle.Text = value; }
         }
 
         #endregion Public Properties
@@ -50,21 +58,22 @@ namespace BiliUPDesktopTool
         {
             DataViewer r = (DataViewer)sender;
             Binding binding_num, binding_incr;
-            string[] value = e.NewValue as string[];
-            if (value != null && value.Length == 3)
+            List<string> value = e.NewValue as List<string>;
+            if (value.Count > 3) value.RemoveRange(0, value.Count - 3);
+            if (value != null && value.Count == 3)
             {
                 switch (value[0])
                 {
                     case "video":
                         binding_num = new Binding()
                         {
-                            Source = Bas.biliupdata.video,
+                            Source = BiliUPData.Intance.video,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[1])
                         };
                         binding_incr = new Binding()
                         {
-                            Source = Bas.biliupdata.video,
+                            Source = BiliUPData.Intance.video,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[2])
                         };
@@ -75,13 +84,13 @@ namespace BiliUPDesktopTool
                     case "article":
                         binding_num = new Binding()
                         {
-                            Source = Bas.biliupdata.article,
+                            Source = BiliUPData.Intance.article,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[1])
                         };
                         binding_incr = new Binding()
                         {
-                            Source = Bas.biliupdata.article,
+                            Source = BiliUPData.Intance.article,
                             Mode = BindingMode.TwoWay,
                             Path = new PropertyPath(value[2])
                         };
@@ -108,6 +117,67 @@ namespace BiliUPDesktopTool
             }
         }
 
+        public void ChangeView(List<string> value)
+        {
+            Binding binding_num, binding_incr;
+            if (value.Count > 3) value.RemoveRange(0, value.Count - 3);
+            if (value != null && value.Count == 3)
+            {
+                switch (value[0])
+                {
+                    case "video":
+                        binding_num = new Binding()
+                        {
+                            Source = BiliUPData.Intance.video,
+                            Mode = BindingMode.TwoWay,
+                            Path = new PropertyPath(value[1])
+                        };
+                        binding_incr = new Binding()
+                        {
+                            Source = BiliUPData.Intance.video,
+                            Mode = BindingMode.TwoWay,
+                            Path = new PropertyPath(value[2])
+                        };
+                        BindingOperations.SetBinding(num, RollingNums.numProperty, binding_num);
+                        BindingOperations.SetBinding(incr, RollingNums.numProperty, binding_incr);
+                        break;
+
+                    case "article":
+                        binding_num = new Binding()
+                        {
+                            Source = BiliUPData.Intance.article,
+                            Mode = BindingMode.TwoWay,
+                            Path = new PropertyPath(value[1])
+                        };
+                        binding_incr = new Binding()
+                        {
+                            Source = BiliUPData.Intance.article,
+                            Mode = BindingMode.TwoWay,
+                            Path = new PropertyPath(value[2])
+                        };
+                        BindingOperations.SetBinding(num, RollingNums.numProperty, binding_num);
+                        BindingOperations.SetBinding(incr, RollingNums.numProperty, binding_incr);
+                        break;
+
+                    default:
+                        BindingOperations.ClearAllBindings(num);
+                        BindingOperations.ClearAllBindings(incr);
+                        break;
+                }
+                Visibility = Visibility.Visible;
+            }
+            else if (value != null)
+            {
+                BindingOperations.ClearAllBindings(num);
+                BindingOperations.ClearAllBindings(incr);
+                Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Visibility = Visibility.Hidden;
+            }
+        }
+
         #endregion Public Methods
 
         #region Private Methods
@@ -119,25 +189,54 @@ namespace BiliUPDesktopTool
         {
             Binding bind_datatitle_color = new Binding()
             {
-                Source = Bas.skin,
+                Source = Skin.Instance,
                 Mode = BindingMode.TwoWay,
                 Path = new PropertyPath("DesktopWnd_FontColor")
             };
             SetBinding(ForegroundProperty, bind_datatitle_color);
         }
 
+        private void Incr_PostiveAndNegativeChanged(object sender, RollingNums.PostiveAndNegativeChangedEventArgs e)
+        {
+            if (!e.NewValue)
+            {
+                DoubleAnimation an = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 180,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
+                };
+                trans.BeginAnimation(RotateTransform.AngleProperty, an);
+            }
+            else
+            {
+                DoubleAnimation an = new DoubleAnimation
+                {
+                    From = 180,
+                    To = 0,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(250))
+                };
+                trans.BeginAnimation(RotateTransform.AngleProperty, an);
+            }
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            FrameworkElement __do = Parent as FrameworkElement;
-            while (__do != null)
-            {
-                __do = __do.Parent as FrameworkElement;
-                if (__do.Parent == null) break;
-            }
-            if (Parent.GetValue(NameProperty).ToString() != "DVP_Holder" && __do.GetType() != typeof(DataDisplaySetter))
+            ChangeView(DataMode);
+
+            if (Tag?.ToString() == "Desktop")
             {
                 BindingInit();
             }
+        }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            BindingOperations.ClearAllBindings(this);
+            BindingOperations.ClearAllBindings(num);
+            BindingOperations.ClearAllBindings(incr);
+
+            incr.PostiveAndNegativeChanged -= Incr_PostiveAndNegativeChanged;
         }
 
         #endregion Private Methods
