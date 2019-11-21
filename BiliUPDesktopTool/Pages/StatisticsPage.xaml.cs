@@ -27,7 +27,7 @@ namespace BiliUPDesktopTool
         {
             InitializeComponent();
 
-            BindingInit();
+            //BindingInit();
         }
 
         #endregion Public Constructors

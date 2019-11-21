@@ -25,7 +25,7 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 初始化设置类
         /// </summary>
-        private Settings() : base(new SettingsTable(), savepath)
+        public Settings() : base(new SettingsTable(), savepath)
         {
             if (DataViewSelected == null)
             {

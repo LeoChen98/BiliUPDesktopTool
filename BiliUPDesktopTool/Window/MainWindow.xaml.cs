@@ -54,12 +54,6 @@ namespace BiliUPDesktopTool
         private void Btn_Close_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Statistics_Box.Children.Clear();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                WinAPIHelper.SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
-            }
             Close();
         }
 

@@ -204,7 +204,7 @@
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Plug-ins\PluginManager.cs" />
-    <Compile Include="Todo.cs" />
+    <Compile Include="Plug-ins\PluginStore.cs" />
     <Compile Include="Window\LisenceWindow.xaml.cs">
       <DependentUpon>LisenceWindow.xaml</DependentUpon>
     </Compile>

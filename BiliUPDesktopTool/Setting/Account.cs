@@ -43,7 +43,7 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 初始化账号数据
         /// </summary>
-        private Account()
+        public Account()
         {
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\"))
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\");

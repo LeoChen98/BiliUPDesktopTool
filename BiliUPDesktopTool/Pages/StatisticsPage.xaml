@@ -9,31 +9,10 @@
              mc:Ignorable="d"
              d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411" MouseUp="UserControl_MouseUp" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <UserControl.Resources>
+        <local:IntervalConverter x:Key="IntervalConverter"/>
         <local:DataDesc_Converter x:Key="DataDesc_Converter" />
         <local:Brush2ColorValue_Converter x:Key="Brush2ColorValue_Converter"/>
-        <sys:String x:Key="DataDesc">{
-  "article": {
-    "view": "文章点击量。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "coin": "硬币。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "reply": "评论。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "fav": "收藏。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "like": "点赞。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "share": "分享数。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）"
-  },
-  "video": {
-    "play": "视频播放数。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "coin": "硬币。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "comment": "评论。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "dm": "弹幕。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "fav": "收藏。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "share": "分享数。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "like": "点赞。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）",
-    "fan": "实时粉丝数。（实时更新，不受“实时模式”开关状态的影响）",
-    "growup": "创作激励计划。（每天凌晨更新，不受“实时模式”开关状态的影响）",
-    "elec": "充电计划电池。（实时更新，实时模式下显示昨日增量+程序运行时增量，非实时模式显示实时电池数据和前一天增量）",
-    "elec_total": "充电计划电池总量，包括历史。（实时更新，实时模式下显示昨日增量+程序运行时增量，非实时模式显示实时电池数据和前一天增量）"
-  }
-}</sys:String>
+        <System:String x:Key="DataDesc">{ "article": { "view": "文章点击量。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "coin": "硬币。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "reply": "评论。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "fav": "收藏。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "like": "点赞。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "share": "分享数。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）" }, "video": { "play": "视频播放数。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "coin": "硬币。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "comment": "评论。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "dm": "弹幕。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "fav": "收藏。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "share": "分享数。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "like": "点赞。（每天中午12点更新昨日数据，实时模式下显示昨日增量+程序运行时增量）", "fan": "实时粉丝数。（实时更新，不受“实时模式”开关状态的影响）", "growup": "创作激励计划。（每天凌晨更新，不受“实时模式”开关状态的影响）", "elec": "充电计划电池。（实时更新，实时模式下显示昨日增量+程序运行时增量，非实时模式显示实时电池数据和前一天增量）", "elec_total": "充电计划电池总量，包括历史。（实时更新，实时模式下显示昨日增量+程序运行时增量，非实时模式显示实时电池数据和前一天增量）" } }</System:String>
     </UserControl.Resources>
     <Grid>
         <Grid>
@@ -813,7 +792,7 @@
                     </Grid>
                     <Grid x:Name="OtherSettingBox" Margin="740,0,0,0" Width="740">
                         <Label x:Name="label00" Content="实时模式：" HorizontalAlignment="Left" Height="23" Margin="11,15,0,0" VerticalAlignment="Top" Width="66" />
-                        <local:ToggleButton x:Name="TBN_RealMode" HorizontalAlignment="Left" Height="28" Margin="72,13,0,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.5,0.5">
+                        <local:ToggleButton x:Name="TBN_RealMode" HorizontalAlignment="Left" Height="28" Margin="72,13,0,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.5,0.5" Status="{Binding IsRealTime,Source={x:Static local:Settings.Instance}}">
                             <local:ToggleButton.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
@@ -824,7 +803,7 @@
                             </local:ToggleButton.RenderTransform>
                         </local:ToggleButton>
                         <Label x:Name="label40" Content="刷新频率：                     秒" HorizontalAlignment="Left" Margin="11,61,0,0" VerticalAlignment="Top" />
-                        <TextBox x:Name="TB_RefreshInterval" HorizontalAlignment="Left" Height="26" Margin="77,61,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="67" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" PreviewTextInput="TB_RefreshInterval_PreviewTextInput" LostKeyboardFocus="TB_RefreshInterval_LostKeyboardFocus" />
+                        <TextBox x:Name="TB_RefreshInterval" HorizontalAlignment="Left" Height="26" Margin="77,61,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="67" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" PreviewTextInput="TB_RefreshInterval_PreviewTextInput" LostKeyboardFocus="TB_RefreshInterval_LostKeyboardFocus" Text="{Binding DataRefreshInterval, Converter={StaticResource IntervalConverter},Source={x:Static local:Settings.Instance}}"/>
                         <Border x:Name="Btn_SetDataViewerPos" BorderThickness="1" HorizontalAlignment="Center" Height="37" Margin="10,104,572,230" VerticalAlignment="Center" Width="158" CornerRadius="10" Background="#FF00A1D6" MouseUp="Btn_SetDataViewerPos_MouseUp">
                             <Border.Triggers>
                                 <EventTrigger RoutedEvent="Border.MouseEnter">

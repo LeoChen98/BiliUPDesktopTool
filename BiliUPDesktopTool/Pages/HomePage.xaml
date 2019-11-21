@@ -7,14 +7,15 @@
              mc:Ignorable="d"
              d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <UserControl.Resources>
+        <local:Percentage_Converter x:Key="Percentage_Converter"/>
         <local:Tooltip_UserInfo_Desc_Converter x:Key="Tooltip_UserInfo_Desc_Converter" />
+        <local:WidthNHeightValue_Times_Converter x:Key="WidthNHeightValue_Times_Converter"/>
     </UserControl.Resources>
     <Grid>
         <Grid x:Name="InfoBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top" Visibility="Hidden">
             <Image x:Name="Img_Face_Default" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="/BiliUPDesktopTool;component/Image/noface.gif" />
-            <Image x:Name="Img_Face" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" />
-            <TextBlock x:Name="TBk_UserName" Padding="5,2" TextTrimming="CharacterEllipsis" FontWeight="Bold" Foreground="#FF252525" FontSize="16" Margin="95,10,37,83">
-                    Username
+            <Image x:Name="Img_Face" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="{Binding Pic,Source={x:Static local:Account.Instance}}"/>
+            <TextBlock x:Name="TBk_UserName" Padding="5,2" TextTrimming="CharacterEllipsis" FontWeight="Bold" Foreground="#FF252525" FontSize="16" Margin="95,10,37,83" Text="{Binding UName,Source={x:Static local:Account.Instance}}">
             </TextBlock>
             <Grid x:Name="DescBox" Margin="95,38,37,50" MouseUp="Lbl_Desc_MouseUp" Cursor="IBeam">
                 <Label x:Name="Lbl_Desc" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="560" Foreground="#FF252525" Padding="0" VerticalContentAlignment="Center" MouseUp="Lbl_Desc_MouseUp" BorderThickness="1" ToolTip="{Binding Text, Converter={StaticResource Tooltip_UserInfo_Desc_Converter}, ElementName=TB_Desc}" d:IsHidden="True" BorderBrush="#00000000">
@@ -62,17 +63,17 @@
                     </Label.Triggers>
                     <TextBlock x:Name="TBk_desc" Width="{Binding Width, ElementName=Lbl_Desc}" Padding="5" TextTrimming="CharacterEllipsis" Text="{Binding Text, ElementName=TB_Desc}" />
                 </Label>
-                <TextBox x:Name="TB_Desc" HorizontalAlignment="Left" Height="28" Text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription" VerticalAlignment="Top" Width="560" VerticalContentAlignment="Center" Background="White" Padding="3,0,0,2" LostKeyboardFocus="TB_Desc_LostKeyboardFocus" Visibility="Hidden" LostFocus="TB_Desc_LostFocus" KeyDown="TB_Desc_KeyDown" VerticalScrollBarVisibility="Disabled" MaxLines="1" TextWrapping="NoWrap" />
+                <TextBox x:Name="TB_Desc" HorizontalAlignment="Left" Height="28" Text="{Binding Desc,Source={x:Static local:Account.Instance}}" VerticalAlignment="Top" Width="560" VerticalContentAlignment="Center" Background="White" Padding="3,0,0,2" LostKeyboardFocus="TB_Desc_LostKeyboardFocus" Visibility="Hidden" LostFocus="TB_Desc_LostFocus" KeyDown="TB_Desc_KeyDown" VerticalScrollBarVisibility="Disabled" MaxLines="1" TextWrapping="NoWrap" />
             </Grid>
             <Grid x:Name="LevelBox" Margin="95,71,112,0" Height="19" VerticalAlignment="Top">
                 <Canvas x:Name="Canvas_Level" Margin="0,0,445,0"  Height="18" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" ClipToBounds="True">
-                    <Image x:Name="Img_level" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/BiliUPDesktopTool;component/Image/level.png" Canvas.Left="-15" Height="386" Width="228" Canvas.Top="0" d:IsLocked="True" />
+                    <Image x:Name="Img_level" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/BiliUPDesktopTool;component/Image/level.png" Canvas.Left="-15" Height="386" Width="228" Canvas.Top="{Binding Level,Converter={StaticResource  WidthNHeightValue_Times_Converter}, ConverterParameter=-36.5,Source={x:Static local:Account.Instance}}" d:IsLocked="True" />
                 </Canvas>
-                <Canvas x:Name="Bar_level" HorizontalAlignment="Left" Margin="40,7,0,8" Width="400" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#66FFFFFF" ClipToBounds="True">
-                    <Rectangle x:Name="Bar_level_top" Fill="#FF4FBDEA" HorizontalAlignment="Left" Height="4" VerticalAlignment="Top" Width="398" ClipToBounds="True" StrokeThickness="0" RadiusX="5" RadiusY="5" Canvas.Left="1" />
+                <Canvas x:Name="Bar_level" HorizontalAlignment="Left" Margin="40,7,0,8" Width="400" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#66FFFFFF" ClipToBounds="True"  ToolTip="{Binding str_ExpProgress,Source={x:Static local:Account.Instance}}">
+                    <Rectangle x:Name="Bar_level_top" Fill="#FF4FBDEA" HorizontalAlignment="Left" Height="4" VerticalAlignment="Top" Width="{Binding ExpProgress,Converter={StaticResource WidthNHeightValue_Times_Converter},ConverterParameter=398,Source={x:Static local:Account.Instance}}" ClipToBounds="True" StrokeThickness="0" RadiusX="5" RadiusY="5" Canvas.Left="1" />
                     <Rectangle x:Name="Bar_level_bottom" HorizontalAlignment="Left" Height="4" VerticalAlignment="Top" Width="400" ClipToBounds="True" Stroke="#FF252525" RadiusX="2" RadiusY="2" />
                 </Canvas>
-                <TextBlock x:Name="Lbl_Level" Text="100%" HorizontalAlignment="Left" Height="19" Margin="445,0,0,0" VerticalAlignment="Top" Width="40" Padding="1" />
+                <TextBlock x:Name="Lbl_Level" Text="{Binding ExpProgress, Converter={StaticResource Percentage_Converter},Source={x:Static local:Account.Instance}}" HorizontalAlignment="Left" Height="19" Margin="445,0,0,0" VerticalAlignment="Top" Width="40" Padding="1" />
             </Grid>
             <Grid x:Name="BtnBox" HorizontalAlignment="Left" Height="16" Margin="10,95,0,0" VerticalAlignment="Top" Width="672">
                 <Grid x:Name="Btn_Space" Margin="0,0,607,0" MouseUp="Btn_Space_MouseUp" Cursor="Hand" Background="#00000000">

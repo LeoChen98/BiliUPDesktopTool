@@ -243,8 +243,8 @@
                     <Grid  Margin="0,0,288,0" x:Name="ByPwdBox">
                         <TextBlock Text="账号：" HorizontalAlignment="Right" Width="43" Height="19" VerticalAlignment="Bottom" Margin="0,0,235,201" />
                         <TextBlock Text="密码：" HorizontalAlignment="Right" Width="43" Height="19" VerticalAlignment="Bottom" Margin="0,0,235,161" />
-                        <TextBox x:Name="TB_UName" Margin="58,39,45,201" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="TB_UName_KeyDown" />
-                        <PasswordBox x:Name="TB_Pwd" Margin="58,80,45,160" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="TB_UName_KeyDown" />
+                        <TextBox x:Name="TB_UName" Margin="58,39,45,201" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="TB_UName_KeyDown" Text="{Binding UserName,Source={x:Static local:Account.Instance}}" />
+                        <PasswordBox x:Name="TB_Pwd" Margin="58,80,45,160" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="TB_UName_KeyDown"/>
                         <TextBlock x:Name="Btn_Login" HorizontalAlignment="Left" Height="40" Margin="43,164,0,0" TextWrapping="Wrap" Text="登录" VerticalAlignment="Top" Width="200" FontSize="16" Padding="85,8,0,0" Background="#FF0BA8DC" Foreground="White" MouseUp="Btn_Login_MouseUp">
                             <TextBlock.Triggers>
                                 <EventTrigger RoutedEvent="UIElement.MouseEnter">
@@ -286,8 +286,8 @@
                                 </EventTrigger>
                             </TextBlock.Triggers>
                         </TextBlock>
-                        <CheckBox x:Name="CB_MarkPwd" Content="记住密码" HorizontalAlignment="Left" Margin="43,129,0,0" VerticalAlignment="Top" />
-                        <CheckBox x:Name="CB_AutoLogin" Content="自动登录" HorizontalAlignment="Left" Margin="175,129,0,0" VerticalAlignment="Top" />
+                        <CheckBox x:Name="CB_MarkPwd" Content="记住密码" HorizontalAlignment="Left" Margin="43,129,0,0" VerticalAlignment="Top" IsChecked="{Binding IsSavePassword,Source={x:Static local:Account.Instance}}"/>
+                        <CheckBox x:Name="CB_AutoLogin" Content="自动登录" HorizontalAlignment="Left" Margin="175,129,0,0" VerticalAlignment="Top" IsChecked="{Binding IsAutoLogin,Source={x:Static local:Account.Instance}}"/>
                     </Grid>
                     <Grid Width="288" Margin="288,0,0,0" x:Name="ByQrCode">
                         <Label Margin="27,11,26,227" FontSize="16"  Content="请使用Bilibili手机APP扫描二维码登录" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />

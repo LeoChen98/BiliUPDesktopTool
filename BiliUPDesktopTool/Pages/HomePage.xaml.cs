@@ -26,7 +26,7 @@ namespace BiliUPDesktopTool
         {
             InitializeComponent();
 
-            BindingInit();
+            //BindingInit();
 
             Refresher = new Timer(new TimerCallback(Refresh));
             Refresher.Change(0, 1800000);
@@ -190,7 +190,7 @@ namespace BiliUPDesktopTool
                                 Title = i["name"].ToString(),
                                 Desc = i["protocol"].ToString(),
                                 Link = i["act_url"].ToString(),
-                                Start_Time = i["stime"].ToString(),
+                                Start_Time = i["stime"] == null ? "-" : i["stime"].ToString(),
                                 End_Time = "-"
                             }));
                         });

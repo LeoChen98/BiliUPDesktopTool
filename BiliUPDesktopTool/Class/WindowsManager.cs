@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 
@@ -81,7 +82,13 @@ namespace BiliUPDesktopTool
             var window = (Window)sender;
             window.Closed -= Win_Closed;
             Windows.Remove(window);
+
             GC.Collect();
+            GC.WaitForPendingFinalizers();
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                WinAPIHelper.SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
+            }
         }
 
         #endregion Private Methods
