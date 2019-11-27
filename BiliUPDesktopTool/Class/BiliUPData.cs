@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Threading;
 
 #pragma warning disable CS0649      //禁用初始值空警告
@@ -87,7 +86,7 @@ namespace BiliUPDesktopTool
         /// <returns>刷新后的实例</returns>
         public BiliUPData Refresh()
         {
-            if (Account.Instance.Islogin == true && !IsRefreshing)
+            if (Account.Instance.IsLogin == true && !IsRefreshing)
             {
                 IsRefreshing = true;
                 article.Refresh();
@@ -1260,7 +1259,7 @@ namespace BiliUPDesktopTool
                     tmp_data = new Data(data);
                 }
 
-                if(ChargeLastTime == null || DateTime.Compare(((DateTime)ChargeLastTime).AddDays(1), DateTime.Now) < 0)
+                if (ChargeLastTime == null || DateTime.Compare(((DateTime)ChargeLastTime).AddDays(1), DateTime.Now) < 0)
                 {
                     tmp_data._elec_last = GetCharge();
                     ChargeLastTime = DateTime.Now.Date;//设定为当天0点数据
@@ -1335,7 +1334,9 @@ namespace BiliUPDesktopTool
 
                 #region Public Constructors
 
-                public Data() { }
+                public Data()
+                {
+                }
 
                 public Data(double elec)
                 {

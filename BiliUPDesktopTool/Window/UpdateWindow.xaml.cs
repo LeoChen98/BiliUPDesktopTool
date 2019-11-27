@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -80,11 +81,11 @@ namespace BiliUPDesktopTool
             Update.Instance.DoUpdate();
         }
 
-        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        private void MsgBoxPushHelper_PushMsg(string msg, Action command, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
         {
             if (IsActive && IsVisible)
             {
-                msgbox.Show(msg);
+                msgbox.Show(msg, command, type);
             }
         }
 

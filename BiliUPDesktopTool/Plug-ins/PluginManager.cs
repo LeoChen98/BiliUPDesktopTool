@@ -136,23 +136,6 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
-        /// 通讯回传
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            if(e.Data.ToString() == "Q")
-            {
-                Input?.Close();
-                Output?.Close();
-                process = null;
-                BiliUPData.Intance.article.PropertyChanged -= Article_PropertyChanged;
-                BiliUPData.Intance.video.PropertyChanged -= Video_PropertyChanged;
-            }
-        }
-
-        /// <summary>
         /// 更新
         /// </summary>
         public void Update()
@@ -276,6 +259,23 @@ namespace BiliUPDesktopTool
                 args_string = args_string.Substring(0, args_string.Length - 1);
             }
             return args_string;
+        }
+
+        /// <summary>
+        /// 通讯回传
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data.ToString() == "Q")
+            {
+                Input?.Close();
+                Output?.Close();
+                process = null;
+                BiliUPData.Intance.article.PropertyChanged -= Article_PropertyChanged;
+                BiliUPData.Intance.video.PropertyChanged -= Video_PropertyChanged;
+            }
         }
 
         /// <summary>

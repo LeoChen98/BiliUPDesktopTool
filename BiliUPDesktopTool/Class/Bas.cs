@@ -361,5 +361,29 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        /// <summary>
+        /// 从毫秒时间戳获取日期
+        /// </summary>
+        /// <param name="timestamp">时间戳</param>
+        /// <returns></returns>
+        internal static string GetTimeStringFromMillisecondTimestamp(int timestamp)
+        {
+            return TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)).AddMilliseconds(timestamp).ToString("yyyy年MM月dd日 HH:mm:ss");
+        }
+
+        /// <summary>
+        /// 从秒时间戳获取日期
+        /// </summary>
+        /// <param name="timestamp">时间戳</param>
+        /// <returns></returns>
+        internal static string GetTimeStringFromSecondTimestamp(int timestamp)
+        {
+            return TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)).AddSeconds(timestamp).ToString("yyyy年MM月dd日 HH:mm:ss");
+        }
+
+        #endregion Internal Methods
     }
 }

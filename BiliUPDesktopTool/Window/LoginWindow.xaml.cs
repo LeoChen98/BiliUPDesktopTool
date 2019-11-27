@@ -145,7 +145,7 @@ namespace BiliUPDesktopTool
                     Account.Instance.Expires_AccessToken = account.Expires_AccessToken;
                     Account.Instance.Uid = account.Uid;
                     Account.Instance.LoginMode = Account.LOGINMODE.ByPassword;
-                    Account.Instance.Islogin = true;
+                    Account.Instance.IsLogin = true;
                     Account.Instance.GetInfo();
 
                     Account.Instance.Save();
@@ -218,7 +218,7 @@ namespace BiliUPDesktopTool
                         Account.Instance.Expires = account.Expires_Cookies;
                         Account.Instance.Cookies = account.strCookies;
                         Account.Instance.Csrf_Token = account.CsrfToken;
-                        Account.Instance.Islogin = true;
+                        Account.Instance.IsLogin = true;
                         Account.Instance.LoginMode = Account.LOGINMODE.ByQrcode;
                         Account.Instance.Save();
 
@@ -251,11 +251,11 @@ namespace BiliUPDesktopTool
             });
         }
 
-        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        private void MsgBoxPushHelper_PushMsg(string msg, Action command, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
         {
             if (IsActive && IsVisible)
             {
-                msgbox.Show(msg);
+                msgbox.Show(msg, command, type);
             }
         }
 

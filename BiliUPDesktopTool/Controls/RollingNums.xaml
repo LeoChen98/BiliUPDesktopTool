@@ -8,13 +8,13 @@
              d:DesignHeight="50" Width="140" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded" Tag="">
     <Grid>
         <Grid x:Name="ViewPanel" Margin="1,0,1,-0.4">
-            <local:RollingNum x:Name="N4" Width="28" Height="50" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}"/>
-            <local:RollingNum x:Name="N3" Width="28" Height="50" Margin="20,0,0,0" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}"/>
-            <local:RollingNum x:Name="N2" Width="28" Height="50" Margin="40,0,0,0" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}"/>
-            <local:RollingNum x:Name="N1" Width="28" Height="50" Margin="60,0,0,0" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}"/>
-            <Label x:Name="numpoint" Content="."  Height="50" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="80,0,0,0" HorizontalAlignment="Left" Width="17" Foreground="{Binding Foreground, ElementName=userControl}"/>
-            <local:RollingNum x:Name="P1" Width="28" Height="50" Margin="90,0,0,0" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}"/>
-            <local:RollingNum x:Name="P2" Width="28" Height="50" Margin="110,0,0,0" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}"/>
+            <local:RollingNum x:Name="N4" Width="28" Height="50" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}" />
+            <local:RollingNum x:Name="N3" Width="28" Height="50" Margin="20,0,0,0" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}" />
+            <local:RollingNum x:Name="N2" Width="28" Height="50" Margin="40,0,0,0" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}" />
+            <local:RollingNum x:Name="N1" Width="28" Height="50" Margin="60,0,0,0" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}" />
+            <Label x:Name="numpoint" Content="."  Height="50" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="80,0,0,0" HorizontalAlignment="Left" Width="17" Foreground="{Binding Foreground, ElementName=userControl}" />
+            <local:RollingNum x:Name="P1" Width="28" Height="50" Margin="90,0,0,0" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}" />
+            <local:RollingNum x:Name="P2" Width="28" Height="50" Margin="110,0,0,0" HorizontalAlignment="Left" Foreground="{Binding Foreground, ElementName=userControl}" />
         </Grid>
     </Grid>
 </UserControl>

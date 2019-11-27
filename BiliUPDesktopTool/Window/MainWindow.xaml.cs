@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -51,12 +50,6 @@ namespace BiliUPDesktopTool
 
         #region Private Methods
 
-        private void Btn_Close_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Statistics_Box.Children.Clear();
-            Close();
-        }
-
         private void Control_Box_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -65,21 +58,17 @@ namespace BiliUPDesktopTool
             }
         }
 
-        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        private void MsgBoxPushHelper_PushMsg(string msg, Action command, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
         {
             if (IsActive && IsVisible)
             {
-                msgbox.Show(msg);
+                msgbox.Show(msg, command, type);
             }
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
             MsgBoxPushHelper.PushMsg -= MsgBoxPushHelper_PushMsg;
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

@@ -20,7 +20,7 @@ namespace BiliUPDesktopTool
 
         #endregion Private Fields
 
-        #region Private Constructors
+        #region Public Constructors
 
         /// <summary>
         /// 初始化设置类
@@ -33,7 +33,7 @@ namespace BiliUPDesktopTool
             }
         }
 
-        #endregion Private Constructors
+        #endregion Public Constructors
 
         #region Public Events
 

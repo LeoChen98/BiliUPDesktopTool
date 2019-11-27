@@ -12,15 +12,6 @@ namespace BiliUPDesktopTool
     /// </summary>
     public class Account : SettingsBase<Account.AccountTable>
     {
-        #region Public Fields
-
-        /// <summary>
-        /// 指示是否登陆
-        /// </summary>
-        public bool Islogin = false;
-
-        #endregion Public Fields
-
         #region Private Fields
 
         //TODO 发布时重新生成.
@@ -31,6 +22,8 @@ namespace BiliUPDesktopTool
 
         private static Account instance = new Account();
 
+        private bool _IsLogin;
+
         /// <summary>
         /// 刷新器
         /// </summary>
@@ -38,7 +31,7 @@ namespace BiliUPDesktopTool
 
         #endregion Private Fields
 
-        #region Private Constructors
+        #region Public Constructors
 
         /// <summary>
         /// 初始化账号数据
@@ -59,7 +52,7 @@ namespace BiliUPDesktopTool
                         str = EncryptHelper.DesDecrypt(str, encryptKey);
                         OutputTable<AccountTable> OT = JsonConvert.DeserializeObject<OutputTable<AccountTable>>(str);
                         ST = OT.settings;
-                        Islogin = true;
+                        IsLogin = true;
                     }
                 }
             }
@@ -67,6 +60,10 @@ namespace BiliUPDesktopTool
             Refresher = new Timer(new TimerCallback(GetInfo));
             Refresher.Change(0, 1800000);
         }
+
+        #endregion Public Constructors
+
+        #region Private Constructors
 
         /// <summary>
         /// 空白初始化函数
@@ -143,7 +140,7 @@ namespace BiliUPDesktopTool
             {
                 if (DateTime.Compare(DateTime.Now, Expires) >= 0)//如果过期
                 {
-                    Islogin = false;
+                    IsLogin = false;
                     Update();
                 }
                 return ST.Cookies;
@@ -225,6 +222,22 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
+        /// 指示是否登陆
+        /// </summary>
+        public bool IsLogin
+        {
+            get
+            {
+                return _IsLogin;
+            }
+            set
+            {
+                _IsLogin = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("IsLogin"));
+            }
+        }
+
+        /// <summary>
         /// 记住密码
         /// </summary>
         public bool IsSavePassword
@@ -247,6 +260,17 @@ namespace BiliUPDesktopTool
             {
                 ST.Level = value;
                 PropertyChangedA(this, new PropertyChangedEventArgs("Level"));
+            }
+        }
+
+        /// <summary>
+        /// 登陆命令
+        /// </summary>
+        public RelayCommand LoginCommand
+        {
+            get
+            {
+                return new RelayCommand(Login);
             }
         }
 
@@ -296,6 +320,17 @@ namespace BiliUPDesktopTool
             {
                 ST.RefreshToken = value;
                 PropertyChangedA(this, new PropertyChangedEventArgs("RefreshToken"));
+            }
+        }
+
+        /// <summary>
+        /// 注销命令
+        /// </summary>
+        public RelayCommand SignOutCommand
+        {
+            get
+            {
+                return new RelayCommand(SignOut);
             }
         }
 
@@ -382,7 +417,7 @@ namespace BiliUPDesktopTool
         /// </summary>
         public void GetInfo(object o = null)
         {
-            if (Islogin)
+            if (IsLogin)
             {
                 string str = Bas.GetHTTPBody("https://api.bilibili.com/x/space/myinfo", Cookies);
                 if (!string.IsNullOrEmpty(str))
@@ -445,7 +480,7 @@ namespace BiliUPDesktopTool
         {
             Bas.GetHTTPBody("https://passport.bilibili.com/login?act=exit", Cookies, "");
 
-            Islogin = false;
+            IsLogin = false;
 
             if (ST.IsSavePassword)
             {
@@ -457,6 +492,8 @@ namespace BiliUPDesktopTool
             }
 
             Save();
+
+            MsgBoxPushHelper.RaisePushMsg("已成功注销登录！");
         }
 
         /// <summary>
@@ -479,7 +516,7 @@ namespace BiliUPDesktopTool
                         Csrf_Token = o[1].ToString();
                         Expires = (DateTime)o[2];
 
-                        Islogin = true;
+                        IsLogin = true;
 
                         Save();
                     }

@@ -6,97 +6,107 @@
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
         Title="B站UP主桌面工具" Height="450" Width="800" ResizeMode="NoResize" Opacity="1" WindowStyle="None" Icon="/BiliUPDesktopTool;component/Image/icon.ico" MouseDown="Window_MouseDown" Focusable="True" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+    <Window.DataContext>
+        <local:WindowBaseCommand />
+    </Window.DataContext>
     <Window.Resources>
-        <Storyboard x:Key="Btn_Home_MouseUp">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Active_Bg">
-                <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=Active_Bg}">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,6,0,0">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-            </ThicknessAnimationUsingKeyFrames>
-            <StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="Lbl_Title">
-                <DiscreteStringKeyFrame KeyTime="0" Value="{Binding Text, ElementName=Lbl_Title}" />
-                <DiscreteStringKeyFrame KeyTime="0:0:0.3" Value="首页" />
-            </StringAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="RB_Wrap">
-                <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=RB_Wrap}">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,-822">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-            </ThicknessAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="Btn_Statistics_MouseUp">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Active_Bg">
-                <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin,ElementName=Active_Bg}">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,56,0,0">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-            </ThicknessAnimationUsingKeyFrames>
-            <StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="Lbl_Title">
-                <DiscreteStringKeyFrame KeyTime="0" Value="{Binding Text, ElementName=Lbl_Title}" />
-                <DiscreteStringKeyFrame KeyTime="0:0:0.3" Value="数据展示设置" />
-            </StringAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="RB_Wrap">
-                <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=RB_Wrap}">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,-411">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-            </ThicknessAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="Btn_More_MouseUp">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Active_Bg">
-                <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=Active_Bg}">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,106,0,0">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-            </ThicknessAnimationUsingKeyFrames>
-            <StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="Lbl_Title">
-                <DiscreteStringKeyFrame KeyTime="0" Value="{Binding Text, ElementName=Lbl_Title}" />
-                <DiscreteStringKeyFrame KeyTime="0:0:0.3" Value="更多" />
-            </StringAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="RB_Wrap">
-                <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=RB_Wrap}">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut" />
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-            </ThicknessAnimationUsingKeyFrames>
-        </Storyboard>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <Storyboard x:Key="Btn_Home_MouseUp">
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Active_Bg">
+                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=Active_Bg}">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                            <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,6,0,0">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                        </ThicknessAnimationUsingKeyFrames>
+                        <StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="Lbl_Title">
+                            <DiscreteStringKeyFrame KeyTime="0" Value="{Binding Text, ElementName=Lbl_Title}" />
+                            <DiscreteStringKeyFrame KeyTime="0:0:0.3" Value="首页" />
+                        </StringAnimationUsingKeyFrames>
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="RB_Wrap">
+                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=RB_Wrap}">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                            <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,-822">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                        </ThicknessAnimationUsingKeyFrames>
+                    </Storyboard>
+                    <Storyboard x:Key="Btn_Statistics_MouseUp">
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Active_Bg">
+                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin,ElementName=Active_Bg}">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                            <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,56,0,0">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                        </ThicknessAnimationUsingKeyFrames>
+                        <StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="Lbl_Title">
+                            <DiscreteStringKeyFrame KeyTime="0" Value="{Binding Text, ElementName=Lbl_Title}" />
+                            <DiscreteStringKeyFrame KeyTime="0:0:0.3" Value="数据展示设置" />
+                        </StringAnimationUsingKeyFrames>
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="RB_Wrap">
+                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=RB_Wrap}">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                            <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,-411">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                        </ThicknessAnimationUsingKeyFrames>
+                    </Storyboard>
+                    <Storyboard x:Key="Btn_More_MouseUp">
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Active_Bg">
+                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=Active_Bg}">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                            <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,106,0,0">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                        </ThicknessAnimationUsingKeyFrames>
+                        <StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="Lbl_Title">
+                            <DiscreteStringKeyFrame KeyTime="0" Value="{Binding Text, ElementName=Lbl_Title}" />
+                            <DiscreteStringKeyFrame KeyTime="0:0:0.3" Value="更多" />
+                        </StringAnimationUsingKeyFrames>
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="RB_Wrap">
+                            <EasingThicknessKeyFrame KeyTime="0" Value="{Binding Margin, ElementName=RB_Wrap}">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                            <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0">
+                                <EasingThicknessKeyFrame.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut" />
+                                </EasingThicknessKeyFrame.EasingFunction>
+                            </EasingThicknessKeyFrame>
+                        </ThicknessAnimationUsingKeyFrames>
+                    </Storyboard>
+                </ResourceDictionary>
+                <ResourceDictionary Source="/BiliUPDesktopTool;component/Style/WindowBaseStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="UIElement.MouseUp" SourceName="Btn_Home">
@@ -295,106 +305,8 @@
         </Grid>
         <Grid x:Name="Control_Box" Margin="60,0,0,404.6">
             <Grid Margin="0,0,78,5.4"  MouseDown="Control_Box_MouseDown" Background="#02FFFFFF" />
-            <TextBlock x:Name="Btn_MinSize" Text="-" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" Background="#02FFFFFF" Margin="0,0,39,0" Padding="17,11,0,0" ToolTip="最小化">
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.MouseEnter">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_MinSize">
-                                        <EasingColorKeyFrame KeyTime="0" Value="#02FFFFFF">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                        <EasingColorKeyFrame KeyTime="0:0:0.05" Value="#7f23ade5">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                    </ColorAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="TextBlock.MouseLeave">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_MinSize">
-                                        <EasingColorKeyFrame KeyTime="0" Value="#7f23ade5">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                        <EasingColorKeyFrame KeyTime="0:0:0.05" Value="#02FFFFFF">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                    </ColorAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="TextBlock.MouseUp">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Window.WindowState)" Storyboard.TargetName="window">
-                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static WindowState.Normal}" />
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.05" Value="{x:Static WindowState.Minimized}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
-            <TextBlock x:Name="Btn_Close" Text="×" HorizontalAlignment="Right" VerticalAlignment="Top" Width="39" Height="39" Background="#02FFFFFF" Padding="15,11,0,0" MouseUp="Btn_Close_MouseUp" ToolTip="关闭">
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.MouseEnter">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_Close">
-                                        <EasingColorKeyFrame KeyTime="0" Value="#02FFFFFF">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                        <EasingColorKeyFrame KeyTime="0:0:0.05" Value="#bfff0000">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                    </ColorAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="TextBlock.MouseLeave">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Btn_Close">
-                                        <EasingColorKeyFrame KeyTime="0" Value="#bfff0000">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                        <EasingColorKeyFrame KeyTime="0:0:0.05" Value="#02FFFFFF">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                    </ColorAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
+            <Button x:Name="Btn_MinSize" Command="{Binding MinSize}" CommandParameter="{Binding ElementName=window, Mode=OneWay}" Style="{StaticResource MinSizeBtn}" />
+            <Button x:Name="Btn_Close" Command="{Binding Close}" CommandParameter="{Binding ElementName=window, Mode=OneWay}" Style="{StaticResource CloseBtn}" />
             <TextBlock x:Name="Lbl_Title" Text="首页" HorizontalAlignment="Left" Margin="10,10,0,12.4" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
             <Rectangle x:Name="rectangle" Fill="#FFD4D4D4" Height="1" Margin="0,39,0,0" VerticalAlignment="Top" />
         </Grid>

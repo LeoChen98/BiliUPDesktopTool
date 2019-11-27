@@ -1,9 +1,11 @@
-﻿namespace BiliUPDesktopTool
+﻿using System;
+
+namespace BiliUPDesktopTool
 {
     /// <summary>
     /// 信息推送类
     /// </summary>
-    internal static class MsgBoxPushHelper
+    public static class MsgBoxPushHelper
     {
         #region Public Delegates
 
@@ -12,7 +14,7 @@
         /// </summary>
         /// <param name="msg">信息</param>
         /// <param name="type">信息类型</param>
-        public delegate void PushMsgHandler(string msg, MsgType type = MsgType.Info);
+        public delegate void PushMsgHandler(string msg, Action command = null, MsgType type = MsgType.Info);
 
         #endregion Public Delegates
 
@@ -59,7 +61,17 @@
         /// <param name="type">信息类型</param>
         public static void RaisePushMsg(string msg, MsgType type = MsgType.Info)
         {
-            PushMsg.Invoke(msg, type);
+            PushMsg.Invoke(msg, null, type);
+        }
+
+        /// <summary>
+        /// 发起信息推送
+        /// </summary>
+        /// <param name="msg">信息</param>
+        /// <param name="type">信息类型</param>
+        public static void RaisePushMsg(string msg, Action command, MsgType type = MsgType.Info)
+        {
+            PushMsg.Invoke(msg, command, type);
         }
 
         #endregion Public Methods

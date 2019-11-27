@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 
 namespace BiliUPDesktopTool
@@ -36,11 +37,11 @@ namespace BiliUPDesktopTool
             DialogResult = true;
         }
 
-        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        private void MsgBoxPushHelper_PushMsg(string msg, Action command, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
         {
             if (IsActive && IsVisible)
             {
-                msgbox.Show(msg);
+                msgbox.Show(msg, command, type);
             }
         }
 

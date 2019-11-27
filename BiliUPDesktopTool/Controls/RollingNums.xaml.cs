@@ -2,7 +2,6 @@
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace BiliUPDesktopTool
 {
@@ -105,85 +104,57 @@ namespace BiliUPDesktopTool
                 PostiveAndNegativeChanged?.Invoke(this, new PostiveAndNegativeChangedEventArgs { OldValue = IsPostive, NewValue = true });
                 IsPostive = true;
             }
-            else if(num <0 && IsPostive)
+            else if (num < 0 && IsPostive)
             {
                 PostiveAndNegativeChanged?.Invoke(this, new PostiveAndNegativeChangedEventArgs { OldValue = IsPostive, NewValue = false });
                 IsPostive = false;
             }
-                num = Math.Abs(num);
-                string numstr = num.ToString();
-                if (numstr.IndexOf("E+") >= 0)
+            num = Math.Abs(num);
+            string numstr = num.ToString();
+            if (numstr.IndexOf("E+") >= 0)
+            {
+                string[] numstmp = Regex.Split(numstr, "E+");
+                numstr = numstmp[0];
+                int x = 1;
+                if (numstmp[0].IndexOf(".") >= 0)
                 {
-                    string[] numstmp = Regex.Split(numstr, "E+");
-                    numstr = numstmp[0];
-                    int x = 1;
-                    if (numstmp[0].IndexOf(".") >= 0)
-                    {
-                        numstr = numstr.Replace(".", "");
-                        x = numstmp[0].Length - numstmp[0].IndexOf(".");
-                    }
-                    for (int i = x - 1; i < int.Parse(numstmp[1]); i++)
-                    {
-                        numstr += "0";
-                    }
+                    numstr = numstr.Replace(".", "");
+                    x = numstmp[0].Length - numstmp[0].IndexOf(".");
                 }
-                int[] numids = new int[6];
-                if (num >= 10000)
+                for (int i = x - 1; i < int.Parse(numstmp[1]); i++)
                 {
-                    if (num >= 100000000)
+                    numstr += "0";
+                }
+            }
+            int[] numids = new int[6];
+            if (num >= 10000)
+            {
+                if (num >= 100000000)
+                {
+                    string tmp1 = numstr.Split('.')[0];
+                    string tmp2 = tmp1.Substring(0, tmp1.Length - 8);//整数部分
+                    string tmp3 = tmp1.Substring(tmp2.Length, 1);//小数部分
+
+                    numids[5] = -2;
+                    numids[4] = int.Parse(tmp1.Substring(tmp2.Length + 1, 1)) >= 5 ? int.Parse(tmp3) + 1 : int.Parse(tmp3);
+
+                    if (numids[4] >= 10)
                     {
-                        string tmp1 = numstr.Split('.')[0];
-                        string tmp2 = tmp1.Substring(0, tmp1.Length - 8);//整数部分
-                        string tmp3 = tmp1.Substring(tmp2.Length, 1);//小数部分
-
-                        numids[5] = -2;
-                        numids[4] = int.Parse(tmp1.Substring(tmp2.Length + 1, 1)) >= 5 ? int.Parse(tmp3) + 1 : int.Parse(tmp3);
-
-                        if (numids[4] >= 10)
-                        {
-                            numids[4] -= 10;
-                            tmp2 = (int.Parse(tmp2) + 1).ToString();
-                        }
-
-                        for (int i = 1; i <= 4; i++)
-                        {
-                            if (tmp2.Length - i >= 0)
-                            {
-                                numids[4 - i] = int.Parse(tmp2.Substring(tmp2.Length - i, 1));
-                            }
-                            else
-                            {
-                                if (4 - i == 3)
-                                {
-                                    numids[3] = 0;
-                                }
-                                else
-                                {
-                                    numids[4 - i] = -3;
-                                }
-                            }
-                        }
+                        numids[4] -= 10;
+                        tmp2 = (int.Parse(tmp2) + 1).ToString();
                     }
-                    else
+
+                    for (int i = 1; i <= 4; i++)
                     {
-                        string tmp1 = numstr.Split('.')[0];
-                        string tmp2 = tmp1.Substring(0, tmp1.Length - 4);//整数部分
-                        string tmp3 = tmp1.Substring(tmp2.Length, 1);//小数部分
-
-                        numids[5] = -1;
-                        numids[4] = int.Parse(tmp1.Substring(tmp2.Length + 1, 1)) >= 5 ? int.Parse(tmp3) + 1 : int.Parse(tmp3);
-
-                        if (numids[4] >= 10)
+                        if (tmp2.Length - i >= 0)
                         {
-                            numids[4] -= 10;
-                            tmp2 = (int.Parse(tmp2) + 1).ToString();
+                            numids[4 - i] = int.Parse(tmp2.Substring(tmp2.Length - i, 1));
                         }
-
-                        for (int i = 1; i <= 4; i++)
+                        else
                         {
-                            if (tmp2.Length - i >= 0)
+                            if (4 - i == 3)
                             {
-                                numids[4 - i] = int.Parse(tmp2.Substring(tmp2.Length - i, 1));
+                                numids[3] = 0;
                             }
                             else
                             {
@@ -194,53 +165,81 @@ namespace BiliUPDesktopTool
                 }
                 else
                 {
-                    string[] tmp1 = numstr.Split('.');
+                    string tmp1 = numstr.Split('.')[0];
+                    string tmp2 = tmp1.Substring(0, tmp1.Length - 4);//整数部分
+                    string tmp3 = tmp1.Substring(tmp2.Length, 1);//小数部分
+
+                    numids[5] = -1;
+                    numids[4] = int.Parse(tmp1.Substring(tmp2.Length + 1, 1)) >= 5 ? int.Parse(tmp3) + 1 : int.Parse(tmp3);
+
+                    if (numids[4] >= 10)
+                    {
+                        numids[4] -= 10;
+                        tmp2 = (int.Parse(tmp2) + 1).ToString();
+                    }
+
                     for (int i = 1; i <= 4; i++)
                     {
-                        if (tmp1[0].Length - i >= 0)
+                        if (tmp2.Length - i >= 0)
                         {
-                            numids[4 - i] = int.Parse(tmp1[0].Substring(tmp1[0].Length - i, 1));
+                            numids[4 - i] = int.Parse(tmp2.Substring(tmp2.Length - i, 1));
                         }
                         else
                         {
                             numids[4 - i] = -3;
                         }
                     }
-                    if (tmp1.Length > 1)
+                }
+            }
+            else
+            {
+                string[] tmp1 = numstr.Split('.');
+                for (int i = 1; i <= 4; i++)
+                {
+                    if (tmp1[0].Length - i >= 0)
                     {
-                        for (int i = 0; i < 2; i++)
+                        numids[4 - i] = int.Parse(tmp1[0].Substring(tmp1[0].Length - i, 1));
+                    }
+                    else
+                    {
+                        numids[4 - i] = -3;
+                    }
+                }
+                if (tmp1.Length > 1)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        if (tmp1[1].Length - i > 0)
                         {
-                            if (tmp1[1].Length - i > 0)
-                            {
-                                numids[4 + i] = int.Parse(tmp1[1].Substring(i, 1));
-                            }
-                            else
-                            {
-                                numids[4 + i] = 0;
-                            }
+                            numids[4 + i] = int.Parse(tmp1[1].Substring(i, 1));
+                        }
+                        else
+                        {
+                            numids[4 + i] = 0;
                         }
                     }
                 }
-                N4.ChangeNum(numids[0]);
-                N3.ChangeNum(numids[1]);
-                N2.ChangeNum(numids[2]);
-                N1.ChangeNum(numids[3]);
-                if (numids[4] == 0 && numids[5] == 0)
-                {
-                    numpoint.Visibility = Visibility.Hidden;
-                    P1.Visibility = Visibility.Hidden;
-                    P2.Visibility = Visibility.Hidden;
-                    ViewPanel.Margin = new Thickness(30, 0, -28, 0);
-                }
-                else
-                {
-                    numpoint.Visibility = Visibility.Visible;
-                    P1.Visibility = Visibility.Visible;
-                    P2.Visibility = Visibility.Visible;
-                    ViewPanel.Margin = new Thickness(1, 0, 1, 0);
-                    P1.ChangeNum(numids[4]);
-                    P2.ChangeNum(numids[5]);
-                }
+            }
+            N4.ChangeNum(numids[0]);
+            N3.ChangeNum(numids[1]);
+            N2.ChangeNum(numids[2]);
+            N1.ChangeNum(numids[3]);
+            if (numids[4] == 0 && numids[5] == 0)
+            {
+                numpoint.Visibility = Visibility.Hidden;
+                P1.Visibility = Visibility.Hidden;
+                P2.Visibility = Visibility.Hidden;
+                ViewPanel.Margin = new Thickness(30, 0, -28, 0);
+            }
+            else
+            {
+                numpoint.Visibility = Visibility.Visible;
+                P1.Visibility = Visibility.Visible;
+                P2.Visibility = Visibility.Visible;
+                ViewPanel.Margin = new Thickness(1, 0, 1, 0);
+                P1.ChangeNum(numids[4]);
+                P2.ChangeNum(numids[5]);
+            }
         }
 
         #endregion Public Methods
@@ -249,7 +248,6 @@ namespace BiliUPDesktopTool
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)

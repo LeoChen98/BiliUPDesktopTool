@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -7,7 +9,7 @@ namespace BiliUPDesktopTool
     /// <summary>
     /// MsgBox.xaml 的交互逻辑
     /// </summary>
-    public partial class MsgBox : UserControl
+    public partial class MsgBox : UserControl, INotifyPropertyChanged
     {
         #region Public Constructors
 
@@ -18,18 +20,32 @@ namespace BiliUPDesktopTool
 
         #endregion Public Constructors
 
+        #region Public Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Public Events
+
+        #region Public Properties
+
+        public RelayCommand command { get; private set; }
+
+        #endregion Public Properties
+
         #region Public Methods
 
-        public void Show(string msg)
+        public void Show(string msg, Action command = null, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
         {
-            Tbk_ShowBox.Text = msg;
+            ShowBox.Content = msg;
+            this.command = command == null ? null : new RelayCommand(command);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("command"));
 
             FormattedText formattedText = new
                FormattedText(msg, System.Globalization.CultureInfo.CurrentCulture,
                System.Windows.FlowDirection.LeftToRight,
-               new Typeface(Tbk_ShowBox.FontFamily, Tbk_ShowBox.FontStyle,
-               Tbk_ShowBox.FontWeight, Tbk_ShowBox.FontStretch),
-               Tbk_ShowBox.FontSize, Tbk_ShowBox.Foreground, null);
+               new Typeface(ShowBox.FontFamily, ShowBox.FontStyle,
+               ShowBox.FontWeight, ShowBox.FontStretch),
+               ShowBox.FontSize, ShowBox.Foreground, null);
 
             Width = formattedText.Width + 40;
             Height = formattedText.Height + 20;
@@ -38,13 +54,5 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private void userControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-        }
-
-        #endregion Private Methods
     }
 }

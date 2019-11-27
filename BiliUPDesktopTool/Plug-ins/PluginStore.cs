@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace BiliUPDesktopTool
+﻿namespace BiliUPDesktopTool
 {
-    class PluginStore
+    internal class PluginStore
     {
+        #region Public Methods
+
         public static PluginInfo_Online[] GetList()
         {
             return null;
         }
 
+        #endregion Public Methods
+
+        #region Public Classes
+
         public class PluginInfo_Online
         {
-
         }
+
+        #endregion Public Classes
     }
 }

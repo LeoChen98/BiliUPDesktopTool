@@ -5,18 +5,145 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:BiliUPDesktopTool"
              mc:Ignorable="d"
+             x:Name="userControl"
              d:DesignHeight="411" d:DesignWidth="740" Width="740" Height="411" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <UserControl.Resources>
-        <local:Percentage_Converter x:Key="Percentage_Converter"/>
+        <local:IsNullConverter x:Key="IsNullConverter" />
+        <local:Bool2Visbility x:Key="Bool2Visbility" />
+        <local:Percentage_Converter x:Key="Percentage_Converter" />
         <local:Tooltip_UserInfo_Desc_Converter x:Key="Tooltip_UserInfo_Desc_Converter" />
-        <local:WidthNHeightValue_Times_Converter x:Key="WidthNHeightValue_Times_Converter"/>
+        <local:WidthNHeightValue_Times_Converter x:Key="WidthNHeightValue_Times_Converter" />
+        <Style x:Key="SmallBtn" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="#00000000" BorderBrush="#FF747474" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" HorizontalAlignment="Center"  VerticalAlignment="Center" CornerRadius="2" BorderThickness="1">
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#00000000">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#66b3b3b3">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#66b3b3b3">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#00000000">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                            <TextBlock Text="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}" TextAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LargeBtn" TargetType="{x:Type Button}">
+            <Setter Property="BorderBrush" Value="#FF747474" />
+            <Setter Property="Background" Value="#02ffffff" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="1" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#02ffffff">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#66b3b3b3">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#66b3b3b3">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#02ffffff">
+                                                    <EasingColorKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut" />
+                                                    </EasingColorKeyFrame.EasingFunction>
+                                                </EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                            <TextBlock Text="{TemplateBinding Content}" TextAlignment="Center" Padding="28,12,28,12" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LevelProgressBar" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Border x:Name="PART_Track" Background="#66FFFFFF" BorderBrush="#FF252525" CornerRadius="2" BorderThickness="1" Height="{TemplateBinding Height}" ClipToBounds="True">
+                            <Rectangle x:Name="PART_Indicator" Fill="#FF4FBDEA" HorizontalAlignment="Left" Height="{TemplateBinding Height}" VerticalAlignment="Top" StrokeThickness="0" RadiusX="5" RadiusY="5" Canvas.Left="1" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
-        <Grid x:Name="InfoBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top" Visibility="Hidden">
-            <Image x:Name="Img_Face_Default" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="/BiliUPDesktopTool;component/Image/noface.gif" />
-            <Image x:Name="Img_Face" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="{Binding Pic,Source={x:Static local:Account.Instance}}"/>
-            <TextBlock x:Name="TBk_UserName" Padding="5,2" TextTrimming="CharacterEllipsis" FontWeight="Bold" Foreground="#FF252525" FontSize="16" Margin="95,10,37,83" Text="{Binding UName,Source={x:Static local:Account.Instance}}">
-            </TextBlock>
+        <Grid x:Name="InfoBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top" Visibility="{Binding IsLogin, Source={x:Static local:Account.Instance},UpdateSourceTrigger=PropertyChanged, ConverterParameter=True, Converter={StaticResource Bool2Visbility}}">
+            <Image x:Name="Img_Face" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="80">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Pic,Source={x:Static local:Account.Instance},Converter={StaticResource IsNullConverter}}" Value="True">
+                                <Setter Property="Source" Value="/BiliUPDesktopTool;component/Image/noface.gif" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Pic,Source={x:Static local:Account.Instance},Converter={StaticResource IsNullConverter}}" Value="False">
+                                <Setter Property="Source" Value="{Binding Pic,Source={x:Static local:Account.Instance}}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <TextBlock x:Name="TBk_UserName" Padding="5,2" TextTrimming="CharacterEllipsis" FontWeight="Bold" Foreground="#FF252525" FontSize="16" Margin="95,10,37,83" Text="{Binding UName,Source={x:Static local:Account.Instance}}" />
             <Grid x:Name="DescBox" Margin="95,38,37,50" MouseUp="Lbl_Desc_MouseUp" Cursor="IBeam">
                 <Label x:Name="Lbl_Desc" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="560" Foreground="#FF252525" Padding="0" VerticalContentAlignment="Center" MouseUp="Lbl_Desc_MouseUp" BorderThickness="1" ToolTip="{Binding Text, Converter={StaticResource Tooltip_UserInfo_Desc_Converter}, ElementName=TB_Desc}" d:IsHidden="True" BorderBrush="#00000000">
                     <Label.Triggers>
@@ -69,337 +196,20 @@
                 <Canvas x:Name="Canvas_Level" Margin="0,0,445,0"  Height="18" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" ClipToBounds="True">
                     <Image x:Name="Img_level" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/BiliUPDesktopTool;component/Image/level.png" Canvas.Left="-15" Height="386" Width="228" Canvas.Top="{Binding Level,Converter={StaticResource  WidthNHeightValue_Times_Converter}, ConverterParameter=-36.5,Source={x:Static local:Account.Instance}}" d:IsLocked="True" />
                 </Canvas>
-                <Canvas x:Name="Bar_level" HorizontalAlignment="Left" Margin="40,7,0,8" Width="400" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#66FFFFFF" ClipToBounds="True"  ToolTip="{Binding str_ExpProgress,Source={x:Static local:Account.Instance}}">
-                    <Rectangle x:Name="Bar_level_top" Fill="#FF4FBDEA" HorizontalAlignment="Left" Height="4" VerticalAlignment="Top" Width="{Binding ExpProgress,Converter={StaticResource WidthNHeightValue_Times_Converter},ConverterParameter=398,Source={x:Static local:Account.Instance}}" ClipToBounds="True" StrokeThickness="0" RadiusX="5" RadiusY="5" Canvas.Left="1" />
-                    <Rectangle x:Name="Bar_level_bottom" HorizontalAlignment="Left" Height="4" VerticalAlignment="Top" Width="400" ClipToBounds="True" Stroke="#FF252525" RadiusX="2" RadiusY="2" />
-                </Canvas>
+                <ProgressBar x:Name="Bar_Level" Height="4" Margin="40,7.5,45,7.5" Width="400" ToolTip="{Binding str_ExpProgress,Source={x:Static local:Account.Instance}}" Value="{Binding ExpProgress, ConverterParameter=100,Source={x:Static local:Account.Instance}, Converter={StaticResource WidthNHeightValue_Times_Converter}}" Style="{StaticResource LevelProgressBar}" />
                 <TextBlock x:Name="Lbl_Level" Text="{Binding ExpProgress, Converter={StaticResource Percentage_Converter},Source={x:Static local:Account.Instance}}" HorizontalAlignment="Left" Height="19" Margin="445,0,0,0" VerticalAlignment="Top" Width="40" Padding="1" />
             </Grid>
             <Grid x:Name="BtnBox" HorizontalAlignment="Left" Height="16" Margin="10,95,0,0" VerticalAlignment="Top" Width="672">
-                <Grid x:Name="Btn_Space" Margin="0,0,607,0" MouseUp="Btn_Space_MouseUp" Cursor="Hand" Background="#00000000">
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="Grid.MouseEnter">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="Grid.MouseLeave">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                    </Grid.Triggers>
-                    <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <TextBlock x:Name="label" Text="主站空间" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="13,1.3,0,0" FontSize="10" />
-                </Grid>
-                <Grid x:Name="Btn_Center" Margin="70,0,537,0" Cursor="Hand" MouseUp="Btn_Center_MouseUp" Background="#00000000">
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="Grid.MouseEnter">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="Grid.MouseLeave">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                    </Grid.Triggers>
-                    <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label1" Content="创作中心" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65"  Padding="13,1.3,0,0" FontSize="10" />
-                </Grid>
-                <Grid x:Name="Btn_Manager" Margin="140,0,467,0" Cursor="Hand" MouseUp="Btn_Manager_MouseUp" Background="#00000000">
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="Grid.MouseEnter">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="Grid.MouseLeave">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                    </Grid.Triggers>
-                    <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label2" Content="投稿管理" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="13,1.3,0,0" FontSize="10" />
-                </Grid>
-                <Grid x:Name="Btn_Upload" Margin="210,0,397,0" Cursor="Hand" MouseUp="Btn_Upload_MouseUp" Background="#00000000">
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="Grid.MouseEnter">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="Grid.MouseLeave">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                    </Grid.Triggers>
-                    <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label3" Content="投稿工具" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="13,1.3,0,0" FontSize="10" />
-                </Grid>
-                <Grid x:Name="Btn_UpdateAccount" Margin="537,0,70,0" Cursor="Hand" MouseUp="Btn_UpdateAccount_MouseUp" Background="#00000000">
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="Grid.MouseEnter">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="Grid.MouseLeave">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                    </Grid.Triggers>
-                    <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label4" Content="更新账号" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="13,1.3,0,0" FontSize="10" />
-                </Grid>
-                <Grid x:Name="Btn_SignOut" Margin="607,0,0,0" Cursor="Hand" MouseUp="Btn_SignOut_MouseUp" Background="#00000000">
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="Grid.MouseEnter">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="Grid.MouseLeave">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#66b3b3b3">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                            <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#00000000">
-                                                <EasingColorKeyFrame.EasingFunction>
-                                                    <CircleEase EasingMode="EaseInOut" />
-                                                </EasingColorKeyFrame.EasingFunction>
-                                            </EasingColorKeyFrame>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                    </Grid.Triggers>
-                    <Rectangle HorizontalAlignment="Left" Height="16" Stroke="#FF747474" VerticalAlignment="Top" Width="65" RadiusX="2" RadiusY="2" />
-                    <Label x:Name="label5" Content="退出登录" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="65" Padding="13,1.3,0,0" FontSize="10" />
-                </Grid>
+                <Button x:Name="Btn_Space" Margin="0,0,607,0" Cursor="Hand" Background="#00000000" Command="{Binding SpaceCommand, ElementName=userControl}" Style="{StaticResource SmallBtn}" Content="主站空间" Height="16" Width="65" />
+                <Button x:Name="Btn_Center" Margin="70,0,537,0" Cursor="Hand" Background="#00000000" Command="{Binding CenterCommand, ElementName=userControl}" Style="{StaticResource SmallBtn}" Content="创作中心" Height="16" Width="65" />
+                <Button x:Name="Btn_Manager" Margin="140,0,467,0" Cursor="Hand" Background="#00000000" Command="{Binding ManagerCommand, ElementName=userControl}" Style="{StaticResource SmallBtn}" Content="投稿管理" Height="16" Width="65" />
+                <Button x:Name="Btn_Upload" Margin="210,0,397,0" Cursor="Hand" Background="#00000000" Command="{Binding UploaderCommand, ElementName=userControl}" Style="{StaticResource SmallBtn}" Content="投稿工具" Height="16" Width="65" />
+                <Button x:Name="Btn_UpdateAccount" Margin="537,0,70,0" Cursor="Hand" Background="#00000000" Command="{Binding LoginCommand,Source={x:Static local:Account.Instance}}" Style="{StaticResource SmallBtn}" Content="更新账号" Height="16" Width="65" />
+                <Button x:Name="Btn_SignOut" Margin="607,0,0,0" Cursor="Hand" Background="#00000000" Command="{Binding SignOutCommand,Source={x:Static local:Account.Instance}}" Style="{StaticResource SmallBtn}" Content="退出登录" Height="16" Width="65" />
             </Grid>
         </Grid>
-        <Grid x:Name="NeedLoginBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top">
-            <Border x:Name="Btn_Login" BorderThickness="1" Margin="277,38,276,37" CornerRadius="5" BorderBrush="#FF747474" Background="#02ffffff" MouseEnter="Btn_Login_MouseEnter" MouseLeave="Btn_Login_MouseLeave" MouseUp="Btn_Login_MouseUp" Cursor="Hand">
-                <Border.Triggers>
-                    <EventTrigger RoutedEvent="Border.MouseEnter">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
-                                        <EasingColorKeyFrame KeyTime="0" Value="#02ffffff">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                        <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#66b3b3b3">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                    </ColorAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="Border.MouseLeave">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
-                                        <EasingColorKeyFrame KeyTime="0" Value="#66b3b3b3">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                        <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#02ffffff">
-                                            <EasingColorKeyFrame.EasingFunction>
-                                                <CircleEase EasingMode="EaseInOut" />
-                                            </EasingColorKeyFrame.EasingFunction>
-                                        </EasingColorKeyFrame>
-                                    </ColorAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </Border.Triggers>
-                <TextBlock x:Name="label7" Text="登陆Bilibili账号" Padding="28,12,0,0" />
-            </Border>
+        <Grid x:Name="NeedLoginBox" Height="116" Margin="24,24,24,0" VerticalAlignment="Top" Visibility="{Binding IsLogin, Source={x:Static local:Account.Instance},UpdateSourceTrigger=PropertyChanged, ConverterParameter=False, Converter={StaticResource Bool2Visbility}}">
+            <Button x:Name="Btn_Login" Margin="277,38,276,37" Content="登陆Bilibili账号" Command="{Binding LoginCommand,Source={x:Static local:Account.Instance}}" Style="{StaticResource LargeBtn}" />
         </Grid>
         <Grid x:Name="DashBoard" HorizontalAlignment="Left" Height="256" Margin="24,145,0,0" VerticalAlignment="Top" Width="692">
             <TextBlock x:Name="label6" Text="最新活动" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="100" FontSize="18" FontWeight="Bold" Margin="10,10,0,0" />

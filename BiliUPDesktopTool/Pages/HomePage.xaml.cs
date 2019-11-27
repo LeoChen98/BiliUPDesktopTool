@@ -34,76 +34,55 @@ namespace BiliUPDesktopTool
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        /// <summary>
+        /// 创作中心命令
+        /// </summary>
+        public RelayCommand CenterCommand
+        {
+            get
+            {
+                return new RelayCommand(() => { Process.Start("https://member.bilibili.com/v2#/home"); });
+            }
+        }
+
+        /// <summary>
+        /// 投稿管理命令
+        /// </summary>
+        public RelayCommand ManagerCommand
+        {
+            get
+            {
+                return new RelayCommand(() => { Process.Start("https://member.bilibili.com/v2#/upload-manager/article"); });
+            }
+        }
+
+        /// <summary>
+        /// 主站空间命令
+        /// </summary>
+        public RelayCommand SpaceCommand
+        {
+            get
+            {
+                return new RelayCommand(() => { Process.Start("https://space.bilibili.com/" + Account.Instance.Uid); });
+            }
+        }
+
+        /// <summary>
+        /// 投稿工具命令
+        /// </summary>
+        public RelayCommand UploaderCommand
+        {
+            get
+            {
+                return new RelayCommand(() => { MsgBoxPushHelper.RaisePushMsg("功能暂未开放"); });
+            }
+        }
+
+        #endregion Public Properties
+
         #region Private Methods
-
-        private void BindingInit()
-        {
-            Binding binduname = new Binding()
-            {
-                Source = Account.Instance,
-                Path = new PropertyPath("UName"),
-                Mode = BindingMode.OneWay
-            };
-            TBk_UserName.SetBinding(TextBlock.TextProperty, binduname);
-
-            Binding bindface = new Binding()
-            {
-                Source = Account.Instance,
-                Path = new PropertyPath("Pic"),
-                Mode = BindingMode.OneWay
-            };
-            Img_Face.SetBinding(Image.SourceProperty, bindface);
-
-            Binding binddesc = new Binding()
-            {
-                Source = Account.Instance,
-                Path = new PropertyPath("Desc"),
-                Mode = BindingMode.OneWay
-            };
-            TB_Desc.SetBinding(TextBox.TextProperty, binddesc);
-
-            Binding bindlevel = new Binding()
-            {
-                Source = Account.Instance,
-                Path = new PropertyPath("Level"),
-                Mode = BindingMode.OneWay,
-                Converter = new WidthNHeightValue_Times_Converter(),
-                ConverterParameter = -36.5
-            };
-            Img_level.SetBinding(Canvas.TopProperty, bindlevel);
-
-            Binding bindlevelprocess = new Binding()
-            {
-                Source = Account.Instance,
-                Path = new PropertyPath("ExpProgress"),
-                Mode = BindingMode.OneWay,
-                Converter = new WidthNHeightValue_Times_Converter(),
-                ConverterParameter = 398
-            };
-            Bar_level_top.SetBinding(WidthProperty, bindlevelprocess);
-
-            Binding bindlevelprocessstr = new Binding()
-            {
-                Source = Account.Instance,
-                Path = new PropertyPath("str_ExpProgress"),
-                Mode = BindingMode.OneWay,
-            };
-            LevelBox.SetBinding(ToolTipProperty, bindlevelprocessstr);
-
-            Binding bindlevelpercentage = new Binding()
-            {
-                Source = Account.Instance,
-                Path = new PropertyPath("ExpProgress"),
-                Mode = BindingMode.OneWay,
-                Converter = new Percentage_Converter()
-            };
-            Lbl_Level.SetBinding(TextBlock.TextProperty, bindlevelpercentage);
-        }
-
-        private void Btn_Center_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Process.Start("https://member.bilibili.com/v2#/home");
-        }
 
         private void Btn_Login_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -120,44 +99,6 @@ namespace BiliUPDesktopTool
             Account.Instance.Login();
             NeedLoginBox.Visibility = Visibility.Hidden;
             InfoBox.Visibility = Visibility.Visible;
-        }
-
-        private void Btn_Manager_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Process.Start("https://member.bilibili.com/v2#/upload-manager/article");
-        }
-
-        private void Btn_SignOut_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Account.Instance.SignOut();
-
-            if (Account.Instance.Islogin)
-            {
-                InfoBox.Visibility = Visibility.Visible;
-                NeedLoginBox.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                InfoBox.Visibility = Visibility.Hidden;
-                NeedLoginBox.Visibility = Visibility.Visible;
-            }
-
-            MsgBoxPushHelper.RaisePushMsg("已成功注销登录！");
-        }
-
-        private void Btn_Space_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Process.Start("https://space.bilibili.com/" + Account.Instance.Uid);
-        }
-
-        private void Btn_UpdateAccount_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Account.Instance.Login();
-        }
-
-        private void Btn_Upload_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            MsgBoxPushHelper.RaisePushMsg("功能暂未开放");
         }
 
         private void Lbl_Desc_MouseUp(object sender, MouseButtonEventArgs e)
@@ -190,7 +131,7 @@ namespace BiliUPDesktopTool
                                 Title = i["name"].ToString(),
                                 Desc = i["protocol"].ToString(),
                                 Link = i["act_url"].ToString(),
-                                Start_Time = i["stime"] == null ? "-" : i["stime"].ToString(),
+                                Start_Time = i["stime"] == null ? "-" : Bas.GetTimeStringFromSecondTimestamp((int)i["stime"]),
                                 End_Time = "-"
                             }));
                         });
@@ -221,16 +162,6 @@ namespace BiliUPDesktopTool
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Account.Instance.Islogin)
-            {
-                InfoBox.Visibility = Visibility.Visible;
-                NeedLoginBox.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                InfoBox.Visibility = Visibility.Hidden;
-                NeedLoginBox.Visibility = Visibility.Visible;
-            }
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
@@ -239,7 +170,6 @@ namespace BiliUPDesktopTool
             BindingOperations.ClearAllBindings(Img_Face);
             BindingOperations.ClearAllBindings(TB_Desc);
             BindingOperations.ClearAllBindings(Img_level);
-            BindingOperations.ClearAllBindings(Bar_level_top);
             BindingOperations.ClearAllBindings(Lbl_Level);
 
             EventList.Children.Clear();

@@ -185,6 +185,7 @@
     </ApplicationDefinition>
     <Compile Include="Class\Update.cs" />
     <Compile Include="Class\Program.cs" />
+    <Compile Include="Class\WindowBaseCommand.cs" />
     <Compile Include="Class\WindowsManager.cs" />
     <Compile Include="Controls\EventItem.xaml.cs">
       <DependentUpon>EventItem.xaml</DependentUpon>
@@ -194,6 +195,7 @@
     </Compile>
     <Compile Include="Helper\MachineInfoHelper.cs" />
     <Compile Include="Helper\MsgBoxPushHelper.cs" />
+    <Compile Include="Helper\MVVMHelper.cs" />
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -264,6 +266,10 @@
     <Page Include="Pages\StatisticsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\WindowBaseStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Window\LisenceWindow.xaml">
       <SubType>Designer</SubType>

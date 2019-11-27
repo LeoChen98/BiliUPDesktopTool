@@ -8,6 +8,9 @@ using System.Windows.Media;
 
 namespace BiliUPDesktopTool
 {
+    /// <summary>
+    /// 布尔值-可视转换器  parameter指示Visible对应的布尔值，以Hidden为相反值
+    /// </summary>
     public class Bool2Visbility : IValueConverter
     {
         #region Public Methods
@@ -15,15 +18,44 @@ namespace BiliUPDesktopTool
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool v = (bool)value;
-            if (v == true) return Visibility.Visible;
+            bool p = bool.Parse(parameter.ToString());
+            if (v == p) return Visibility.Visible;
             else return Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Visibility v = (Visibility)value;
-            if (v == Visibility.Visible) return true;
+            bool p = bool.Parse(parameter.ToString());
+            if ((v == Visibility.Visible) == p) return true;
             else return false;
+        }
+
+        #endregion Public Methods
+    }
+
+    /// <summary>
+    /// 笔刷-颜色转换器
+    /// </summary>
+    public class Brush2ColorValue_Converter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value.GetType() == typeof(SolidColorBrush))
+            {
+                return ((SolidColorBrush)value).Color;
+            }
+            else
+            {
+                return Colors.Transparent;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return new SolidColorBrush((Color)value);
         }
 
         #endregion Public Methods
@@ -68,6 +100,26 @@ namespace BiliUPDesktopTool
             if (string.IsNullOrEmpty((string)value)) value = "60";
             value = Regex.Replace((string)value, @"[^0-9]+", "");
             return int.Parse((string)value) * 1000;
+        }
+
+        #endregion Public Methods
+    }
+
+    /// <summary>
+    /// 布尔值-可视转换器  parameter指示Visible对应的布尔值，以Hidden为相反值
+    /// </summary>
+    public class IsNullConverter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (string.IsNullOrEmpty(value.ToString()));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new Exception("This converter is only used for convert to bool.");
         }
 
         #endregion Public Methods
@@ -161,28 +213,5 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Public Methods
-    }
-
-    /// <summary>
-    /// 笔刷-颜色转换器
-    /// </summary>
-    public class Brush2ColorValue_Converter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if(value.GetType() == typeof(SolidColorBrush))
-            {
-                return ((SolidColorBrush)value).Color;
-            }
-            else
-            {
-                return Colors.Transparent;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return new SolidColorBrush((Color)value);
-        }
     }
 }

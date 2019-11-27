@@ -1,8 +1,7 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace BiliUPDesktopTool
 {
@@ -16,8 +15,6 @@ namespace BiliUPDesktopTool
         public SettingWindow()
         {
             InitializeComponent();
-
-            setBinding();
 
             MsgBoxPushHelper.PushMsg += MsgBoxPushHelper_PushMsg;
         }
@@ -45,11 +42,11 @@ namespace BiliUPDesktopTool
             WindowsManager.Instance.GetWindow<DesktopWindowSetter>().Show();
         }
 
-        private void MsgBoxPushHelper_PushMsg(string msg, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
+        private void MsgBoxPushHelper_PushMsg(string msg, Action command, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
         {
             if (IsActive && IsVisible)
             {
-                msgbox.Show(msg);
+                msgbox.Show(msg, command, type);
             }
         }
 
@@ -64,17 +61,6 @@ namespace BiliUPDesktopTool
             {
                 BTN_AutoRun.Content = "设置为开机启动";
             }
-        }
-
-        private void setBinding()
-        {
-            Binding bindAutoCheckUpdate = new Binding()
-            {
-                Source = Settings.Instance,
-                Mode = BindingMode.TwoWay,
-                Path = new PropertyPath("IsAutoCheckUpdate")
-            };
-            CB_IsAutoCheckUpdate.SetBinding(CheckBox.IsCheckedProperty, bindAutoCheckUpdate);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

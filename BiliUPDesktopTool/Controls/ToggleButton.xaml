@@ -11,24 +11,24 @@
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="slider">
                 <EasingThicknessKeyFrame KeyTime="0" Value="0,0,36,0">
                     <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
+                        <CircleEase EasingMode="EaseInOut" />
                     </EasingThicknessKeyFrame.EasingFunction>
                 </EasingThicknessKeyFrame>
                 <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="36,0,0,0">
                     <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
+                        <CircleEase EasingMode="EaseInOut" />
                     </EasingThicknessKeyFrame.EasingFunction>
                 </EasingThicknessKeyFrame>
             </ThicknessAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="userControl">
                 <EasingColorKeyFrame KeyTime="0" Value="#FF969696">
                     <EasingColorKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
+                        <CircleEase EasingMode="EaseInOut" />
                     </EasingColorKeyFrame.EasingFunction>
                 </EasingColorKeyFrame>
                 <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF21C73B">
                     <EasingColorKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
+                        <CircleEase EasingMode="EaseInOut" />
                     </EasingColorKeyFrame.EasingFunction>
                 </EasingColorKeyFrame>
             </ColorAnimationUsingKeyFrames>
@@ -37,24 +37,24 @@
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="slider">
                 <EasingThicknessKeyFrame KeyTime="0" Value="36,0,0,0">
                     <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
+                        <CircleEase EasingMode="EaseInOut" />
                     </EasingThicknessKeyFrame.EasingFunction>
                 </EasingThicknessKeyFrame>
                 <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,36,0">
                     <EasingThicknessKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
+                        <CircleEase EasingMode="EaseInOut" />
                     </EasingThicknessKeyFrame.EasingFunction>
                 </EasingThicknessKeyFrame>
             </ThicknessAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="userControl">
                 <EasingColorKeyFrame KeyTime="0" Value="#FF21C73B">
                     <EasingColorKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
+                        <CircleEase EasingMode="EaseInOut" />
                     </EasingColorKeyFrame.EasingFunction>
                 </EasingColorKeyFrame>
                 <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF969696">
                     <EasingColorKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
+                        <CircleEase EasingMode="EaseInOut" />
                     </EasingColorKeyFrame.EasingFunction>
                 </EasingColorKeyFrame>
             </ColorAnimationUsingKeyFrames>
