@@ -18,12 +18,12 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 主程序Build
         /// </summary>
-        public const int _Build = 13;
+        public const int _Build = 14;
 
         /// <summary>
         /// 主程序版本号
         /// </summary>
-        public const string _Version = "2.0.0.13 Preview 5";
+        public const string _Version = "2.0.0.14 Preview 6";
 
         #endregion Public Fields
 
