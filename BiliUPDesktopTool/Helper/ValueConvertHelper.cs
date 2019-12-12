@@ -114,7 +114,9 @@ namespace BiliUPDesktopTool
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (string.IsNullOrEmpty(value.ToString()));
+            if (value == null || string.IsNullOrEmpty(value.ToString()))
+                return true;
+            else return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

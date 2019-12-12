@@ -15,17 +15,6 @@ namespace BiliUPDesktopTool
     /// </summary>
     internal class BiliUPData
     {
-        private static BiliUPData intance;
-
-        public static BiliUPData Intance
-        {
-            get
-            {
-                if (intance == null) intance = new BiliUPData();
-                return intance;
-            }
-        }
-
         #region Public Fields
 
         /// <summary>
@@ -42,6 +31,8 @@ namespace BiliUPDesktopTool
 
         #region Private Fields
 
+        private static BiliUPData intance;
+
         /// <summary>
         /// 指示是否正在刷新数据。
         /// </summary>
@@ -54,7 +45,7 @@ namespace BiliUPDesktopTool
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
         /// 初始化up主数据
@@ -67,7 +58,20 @@ namespace BiliUPDesktopTool
             Refresher = new Timer((o) => { Refresh(); }, null, 0, Settings.Instance.DataRefreshInterval);
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
+
+        #region Public Properties
+
+        public static BiliUPData Intance
+        {
+            get
+            {
+                if (intance == null) intance = new BiliUPData();
+                return intance;
+            }
+        }
+
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -667,10 +671,10 @@ namespace BiliUPDesktopTool
         {
             #region Private Fields
 
+            private DateTime? ChargeLastTime = null;
             private Data data;
 
             private DateTime? LastTime = null;
-            private DateTime? ChargeLastTime = null;
 
             #endregion Private Fields
 

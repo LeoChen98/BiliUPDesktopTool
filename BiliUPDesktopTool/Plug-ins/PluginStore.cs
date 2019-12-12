@@ -17,13 +17,17 @@ namespace BiliUPDesktopTool
 
         public class PluginInfo_Online
         {
-            public string name;
+            #region Public Fields
+
             public string description;
-            public int version;
-            public string version_str;
+            public string hash;
+            public string name;
             public DateTime updatetime;
             public string url;
-            public string hash;
+            public int version;
+            public string version_str;
+
+            #endregion Public Fields
         }
 
         #endregion Public Classes
