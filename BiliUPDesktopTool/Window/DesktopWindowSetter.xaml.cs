@@ -31,38 +31,11 @@ namespace BiliUPDesktopTool
 
             //建立备份
             _Backup = new double[2] { Skin.Instance.DesktopWnd_Top, Skin.Instance.DesktopWnd_Left };
-
-            //初始化数据绑定
-            BindingInit();
         }
 
         #endregion Public Constructors
 
         #region Private Methods
-
-        /// <summary>
-        /// 初始化数据绑定
-        /// </summary>
-        private void BindingInit()
-        {
-            //绑定窗体Top
-            Binding bind_top = new Binding
-            {
-                Source = Skin.Instance,
-                Mode = BindingMode.TwoWay,
-                Path = new PropertyPath("DesktopWnd_Top")
-            };
-            SetBinding(TopProperty, bind_top);
-
-            //绑定窗体Left
-            Binding bind_left = new Binding
-            {
-                Source = Skin.Instance,
-                Mode = BindingMode.TwoWay,
-                Path = new PropertyPath("DesktopWnd_Left")
-            };
-            SetBinding(LeftProperty, bind_left);
-        }
 
         private void Btn_cancel_Click(object sender, RoutedEventArgs e)
         {

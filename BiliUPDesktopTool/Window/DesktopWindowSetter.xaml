@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiliUPDesktopTool"
         mc:Ignorable="d"
-        Title="桌面数据展示位置设置窗口 - B站up主桌面工具" Height="300" Width="350" WindowStyle="None" AllowsTransparency="True" Cursor="SizeAll" Background="#66000000" MouseDown="Window_MouseDown" Icon="/BiliUPDesktopTool;component/icon.ico">
+        Title="桌面数据展示位置设置窗口 - B站up主桌面工具" Height="300" Width="350" WindowStyle="None" AllowsTransparency="True" Cursor="SizeAll" Background="#66000000" MouseDown="Window_MouseDown" Icon="/BiliUPDesktopTool;component/icon.ico" Left="{Binding DesktopWnd_Left,Source={x:Static local:Skin.Instance},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Top="{Binding DesktopWnd_Top,Source={x:Static local:Skin.Instance},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
     <Border BorderBrush="Black" BorderThickness="1">
         <Grid>
             <Label x:Name="Notice" FontSize="24" Margin="0,40,9.8,89.6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD6D6D6">

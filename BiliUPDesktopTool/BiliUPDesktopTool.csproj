@@ -149,8 +149,8 @@
     <StartupObject>BiliUPDesktopTool.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BiliAccount, Version=1.1.1.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BiliAccount.1.1.1.4\lib\net45\BiliAccount.dll</HintPath>
+    <Reference Include="BiliAccount, Version=2.0.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BiliAccount.2.0.0.7\lib\net45\BiliAccount.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -165,6 +165,7 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Net" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
