@@ -453,6 +453,10 @@ namespace BiliUPDesktopTool
             {
                 if (WindowsManager.Instance.GetWindow<LoginWindow>() != null && !WindowsManager.Instance.GetWindow<LoginWindow>().IsVisible) WindowsManager.Instance.GetWindow<LoginWindow>().ShowDialog();
                 GetInfo();
+                if (WindowsManager.Instance.HasWindow<MainWindow>())
+                {
+                    WindowsManager.Instance.GetWindow<MainWindow>().homepage.Refresh(null);
+                }
             });
         }
 

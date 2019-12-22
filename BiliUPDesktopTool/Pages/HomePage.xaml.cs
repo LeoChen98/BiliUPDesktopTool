@@ -84,23 +84,6 @@ namespace BiliUPDesktopTool
 
         #region Private Methods
 
-        private void Btn_Login_MouseEnter(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0x66, 0xb3, 0xb3, 0xb3));
-        }
-
-        private void Btn_Login_MouseLeave(object sender, MouseEventArgs e)
-        {
-            (sender as Border).Background = new SolidColorBrush(Color.FromArgb(0x02, 0xff, 0xff, 0xff));
-        }
-
-        private void Btn_Login_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Account.Instance.Login();
-            NeedLoginBox.Visibility = Visibility.Hidden;
-            InfoBox.Visibility = Visibility.Visible;
-        }
-
         private void Lbl_Desc_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (TB_Desc.Visibility == Visibility.Hidden)
@@ -110,7 +93,7 @@ namespace BiliUPDesktopTool
             }
         }
 
-        private void Refresh(object state)
+        internal void Refresh(object state)
         {
             string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/activity/videoall", Account.Instance.Cookies);
             if (!string.IsNullOrEmpty(str))

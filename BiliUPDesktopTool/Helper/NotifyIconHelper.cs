@@ -122,6 +122,7 @@ namespace BiliUPDesktopTool
         private void MI_About_Click(object sender, EventArgs e)
         {
             WindowsManager.Instance.GetWindow<About>().Show();
+            ToastHelper.Notify();
         }
 
         private void MI_CheckUpdate_Click(object sender, EventArgs e)
