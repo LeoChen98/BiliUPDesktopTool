@@ -112,7 +112,7 @@ namespace BiliUPDesktopTool
 
         private void Refresh(object state)
         {
-            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/app/h5/activity/videoall?platform=ios", Account.Instance.Cookies);
+            string str = Bas.GetHTTPBody("https://member.bilibili.com/x/web/activity/videoall", Account.Instance.Cookies);
             if (!string.IsNullOrEmpty(str))
             {
                 JObject obj = JObject.Parse(str);
@@ -132,7 +132,7 @@ namespace BiliUPDesktopTool
                                 Desc = i["protocol"].ToString(),
                                 Link = i["act_url"].ToString(),
                                 Start_Time = i["stime"] == null ? "-" : Bas.GetTimeStringFromSecondTimestamp((int)i["stime"]),
-                                End_Time = "-"
+                                End_Time = i["etime"] == null ? "-" : Bas.GetTimeStringFromSecondTimestamp((int)i["etime"])
                             }));
                         });
                     }
