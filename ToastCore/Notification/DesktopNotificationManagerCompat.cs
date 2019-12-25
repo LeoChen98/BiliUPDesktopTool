@@ -39,15 +39,14 @@ namespace ToastCore.Notification {
 
             _aumid = aumid;
 
-            string exename = Assembly.GetExecutingAssembly().GetName().Name;
-            string shortpath = "\\Microsoft\\Windows\\Start Menu\\A" + exename;
+            string shortpath = "\\Microsoft\\Windows\\Start Menu\\zhangbudademao.com";
             var shortcut = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                 + shortpath + $"\\{_aumid}.lnk";
             if (!File.Exists(shortcut))
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + shortpath);
                 // 不需要从通知打开程序则不需要这项操作
-                // RegisterComServer<T>(exePath);
+                RegisterComServer<T>(Assembly.GetExecutingAssembly().GetName().Name);
                 CreatShortcut<T>(shortcut);
             }
 

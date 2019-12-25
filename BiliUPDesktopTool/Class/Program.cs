@@ -12,16 +12,19 @@ namespace BiliUPDesktopTool
         [STAThread]
         public static void Main(string[] args)
         {
+            //初始化托盘和Toast实例
+            _ = NotifyIconHelper.Instance;
+            _ = ToastHelper.Instance;
+
             if (RunningInstance() != null && Environment.CommandLine.ToLower().IndexOf("-m") == -1)
             {
-                System.Windows.Forms.MessageBox.Show("已经有一个实例在运行！");
+                //System.Windows.Forms.MessageBox.Show("已经有一个实例在运行！");
+                ToastHelper.Instance.NotifyMutiLaunch();
                 Environment.Exit(0);
             }
 
             //用户统计
             Bas.User_Statistics();
-
-            _ = NotifyIconHelper.Instance;
 
             if (Settings.Instance.IsFirstRun)
             {

@@ -180,7 +180,7 @@ namespace ToastCore.Util {
         internal extern static void PropVariantClear([In, Out] PropVariant pvar);
 
         public void Dispose() {
-            PropVariantClear(this);
+            //PropVariantClear(this);
             GC.SuppressFinalize(this);
         }
 

@@ -23,17 +23,39 @@ namespace BiliUPDesktopTool
 
     internal class ToastHelper
     {
-        #region Public Methods
+        private static ToastHelper _helper;
+        private ToastManager _manager;
 
-        public static void Notify()
+        public static ToastHelper Instance
         {
-            var _manager = new ToastManager();
-            _manager.Init<ToastManager>("B站UP主桌面工具");
-            ToastManager.ToastCallback += ToastManager_ToastCallback;
-            new Action(()=> { _manager.Notify("Hello", "Toast", new ToastCommands { Content = "OK", Argument = "OKarg" }, new ToastCommands { Content = "NO", Argument = "NOarg" }); }).Invoke();
+            get
+            {
+                if (_helper == null) _helper = new ToastHelper();
+                return _helper;
+            }
         }
 
-        public static bool IsEnable
+        private ToastHelper()
+        {
+            _manager = new ToastManager();
+            _manager.Init<ToastManager>("B站UP主桌面工具");
+            ToastManager.ToastCallback += ToastManager_ToastCallback;
+        }
+
+        #region Public Methods
+
+        public void Notify()
+        {
+            //new Action(()=> { _manager.Notify("Hello", "Toast", new ToastCommands {Content = "OK", Argument = "OKarg" }, new ToastCommands { Content = "NO", Argument = "NOarg" }); }).Invoke();
+            new Action(()=> { _manager.Notify("Hello", "Toast", new ToastCommands {Content = "OK", Argument = "OKarg abc" }, new ToastCommands { Content = "NO", Argument = "NOarg" }); }).Invoke();
+        }
+
+        public void NotifyMutiLaunch()
+        {
+            new Action(() => { _manager.Notify("B站UP主桌面工具", "已经有一个实例在运行！", new ToastCommands { Content = "知道了", Argument = "MutiLaunchArg" }); }).Invoke();
+        }
+
+        public bool IsEnable
         {
             get
             {
@@ -45,14 +67,23 @@ namespace BiliUPDesktopTool
 
         #region Private Methods
 
-        private static void ToastManager_ToastCallback(string app, string arg, List<KeyValuePair<string, string>> kvs)
+        private void ToastManager_ToastCallback(string app, string arg, List<KeyValuePair<string, string>> kvs)
         {
-            string res = $"appid : {app}  arg : {arg} \n";
-            kvs.ForEach(kv => res += $"key : {kv.Key}  value : {kv.Value} \n");
-            App.Current.Dispatcher.Invoke(() =>
+            switch (arg)
             {
-                System.Windows.Forms.MessageBox.Show(res);
-            });
+                case "MutiLaunchArg":
+                    App.Current.Dispatcher.Invoke(() => { WindowsManager.Instance.GetWindow<MainWindow>().Show(); });
+                    break;
+
+                default:
+                    string res = $"appid : {app}  arg : {arg} \n";
+                    kvs.ForEach(kv => res += $"key : {kv.Key}  value : {kv.Value} \n");
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        System.Windows.Forms.MessageBox.Show(res);
+                    });
+                    break;
+            }
         }
 
         
