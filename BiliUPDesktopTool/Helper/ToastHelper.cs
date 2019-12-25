@@ -99,10 +99,10 @@ namespace BiliUPDesktopTool
 
         #region Public Methods
 
-        public void Notify()
+        public void Notify(string content)
         {
             WindowBeOpenWhenNeed = WindowNegation.None;
-            if (IsEnable) new Action(() => { _manager.Notify("Hello", "Toast"); }).Invoke();
+            if (IsEnable) new Action(() => { _manager.Notify("B站UP主桌面工具", content); }).Invoke();
         }
 
         public void NotifyMutiLaunch()

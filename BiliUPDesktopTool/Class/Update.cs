@@ -111,7 +111,7 @@ namespace BiliUPDesktopTool
                     {
                         if ((int)jobj["data"]["build"] <= Bas.Build)
                         {
-                            if (IsGUI) MessageBox.Show("当前版本已是最新");
+                            if (IsGUI) ToastHelper.Instance.Notify("当前版本已是最新");
                             return;
                         }
                         else
