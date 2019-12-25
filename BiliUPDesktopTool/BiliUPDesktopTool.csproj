@@ -219,6 +219,13 @@
     </Compile>
     <Compile Include="Plug-ins\PluginManager.cs" />
     <Compile Include="Plug-ins\PluginStore.cs" />
+    <Compile Include="ToastCore\Notification\NotificationActivator.cs" />
+    <Compile Include="ToastCore\Notification\DesktopNotificationHistoryCompat.cs" />
+    <Compile Include="ToastCore\Notification\DesktopNotificationManagerCompat.cs" />
+    <Compile Include="ToastCore\Notification\NotificationService.cs" />
+    <Compile Include="ToastCore\Notification\NotificationUserInput.cs" />
+    <Compile Include="ToastCore\Notification\ToastCommands.cs" />
+    <Compile Include="ToastCore\Util\ShellHelper.cs" />
     <Compile Include="Window\LisenceWindow.xaml.cs">
       <DependentUpon>LisenceWindow.xaml</DependentUpon>
     </Compile>
@@ -447,12 +454,6 @@
     <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml">
       <Version>4.7.0</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ToastCore\ToastCore.csproj">
-      <Project>{18f57aa0-e5ed-4569-a074-a0c622d3d52b}</Project>
-      <Name>ToastCore</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

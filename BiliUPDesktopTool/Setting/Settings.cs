@@ -84,6 +84,20 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
+        /// 忽略的版本
+        /// </summary>
+        public int IgnoredVersion
+        {
+            get { return ST.IgnoredVersion; }
+            set
+            {
+                ST.IgnoredVersion = value;
+                PropertyChangedA(this, new PropertyChangedEventArgs("IgnoredVersion"));
+                Save();
+            }
+        }
+
+        /// <summary>
         /// 指示是否自动检查更新
         /// </summary>
         public bool IsAutoCheckUpdate
@@ -166,6 +180,7 @@ namespace BiliUPDesktopTool
 
             public List<List<string>> DataViewSelected;
 
+            public int IgnoredVersion = -1;
             public bool IsAutoCheckUpdate = true;
             public bool IsDataViewerDisplay = true;
             public bool IsFirstRun = true;

@@ -81,6 +81,16 @@ namespace BiliUPDesktopTool
             Update.Instance.DoUpdate();
         }
 
+        //public void Show(bool IsStarted = false)
+        //{
+        //    if (IsStarted)
+        //    {
+        //        BTN_Cancel.IsEnabled = false;
+        //        BTN_Update.IsEnabled = false;
+        //    }
+        //    Show();
+        //}
+
         private void MsgBoxPushHelper_PushMsg(string msg, Action command, MsgBoxPushHelper.MsgType type = MsgBoxPushHelper.MsgType.Info)
         {
             if (IsActive && IsVisible)

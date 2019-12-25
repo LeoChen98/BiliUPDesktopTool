@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Data;
 
 namespace BiliUPDesktopTool
 {
@@ -13,13 +12,11 @@ namespace BiliUPDesktopTool
         public DesktopWindow()
         {
             InitializeComponent();
-
         }
 
         #endregion Public Constructors
 
         #region Private Methods
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

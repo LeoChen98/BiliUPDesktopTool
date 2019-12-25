@@ -51,6 +51,17 @@ namespace BiliUPDesktopTool
         }
 
         /// <summary>
+        /// 新版本号
+        /// </summary>
+        public string NewVersionStr
+        {
+            get
+            {
+                return jobj["data"]["version"].ToString();
+            }
+        }
+
+        /// <summary>
         /// 更新状态
         /// </summary>
         public string Status
@@ -105,14 +116,22 @@ namespace BiliUPDesktopTool
                         }
                         else
                         {
-                            if (IsGUI)
+                            if((int)jobj["data"]["force"] == 1)
                             {
-                                UpdateText = "当前版本：" + Bas.Version + "\r\n最新版本：" + jobj["data"]["version"].ToString() + "(" + jobj["data"]["updatetime"].ToString() + "更新)\r\n\r\n更新内容：\r\n" + jobj["data"]["content"].ToString();
                                 WindowsManager.Instance.GetWindow<UpdateWindow>().Show();
+                                DoUpdate(); 
                             }
                             else
                             {
-                                NotifyIconHelper.Instance.ShowToolTip("检查到新版本！请通过“检查更新”屏幕更新。");
+                                UpdateText = $"当前版本：{Bas.Version}\r\n最新版本：{jobj["data"]["version"].ToString()}({jobj["data"]["updatetime"].ToString()}更新)\r\n\r\n更新内容：\r\n{jobj["data"]["content"].ToString()}";
+                                if (IsGUI)
+                                {
+                                    WindowsManager.Instance.GetWindow<UpdateWindow>().Show();
+                                }
+                                else
+                                {
+                                    if ((int)jobj["data"]["build"] != Settings.Instance.IgnoredVersion) ToastHelper.Instance.NotifyUpdate();
+                                }
                             }
                         }
                     }
@@ -123,6 +142,8 @@ namespace BiliUPDesktopTool
 
         public void DoUpdate()
         {
+            Settings.Instance.IgnoredVersion = -1;
+
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\"))
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\");
 
@@ -130,6 +151,14 @@ namespace BiliUPDesktopTool
             Downloader.DownloadProgressChanged += Downloader_DownloadProgressChanged;
             Downloader.DownloadFileCompleted += Downloader_DownloadFileCompleted;
             Downloader.DownloadFileAsync(new Uri(jobj["data"]["url"].ToString()), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\zhangbudademao.com\\BiliUPDesktopTool\\update.zip");
+        }
+
+        /// <summary>
+        /// 忽略当前版本
+        /// </summary>
+        public void IgnoreThisVersion()
+        {
+            Settings.Instance.IgnoredVersion = (int)jobj["data"]["build"];
         }
 
         #endregion Public Methods

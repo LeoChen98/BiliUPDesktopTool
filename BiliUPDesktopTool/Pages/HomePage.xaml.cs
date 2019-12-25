@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace BiliUPDesktopTool
 {
@@ -82,16 +81,7 @@ namespace BiliUPDesktopTool
 
         #endregion Public Properties
 
-        #region Private Methods
-
-        private void Lbl_Desc_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (TB_Desc.Visibility == Visibility.Hidden)
-            {
-                TB_Desc.Visibility = Visibility.Visible;
-                TB_Desc.Focus();
-            }
-        }
+        #region Internal Methods
 
         internal void Refresh(object state)
         {
@@ -120,6 +110,19 @@ namespace BiliUPDesktopTool
                         });
                     }
                 }
+            }
+        }
+
+        #endregion Internal Methods
+
+        #region Private Methods
+
+        private void Lbl_Desc_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (TB_Desc.Visibility == Visibility.Hidden)
+            {
+                TB_Desc.Visibility = Visibility.Visible;
+                TB_Desc.Focus();
             }
         }
 

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BiliUPDesktopTool
 {
@@ -12,12 +9,31 @@ namespace BiliUPDesktopTool
     /// </summary>
     internal class DesktopBridgeHelper
     {
-        const long APPMODEL_ERROR_NO_PACKAGE = 15700L;
+        #region Private Fields
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern int GetCurrentPackageFullName(ref int packageFullNameLength, StringBuilder packageFullName);
+        private const long APPMODEL_ERROR_NO_PACKAGE = 15700L;
 
         private static bool? _isRunningAsUwp;
+
+        #endregion Private Fields
+
+        #region Public Properties
+
+        public static bool IsWindows7OrLower
+        {
+            get
+            {
+                int versionMajor = Environment.OSVersion.Version.Major;
+                int versionMinor = Environment.OSVersion.Version.Minor;
+                double version = versionMajor + (double)versionMinor / 10;
+                return version <= 6.1;
+            }
+        }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
         public static bool IsRunningAsUwp()
         {
             if (_isRunningAsUwp == null)
@@ -42,15 +58,13 @@ namespace BiliUPDesktopTool
             return _isRunningAsUwp.Value;
         }
 
-        private static bool IsWindows7OrLower
-        {
-            get
-            {
-                int versionMajor = Environment.OSVersion.Version.Major;
-                int versionMinor = Environment.OSVersion.Version.Minor;
-                double version = versionMajor + (double)versionMinor / 10;
-                return version <= 6.1;
-            }
-        }
+        #endregion Public Methods
+
+        #region Private Methods
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern int GetCurrentPackageFullName(ref int packageFullNameLength, StringBuilder packageFullName);
+
+        #endregion Private Methods
     }
 }
