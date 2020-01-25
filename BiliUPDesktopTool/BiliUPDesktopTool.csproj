@@ -189,10 +189,6 @@
     <Reference Include="PresentationCore" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Compile Include="Class\Update.cs" />
     <Compile Include="Class\Program.cs" />
     <Compile Include="Class\WindowBaseCommand.cs" />
@@ -342,10 +338,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Controls\RollingNum.xaml.cs">
       <DependentUpon>RollingNum.xaml</DependentUpon>
     </Compile>
@@ -437,7 +429,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BiliAccount">
-      <Version>2.0.4.11</Version>
+      <Version>2.2.0.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
       <Version>10.0.18362.2005</Version>

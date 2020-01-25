@@ -8,6 +8,8 @@ namespace BiliUPDesktopTool
     internal class Program
     {
         #region Public Methods
+        public static Application app;
+
 
         [STAThread]
         public static void Main(string[] args)
@@ -46,7 +48,7 @@ namespace BiliUPDesktopTool
                 WindowsManager.Instance.GetWindow<MainWindow>().Show();
             }
 
-            Application app = new Application();
+            app = new Application();
             app.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
             Thread DesktopWnd_Monitor = new Thread(DesktopWnd_Monitor_Handler);

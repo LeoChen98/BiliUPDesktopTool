@@ -128,11 +128,11 @@ namespace BiliUPDesktopTool
             switch (arg)
             {
                 case "MutiLaunchArg"://重复启动
-                    App.Current.Dispatcher.Invoke(() => { WindowsManager.Instance.GetWindow<MainWindow>().Show(); });
+                    Program.app.Dispatcher.Invoke(() => { WindowsManager.Instance.GetWindow<MainWindow>().Show(); });
                     break;
 
                 case "CallUpdateArg"://执行更新
-                    App.Current.Dispatcher.Invoke(() => { WindowsManager.Instance.GetWindow<UpdateWindow>().Show(); });
+                    Program.app.Dispatcher.Invoke(() => { WindowsManager.Instance.GetWindow<UpdateWindow>().Show(); });
                     new Action(() => { Update.Instance.DoUpdate(); }).Invoke();
                     break;
 
@@ -155,11 +155,11 @@ namespace BiliUPDesktopTool
                     switch (WindowBeOpenWhenNeed)
                     {
                         case WindowNegation.MainWindow:
-                            App.Current.Dispatcher.Invoke(() => { WindowsManager.Instance.GetWindow<MainWindow>().Show(); });
+                            Program.app.Dispatcher.Invoke(() => { WindowsManager.Instance.GetWindow<MainWindow>().Show(); });
                             break;
 
                         case WindowNegation.MainWindow_Statistics:
-                            App.Current.Dispatcher.Invoke(() =>
+                            Program.app.Dispatcher.Invoke(() =>
                             {
                                 WindowsManager.Instance.GetWindow<MainWindow>().Show();
                                 WindowsManager.Instance.GetWindow<MainWindow>().ToTab(1);
@@ -167,7 +167,7 @@ namespace BiliUPDesktopTool
                             break;
 
                         case WindowNegation.UpdateWindow:
-                            App.Current.Dispatcher.Invoke(() => { WindowsManager.Instance.GetWindow<UpdateWindow>().Show(); });
+                            Program.app.Dispatcher.Invoke(() => { WindowsManager.Instance.GetWindow<UpdateWindow>().Show(); });
                             break;
 
                         case WindowNegation.None:

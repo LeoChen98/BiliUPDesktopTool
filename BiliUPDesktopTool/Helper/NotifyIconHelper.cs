@@ -23,10 +23,15 @@ namespace BiliUPDesktopTool
         /// </summary>
         private NotifyIconHelper()
         {
+
             NI = new NotifyIcon()
             {
                 Icon = System.Drawing.Icon.ExtractAssociatedIcon(Application.ExecutablePath),
+#if DEBUG
+                Text = "B站up主桌面工具 - 调试模式",
+#else
                 Text = "B站up主桌面工具",
+#endif
                 Visible = true,
                 ContextMenuStrip = new ContextMenuStrip(),
             };
@@ -35,9 +40,9 @@ namespace BiliUPDesktopTool
             NI.DoubleClick += NI_DoubleClick;
         }
 
-        #endregion Private Constructors
+#endregion Private Constructors
 
-        #region Public Properties
+#region Public Properties
 
         public static NotifyIconHelper Instance
         {
@@ -48,9 +53,9 @@ namespace BiliUPDesktopTool
             }
         }
 
-        #endregion Public Properties
+#endregion Public Properties
 
-        #region Public Methods
+#region Public Methods
 
         /// <summary>
         /// 气泡提示
@@ -67,9 +72,9 @@ namespace BiliUPDesktopTool
             NI.ShowBalloonTip(time);
         }
 
-        #endregion Public Methods
+#endregion Public Methods
 
-        #region Private Methods
+#region Private Methods
 
         /// <summary>
         /// 获得菜单对象
@@ -176,6 +181,6 @@ namespace BiliUPDesktopTool
             WindowsManager.Instance.GetWindow<MainWindow>().Show();
         }
 
-        #endregion Private Methods
+#endregion Private Methods
     }
 }
