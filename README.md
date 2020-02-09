@@ -1,4 +1,4 @@
-﻿# BiliUPDesktopTool
+# BiliUPDesktopTool
  B站UP主桌面工具
 
 [![Version](https://img.shields.io/github/release/LeoChen98/BiliUPDesktopTool.svg?label=Version)](https://github.com/LeoChen98/BiliUPDesktopTool/releases)
@@ -9,6 +9,7 @@
 [![.netVersion](https://img.shields.io/badge/.net-4.5-brightgreen.svg)](#)
 [![Pull Request Welcome](https://img.shields.io/badge/Pull%20request-welcome-brightgreen.svg)](#)
 [![GitHub license](https://img.shields.io/github/license/LeoChen98/BiliUPDesktopTool.svg)](https://github.com/LeoChen98/BiliUPDesktopTool/blob/master/LICENSE)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FLeoChen98%2FBiliUPDesktopTool.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FLeoChen98%2FBiliUPDesktopTool?ref=badge_shield)
 
 ## 简述
 * 本程序旨于在Windows平台上为up主提供更方便的数据统计和其他功能
@@ -47,3 +48,7 @@ Copyright © 2000-2018 SharpZipLib Contributors
 
 Licensed under MIT
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FLeoChen98%2FBiliUPDesktopTool.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FLeoChen98%2FBiliUPDesktopTool?ref=badge_large)
