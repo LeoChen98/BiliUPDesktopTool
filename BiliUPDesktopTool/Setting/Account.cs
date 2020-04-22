@@ -512,9 +512,26 @@ namespace BiliUPDesktopTool
                     {
                         if (!BiliAccount.Linq.ByPassword.IsTokenAvailable(AccessToken))
                         {
-                            Expires_AccessToken = (DateTime)BiliAccount.Linq.ByPassword.RefreshToken(AccessToken, RefreshToken);
+                            goto relogin;
+                        }
+                        else
+                        {
+                            DateTime? dt = (DateTime)BiliAccount.Linq.ByPassword.RefreshToken(AccessToken, RefreshToken);
+                            if (dt == null)
+                                goto relogin;
+                            else
+                                goto sso;
+                        }
+                    relogin:
+                        BiliAccount.Account account = BiliAccount.Linq.ByPassword.LoginByPassword(UserName, PassWord);
+                        if (account.LoginStatus == BiliAccount.Account.LoginStatusEnum.ByPassword)
+                        {
+                            AccessToken = account.AccessToken;
+                            RefreshToken = account.RefreshToken;
+                            Expires_AccessToken = account.Expires_AccessToken;
                         }
 
+                    sso:
                         object[] o = BiliAccount.Linq.ByPassword.SSO(AccessToken);
                         Cookies = o[0].ToString();
                         Csrf_Token = o[1].ToString();
