@@ -173,7 +173,7 @@ namespace BiliUPDesktopTool
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Parent.GetType() == typeof(DesktopWindow))
+            if (Tag?.ToString() == "DesktopWnd")
             {
                 BindingInit();
             }

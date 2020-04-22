@@ -40,6 +40,14 @@ namespace BiliUPDesktopTool
         }
 
         #endregion Public Properties
+        public class WindowExistedException : Exception
+        {
+            public WindowExistedException(string message, Window window) : base(message)
+            {
+                Window = window;
+            }
+            public Window Window;
+        }
 
         #region Public Methods
 
@@ -52,7 +60,7 @@ namespace BiliUPDesktopTool
             }
             else
             {
-                throw new Exception($"{typeof(T).Name} 已存在");
+                throw new WindowExistedException($"{typeof(T).Name} 已存在", win);
             }
         }
 

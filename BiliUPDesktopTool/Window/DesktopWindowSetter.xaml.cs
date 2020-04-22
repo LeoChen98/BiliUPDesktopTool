@@ -15,7 +15,7 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 备份设置 [0]:Top;[1]:Left
         /// </summary>
-        private double[] _Backup;
+        private double?[] _Backup;
 
         #endregion Private Fields
 
@@ -29,7 +29,7 @@ namespace BiliUPDesktopTool
             ShowDesktop();
 
             //建立备份
-            _Backup = new double[2] { Skin.Instance.DesktopWnd_Top, Skin.Instance.DesktopWnd_Left };
+            _Backup = new double?[2] { Skin.Instance.DesktopWnd_Top, Skin.Instance.DesktopWnd_Left };
         }
 
         #endregion Public Constructors

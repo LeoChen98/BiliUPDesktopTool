@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Media;
 
 namespace BiliUPDesktopTool
@@ -70,13 +71,17 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 桌面窗体的Left属性
         /// </summary>
-        public double DesktopWnd_Left
+        public double? DesktopWnd_Left
         {
             get { return ST.DesktopWnd_Left; }
             set
             {
-                ST.DesktopWnd_Left = value;
-                PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_Left"));
+                if(value != null)
+                {
+                    ST.DesktopWnd_Left = (double)value;
+                    PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_Left"));
+                    PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_Margin"));
+                }
             }
         }
 
@@ -96,14 +101,24 @@ namespace BiliUPDesktopTool
         /// <summary>
         /// 桌面窗体的Top属性
         /// </summary>
-        public double DesktopWnd_Top
+        public double? DesktopWnd_Top
         {
             get { return ST.DesktopWnd_Top; }
             set
             {
-                ST.DesktopWnd_Top = value;
-                PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_Top"));
+                if(value != null)
+                {
+                    ST.DesktopWnd_Top = (double)value;
+                    PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_Top"));
+                    PropertyChangedA(this, new PropertyChangedEventArgs("DesktopWnd_Margin"));
+                }
             }
+        }
+
+        public Thickness DesktopWnd_Margin
+        {
+            get { return new Thickness { Left = (double)DesktopWnd_Left, Top = (double)DesktopWnd_Top }; }
+            set { }
         }
 
         #endregion Public Properties

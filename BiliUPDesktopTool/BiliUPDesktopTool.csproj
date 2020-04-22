@@ -203,6 +203,7 @@
     <Compile Include="Helper\MachineInfoHelper.cs" />
     <Compile Include="Helper\MsgBoxPushHelper.cs" />
     <Compile Include="Helper\MVVMHelper.cs" />
+    <Compile Include="Helper\ScreenHelper.cs" />
     <Compile Include="Helper\ToastHelper.cs" />
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -429,7 +430,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BiliAccount">
-      <Version>2.2.0.12</Version>
+      <Version>2.3.2.16</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
       <Version>10.0.18362.2005</Version>

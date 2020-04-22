@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Forms;
 
 namespace BiliUPDesktopTool
 {
@@ -212,6 +213,44 @@ namespace BiliUPDesktopTool
             double v = value == null ? 0 : (double)value;
             double p = parameter == null ? 0 : (double)parameter;
             return v / p;
+        }
+
+        #endregion Public Methods
+    }
+
+
+    /// <summary>
+    /// 桌面窗口位置值转换器
+    /// </summary>
+    public class DesktopWnd_Pos_Converter : IValueConverter
+    {
+        #region Public Methods
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (Screen.AllScreens.Length > 1)
+            {
+                double tmp = 0;
+                switch (parameter.ToString().ToLower())
+                {
+                    case "left":
+                        foreach (Screen i in Screen.AllScreens)
+                            if (i.WorkingArea.X < tmp) tmp = i.WorkingArea.X;
+                        return (double)value - tmp;
+                    case "top":
+                        foreach (Screen i in Screen.AllScreens)
+                            if (i.WorkingArea.Y < tmp) tmp = i.WorkingArea.Y;
+                        return (double)value - tmp;
+                    default:
+                        throw new ArgumentException("非法parameter!");
+                }
+            }
+            else return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new Exception("This converter is only used for convert to bool.");
         }
 
         #endregion Public Methods
